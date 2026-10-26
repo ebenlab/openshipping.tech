@@ -5,6 +5,8 @@ a mode's file holds every module marked R (required) or O (optional) for it.
 """
 import copy
 import pathlib
+import re
+import shutil
 
 import yaml
 
@@ -108,6 +110,10 @@ def emit(doc, outdir, dumper):
     return counts
 
 
+def kebab(s):
+    return re.sub(r"[^a-z0-9]+", "-", s.lower()).strip("-")
+
+
 def _group(title, tags, ops_by_tag):
     return {"group": title, "pages": [{"group": t, "pages": ops_by_tag[t]} for t in tags]}
 
@@ -120,12 +126,19 @@ def write_nav(root):
     for slug, col, title, who in MODES:
         d = yaml.safe_load(open(root / "openapi" / f"{slug}.yaml"))
         levels = {m: row[col] for m, row in MATRIX.items() if row[col]}
+        # One stub page per operation; `mint export` cannot resolve inline "METHOD /path" navigation entries.
+        out = root / "api-reference" / slug
+        if out.exists():
+            shutil.rmtree(out)
         ops_by_tag, mods = {}, {}
         for p, item in d["paths"].items():
             for k, v in item.items():
                 if k in METHODS:
                     t = v["tags"][0]
-                    ops_by_tag.setdefault(t, []).append(f"{k.upper()} {p}")
+                    page = f"api-reference/{slug}/{kebab(t)}/{kebab(v['summary'])}"
+                    (root / page).parent.mkdir(parents=True, exist_ok=True)
+                    (root / f"{page}.mdx").write_text(f'---\nopenapi: "openapi/{slug}.yaml {k.upper()} {p}"\n---\n')
+                    ops_by_tag.setdefault(t, []).append(page)
                     mods.setdefault(TAG_MODULE[t], []).append(t)
         tags = [t["name"] for t in d["tags"]]
         req = [t for t in tags if levels[TAG_MODULE[t]] != "O"]
@@ -153,12 +166,11 @@ Required modules are grouped first in the sidebar, optional ones after. {('Not p
 
 The machine-readable file for this mode is [`/openapi/{slug}.yaml`](/openapi/{slug}.yaml). The complete document, with every module, is [`/openapi.yaml`](/openapi.yaml).
 """
-        (root / "api-reference" / slug).mkdir(parents=True, exist_ok=True)
         (root / f"{page}.mdx").write_text(body)
         groups = [{"group": "Overview", "pages": [page]}, _group("Required modules", req, ops_by_tag)]
         if opt:
             groups.append(_group("Optional modules", opt, ops_by_tag))
-        menu.append({"item": title, "description": f"{total} operations", "openapi": {"source": f"openapi/{slug}.yaml", "directory": f"api-reference/{slug}"}, "groups": groups})
+        menu.append({"item": title, "description": f"{total} operations", "groups": groups})
     dj = root / "docs.json"
     cfg = json.loads(dj.read_text())
     for i, t in enumerate(cfg["navigation"]["tabs"]):

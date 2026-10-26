@@ -100,10 +100,6 @@
           {
             "item": "Universal",
             "description": "205 operations",
-            "openapi": {
-              "source": "openapi/universal.yaml",
-              "directory": "api-reference/universal"
-            },
             "groups": [
               {
                 "group": "Overview",
@@ -117,145 +113,145 @@
                   {
                     "group": "Rates",
                     "pages": [
-                      "POST /v1/rates",
-                      "GET /v1/rate_quotes/{id}"
+                      "api-reference/universal/rates/get-live-rates",
+                      "api-reference/universal/rates/retrieve-a-rate-quote"
                     ]
                   },
                   {
                     "group": "Shipments",
                     "pages": [
-                      "POST /v1/shipments",
-                      "GET /v1/shipments",
-                      "GET /v1/shipments/search",
-                      "GET /v1/shipments/{id}",
-                      "POST /v1/shipments/{id}",
-                      "DELETE /v1/shipments/{id}",
-                      "POST /v1/shipments/{id}/purchase",
-                      "POST /v1/shipments/{id}/void",
-                      "POST /v1/shipments/{id}/rates",
-                      "POST /v1/shipments/{id}/return",
-                      "POST /v1/shipments/{id}/label"
+                      "api-reference/universal/shipments/create-a-shipment-draft-or-purchase-with-purchase-true",
+                      "api-reference/universal/shipments/list-shipments",
+                      "api-reference/universal/shipments/search-shipments",
+                      "api-reference/universal/shipments/retrieve-a-shipment",
+                      "api-reference/universal/shipments/update-a-shipment",
+                      "api-reference/universal/shipments/delete-a-draft-shipment",
+                      "api-reference/universal/shipments/purchase-a-label",
+                      "api-reference/universal/shipments/void-a-label",
+                      "api-reference/universal/shipments/re-rate-a-draft-shipment",
+                      "api-reference/universal/shipments/create-a-return-shipment",
+                      "api-reference/universal/shipments/re-render-the-label"
                     ]
                   },
                   {
                     "group": "Tracking",
                     "pages": [
-                      "POST /v1/trackers",
-                      "GET /v1/trackers",
-                      "GET /v1/trackers/search",
-                      "GET /v1/trackers/{id}",
-                      "POST /v1/trackers/{id}",
-                      "DELETE /v1/trackers/{id}",
-                      "POST /v1/trackers/{id}/refresh",
-                      "GET /v1/trackers/{id}/events"
+                      "api-reference/universal/tracking/create-a-tracker",
+                      "api-reference/universal/tracking/list-trackers",
+                      "api-reference/universal/tracking/search-trackers",
+                      "api-reference/universal/tracking/retrieve-a-tracker",
+                      "api-reference/universal/tracking/update-a-tracker",
+                      "api-reference/universal/tracking/discard-a-tracker",
+                      "api-reference/universal/tracking/force-a-carrier-poll",
+                      "api-reference/universal/tracking/list-tracking-events"
                     ]
                   },
                   {
                     "group": "Webhooks",
                     "pages": [
-                      "POST /v1/webhook_endpoints",
-                      "GET /v1/webhook_endpoints",
-                      "GET /v1/webhook_endpoints/{id}",
-                      "POST /v1/webhook_endpoints/{id}",
-                      "DELETE /v1/webhook_endpoints/{id}",
-                      "POST /v1/webhook_endpoints/{id}/rotate_secret",
-                      "POST /v1/webhook_endpoints/{id}/test"
+                      "api-reference/universal/webhooks/create-a-webhook-endpoint",
+                      "api-reference/universal/webhooks/list-webhook-endpoints",
+                      "api-reference/universal/webhooks/retrieve-a-webhookendpoint",
+                      "api-reference/universal/webhooks/update-a-webhookendpoint",
+                      "api-reference/universal/webhooks/delete-a-webhookendpoint",
+                      "api-reference/universal/webhooks/rotate-the-signing-secret",
+                      "api-reference/universal/webhooks/send-a-test-event"
                     ]
                   },
                   {
                     "group": "Events",
                     "pages": [
-                      "GET /v1/events",
-                      "GET /v1/events/{id}",
-                      "GET /v1/events/{id}/deliveries",
-                      "POST /v1/events/{id}/redeliver"
+                      "api-reference/universal/events/list-events",
+                      "api-reference/universal/events/retrieve-an-event",
+                      "api-reference/universal/events/list-delivery-attempts",
+                      "api-reference/universal/events/redeliver-an-event"
                     ]
                   },
                   {
                     "group": "Inbound",
                     "pages": [
-                      "POST /v1/inbound/{connection_id}",
-                      "POST /v1/inbound_events",
-                      "GET /v1/inbound_events",
-                      "GET /v1/inbound_events/{id}"
+                      "api-reference/universal/inbound/carrier-push-receiver-carrier-native-payload",
+                      "api-reference/universal/inbound/inject-canonical-events",
+                      "api-reference/universal/inbound/list-inbound-events",
+                      "api-reference/universal/inbound/retrieve-a-inboundevent"
                     ]
                   },
                   {
                     "group": "Carriers",
                     "pages": [
-                      "GET /v1/carriers",
-                      "GET /v1/carriers/{id}"
+                      "api-reference/universal/carriers/list-carriers",
+                      "api-reference/universal/carriers/retrieve-a-carrier"
                     ]
                   },
                   {
                     "group": "Connections",
                     "pages": [
-                      "POST /v1/connections",
-                      "GET /v1/connections",
-                      "GET /v1/connections/{id}",
-                      "POST /v1/connections/{id}",
-                      "DELETE /v1/connections/{id}",
-                      "POST /v1/connections/{id}/verify",
-                      "POST /v1/connect_sessions",
-                      "GET /v1/connect_sessions/{id}",
-                      "GET /v1/oauth/callback"
+                      "api-reference/universal/connections/create-a-credentials-based-connection",
+                      "api-reference/universal/connections/list-connections",
+                      "api-reference/universal/connections/retrieve-a-connection",
+                      "api-reference/universal/connections/update-a-connection",
+                      "api-reference/universal/connections/delete-a-connection",
+                      "api-reference/universal/connections/verify-connection-credentials",
+                      "api-reference/universal/connections/start-an-oauth-oidc-connect-flow",
+                      "api-reference/universal/connections/retrieve-a-connect-session",
+                      "api-reference/universal/connections/carrier-oauth-redirect-target"
                     ]
                   },
                   {
                     "group": "Batches",
                     "pages": [
-                      "POST /v1/batches",
-                      "GET /v1/batches/{id}"
+                      "api-reference/universal/batches/create-a-batch",
+                      "api-reference/universal/batches/retrieve-a-batch"
                     ]
                   },
                   {
                     "group": "Test Helpers",
                     "pages": [
-                      "POST /v1/test_helpers/trackers/{id}/advance",
-                      "POST /v1/test_helpers/shipments/{id}/charge_adjustment"
+                      "api-reference/universal/test-helpers/advance-a-test-tracker",
+                      "api-reference/universal/test-helpers/simulate-a-carrier-charge-adjustment"
                     ]
                   },
                   {
                     "group": "Catalog",
                     "pages": [
-                      "POST /v1/service_availability"
+                      "api-reference/universal/catalog/check-serviceability"
                     ]
                   },
                   {
                     "group": "Integrations",
                     "pages": [
-                      "GET /v1/integrations",
-                      "GET /v1/integrations/{id}",
-                      "POST /v1/address_validations",
-                      "GET /v1/address_validations/{id}",
-                      "POST /v1/insurance_quotes",
-                      "POST /v1/coverages",
-                      "GET /v1/coverages",
-                      "GET /v1/coverages/{id}",
-                      "POST /v1/coverages/{id}/cancel",
-                      "POST /v1/claims",
-                      "GET /v1/claims",
-                      "GET /v1/claims/{id}",
-                      "POST /v1/claims/{id}",
-                      "POST /v1/claims/{id}/withdraw"
+                      "api-reference/universal/integrations/list-integrations",
+                      "api-reference/universal/integrations/retrieve-an-integration",
+                      "api-reference/universal/integrations/validate-an-address",
+                      "api-reference/universal/integrations/retrieve-an-address-validation",
+                      "api-reference/universal/integrations/quote-insurance",
+                      "api-reference/universal/integrations/buy-coverage",
+                      "api-reference/universal/integrations/list-coverages",
+                      "api-reference/universal/integrations/retrieve-a-coverage",
+                      "api-reference/universal/integrations/cancel-coverage",
+                      "api-reference/universal/integrations/submit-a-claim",
+                      "api-reference/universal/integrations/list-claims",
+                      "api-reference/universal/integrations/retrieve-a-claim",
+                      "api-reference/universal/integrations/update-a-claim",
+                      "api-reference/universal/integrations/withdraw-a-claim"
                     ]
                   },
                   {
                     "group": "Jobs",
                     "pages": [
-                      "POST /v1/jobs",
-                      "GET /v1/jobs",
-                      "GET /v1/jobs/{id}",
-                      "POST /v1/jobs/{id}/cancel",
-                      "POST /v1/jobs/{id}/retry",
-                      "GET /v1/jobs/{id}/logs",
-                      "GET /v1/jobs/{id}/stream"
+                      "api-reference/universal/jobs/start-a-job",
+                      "api-reference/universal/jobs/list-jobs",
+                      "api-reference/universal/jobs/retrieve-a-job",
+                      "api-reference/universal/jobs/cancel-a-job",
+                      "api-reference/universal/jobs/retry-a-job",
+                      "api-reference/universal/jobs/job-logs",
+                      "api-reference/universal/jobs/stream-job-progress-sse"
                     ]
                   },
                   {
                     "group": "Discovery",
                     "pages": [
-                      "GET /.well-known/shipping-configuration"
+                      "api-reference/universal/discovery/shipping-configuration-document"
                     ]
                   }
                 ]
@@ -266,192 +262,192 @@
                   {
                     "group": "Pickups",
                     "pages": [
-                      "POST /v1/pickups/availability",
-                      "POST /v1/pickups",
-                      "GET /v1/pickups",
-                      "GET /v1/pickups/search",
-                      "GET /v1/pickups/{id}",
-                      "POST /v1/pickups/{id}",
-                      "POST /v1/pickups/{id}/cancel"
+                      "api-reference/universal/pickups/check-pickup-availability",
+                      "api-reference/universal/pickups/book-a-pickup",
+                      "api-reference/universal/pickups/list-pickups",
+                      "api-reference/universal/pickups/search-pickups",
+                      "api-reference/universal/pickups/retrieve-a-pickup",
+                      "api-reference/universal/pickups/update-a-pickup",
+                      "api-reference/universal/pickups/cancel-a-pickup"
                     ]
                   },
                   {
                     "group": "Manifests",
                     "pages": [
-                      "POST /v1/manifests",
-                      "GET /v1/manifests",
-                      "GET /v1/manifests/{id}",
-                      "POST /v1/manifests/{id}",
-                      "POST /v1/manifests/preview",
-                      "POST /v1/manifests/{id}/reprint"
+                      "api-reference/universal/manifests/create-close-out-one-or-more-manifests",
+                      "api-reference/universal/manifests/list-manifests",
+                      "api-reference/universal/manifests/retrieve-a-manifest",
+                      "api-reference/universal/manifests/update-a-manifest",
+                      "api-reference/universal/manifests/preview-the-day-s-close-out",
+                      "api-reference/universal/manifests/re-fetch-manifest-documents"
                     ]
                   },
                   {
                     "group": "Files",
                     "pages": [
-                      "POST /v1/files",
-                      "GET /v1/files",
-                      "GET /v1/files/{id}",
-                      "DELETE /v1/files/{id}",
-                      "GET /v1/files/{id}/contents"
+                      "api-reference/universal/files/upload-a-file",
+                      "api-reference/universal/files/list-files",
+                      "api-reference/universal/files/retrieve-a-file",
+                      "api-reference/universal/files/delete-a-file",
+                      "api-reference/universal/files/download-file-contents"
                     ]
                   },
                   {
                     "group": "Document Uploads",
                     "pages": [
-                      "POST /v1/document_uploads",
-                      "GET /v1/document_uploads",
-                      "GET /v1/document_uploads/{id}",
-                      "POST /v1/document_uploads/{id}"
+                      "api-reference/universal/document-uploads/submit-customs-documents-to-a-carrier",
+                      "api-reference/universal/document-uploads/list-document-uploads",
+                      "api-reference/universal/document-uploads/retrieve-a-documentupload",
+                      "api-reference/universal/document-uploads/update-a-documentupload"
                     ]
                   },
                   {
                     "group": "Pickup Schedules",
                     "pages": [
-                      "POST /v1/pickup_schedules",
-                      "GET /v1/pickup_schedules",
-                      "GET /v1/pickup_schedules/{id}",
-                      "POST /v1/pickup_schedules/{id}",
-                      "POST /v1/pickup_schedules/{id}/pause",
-                      "POST /v1/pickup_schedules/{id}/resume",
-                      "POST /v1/pickup_schedules/{id}/cancel",
-                      "POST /v1/pickup_schedules/{id}/skip",
-                      "POST /v1/pickup_schedules/{id}/add",
-                      "GET /v1/pickup_schedules/{id}/occurrences"
+                      "api-reference/universal/pickup-schedules/create-a-pickup-schedule",
+                      "api-reference/universal/pickup-schedules/list-pickup-schedules",
+                      "api-reference/universal/pickup-schedules/retrieve-a-pickupschedule",
+                      "api-reference/universal/pickup-schedules/update-a-pickupschedule",
+                      "api-reference/universal/pickup-schedules/pause-a-pickup-schedule",
+                      "api-reference/universal/pickup-schedules/resume-a-pickup-schedule",
+                      "api-reference/universal/pickup-schedules/cancel-a-pickup-schedule",
+                      "api-reference/universal/pickup-schedules/skip-a-pickup-schedule",
+                      "api-reference/universal/pickup-schedules/add-a-pickup-schedule",
+                      "api-reference/universal/pickup-schedules/list-occurrences"
                     ]
                   },
                   {
                     "group": "Trade",
                     "pages": [
-                      "POST /v1/classifications",
-                      "GET /v1/classifications",
-                      "GET /v1/classifications/{id}",
-                      "POST /v1/classifications/{id}/apply",
-                      "POST /v1/classifications/{id}/feedback",
-                      "POST /v1/compliance_screenings",
-                      "GET /v1/compliance_screenings",
-                      "GET /v1/compliance_screenings/{id}",
-                      "POST /v1/landed_costs",
-                      "GET /v1/landed_costs",
-                      "GET /v1/landed_costs/{id}",
-                      "GET /v1/tariffs/{country}/{hs_code}",
-                      "GET /v1/duty_collections",
-                      "GET /v1/duty_collections/{id}",
-                      "POST /v1/duty_collections/{id}/pay",
-                      "POST /v1/duty_collections/export"
+                      "api-reference/universal/trade/classify-items",
+                      "api-reference/universal/trade/list-classifications",
+                      "api-reference/universal/trade/retrieve-a-classification",
+                      "api-reference/universal/trade/apply-classification-to-a-draft-shipment",
+                      "api-reference/universal/trade/submit-classification-feedback",
+                      "api-reference/universal/trade/screen-parties-and-goods",
+                      "api-reference/universal/trade/list-compliance-screenings",
+                      "api-reference/universal/trade/retrieve-a-compliancescreening",
+                      "api-reference/universal/trade/quote-landed-cost",
+                      "api-reference/universal/trade/list-landed-costs",
+                      "api-reference/universal/trade/retrieve-a-landedcost",
+                      "api-reference/universal/trade/look-up-a-tariff-line",
+                      "api-reference/universal/trade/list-duty-collections",
+                      "api-reference/universal/trade/retrieve-a-dutycollection",
+                      "api-reference/universal/trade/pay-a-duty-collection",
+                      "api-reference/universal/trade/export-duty-collections"
                     ]
                   },
                   {
                     "group": "Accounts",
                     "pages": [
-                      "POST /v1/accounts",
-                      "GET /v1/accounts",
-                      "GET /v1/accounts/{id}",
-                      "POST /v1/accounts/{id}",
-                      "GET /v1/account"
+                      "api-reference/universal/accounts/create-a-child-account",
+                      "api-reference/universal/accounts/list-accounts",
+                      "api-reference/universal/accounts/retrieve-a-account",
+                      "api-reference/universal/accounts/update-a-account",
+                      "api-reference/universal/accounts/retrieve-the-current-account"
                     ]
                   },
                   {
                     "group": "Products",
                     "pages": [
-                      "POST /v1/products",
-                      "GET /v1/products",
-                      "GET /v1/products/search",
-                      "GET /v1/products/{id}",
-                      "POST /v1/products/{id}",
-                      "DELETE /v1/products/{id}",
-                      "POST /v1/products/upsert",
-                      "POST /v1/products/import",
-                      "POST /v1/products/{id}/archive",
-                      "POST /v1/products/{id}/unarchive"
+                      "api-reference/universal/products/create-a-product",
+                      "api-reference/universal/products/list-products",
+                      "api-reference/universal/products/search-products",
+                      "api-reference/universal/products/retrieve-a-product",
+                      "api-reference/universal/products/update-a-product",
+                      "api-reference/universal/products/delete-an-unreferenced-product",
+                      "api-reference/universal/products/upsert-a-product",
+                      "api-reference/universal/products/import-products-from-a-file",
+                      "api-reference/universal/products/archive-a-product",
+                      "api-reference/universal/products/unarchive-a-product"
                     ]
                   },
                   {
                     "group": "Data Network",
                     "pages": [
-                      "POST /v1/participants",
-                      "GET /v1/participants",
-                      "GET /v1/participants/{id}",
-                      "POST /v1/participants/{id}/credentials",
-                      "POST /v1/participants/{id}/rotate_keys",
-                      "POST /v1/records",
-                      "GET /v1/records",
-                      "POST /v1/records/query",
-                      "POST /v1/records/verify",
-                      "GET /v1/records/feed",
-                      "POST /v1/records/erase",
-                      "GET /v1/anchors/{id}",
-                      "POST /v1/access_grants",
-                      "GET /v1/access_grants",
-                      "GET /v1/access_grants/{id}",
-                      "POST /v1/access_grants/{id}/revoke",
-                      "POST /v1/attestations",
-                      "GET /v1/attestations",
-                      "GET /v1/attestations/{id}",
-                      "POST /v1/datasets",
-                      "GET /v1/timelines/{shipment_id}",
-                      "GET /v1/timelines/{shipment_id}/events",
-                      "POST /v1/timelines/resolve",
-                      "POST /v1/identifier_links",
-                      "GET /v1/milestone_definitions"
+                      "api-reference/universal/data-network/register-a-participant-did",
+                      "api-reference/universal/data-network/list-participants",
+                      "api-reference/universal/data-network/retrieve-a-participant",
+                      "api-reference/universal/data-network/attach-a-verifiable-credential",
+                      "api-reference/universal/data-network/rotate-participant-keys",
+                      "api-reference/universal/data-network/write-a-record",
+                      "api-reference/universal/data-network/list-records",
+                      "api-reference/universal/data-network/query-records",
+                      "api-reference/universal/data-network/verify-a-record",
+                      "api-reference/universal/data-network/change-feed",
+                      "api-reference/universal/data-network/crypto-shred-personal-data",
+                      "api-reference/universal/data-network/retrieve-an-anchor",
+                      "api-reference/universal/data-network/grant-access",
+                      "api-reference/universal/data-network/list-access-grants",
+                      "api-reference/universal/data-network/retrieve-a-accessgrant",
+                      "api-reference/universal/data-network/revoke-a-grant",
+                      "api-reference/universal/data-network/create-an-attestation",
+                      "api-reference/universal/data-network/list-attestations",
+                      "api-reference/universal/data-network/retrieve-a-attestation",
+                      "api-reference/universal/data-network/create-a-dataset-extract",
+                      "api-reference/universal/data-network/end-to-end-timeline",
+                      "api-reference/universal/data-network/merged-events-with-provenance",
+                      "api-reference/universal/data-network/resolve-an-identifier-to-shipments",
+                      "api-reference/universal/data-network/link-identifiers",
+                      "api-reference/universal/data-network/milestone-definition-set"
                     ]
                   },
                   {
                     "group": "Templates",
                     "pages": [
-                      "POST /v1/documents/generate",
-                      "GET /v1/documents",
-                      "GET /v1/documents/{id}",
-                      "DELETE /v1/documents/{id}",
-                      "POST /v1/document_jobs",
-                      "GET /v1/document_jobs",
-                      "GET /v1/document_jobs/{id}",
-                      "GET /v1/label_specs",
-                      "GET /v1/label_specs/{id}",
-                      "POST /v1/label_specs/{id}/certify",
-                      "POST /v1/label_specs/{id}/tracking_ranges",
-                      "POST /v1/documents/ingest",
-                      "GET /v1/document_ingestions",
-                      "GET /v1/document_ingestions/{id}",
-                      "POST /v1/document_ingestions/{id}/apply",
-                      "POST /v1/document_ingestions/{id}/reject"
+                      "api-reference/universal/templates/generate-a-document",
+                      "api-reference/universal/templates/list-documents",
+                      "api-reference/universal/templates/retrieve-a-document",
+                      "api-reference/universal/templates/delete-a-standalone-document",
+                      "api-reference/universal/templates/create-a-document-job",
+                      "api-reference/universal/templates/list-document-jobs",
+                      "api-reference/universal/templates/retrieve-a-documentjob",
+                      "api-reference/universal/templates/list-label-specs",
+                      "api-reference/universal/templates/retrieve-a-labelspec",
+                      "api-reference/universal/templates/certify-labels-against-the-spec",
+                      "api-reference/universal/templates/allocate-tracking-numbers",
+                      "api-reference/universal/templates/ingest-a-document",
+                      "api-reference/universal/templates/list-document-ingestions",
+                      "api-reference/universal/templates/retrieve-a-documentingestion",
+                      "api-reference/universal/templates/apply-extracted-data",
+                      "api-reference/universal/templates/reject-an-ingestion"
                     ]
                   },
                   {
                     "group": "Billing",
                     "pages": [
-                      "GET /v1/invoices",
-                      "GET /v1/invoices/{id}",
-                      "POST /v1/invoices/{id}/dispute",
-                      "POST /v1/invoices/{id}/pay",
-                      "GET /v1/invoices/{id}/export",
-                      "GET /v1/invoices/upcoming",
-                      "POST /v1/usage_records",
-                      "GET /v1/usage_records",
-                      "GET /v1/usage_records/{id}",
-                      "POST /v1/usage_records/import",
-                      "GET /v1/usage_summaries",
-                      "GET /v1/balance",
-                      "POST /v1/balance/top_up",
-                      "GET /v1/balance_transactions",
-                      "POST /v1/payment_methods/setup",
-                      "GET /v1/payment_methods",
-                      "GET /v1/payment_methods/{id}",
-                      "DELETE /v1/payment_methods/{id}",
-                      "GET /v1/payments",
-                      "GET /v1/payments/{id}"
+                      "api-reference/universal/billing/list-invoices",
+                      "api-reference/universal/billing/retrieve-a-invoice",
+                      "api-reference/universal/billing/invoice-dispute",
+                      "api-reference/universal/billing/pay-an-invoice",
+                      "api-reference/universal/billing/export-an-invoice",
+                      "api-reference/universal/billing/preview-the-upcoming-usage-invoice",
+                      "api-reference/universal/billing/report-usage",
+                      "api-reference/universal/billing/list-usage-records",
+                      "api-reference/universal/billing/retrieve-a-usagerecord",
+                      "api-reference/universal/billing/import-usage-records",
+                      "api-reference/universal/billing/usage-summary-per-meter",
+                      "api-reference/universal/billing/retrieve-the-prepaid-balance",
+                      "api-reference/universal/billing/top-up-the-balance",
+                      "api-reference/universal/billing/list-balance-transactions",
+                      "api-reference/universal/billing/start-hosted-payment-method-setup",
+                      "api-reference/universal/billing/list-payment-methods",
+                      "api-reference/universal/billing/retrieve-a-paymentmethod",
+                      "api-reference/universal/billing/delete-a-paymentmethod",
+                      "api-reference/universal/billing/list-payments",
+                      "api-reference/universal/billing/retrieve-a-payment"
                     ]
                   },
                   {
                     "group": "Inventory",
                     "pages": [
-                      "GET /v1/inventory/levels",
-                      "POST /v1/fulfillment_orders",
-                      "GET /v1/fulfillment_orders",
-                      "GET /v1/fulfillment_orders/search",
-                      "GET /v1/fulfillment_orders/{id}",
-                      "POST /v1/fulfillment_orders/{id}",
-                      "POST /v1/fulfillment_orders/{id}/cancel"
+                      "api-reference/universal/inventory/stock-levels",
+                      "api-reference/universal/inventory/create-a-fulfillment-order",
+                      "api-reference/universal/inventory/list-fulfillment-orders",
+                      "api-reference/universal/inventory/search-fulfillment-orders",
+                      "api-reference/universal/inventory/retrieve-a-fulfillmentorder",
+                      "api-reference/universal/inventory/update-a-fulfillmentorder",
+                      "api-reference/universal/inventory/fulfillment-order-cancel"
                     ]
                   }
                 ]
@@ -461,10 +457,6 @@
           {
             "item": "Carrier",
             "description": "212 operations",
-            "openapi": {
-              "source": "openapi/carrier.yaml",
-              "directory": "api-reference/carrier"
-            },
             "groups": [
               {
                 "group": "Overview",
@@ -478,208 +470,208 @@
                   {
                     "group": "Rates",
                     "pages": [
-                      "POST /v1/rates",
-                      "GET /v1/rate_quotes/{id}"
+                      "api-reference/carrier/rates/get-live-rates",
+                      "api-reference/carrier/rates/retrieve-a-rate-quote"
                     ]
                   },
                   {
                     "group": "Shipments",
                     "pages": [
-                      "POST /v1/shipments",
-                      "GET /v1/shipments",
-                      "GET /v1/shipments/search",
-                      "GET /v1/shipments/{id}",
-                      "POST /v1/shipments/{id}",
-                      "DELETE /v1/shipments/{id}",
-                      "POST /v1/shipments/{id}/purchase",
-                      "POST /v1/shipments/{id}/void",
-                      "POST /v1/shipments/{id}/rates",
-                      "POST /v1/shipments/{id}/return",
-                      "POST /v1/shipments/{id}/label"
+                      "api-reference/carrier/shipments/create-a-shipment-draft-or-purchase-with-purchase-true",
+                      "api-reference/carrier/shipments/list-shipments",
+                      "api-reference/carrier/shipments/search-shipments",
+                      "api-reference/carrier/shipments/retrieve-a-shipment",
+                      "api-reference/carrier/shipments/update-a-shipment",
+                      "api-reference/carrier/shipments/delete-a-draft-shipment",
+                      "api-reference/carrier/shipments/purchase-a-label",
+                      "api-reference/carrier/shipments/void-a-label",
+                      "api-reference/carrier/shipments/re-rate-a-draft-shipment",
+                      "api-reference/carrier/shipments/create-a-return-shipment",
+                      "api-reference/carrier/shipments/re-render-the-label"
                     ]
                   },
                   {
                     "group": "Pickups",
                     "pages": [
-                      "POST /v1/pickups/availability",
-                      "POST /v1/pickups",
-                      "GET /v1/pickups",
-                      "GET /v1/pickups/search",
-                      "GET /v1/pickups/{id}",
-                      "POST /v1/pickups/{id}",
-                      "POST /v1/pickups/{id}/cancel"
+                      "api-reference/carrier/pickups/check-pickup-availability",
+                      "api-reference/carrier/pickups/book-a-pickup",
+                      "api-reference/carrier/pickups/list-pickups",
+                      "api-reference/carrier/pickups/search-pickups",
+                      "api-reference/carrier/pickups/retrieve-a-pickup",
+                      "api-reference/carrier/pickups/update-a-pickup",
+                      "api-reference/carrier/pickups/cancel-a-pickup"
                     ]
                   },
                   {
                     "group": "Tracking",
                     "pages": [
-                      "POST /v1/trackers",
-                      "GET /v1/trackers",
-                      "GET /v1/trackers/search",
-                      "GET /v1/trackers/{id}",
-                      "POST /v1/trackers/{id}",
-                      "DELETE /v1/trackers/{id}",
-                      "POST /v1/trackers/{id}/refresh",
-                      "GET /v1/trackers/{id}/events"
+                      "api-reference/carrier/tracking/create-a-tracker",
+                      "api-reference/carrier/tracking/list-trackers",
+                      "api-reference/carrier/tracking/search-trackers",
+                      "api-reference/carrier/tracking/retrieve-a-tracker",
+                      "api-reference/carrier/tracking/update-a-tracker",
+                      "api-reference/carrier/tracking/discard-a-tracker",
+                      "api-reference/carrier/tracking/force-a-carrier-poll",
+                      "api-reference/carrier/tracking/list-tracking-events"
                     ]
                   },
                   {
                     "group": "Webhooks",
                     "pages": [
-                      "POST /v1/webhook_endpoints",
-                      "GET /v1/webhook_endpoints",
-                      "GET /v1/webhook_endpoints/{id}",
-                      "POST /v1/webhook_endpoints/{id}",
-                      "DELETE /v1/webhook_endpoints/{id}",
-                      "POST /v1/webhook_endpoints/{id}/rotate_secret",
-                      "POST /v1/webhook_endpoints/{id}/test"
+                      "api-reference/carrier/webhooks/create-a-webhook-endpoint",
+                      "api-reference/carrier/webhooks/list-webhook-endpoints",
+                      "api-reference/carrier/webhooks/retrieve-a-webhookendpoint",
+                      "api-reference/carrier/webhooks/update-a-webhookendpoint",
+                      "api-reference/carrier/webhooks/delete-a-webhookendpoint",
+                      "api-reference/carrier/webhooks/rotate-the-signing-secret",
+                      "api-reference/carrier/webhooks/send-a-test-event"
                     ]
                   },
                   {
                     "group": "Events",
                     "pages": [
-                      "GET /v1/events",
-                      "GET /v1/events/{id}",
-                      "GET /v1/events/{id}/deliveries",
-                      "POST /v1/events/{id}/redeliver"
+                      "api-reference/carrier/events/list-events",
+                      "api-reference/carrier/events/retrieve-an-event",
+                      "api-reference/carrier/events/list-delivery-attempts",
+                      "api-reference/carrier/events/redeliver-an-event"
                     ]
                   },
                   {
                     "group": "Inbound",
                     "pages": [
-                      "POST /v1/inbound/{connection_id}",
-                      "POST /v1/inbound_events",
-                      "GET /v1/inbound_events",
-                      "GET /v1/inbound_events/{id}"
+                      "api-reference/carrier/inbound/carrier-push-receiver-carrier-native-payload",
+                      "api-reference/carrier/inbound/inject-canonical-events",
+                      "api-reference/carrier/inbound/list-inbound-events",
+                      "api-reference/carrier/inbound/retrieve-a-inboundevent"
                     ]
                   },
                   {
                     "group": "Carriers",
                     "pages": [
-                      "GET /v1/carriers",
-                      "GET /v1/carriers/{id}"
+                      "api-reference/carrier/carriers/list-carriers",
+                      "api-reference/carrier/carriers/retrieve-a-carrier"
                     ]
                   },
                   {
                     "group": "Batches",
                     "pages": [
-                      "POST /v1/batches",
-                      "GET /v1/batches/{id}"
+                      "api-reference/carrier/batches/create-a-batch",
+                      "api-reference/carrier/batches/retrieve-a-batch"
                     ]
                   },
                   {
                     "group": "Test Helpers",
                     "pages": [
-                      "POST /v1/test_helpers/trackers/{id}/advance",
-                      "POST /v1/test_helpers/shipments/{id}/charge_adjustment"
+                      "api-reference/carrier/test-helpers/advance-a-test-tracker",
+                      "api-reference/carrier/test-helpers/simulate-a-carrier-charge-adjustment"
                     ]
                   },
                   {
                     "group": "Pickup Schedules",
                     "pages": [
-                      "POST /v1/pickup_schedules",
-                      "GET /v1/pickup_schedules",
-                      "GET /v1/pickup_schedules/{id}",
-                      "POST /v1/pickup_schedules/{id}",
-                      "POST /v1/pickup_schedules/{id}/pause",
-                      "POST /v1/pickup_schedules/{id}/resume",
-                      "POST /v1/pickup_schedules/{id}/cancel",
-                      "POST /v1/pickup_schedules/{id}/skip",
-                      "POST /v1/pickup_schedules/{id}/add",
-                      "GET /v1/pickup_schedules/{id}/occurrences"
+                      "api-reference/carrier/pickup-schedules/create-a-pickup-schedule",
+                      "api-reference/carrier/pickup-schedules/list-pickup-schedules",
+                      "api-reference/carrier/pickup-schedules/retrieve-a-pickupschedule",
+                      "api-reference/carrier/pickup-schedules/update-a-pickupschedule",
+                      "api-reference/carrier/pickup-schedules/pause-a-pickup-schedule",
+                      "api-reference/carrier/pickup-schedules/resume-a-pickup-schedule",
+                      "api-reference/carrier/pickup-schedules/cancel-a-pickup-schedule",
+                      "api-reference/carrier/pickup-schedules/skip-a-pickup-schedule",
+                      "api-reference/carrier/pickup-schedules/add-a-pickup-schedule",
+                      "api-reference/carrier/pickup-schedules/list-occurrences"
                     ]
                   },
                   {
                     "group": "Trade",
                     "pages": [
-                      "POST /v1/classifications",
-                      "GET /v1/classifications",
-                      "GET /v1/classifications/{id}",
-                      "POST /v1/classifications/{id}/apply",
-                      "POST /v1/classifications/{id}/feedback",
-                      "POST /v1/compliance_screenings",
-                      "GET /v1/compliance_screenings",
-                      "GET /v1/compliance_screenings/{id}",
-                      "POST /v1/landed_costs",
-                      "GET /v1/landed_costs",
-                      "GET /v1/landed_costs/{id}",
-                      "GET /v1/tariffs/{country}/{hs_code}",
-                      "GET /v1/duty_collections",
-                      "GET /v1/duty_collections/{id}",
-                      "POST /v1/duty_collections/{id}/pay",
-                      "POST /v1/duty_collections/export"
+                      "api-reference/carrier/trade/classify-items",
+                      "api-reference/carrier/trade/list-classifications",
+                      "api-reference/carrier/trade/retrieve-a-classification",
+                      "api-reference/carrier/trade/apply-classification-to-a-draft-shipment",
+                      "api-reference/carrier/trade/submit-classification-feedback",
+                      "api-reference/carrier/trade/screen-parties-and-goods",
+                      "api-reference/carrier/trade/list-compliance-screenings",
+                      "api-reference/carrier/trade/retrieve-a-compliancescreening",
+                      "api-reference/carrier/trade/quote-landed-cost",
+                      "api-reference/carrier/trade/list-landed-costs",
+                      "api-reference/carrier/trade/retrieve-a-landedcost",
+                      "api-reference/carrier/trade/look-up-a-tariff-line",
+                      "api-reference/carrier/trade/list-duty-collections",
+                      "api-reference/carrier/trade/retrieve-a-dutycollection",
+                      "api-reference/carrier/trade/pay-a-duty-collection",
+                      "api-reference/carrier/trade/export-duty-collections"
                     ]
                   },
                   {
                     "group": "Catalog",
                     "pages": [
-                      "POST /v1/service_availability"
+                      "api-reference/carrier/catalog/check-serviceability"
                     ]
                   },
                   {
                     "group": "Routes",
                     "pages": [
-                      "POST /v1/journeys/plan",
-                      "GET /v1/shipments/{id}/journey"
+                      "api-reference/carrier/routes/plan-a-journey",
+                      "api-reference/carrier/routes/retrieve-a-shipment-s-journey"
                     ]
                   },
                   {
                     "group": "Accounts",
                     "pages": [
-                      "POST /v1/accounts",
-                      "GET /v1/accounts",
-                      "GET /v1/accounts/{id}",
-                      "POST /v1/accounts/{id}",
-                      "GET /v1/account"
+                      "api-reference/carrier/accounts/create-a-child-account",
+                      "api-reference/carrier/accounts/list-accounts",
+                      "api-reference/carrier/accounts/retrieve-a-account",
+                      "api-reference/carrier/accounts/update-a-account",
+                      "api-reference/carrier/accounts/retrieve-the-current-account"
                     ]
                   },
                   {
                     "group": "Consolidation",
                     "pages": [
-                      "GET /v1/shipments/{id}/custody"
+                      "api-reference/carrier/consolidation/custody-chain"
                     ]
                   },
                   {
                     "group": "Jobs",
                     "pages": [
-                      "POST /v1/jobs",
-                      "GET /v1/jobs",
-                      "GET /v1/jobs/{id}",
-                      "POST /v1/jobs/{id}/cancel",
-                      "POST /v1/jobs/{id}/retry",
-                      "GET /v1/jobs/{id}/logs",
-                      "GET /v1/jobs/{id}/stream"
+                      "api-reference/carrier/jobs/start-a-job",
+                      "api-reference/carrier/jobs/list-jobs",
+                      "api-reference/carrier/jobs/retrieve-a-job",
+                      "api-reference/carrier/jobs/cancel-a-job",
+                      "api-reference/carrier/jobs/retry-a-job",
+                      "api-reference/carrier/jobs/job-logs",
+                      "api-reference/carrier/jobs/stream-job-progress-sse"
                     ]
                   },
                   {
                     "group": "Billing",
                     "pages": [
-                      "GET /v1/invoices",
-                      "GET /v1/invoices/{id}",
-                      "POST /v1/invoices/{id}/dispute",
-                      "POST /v1/invoices/{id}/pay",
-                      "GET /v1/invoices/{id}/export",
-                      "GET /v1/invoices/upcoming",
-                      "POST /v1/usage_records",
-                      "GET /v1/usage_records",
-                      "GET /v1/usage_records/{id}",
-                      "POST /v1/usage_records/import",
-                      "GET /v1/usage_summaries",
-                      "GET /v1/balance",
-                      "POST /v1/balance/top_up",
-                      "GET /v1/balance_transactions",
-                      "POST /v1/payment_methods/setup",
-                      "GET /v1/payment_methods",
-                      "GET /v1/payment_methods/{id}",
-                      "DELETE /v1/payment_methods/{id}",
-                      "GET /v1/payments",
-                      "GET /v1/payments/{id}"
+                      "api-reference/carrier/billing/list-invoices",
+                      "api-reference/carrier/billing/retrieve-a-invoice",
+                      "api-reference/carrier/billing/invoice-dispute",
+                      "api-reference/carrier/billing/pay-an-invoice",
+                      "api-reference/carrier/billing/export-an-invoice",
+                      "api-reference/carrier/billing/preview-the-upcoming-usage-invoice",
+                      "api-reference/carrier/billing/report-usage",
+                      "api-reference/carrier/billing/list-usage-records",
+                      "api-reference/carrier/billing/retrieve-a-usagerecord",
+                      "api-reference/carrier/billing/import-usage-records",
+                      "api-reference/carrier/billing/usage-summary-per-meter",
+                      "api-reference/carrier/billing/retrieve-the-prepaid-balance",
+                      "api-reference/carrier/billing/top-up-the-balance",
+                      "api-reference/carrier/billing/list-balance-transactions",
+                      "api-reference/carrier/billing/start-hosted-payment-method-setup",
+                      "api-reference/carrier/billing/list-payment-methods",
+                      "api-reference/carrier/billing/retrieve-a-paymentmethod",
+                      "api-reference/carrier/billing/delete-a-paymentmethod",
+                      "api-reference/carrier/billing/list-payments",
+                      "api-reference/carrier/billing/retrieve-a-payment"
                     ]
                   },
                   {
                     "group": "Discovery",
                     "pages": [
-                      "GET /.well-known/shipping-configuration"
+                      "api-reference/carrier/discovery/shipping-configuration-document"
                     ]
                   }
                 ]
@@ -690,151 +682,151 @@
                   {
                     "group": "Manifests",
                     "pages": [
-                      "POST /v1/manifests",
-                      "GET /v1/manifests",
-                      "GET /v1/manifests/{id}",
-                      "POST /v1/manifests/{id}",
-                      "POST /v1/manifests/preview",
-                      "POST /v1/manifests/{id}/reprint"
+                      "api-reference/carrier/manifests/create-close-out-one-or-more-manifests",
+                      "api-reference/carrier/manifests/list-manifests",
+                      "api-reference/carrier/manifests/retrieve-a-manifest",
+                      "api-reference/carrier/manifests/update-a-manifest",
+                      "api-reference/carrier/manifests/preview-the-day-s-close-out",
+                      "api-reference/carrier/manifests/re-fetch-manifest-documents"
                     ]
                   },
                   {
                     "group": "Files",
                     "pages": [
-                      "POST /v1/files",
-                      "GET /v1/files",
-                      "GET /v1/files/{id}",
-                      "DELETE /v1/files/{id}",
-                      "GET /v1/files/{id}/contents"
+                      "api-reference/carrier/files/upload-a-file",
+                      "api-reference/carrier/files/list-files",
+                      "api-reference/carrier/files/retrieve-a-file",
+                      "api-reference/carrier/files/delete-a-file",
+                      "api-reference/carrier/files/download-file-contents"
                     ]
                   },
                   {
                     "group": "Document Uploads",
                     "pages": [
-                      "POST /v1/document_uploads",
-                      "GET /v1/document_uploads",
-                      "GET /v1/document_uploads/{id}",
-                      "POST /v1/document_uploads/{id}"
+                      "api-reference/carrier/document-uploads/submit-customs-documents-to-a-carrier",
+                      "api-reference/carrier/document-uploads/list-document-uploads",
+                      "api-reference/carrier/document-uploads/retrieve-a-documentupload",
+                      "api-reference/carrier/document-uploads/update-a-documentupload"
                     ]
                   },
                   {
                     "group": "Injection",
                     "pages": [
-                      "POST /v1/shipments/{id}/cancel_injection",
-                      "POST /v1/asns",
-                      "GET /v1/asns",
-                      "GET /v1/asns/{id}",
-                      "POST /v1/asns/{id}",
-                      "POST /v1/asns/{id}/dispatch",
-                      "POST /v1/asns/{id}/arrive",
-                      "POST /v1/asns/{id}/cancel",
-                      "POST /v1/asns/{id}/close",
-                      "POST /v1/asns/{id}/receive"
+                      "api-reference/carrier/injection/cancel-an-injected-shipment",
+                      "api-reference/carrier/injection/create-an-advance-shipping-notice",
+                      "api-reference/carrier/injection/list-asns",
+                      "api-reference/carrier/injection/retrieve-a-asn",
+                      "api-reference/carrier/injection/update-a-asn",
+                      "api-reference/carrier/injection/asn-dispatch",
+                      "api-reference/carrier/injection/asn-arrive",
+                      "api-reference/carrier/injection/asn-cancel",
+                      "api-reference/carrier/injection/asn-close",
+                      "api-reference/carrier/injection/asn-receive"
                     ]
                   },
                   {
                     "group": "Products",
                     "pages": [
-                      "POST /v1/products",
-                      "GET /v1/products",
-                      "GET /v1/products/search",
-                      "GET /v1/products/{id}",
-                      "POST /v1/products/{id}",
-                      "DELETE /v1/products/{id}",
-                      "POST /v1/products/upsert",
-                      "POST /v1/products/import",
-                      "POST /v1/products/{id}/archive",
-                      "POST /v1/products/{id}/unarchive"
+                      "api-reference/carrier/products/create-a-product",
+                      "api-reference/carrier/products/list-products",
+                      "api-reference/carrier/products/search-products",
+                      "api-reference/carrier/products/retrieve-a-product",
+                      "api-reference/carrier/products/update-a-product",
+                      "api-reference/carrier/products/delete-an-unreferenced-product",
+                      "api-reference/carrier/products/upsert-a-product",
+                      "api-reference/carrier/products/import-products-from-a-file",
+                      "api-reference/carrier/products/archive-a-product",
+                      "api-reference/carrier/products/unarchive-a-product"
                     ]
                   },
                   {
                     "group": "IoT",
                     "pages": [
-                      "POST /v1/device_events",
-                      "GET /v1/device_events",
-                      "GET /v1/shipments/{id}/conditions"
+                      "api-reference/carrier/iot/ingest-device-events",
+                      "api-reference/carrier/iot/list-device-events",
+                      "api-reference/carrier/iot/condition-readings-and-excursions"
                     ]
                   },
                   {
                     "group": "Data Network",
                     "pages": [
-                      "POST /v1/participants",
-                      "GET /v1/participants",
-                      "GET /v1/participants/{id}",
-                      "POST /v1/participants/{id}/credentials",
-                      "POST /v1/participants/{id}/rotate_keys",
-                      "POST /v1/records",
-                      "GET /v1/records",
-                      "POST /v1/records/query",
-                      "POST /v1/records/verify",
-                      "GET /v1/records/feed",
-                      "POST /v1/records/erase",
-                      "GET /v1/anchors/{id}",
-                      "POST /v1/access_grants",
-                      "GET /v1/access_grants",
-                      "GET /v1/access_grants/{id}",
-                      "POST /v1/access_grants/{id}/revoke",
-                      "POST /v1/attestations",
-                      "GET /v1/attestations",
-                      "GET /v1/attestations/{id}",
-                      "POST /v1/datasets",
-                      "GET /v1/timelines/{shipment_id}",
-                      "GET /v1/timelines/{shipment_id}/events",
-                      "POST /v1/timelines/resolve",
-                      "POST /v1/identifier_links",
-                      "GET /v1/milestone_definitions"
+                      "api-reference/carrier/data-network/register-a-participant-did",
+                      "api-reference/carrier/data-network/list-participants",
+                      "api-reference/carrier/data-network/retrieve-a-participant",
+                      "api-reference/carrier/data-network/attach-a-verifiable-credential",
+                      "api-reference/carrier/data-network/rotate-participant-keys",
+                      "api-reference/carrier/data-network/write-a-record",
+                      "api-reference/carrier/data-network/list-records",
+                      "api-reference/carrier/data-network/query-records",
+                      "api-reference/carrier/data-network/verify-a-record",
+                      "api-reference/carrier/data-network/change-feed",
+                      "api-reference/carrier/data-network/crypto-shred-personal-data",
+                      "api-reference/carrier/data-network/retrieve-an-anchor",
+                      "api-reference/carrier/data-network/grant-access",
+                      "api-reference/carrier/data-network/list-access-grants",
+                      "api-reference/carrier/data-network/retrieve-a-accessgrant",
+                      "api-reference/carrier/data-network/revoke-a-grant",
+                      "api-reference/carrier/data-network/create-an-attestation",
+                      "api-reference/carrier/data-network/list-attestations",
+                      "api-reference/carrier/data-network/retrieve-a-attestation",
+                      "api-reference/carrier/data-network/create-a-dataset-extract",
+                      "api-reference/carrier/data-network/end-to-end-timeline",
+                      "api-reference/carrier/data-network/merged-events-with-provenance",
+                      "api-reference/carrier/data-network/resolve-an-identifier-to-shipments",
+                      "api-reference/carrier/data-network/link-identifiers",
+                      "api-reference/carrier/data-network/milestone-definition-set"
                     ]
                   },
                   {
                     "group": "Templates",
                     "pages": [
-                      "POST /v1/documents/generate",
-                      "GET /v1/documents",
-                      "GET /v1/documents/{id}",
-                      "DELETE /v1/documents/{id}",
-                      "POST /v1/document_jobs",
-                      "GET /v1/document_jobs",
-                      "GET /v1/document_jobs/{id}",
-                      "GET /v1/label_specs",
-                      "GET /v1/label_specs/{id}",
-                      "POST /v1/label_specs/{id}/certify",
-                      "POST /v1/label_specs/{id}/tracking_ranges",
-                      "POST /v1/documents/ingest",
-                      "GET /v1/document_ingestions",
-                      "GET /v1/document_ingestions/{id}",
-                      "POST /v1/document_ingestions/{id}/apply",
-                      "POST /v1/document_ingestions/{id}/reject"
+                      "api-reference/carrier/templates/generate-a-document",
+                      "api-reference/carrier/templates/list-documents",
+                      "api-reference/carrier/templates/retrieve-a-document",
+                      "api-reference/carrier/templates/delete-a-standalone-document",
+                      "api-reference/carrier/templates/create-a-document-job",
+                      "api-reference/carrier/templates/list-document-jobs",
+                      "api-reference/carrier/templates/retrieve-a-documentjob",
+                      "api-reference/carrier/templates/list-label-specs",
+                      "api-reference/carrier/templates/retrieve-a-labelspec",
+                      "api-reference/carrier/templates/certify-labels-against-the-spec",
+                      "api-reference/carrier/templates/allocate-tracking-numbers",
+                      "api-reference/carrier/templates/ingest-a-document",
+                      "api-reference/carrier/templates/list-document-ingestions",
+                      "api-reference/carrier/templates/retrieve-a-documentingestion",
+                      "api-reference/carrier/templates/apply-extracted-data",
+                      "api-reference/carrier/templates/reject-an-ingestion"
                     ]
                   },
                   {
                     "group": "Integrations",
                     "pages": [
-                      "GET /v1/integrations",
-                      "GET /v1/integrations/{id}",
-                      "POST /v1/address_validations",
-                      "GET /v1/address_validations/{id}",
-                      "POST /v1/insurance_quotes",
-                      "POST /v1/coverages",
-                      "GET /v1/coverages",
-                      "GET /v1/coverages/{id}",
-                      "POST /v1/coverages/{id}/cancel",
-                      "POST /v1/claims",
-                      "GET /v1/claims",
-                      "GET /v1/claims/{id}",
-                      "POST /v1/claims/{id}",
-                      "POST /v1/claims/{id}/withdraw"
+                      "api-reference/carrier/integrations/list-integrations",
+                      "api-reference/carrier/integrations/retrieve-an-integration",
+                      "api-reference/carrier/integrations/validate-an-address",
+                      "api-reference/carrier/integrations/retrieve-an-address-validation",
+                      "api-reference/carrier/integrations/quote-insurance",
+                      "api-reference/carrier/integrations/buy-coverage",
+                      "api-reference/carrier/integrations/list-coverages",
+                      "api-reference/carrier/integrations/retrieve-a-coverage",
+                      "api-reference/carrier/integrations/cancel-coverage",
+                      "api-reference/carrier/integrations/submit-a-claim",
+                      "api-reference/carrier/integrations/list-claims",
+                      "api-reference/carrier/integrations/retrieve-a-claim",
+                      "api-reference/carrier/integrations/update-a-claim",
+                      "api-reference/carrier/integrations/withdraw-a-claim"
                     ]
                   },
                   {
                     "group": "Inventory",
                     "pages": [
-                      "GET /v1/inventory/levels",
-                      "POST /v1/fulfillment_orders",
-                      "GET /v1/fulfillment_orders",
-                      "GET /v1/fulfillment_orders/search",
-                      "GET /v1/fulfillment_orders/{id}",
-                      "POST /v1/fulfillment_orders/{id}",
-                      "POST /v1/fulfillment_orders/{id}/cancel"
+                      "api-reference/carrier/inventory/stock-levels",
+                      "api-reference/carrier/inventory/create-a-fulfillment-order",
+                      "api-reference/carrier/inventory/list-fulfillment-orders",
+                      "api-reference/carrier/inventory/search-fulfillment-orders",
+                      "api-reference/carrier/inventory/retrieve-a-fulfillmentorder",
+                      "api-reference/carrier/inventory/update-a-fulfillmentorder",
+                      "api-reference/carrier/inventory/fulfillment-order-cancel"
                     ]
                   }
                 ]
@@ -844,10 +836,6 @@
           {
             "item": "Network",
             "description": "221 operations",
-            "openapi": {
-              "source": "openapi/network.yaml",
-              "directory": "api-reference/network"
-            },
             "groups": [
               {
                 "group": "Overview",
@@ -861,221 +849,221 @@
                   {
                     "group": "Rates",
                     "pages": [
-                      "POST /v1/rates",
-                      "GET /v1/rate_quotes/{id}"
+                      "api-reference/network/rates/get-live-rates",
+                      "api-reference/network/rates/retrieve-a-rate-quote"
                     ]
                   },
                   {
                     "group": "Shipments",
                     "pages": [
-                      "POST /v1/shipments",
-                      "GET /v1/shipments",
-                      "GET /v1/shipments/search",
-                      "GET /v1/shipments/{id}",
-                      "POST /v1/shipments/{id}",
-                      "DELETE /v1/shipments/{id}",
-                      "POST /v1/shipments/{id}/purchase",
-                      "POST /v1/shipments/{id}/void",
-                      "POST /v1/shipments/{id}/rates",
-                      "POST /v1/shipments/{id}/return",
-                      "POST /v1/shipments/{id}/label"
+                      "api-reference/network/shipments/create-a-shipment-draft-or-purchase-with-purchase-true",
+                      "api-reference/network/shipments/list-shipments",
+                      "api-reference/network/shipments/search-shipments",
+                      "api-reference/network/shipments/retrieve-a-shipment",
+                      "api-reference/network/shipments/update-a-shipment",
+                      "api-reference/network/shipments/delete-a-draft-shipment",
+                      "api-reference/network/shipments/purchase-a-label",
+                      "api-reference/network/shipments/void-a-label",
+                      "api-reference/network/shipments/re-rate-a-draft-shipment",
+                      "api-reference/network/shipments/create-a-return-shipment",
+                      "api-reference/network/shipments/re-render-the-label"
                     ]
                   },
                   {
                     "group": "Pickups",
                     "pages": [
-                      "POST /v1/pickups/availability",
-                      "POST /v1/pickups",
-                      "GET /v1/pickups",
-                      "GET /v1/pickups/search",
-                      "GET /v1/pickups/{id}",
-                      "POST /v1/pickups/{id}",
-                      "POST /v1/pickups/{id}/cancel"
+                      "api-reference/network/pickups/check-pickup-availability",
+                      "api-reference/network/pickups/book-a-pickup",
+                      "api-reference/network/pickups/list-pickups",
+                      "api-reference/network/pickups/search-pickups",
+                      "api-reference/network/pickups/retrieve-a-pickup",
+                      "api-reference/network/pickups/update-a-pickup",
+                      "api-reference/network/pickups/cancel-a-pickup"
                     ]
                   },
                   {
                     "group": "Tracking",
                     "pages": [
-                      "POST /v1/trackers",
-                      "GET /v1/trackers",
-                      "GET /v1/trackers/search",
-                      "GET /v1/trackers/{id}",
-                      "POST /v1/trackers/{id}",
-                      "DELETE /v1/trackers/{id}",
-                      "POST /v1/trackers/{id}/refresh",
-                      "GET /v1/trackers/{id}/events"
+                      "api-reference/network/tracking/create-a-tracker",
+                      "api-reference/network/tracking/list-trackers",
+                      "api-reference/network/tracking/search-trackers",
+                      "api-reference/network/tracking/retrieve-a-tracker",
+                      "api-reference/network/tracking/update-a-tracker",
+                      "api-reference/network/tracking/discard-a-tracker",
+                      "api-reference/network/tracking/force-a-carrier-poll",
+                      "api-reference/network/tracking/list-tracking-events"
                     ]
                   },
                   {
                     "group": "Webhooks",
                     "pages": [
-                      "POST /v1/webhook_endpoints",
-                      "GET /v1/webhook_endpoints",
-                      "GET /v1/webhook_endpoints/{id}",
-                      "POST /v1/webhook_endpoints/{id}",
-                      "DELETE /v1/webhook_endpoints/{id}",
-                      "POST /v1/webhook_endpoints/{id}/rotate_secret",
-                      "POST /v1/webhook_endpoints/{id}/test"
+                      "api-reference/network/webhooks/create-a-webhook-endpoint",
+                      "api-reference/network/webhooks/list-webhook-endpoints",
+                      "api-reference/network/webhooks/retrieve-a-webhookendpoint",
+                      "api-reference/network/webhooks/update-a-webhookendpoint",
+                      "api-reference/network/webhooks/delete-a-webhookendpoint",
+                      "api-reference/network/webhooks/rotate-the-signing-secret",
+                      "api-reference/network/webhooks/send-a-test-event"
                     ]
                   },
                   {
                     "group": "Events",
                     "pages": [
-                      "GET /v1/events",
-                      "GET /v1/events/{id}",
-                      "GET /v1/events/{id}/deliveries",
-                      "POST /v1/events/{id}/redeliver"
+                      "api-reference/network/events/list-events",
+                      "api-reference/network/events/retrieve-an-event",
+                      "api-reference/network/events/list-delivery-attempts",
+                      "api-reference/network/events/redeliver-an-event"
                     ]
                   },
                   {
                     "group": "Inbound",
                     "pages": [
-                      "POST /v1/inbound/{connection_id}",
-                      "POST /v1/inbound_events",
-                      "GET /v1/inbound_events",
-                      "GET /v1/inbound_events/{id}"
+                      "api-reference/network/inbound/carrier-push-receiver-carrier-native-payload",
+                      "api-reference/network/inbound/inject-canonical-events",
+                      "api-reference/network/inbound/list-inbound-events",
+                      "api-reference/network/inbound/retrieve-a-inboundevent"
                     ]
                   },
                   {
                     "group": "Carriers",
                     "pages": [
-                      "GET /v1/carriers",
-                      "GET /v1/carriers/{id}"
+                      "api-reference/network/carriers/list-carriers",
+                      "api-reference/network/carriers/retrieve-a-carrier"
                     ]
                   },
                   {
                     "group": "Batches",
                     "pages": [
-                      "POST /v1/batches",
-                      "GET /v1/batches/{id}"
+                      "api-reference/network/batches/create-a-batch",
+                      "api-reference/network/batches/retrieve-a-batch"
                     ]
                   },
                   {
                     "group": "Test Helpers",
                     "pages": [
-                      "POST /v1/test_helpers/trackers/{id}/advance",
-                      "POST /v1/test_helpers/shipments/{id}/charge_adjustment"
+                      "api-reference/network/test-helpers/advance-a-test-tracker",
+                      "api-reference/network/test-helpers/simulate-a-carrier-charge-adjustment"
                     ]
                   },
                   {
                     "group": "Pickup Schedules",
                     "pages": [
-                      "POST /v1/pickup_schedules",
-                      "GET /v1/pickup_schedules",
-                      "GET /v1/pickup_schedules/{id}",
-                      "POST /v1/pickup_schedules/{id}",
-                      "POST /v1/pickup_schedules/{id}/pause",
-                      "POST /v1/pickup_schedules/{id}/resume",
-                      "POST /v1/pickup_schedules/{id}/cancel",
-                      "POST /v1/pickup_schedules/{id}/skip",
-                      "POST /v1/pickup_schedules/{id}/add",
-                      "GET /v1/pickup_schedules/{id}/occurrences"
+                      "api-reference/network/pickup-schedules/create-a-pickup-schedule",
+                      "api-reference/network/pickup-schedules/list-pickup-schedules",
+                      "api-reference/network/pickup-schedules/retrieve-a-pickupschedule",
+                      "api-reference/network/pickup-schedules/update-a-pickupschedule",
+                      "api-reference/network/pickup-schedules/pause-a-pickup-schedule",
+                      "api-reference/network/pickup-schedules/resume-a-pickup-schedule",
+                      "api-reference/network/pickup-schedules/cancel-a-pickup-schedule",
+                      "api-reference/network/pickup-schedules/skip-a-pickup-schedule",
+                      "api-reference/network/pickup-schedules/add-a-pickup-schedule",
+                      "api-reference/network/pickup-schedules/list-occurrences"
                     ]
                   },
                   {
                     "group": "Catalog",
                     "pages": [
-                      "POST /v1/service_availability"
+                      "api-reference/network/catalog/check-serviceability"
                     ]
                   },
                   {
                     "group": "Routes",
                     "pages": [
-                      "POST /v1/journeys/plan",
-                      "GET /v1/shipments/{id}/journey"
+                      "api-reference/network/routes/plan-a-journey",
+                      "api-reference/network/routes/retrieve-a-shipment-s-journey"
                     ]
                   },
                   {
                     "group": "Injection",
                     "pages": [
-                      "POST /v1/shipments/{id}/cancel_injection",
-                      "POST /v1/asns",
-                      "GET /v1/asns",
-                      "GET /v1/asns/{id}",
-                      "POST /v1/asns/{id}",
-                      "POST /v1/asns/{id}/dispatch",
-                      "POST /v1/asns/{id}/arrive",
-                      "POST /v1/asns/{id}/cancel",
-                      "POST /v1/asns/{id}/close",
-                      "POST /v1/asns/{id}/receive"
+                      "api-reference/network/injection/cancel-an-injected-shipment",
+                      "api-reference/network/injection/create-an-advance-shipping-notice",
+                      "api-reference/network/injection/list-asns",
+                      "api-reference/network/injection/retrieve-a-asn",
+                      "api-reference/network/injection/update-a-asn",
+                      "api-reference/network/injection/asn-dispatch",
+                      "api-reference/network/injection/asn-arrive",
+                      "api-reference/network/injection/asn-cancel",
+                      "api-reference/network/injection/asn-close",
+                      "api-reference/network/injection/asn-receive"
                     ]
                   },
                   {
                     "group": "Accounts",
                     "pages": [
-                      "POST /v1/accounts",
-                      "GET /v1/accounts",
-                      "GET /v1/accounts/{id}",
-                      "POST /v1/accounts/{id}",
-                      "GET /v1/account"
+                      "api-reference/network/accounts/create-a-child-account",
+                      "api-reference/network/accounts/list-accounts",
+                      "api-reference/network/accounts/retrieve-a-account",
+                      "api-reference/network/accounts/update-a-account",
+                      "api-reference/network/accounts/retrieve-the-current-account"
                     ]
                   },
                   {
                     "group": "Consolidation",
                     "pages": [
-                      "GET /v1/shipments/{id}/custody"
+                      "api-reference/network/consolidation/custody-chain"
                     ]
                   },
                   {
                     "group": "Integrations",
                     "pages": [
-                      "GET /v1/integrations",
-                      "GET /v1/integrations/{id}",
-                      "POST /v1/address_validations",
-                      "GET /v1/address_validations/{id}",
-                      "POST /v1/insurance_quotes",
-                      "POST /v1/coverages",
-                      "GET /v1/coverages",
-                      "GET /v1/coverages/{id}",
-                      "POST /v1/coverages/{id}/cancel",
-                      "POST /v1/claims",
-                      "GET /v1/claims",
-                      "GET /v1/claims/{id}",
-                      "POST /v1/claims/{id}",
-                      "POST /v1/claims/{id}/withdraw"
+                      "api-reference/network/integrations/list-integrations",
+                      "api-reference/network/integrations/retrieve-an-integration",
+                      "api-reference/network/integrations/validate-an-address",
+                      "api-reference/network/integrations/retrieve-an-address-validation",
+                      "api-reference/network/integrations/quote-insurance",
+                      "api-reference/network/integrations/buy-coverage",
+                      "api-reference/network/integrations/list-coverages",
+                      "api-reference/network/integrations/retrieve-a-coverage",
+                      "api-reference/network/integrations/cancel-coverage",
+                      "api-reference/network/integrations/submit-a-claim",
+                      "api-reference/network/integrations/list-claims",
+                      "api-reference/network/integrations/retrieve-a-claim",
+                      "api-reference/network/integrations/update-a-claim",
+                      "api-reference/network/integrations/withdraw-a-claim"
                     ]
                   },
                   {
                     "group": "Jobs",
                     "pages": [
-                      "POST /v1/jobs",
-                      "GET /v1/jobs",
-                      "GET /v1/jobs/{id}",
-                      "POST /v1/jobs/{id}/cancel",
-                      "POST /v1/jobs/{id}/retry",
-                      "GET /v1/jobs/{id}/logs",
-                      "GET /v1/jobs/{id}/stream"
+                      "api-reference/network/jobs/start-a-job",
+                      "api-reference/network/jobs/list-jobs",
+                      "api-reference/network/jobs/retrieve-a-job",
+                      "api-reference/network/jobs/cancel-a-job",
+                      "api-reference/network/jobs/retry-a-job",
+                      "api-reference/network/jobs/job-logs",
+                      "api-reference/network/jobs/stream-job-progress-sse"
                     ]
                   },
                   {
                     "group": "Billing",
                     "pages": [
-                      "GET /v1/invoices",
-                      "GET /v1/invoices/{id}",
-                      "POST /v1/invoices/{id}/dispute",
-                      "POST /v1/invoices/{id}/pay",
-                      "GET /v1/invoices/{id}/export",
-                      "GET /v1/invoices/upcoming",
-                      "POST /v1/usage_records",
-                      "GET /v1/usage_records",
-                      "GET /v1/usage_records/{id}",
-                      "POST /v1/usage_records/import",
-                      "GET /v1/usage_summaries",
-                      "GET /v1/balance",
-                      "POST /v1/balance/top_up",
-                      "GET /v1/balance_transactions",
-                      "POST /v1/payment_methods/setup",
-                      "GET /v1/payment_methods",
-                      "GET /v1/payment_methods/{id}",
-                      "DELETE /v1/payment_methods/{id}",
-                      "GET /v1/payments",
-                      "GET /v1/payments/{id}"
+                      "api-reference/network/billing/list-invoices",
+                      "api-reference/network/billing/retrieve-a-invoice",
+                      "api-reference/network/billing/invoice-dispute",
+                      "api-reference/network/billing/pay-an-invoice",
+                      "api-reference/network/billing/export-an-invoice",
+                      "api-reference/network/billing/preview-the-upcoming-usage-invoice",
+                      "api-reference/network/billing/report-usage",
+                      "api-reference/network/billing/list-usage-records",
+                      "api-reference/network/billing/retrieve-a-usagerecord",
+                      "api-reference/network/billing/import-usage-records",
+                      "api-reference/network/billing/usage-summary-per-meter",
+                      "api-reference/network/billing/retrieve-the-prepaid-balance",
+                      "api-reference/network/billing/top-up-the-balance",
+                      "api-reference/network/billing/list-balance-transactions",
+                      "api-reference/network/billing/start-hosted-payment-method-setup",
+                      "api-reference/network/billing/list-payment-methods",
+                      "api-reference/network/billing/retrieve-a-paymentmethod",
+                      "api-reference/network/billing/delete-a-paymentmethod",
+                      "api-reference/network/billing/list-payments",
+                      "api-reference/network/billing/retrieve-a-payment"
                     ]
                   },
                   {
                     "group": "Discovery",
                     "pages": [
-                      "GET /.well-known/shipping-configuration"
+                      "api-reference/network/discovery/shipping-configuration-document"
                     ]
                   }
                 ]
@@ -1086,152 +1074,152 @@
                   {
                     "group": "Manifests",
                     "pages": [
-                      "POST /v1/manifests",
-                      "GET /v1/manifests",
-                      "GET /v1/manifests/{id}",
-                      "POST /v1/manifests/{id}",
-                      "POST /v1/manifests/preview",
-                      "POST /v1/manifests/{id}/reprint"
+                      "api-reference/network/manifests/create-close-out-one-or-more-manifests",
+                      "api-reference/network/manifests/list-manifests",
+                      "api-reference/network/manifests/retrieve-a-manifest",
+                      "api-reference/network/manifests/update-a-manifest",
+                      "api-reference/network/manifests/preview-the-day-s-close-out",
+                      "api-reference/network/manifests/re-fetch-manifest-documents"
                     ]
                   },
                   {
                     "group": "Files",
                     "pages": [
-                      "POST /v1/files",
-                      "GET /v1/files",
-                      "GET /v1/files/{id}",
-                      "DELETE /v1/files/{id}",
-                      "GET /v1/files/{id}/contents"
+                      "api-reference/network/files/upload-a-file",
+                      "api-reference/network/files/list-files",
+                      "api-reference/network/files/retrieve-a-file",
+                      "api-reference/network/files/delete-a-file",
+                      "api-reference/network/files/download-file-contents"
                     ]
                   },
                   {
                     "group": "Document Uploads",
                     "pages": [
-                      "POST /v1/document_uploads",
-                      "GET /v1/document_uploads",
-                      "GET /v1/document_uploads/{id}",
-                      "POST /v1/document_uploads/{id}"
+                      "api-reference/network/document-uploads/submit-customs-documents-to-a-carrier",
+                      "api-reference/network/document-uploads/list-document-uploads",
+                      "api-reference/network/document-uploads/retrieve-a-documentupload",
+                      "api-reference/network/document-uploads/update-a-documentupload"
                     ]
                   },
                   {
                     "group": "Connections",
                     "pages": [
-                      "POST /v1/connections",
-                      "GET /v1/connections",
-                      "GET /v1/connections/{id}",
-                      "POST /v1/connections/{id}",
-                      "DELETE /v1/connections/{id}",
-                      "POST /v1/connections/{id}/verify",
-                      "POST /v1/connect_sessions",
-                      "GET /v1/connect_sessions/{id}",
-                      "GET /v1/oauth/callback"
+                      "api-reference/network/connections/create-a-credentials-based-connection",
+                      "api-reference/network/connections/list-connections",
+                      "api-reference/network/connections/retrieve-a-connection",
+                      "api-reference/network/connections/update-a-connection",
+                      "api-reference/network/connections/delete-a-connection",
+                      "api-reference/network/connections/verify-connection-credentials",
+                      "api-reference/network/connections/start-an-oauth-oidc-connect-flow",
+                      "api-reference/network/connections/retrieve-a-connect-session",
+                      "api-reference/network/connections/carrier-oauth-redirect-target"
                     ]
                   },
                   {
                     "group": "Trade",
                     "pages": [
-                      "POST /v1/classifications",
-                      "GET /v1/classifications",
-                      "GET /v1/classifications/{id}",
-                      "POST /v1/classifications/{id}/apply",
-                      "POST /v1/classifications/{id}/feedback",
-                      "POST /v1/compliance_screenings",
-                      "GET /v1/compliance_screenings",
-                      "GET /v1/compliance_screenings/{id}",
-                      "POST /v1/landed_costs",
-                      "GET /v1/landed_costs",
-                      "GET /v1/landed_costs/{id}",
-                      "GET /v1/tariffs/{country}/{hs_code}",
-                      "GET /v1/duty_collections",
-                      "GET /v1/duty_collections/{id}",
-                      "POST /v1/duty_collections/{id}/pay",
-                      "POST /v1/duty_collections/export"
+                      "api-reference/network/trade/classify-items",
+                      "api-reference/network/trade/list-classifications",
+                      "api-reference/network/trade/retrieve-a-classification",
+                      "api-reference/network/trade/apply-classification-to-a-draft-shipment",
+                      "api-reference/network/trade/submit-classification-feedback",
+                      "api-reference/network/trade/screen-parties-and-goods",
+                      "api-reference/network/trade/list-compliance-screenings",
+                      "api-reference/network/trade/retrieve-a-compliancescreening",
+                      "api-reference/network/trade/quote-landed-cost",
+                      "api-reference/network/trade/list-landed-costs",
+                      "api-reference/network/trade/retrieve-a-landedcost",
+                      "api-reference/network/trade/look-up-a-tariff-line",
+                      "api-reference/network/trade/list-duty-collections",
+                      "api-reference/network/trade/retrieve-a-dutycollection",
+                      "api-reference/network/trade/pay-a-duty-collection",
+                      "api-reference/network/trade/export-duty-collections"
                     ]
                   },
                   {
                     "group": "Products",
                     "pages": [
-                      "POST /v1/products",
-                      "GET /v1/products",
-                      "GET /v1/products/search",
-                      "GET /v1/products/{id}",
-                      "POST /v1/products/{id}",
-                      "DELETE /v1/products/{id}",
-                      "POST /v1/products/upsert",
-                      "POST /v1/products/import",
-                      "POST /v1/products/{id}/archive",
-                      "POST /v1/products/{id}/unarchive"
+                      "api-reference/network/products/create-a-product",
+                      "api-reference/network/products/list-products",
+                      "api-reference/network/products/search-products",
+                      "api-reference/network/products/retrieve-a-product",
+                      "api-reference/network/products/update-a-product",
+                      "api-reference/network/products/delete-an-unreferenced-product",
+                      "api-reference/network/products/upsert-a-product",
+                      "api-reference/network/products/import-products-from-a-file",
+                      "api-reference/network/products/archive-a-product",
+                      "api-reference/network/products/unarchive-a-product"
                     ]
                   },
                   {
                     "group": "IoT",
                     "pages": [
-                      "POST /v1/device_events",
-                      "GET /v1/device_events",
-                      "GET /v1/shipments/{id}/conditions"
+                      "api-reference/network/iot/ingest-device-events",
+                      "api-reference/network/iot/list-device-events",
+                      "api-reference/network/iot/condition-readings-and-excursions"
                     ]
                   },
                   {
                     "group": "Data Network",
                     "pages": [
-                      "POST /v1/participants",
-                      "GET /v1/participants",
-                      "GET /v1/participants/{id}",
-                      "POST /v1/participants/{id}/credentials",
-                      "POST /v1/participants/{id}/rotate_keys",
-                      "POST /v1/records",
-                      "GET /v1/records",
-                      "POST /v1/records/query",
-                      "POST /v1/records/verify",
-                      "GET /v1/records/feed",
-                      "POST /v1/records/erase",
-                      "GET /v1/anchors/{id}",
-                      "POST /v1/access_grants",
-                      "GET /v1/access_grants",
-                      "GET /v1/access_grants/{id}",
-                      "POST /v1/access_grants/{id}/revoke",
-                      "POST /v1/attestations",
-                      "GET /v1/attestations",
-                      "GET /v1/attestations/{id}",
-                      "POST /v1/datasets",
-                      "GET /v1/timelines/{shipment_id}",
-                      "GET /v1/timelines/{shipment_id}/events",
-                      "POST /v1/timelines/resolve",
-                      "POST /v1/identifier_links",
-                      "GET /v1/milestone_definitions"
+                      "api-reference/network/data-network/register-a-participant-did",
+                      "api-reference/network/data-network/list-participants",
+                      "api-reference/network/data-network/retrieve-a-participant",
+                      "api-reference/network/data-network/attach-a-verifiable-credential",
+                      "api-reference/network/data-network/rotate-participant-keys",
+                      "api-reference/network/data-network/write-a-record",
+                      "api-reference/network/data-network/list-records",
+                      "api-reference/network/data-network/query-records",
+                      "api-reference/network/data-network/verify-a-record",
+                      "api-reference/network/data-network/change-feed",
+                      "api-reference/network/data-network/crypto-shred-personal-data",
+                      "api-reference/network/data-network/retrieve-an-anchor",
+                      "api-reference/network/data-network/grant-access",
+                      "api-reference/network/data-network/list-access-grants",
+                      "api-reference/network/data-network/retrieve-a-accessgrant",
+                      "api-reference/network/data-network/revoke-a-grant",
+                      "api-reference/network/data-network/create-an-attestation",
+                      "api-reference/network/data-network/list-attestations",
+                      "api-reference/network/data-network/retrieve-a-attestation",
+                      "api-reference/network/data-network/create-a-dataset-extract",
+                      "api-reference/network/data-network/end-to-end-timeline",
+                      "api-reference/network/data-network/merged-events-with-provenance",
+                      "api-reference/network/data-network/resolve-an-identifier-to-shipments",
+                      "api-reference/network/data-network/link-identifiers",
+                      "api-reference/network/data-network/milestone-definition-set"
                     ]
                   },
                   {
                     "group": "Templates",
                     "pages": [
-                      "POST /v1/documents/generate",
-                      "GET /v1/documents",
-                      "GET /v1/documents/{id}",
-                      "DELETE /v1/documents/{id}",
-                      "POST /v1/document_jobs",
-                      "GET /v1/document_jobs",
-                      "GET /v1/document_jobs/{id}",
-                      "GET /v1/label_specs",
-                      "GET /v1/label_specs/{id}",
-                      "POST /v1/label_specs/{id}/certify",
-                      "POST /v1/label_specs/{id}/tracking_ranges",
-                      "POST /v1/documents/ingest",
-                      "GET /v1/document_ingestions",
-                      "GET /v1/document_ingestions/{id}",
-                      "POST /v1/document_ingestions/{id}/apply",
-                      "POST /v1/document_ingestions/{id}/reject"
+                      "api-reference/network/templates/generate-a-document",
+                      "api-reference/network/templates/list-documents",
+                      "api-reference/network/templates/retrieve-a-document",
+                      "api-reference/network/templates/delete-a-standalone-document",
+                      "api-reference/network/templates/create-a-document-job",
+                      "api-reference/network/templates/list-document-jobs",
+                      "api-reference/network/templates/retrieve-a-documentjob",
+                      "api-reference/network/templates/list-label-specs",
+                      "api-reference/network/templates/retrieve-a-labelspec",
+                      "api-reference/network/templates/certify-labels-against-the-spec",
+                      "api-reference/network/templates/allocate-tracking-numbers",
+                      "api-reference/network/templates/ingest-a-document",
+                      "api-reference/network/templates/list-document-ingestions",
+                      "api-reference/network/templates/retrieve-a-documentingestion",
+                      "api-reference/network/templates/apply-extracted-data",
+                      "api-reference/network/templates/reject-an-ingestion"
                     ]
                   },
                   {
                     "group": "Inventory",
                     "pages": [
-                      "GET /v1/inventory/levels",
-                      "POST /v1/fulfillment_orders",
-                      "GET /v1/fulfillment_orders",
-                      "GET /v1/fulfillment_orders/search",
-                      "GET /v1/fulfillment_orders/{id}",
-                      "POST /v1/fulfillment_orders/{id}",
-                      "POST /v1/fulfillment_orders/{id}/cancel"
+                      "api-reference/network/inventory/stock-levels",
+                      "api-reference/network/inventory/create-a-fulfillment-order",
+                      "api-reference/network/inventory/list-fulfillment-orders",
+                      "api-reference/network/inventory/search-fulfillment-orders",
+                      "api-reference/network/inventory/retrieve-a-fulfillmentorder",
+                      "api-reference/network/inventory/update-a-fulfillmentorder",
+                      "api-reference/network/inventory/fulfillment-order-cancel"
                     ]
                   }
                 ]
@@ -1241,10 +1229,6 @@
           {
             "item": "3PL",
             "description": "221 operations",
-            "openapi": {
-              "source": "openapi/3pl.yaml",
-              "directory": "api-reference/3pl"
-            },
             "groups": [
               {
                 "group": "Overview",
@@ -1258,234 +1242,234 @@
                   {
                     "group": "Rates",
                     "pages": [
-                      "POST /v1/rates",
-                      "GET /v1/rate_quotes/{id}"
+                      "api-reference/3pl/rates/get-live-rates",
+                      "api-reference/3pl/rates/retrieve-a-rate-quote"
                     ]
                   },
                   {
                     "group": "Shipments",
                     "pages": [
-                      "POST /v1/shipments",
-                      "GET /v1/shipments",
-                      "GET /v1/shipments/search",
-                      "GET /v1/shipments/{id}",
-                      "POST /v1/shipments/{id}",
-                      "DELETE /v1/shipments/{id}",
-                      "POST /v1/shipments/{id}/purchase",
-                      "POST /v1/shipments/{id}/void",
-                      "POST /v1/shipments/{id}/rates",
-                      "POST /v1/shipments/{id}/return",
-                      "POST /v1/shipments/{id}/label"
+                      "api-reference/3pl/shipments/create-a-shipment-draft-or-purchase-with-purchase-true",
+                      "api-reference/3pl/shipments/list-shipments",
+                      "api-reference/3pl/shipments/search-shipments",
+                      "api-reference/3pl/shipments/retrieve-a-shipment",
+                      "api-reference/3pl/shipments/update-a-shipment",
+                      "api-reference/3pl/shipments/delete-a-draft-shipment",
+                      "api-reference/3pl/shipments/purchase-a-label",
+                      "api-reference/3pl/shipments/void-a-label",
+                      "api-reference/3pl/shipments/re-rate-a-draft-shipment",
+                      "api-reference/3pl/shipments/create-a-return-shipment",
+                      "api-reference/3pl/shipments/re-render-the-label"
                     ]
                   },
                   {
                     "group": "Tracking",
                     "pages": [
-                      "POST /v1/trackers",
-                      "GET /v1/trackers",
-                      "GET /v1/trackers/search",
-                      "GET /v1/trackers/{id}",
-                      "POST /v1/trackers/{id}",
-                      "DELETE /v1/trackers/{id}",
-                      "POST /v1/trackers/{id}/refresh",
-                      "GET /v1/trackers/{id}/events"
+                      "api-reference/3pl/tracking/create-a-tracker",
+                      "api-reference/3pl/tracking/list-trackers",
+                      "api-reference/3pl/tracking/search-trackers",
+                      "api-reference/3pl/tracking/retrieve-a-tracker",
+                      "api-reference/3pl/tracking/update-a-tracker",
+                      "api-reference/3pl/tracking/discard-a-tracker",
+                      "api-reference/3pl/tracking/force-a-carrier-poll",
+                      "api-reference/3pl/tracking/list-tracking-events"
                     ]
                   },
                   {
                     "group": "Webhooks",
                     "pages": [
-                      "POST /v1/webhook_endpoints",
-                      "GET /v1/webhook_endpoints",
-                      "GET /v1/webhook_endpoints/{id}",
-                      "POST /v1/webhook_endpoints/{id}",
-                      "DELETE /v1/webhook_endpoints/{id}",
-                      "POST /v1/webhook_endpoints/{id}/rotate_secret",
-                      "POST /v1/webhook_endpoints/{id}/test"
+                      "api-reference/3pl/webhooks/create-a-webhook-endpoint",
+                      "api-reference/3pl/webhooks/list-webhook-endpoints",
+                      "api-reference/3pl/webhooks/retrieve-a-webhookendpoint",
+                      "api-reference/3pl/webhooks/update-a-webhookendpoint",
+                      "api-reference/3pl/webhooks/delete-a-webhookendpoint",
+                      "api-reference/3pl/webhooks/rotate-the-signing-secret",
+                      "api-reference/3pl/webhooks/send-a-test-event"
                     ]
                   },
                   {
                     "group": "Events",
                     "pages": [
-                      "GET /v1/events",
-                      "GET /v1/events/{id}",
-                      "GET /v1/events/{id}/deliveries",
-                      "POST /v1/events/{id}/redeliver"
+                      "api-reference/3pl/events/list-events",
+                      "api-reference/3pl/events/retrieve-an-event",
+                      "api-reference/3pl/events/list-delivery-attempts",
+                      "api-reference/3pl/events/redeliver-an-event"
                     ]
                   },
                   {
                     "group": "Inbound",
                     "pages": [
-                      "POST /v1/inbound/{connection_id}",
-                      "POST /v1/inbound_events",
-                      "GET /v1/inbound_events",
-                      "GET /v1/inbound_events/{id}"
+                      "api-reference/3pl/inbound/carrier-push-receiver-carrier-native-payload",
+                      "api-reference/3pl/inbound/inject-canonical-events",
+                      "api-reference/3pl/inbound/list-inbound-events",
+                      "api-reference/3pl/inbound/retrieve-a-inboundevent"
                     ]
                   },
                   {
                     "group": "Carriers",
                     "pages": [
-                      "GET /v1/carriers",
-                      "GET /v1/carriers/{id}"
+                      "api-reference/3pl/carriers/list-carriers",
+                      "api-reference/3pl/carriers/retrieve-a-carrier"
                     ]
                   },
                   {
                     "group": "Batches",
                     "pages": [
-                      "POST /v1/batches",
-                      "GET /v1/batches/{id}"
+                      "api-reference/3pl/batches/create-a-batch",
+                      "api-reference/3pl/batches/retrieve-a-batch"
                     ]
                   },
                   {
                     "group": "Test Helpers",
                     "pages": [
-                      "POST /v1/test_helpers/trackers/{id}/advance",
-                      "POST /v1/test_helpers/shipments/{id}/charge_adjustment"
+                      "api-reference/3pl/test-helpers/advance-a-test-tracker",
+                      "api-reference/3pl/test-helpers/simulate-a-carrier-charge-adjustment"
                     ]
                   },
                   {
                     "group": "Trade",
                     "pages": [
-                      "POST /v1/classifications",
-                      "GET /v1/classifications",
-                      "GET /v1/classifications/{id}",
-                      "POST /v1/classifications/{id}/apply",
-                      "POST /v1/classifications/{id}/feedback",
-                      "POST /v1/compliance_screenings",
-                      "GET /v1/compliance_screenings",
-                      "GET /v1/compliance_screenings/{id}",
-                      "POST /v1/landed_costs",
-                      "GET /v1/landed_costs",
-                      "GET /v1/landed_costs/{id}",
-                      "GET /v1/tariffs/{country}/{hs_code}",
-                      "GET /v1/duty_collections",
-                      "GET /v1/duty_collections/{id}",
-                      "POST /v1/duty_collections/{id}/pay",
-                      "POST /v1/duty_collections/export"
+                      "api-reference/3pl/trade/classify-items",
+                      "api-reference/3pl/trade/list-classifications",
+                      "api-reference/3pl/trade/retrieve-a-classification",
+                      "api-reference/3pl/trade/apply-classification-to-a-draft-shipment",
+                      "api-reference/3pl/trade/submit-classification-feedback",
+                      "api-reference/3pl/trade/screen-parties-and-goods",
+                      "api-reference/3pl/trade/list-compliance-screenings",
+                      "api-reference/3pl/trade/retrieve-a-compliancescreening",
+                      "api-reference/3pl/trade/quote-landed-cost",
+                      "api-reference/3pl/trade/list-landed-costs",
+                      "api-reference/3pl/trade/retrieve-a-landedcost",
+                      "api-reference/3pl/trade/look-up-a-tariff-line",
+                      "api-reference/3pl/trade/list-duty-collections",
+                      "api-reference/3pl/trade/retrieve-a-dutycollection",
+                      "api-reference/3pl/trade/pay-a-duty-collection",
+                      "api-reference/3pl/trade/export-duty-collections"
                     ]
                   },
                   {
                     "group": "Catalog",
                     "pages": [
-                      "POST /v1/service_availability"
+                      "api-reference/3pl/catalog/check-serviceability"
                     ]
                   },
                   {
                     "group": "Routes",
                     "pages": [
-                      "POST /v1/journeys/plan",
-                      "GET /v1/shipments/{id}/journey"
+                      "api-reference/3pl/routes/plan-a-journey",
+                      "api-reference/3pl/routes/retrieve-a-shipment-s-journey"
                     ]
                   },
                   {
                     "group": "Injection",
                     "pages": [
-                      "POST /v1/shipments/{id}/cancel_injection",
-                      "POST /v1/asns",
-                      "GET /v1/asns",
-                      "GET /v1/asns/{id}",
-                      "POST /v1/asns/{id}",
-                      "POST /v1/asns/{id}/dispatch",
-                      "POST /v1/asns/{id}/arrive",
-                      "POST /v1/asns/{id}/cancel",
-                      "POST /v1/asns/{id}/close",
-                      "POST /v1/asns/{id}/receive"
+                      "api-reference/3pl/injection/cancel-an-injected-shipment",
+                      "api-reference/3pl/injection/create-an-advance-shipping-notice",
+                      "api-reference/3pl/injection/list-asns",
+                      "api-reference/3pl/injection/retrieve-a-asn",
+                      "api-reference/3pl/injection/update-a-asn",
+                      "api-reference/3pl/injection/asn-dispatch",
+                      "api-reference/3pl/injection/asn-arrive",
+                      "api-reference/3pl/injection/asn-cancel",
+                      "api-reference/3pl/injection/asn-close",
+                      "api-reference/3pl/injection/asn-receive"
                     ]
                   },
                   {
                     "group": "Products",
                     "pages": [
-                      "POST /v1/products",
-                      "GET /v1/products",
-                      "GET /v1/products/search",
-                      "GET /v1/products/{id}",
-                      "POST /v1/products/{id}",
-                      "DELETE /v1/products/{id}",
-                      "POST /v1/products/upsert",
-                      "POST /v1/products/import",
-                      "POST /v1/products/{id}/archive",
-                      "POST /v1/products/{id}/unarchive"
+                      "api-reference/3pl/products/create-a-product",
+                      "api-reference/3pl/products/list-products",
+                      "api-reference/3pl/products/search-products",
+                      "api-reference/3pl/products/retrieve-a-product",
+                      "api-reference/3pl/products/update-a-product",
+                      "api-reference/3pl/products/delete-an-unreferenced-product",
+                      "api-reference/3pl/products/upsert-a-product",
+                      "api-reference/3pl/products/import-products-from-a-file",
+                      "api-reference/3pl/products/archive-a-product",
+                      "api-reference/3pl/products/unarchive-a-product"
                     ]
                   },
                   {
                     "group": "Consolidation",
                     "pages": [
-                      "GET /v1/shipments/{id}/custody"
+                      "api-reference/3pl/consolidation/custody-chain"
                     ]
                   },
                   {
                     "group": "Templates",
                     "pages": [
-                      "POST /v1/documents/generate",
-                      "GET /v1/documents",
-                      "GET /v1/documents/{id}",
-                      "DELETE /v1/documents/{id}",
-                      "POST /v1/document_jobs",
-                      "GET /v1/document_jobs",
-                      "GET /v1/document_jobs/{id}",
-                      "GET /v1/label_specs",
-                      "GET /v1/label_specs/{id}",
-                      "POST /v1/label_specs/{id}/certify",
-                      "POST /v1/label_specs/{id}/tracking_ranges",
-                      "POST /v1/documents/ingest",
-                      "GET /v1/document_ingestions",
-                      "GET /v1/document_ingestions/{id}",
-                      "POST /v1/document_ingestions/{id}/apply",
-                      "POST /v1/document_ingestions/{id}/reject"
+                      "api-reference/3pl/templates/generate-a-document",
+                      "api-reference/3pl/templates/list-documents",
+                      "api-reference/3pl/templates/retrieve-a-document",
+                      "api-reference/3pl/templates/delete-a-standalone-document",
+                      "api-reference/3pl/templates/create-a-document-job",
+                      "api-reference/3pl/templates/list-document-jobs",
+                      "api-reference/3pl/templates/retrieve-a-documentjob",
+                      "api-reference/3pl/templates/list-label-specs",
+                      "api-reference/3pl/templates/retrieve-a-labelspec",
+                      "api-reference/3pl/templates/certify-labels-against-the-spec",
+                      "api-reference/3pl/templates/allocate-tracking-numbers",
+                      "api-reference/3pl/templates/ingest-a-document",
+                      "api-reference/3pl/templates/list-document-ingestions",
+                      "api-reference/3pl/templates/retrieve-a-documentingestion",
+                      "api-reference/3pl/templates/apply-extracted-data",
+                      "api-reference/3pl/templates/reject-an-ingestion"
                     ]
                   },
                   {
                     "group": "Jobs",
                     "pages": [
-                      "POST /v1/jobs",
-                      "GET /v1/jobs",
-                      "GET /v1/jobs/{id}",
-                      "POST /v1/jobs/{id}/cancel",
-                      "POST /v1/jobs/{id}/retry",
-                      "GET /v1/jobs/{id}/logs",
-                      "GET /v1/jobs/{id}/stream"
+                      "api-reference/3pl/jobs/start-a-job",
+                      "api-reference/3pl/jobs/list-jobs",
+                      "api-reference/3pl/jobs/retrieve-a-job",
+                      "api-reference/3pl/jobs/cancel-a-job",
+                      "api-reference/3pl/jobs/retry-a-job",
+                      "api-reference/3pl/jobs/job-logs",
+                      "api-reference/3pl/jobs/stream-job-progress-sse"
                     ]
                   },
                   {
                     "group": "Billing",
                     "pages": [
-                      "GET /v1/invoices",
-                      "GET /v1/invoices/{id}",
-                      "POST /v1/invoices/{id}/dispute",
-                      "POST /v1/invoices/{id}/pay",
-                      "GET /v1/invoices/{id}/export",
-                      "GET /v1/invoices/upcoming",
-                      "POST /v1/usage_records",
-                      "GET /v1/usage_records",
-                      "GET /v1/usage_records/{id}",
-                      "POST /v1/usage_records/import",
-                      "GET /v1/usage_summaries",
-                      "GET /v1/balance",
-                      "POST /v1/balance/top_up",
-                      "GET /v1/balance_transactions",
-                      "POST /v1/payment_methods/setup",
-                      "GET /v1/payment_methods",
-                      "GET /v1/payment_methods/{id}",
-                      "DELETE /v1/payment_methods/{id}",
-                      "GET /v1/payments",
-                      "GET /v1/payments/{id}"
+                      "api-reference/3pl/billing/list-invoices",
+                      "api-reference/3pl/billing/retrieve-a-invoice",
+                      "api-reference/3pl/billing/invoice-dispute",
+                      "api-reference/3pl/billing/pay-an-invoice",
+                      "api-reference/3pl/billing/export-an-invoice",
+                      "api-reference/3pl/billing/preview-the-upcoming-usage-invoice",
+                      "api-reference/3pl/billing/report-usage",
+                      "api-reference/3pl/billing/list-usage-records",
+                      "api-reference/3pl/billing/retrieve-a-usagerecord",
+                      "api-reference/3pl/billing/import-usage-records",
+                      "api-reference/3pl/billing/usage-summary-per-meter",
+                      "api-reference/3pl/billing/retrieve-the-prepaid-balance",
+                      "api-reference/3pl/billing/top-up-the-balance",
+                      "api-reference/3pl/billing/list-balance-transactions",
+                      "api-reference/3pl/billing/start-hosted-payment-method-setup",
+                      "api-reference/3pl/billing/list-payment-methods",
+                      "api-reference/3pl/billing/retrieve-a-paymentmethod",
+                      "api-reference/3pl/billing/delete-a-paymentmethod",
+                      "api-reference/3pl/billing/list-payments",
+                      "api-reference/3pl/billing/retrieve-a-payment"
                     ]
                   },
                   {
                     "group": "Inventory",
                     "pages": [
-                      "GET /v1/inventory/levels",
-                      "POST /v1/fulfillment_orders",
-                      "GET /v1/fulfillment_orders",
-                      "GET /v1/fulfillment_orders/search",
-                      "GET /v1/fulfillment_orders/{id}",
-                      "POST /v1/fulfillment_orders/{id}",
-                      "POST /v1/fulfillment_orders/{id}/cancel"
+                      "api-reference/3pl/inventory/stock-levels",
+                      "api-reference/3pl/inventory/create-a-fulfillment-order",
+                      "api-reference/3pl/inventory/list-fulfillment-orders",
+                      "api-reference/3pl/inventory/search-fulfillment-orders",
+                      "api-reference/3pl/inventory/retrieve-a-fulfillmentorder",
+                      "api-reference/3pl/inventory/update-a-fulfillmentorder",
+                      "api-reference/3pl/inventory/fulfillment-order-cancel"
                     ]
                   },
                   {
                     "group": "Discovery",
                     "pages": [
-                      "GET /.well-known/shipping-configuration"
+                      "api-reference/3pl/discovery/shipping-configuration-document"
                     ]
                   }
                 ]
@@ -1496,139 +1480,139 @@
                   {
                     "group": "Pickups",
                     "pages": [
-                      "POST /v1/pickups/availability",
-                      "POST /v1/pickups",
-                      "GET /v1/pickups",
-                      "GET /v1/pickups/search",
-                      "GET /v1/pickups/{id}",
-                      "POST /v1/pickups/{id}",
-                      "POST /v1/pickups/{id}/cancel"
+                      "api-reference/3pl/pickups/check-pickup-availability",
+                      "api-reference/3pl/pickups/book-a-pickup",
+                      "api-reference/3pl/pickups/list-pickups",
+                      "api-reference/3pl/pickups/search-pickups",
+                      "api-reference/3pl/pickups/retrieve-a-pickup",
+                      "api-reference/3pl/pickups/update-a-pickup",
+                      "api-reference/3pl/pickups/cancel-a-pickup"
                     ]
                   },
                   {
                     "group": "Manifests",
                     "pages": [
-                      "POST /v1/manifests",
-                      "GET /v1/manifests",
-                      "GET /v1/manifests/{id}",
-                      "POST /v1/manifests/{id}",
-                      "POST /v1/manifests/preview",
-                      "POST /v1/manifests/{id}/reprint"
+                      "api-reference/3pl/manifests/create-close-out-one-or-more-manifests",
+                      "api-reference/3pl/manifests/list-manifests",
+                      "api-reference/3pl/manifests/retrieve-a-manifest",
+                      "api-reference/3pl/manifests/update-a-manifest",
+                      "api-reference/3pl/manifests/preview-the-day-s-close-out",
+                      "api-reference/3pl/manifests/re-fetch-manifest-documents"
                     ]
                   },
                   {
                     "group": "Files",
                     "pages": [
-                      "POST /v1/files",
-                      "GET /v1/files",
-                      "GET /v1/files/{id}",
-                      "DELETE /v1/files/{id}",
-                      "GET /v1/files/{id}/contents"
+                      "api-reference/3pl/files/upload-a-file",
+                      "api-reference/3pl/files/list-files",
+                      "api-reference/3pl/files/retrieve-a-file",
+                      "api-reference/3pl/files/delete-a-file",
+                      "api-reference/3pl/files/download-file-contents"
                     ]
                   },
                   {
                     "group": "Document Uploads",
                     "pages": [
-                      "POST /v1/document_uploads",
-                      "GET /v1/document_uploads",
-                      "GET /v1/document_uploads/{id}",
-                      "POST /v1/document_uploads/{id}"
+                      "api-reference/3pl/document-uploads/submit-customs-documents-to-a-carrier",
+                      "api-reference/3pl/document-uploads/list-document-uploads",
+                      "api-reference/3pl/document-uploads/retrieve-a-documentupload",
+                      "api-reference/3pl/document-uploads/update-a-documentupload"
                     ]
                   },
                   {
                     "group": "Connections",
                     "pages": [
-                      "POST /v1/connections",
-                      "GET /v1/connections",
-                      "GET /v1/connections/{id}",
-                      "POST /v1/connections/{id}",
-                      "DELETE /v1/connections/{id}",
-                      "POST /v1/connections/{id}/verify",
-                      "POST /v1/connect_sessions",
-                      "GET /v1/connect_sessions/{id}",
-                      "GET /v1/oauth/callback"
+                      "api-reference/3pl/connections/create-a-credentials-based-connection",
+                      "api-reference/3pl/connections/list-connections",
+                      "api-reference/3pl/connections/retrieve-a-connection",
+                      "api-reference/3pl/connections/update-a-connection",
+                      "api-reference/3pl/connections/delete-a-connection",
+                      "api-reference/3pl/connections/verify-connection-credentials",
+                      "api-reference/3pl/connections/start-an-oauth-oidc-connect-flow",
+                      "api-reference/3pl/connections/retrieve-a-connect-session",
+                      "api-reference/3pl/connections/carrier-oauth-redirect-target"
                     ]
                   },
                   {
                     "group": "Pickup Schedules",
                     "pages": [
-                      "POST /v1/pickup_schedules",
-                      "GET /v1/pickup_schedules",
-                      "GET /v1/pickup_schedules/{id}",
-                      "POST /v1/pickup_schedules/{id}",
-                      "POST /v1/pickup_schedules/{id}/pause",
-                      "POST /v1/pickup_schedules/{id}/resume",
-                      "POST /v1/pickup_schedules/{id}/cancel",
-                      "POST /v1/pickup_schedules/{id}/skip",
-                      "POST /v1/pickup_schedules/{id}/add",
-                      "GET /v1/pickup_schedules/{id}/occurrences"
+                      "api-reference/3pl/pickup-schedules/create-a-pickup-schedule",
+                      "api-reference/3pl/pickup-schedules/list-pickup-schedules",
+                      "api-reference/3pl/pickup-schedules/retrieve-a-pickupschedule",
+                      "api-reference/3pl/pickup-schedules/update-a-pickupschedule",
+                      "api-reference/3pl/pickup-schedules/pause-a-pickup-schedule",
+                      "api-reference/3pl/pickup-schedules/resume-a-pickup-schedule",
+                      "api-reference/3pl/pickup-schedules/cancel-a-pickup-schedule",
+                      "api-reference/3pl/pickup-schedules/skip-a-pickup-schedule",
+                      "api-reference/3pl/pickup-schedules/add-a-pickup-schedule",
+                      "api-reference/3pl/pickup-schedules/list-occurrences"
                     ]
                   },
                   {
                     "group": "Accounts",
                     "pages": [
-                      "POST /v1/accounts",
-                      "GET /v1/accounts",
-                      "GET /v1/accounts/{id}",
-                      "POST /v1/accounts/{id}",
-                      "GET /v1/account"
+                      "api-reference/3pl/accounts/create-a-child-account",
+                      "api-reference/3pl/accounts/list-accounts",
+                      "api-reference/3pl/accounts/retrieve-a-account",
+                      "api-reference/3pl/accounts/update-a-account",
+                      "api-reference/3pl/accounts/retrieve-the-current-account"
                     ]
                   },
                   {
                     "group": "IoT",
                     "pages": [
-                      "POST /v1/device_events",
-                      "GET /v1/device_events",
-                      "GET /v1/shipments/{id}/conditions"
+                      "api-reference/3pl/iot/ingest-device-events",
+                      "api-reference/3pl/iot/list-device-events",
+                      "api-reference/3pl/iot/condition-readings-and-excursions"
                     ]
                   },
                   {
                     "group": "Data Network",
                     "pages": [
-                      "POST /v1/participants",
-                      "GET /v1/participants",
-                      "GET /v1/participants/{id}",
-                      "POST /v1/participants/{id}/credentials",
-                      "POST /v1/participants/{id}/rotate_keys",
-                      "POST /v1/records",
-                      "GET /v1/records",
-                      "POST /v1/records/query",
-                      "POST /v1/records/verify",
-                      "GET /v1/records/feed",
-                      "POST /v1/records/erase",
-                      "GET /v1/anchors/{id}",
-                      "POST /v1/access_grants",
-                      "GET /v1/access_grants",
-                      "GET /v1/access_grants/{id}",
-                      "POST /v1/access_grants/{id}/revoke",
-                      "POST /v1/attestations",
-                      "GET /v1/attestations",
-                      "GET /v1/attestations/{id}",
-                      "POST /v1/datasets",
-                      "GET /v1/timelines/{shipment_id}",
-                      "GET /v1/timelines/{shipment_id}/events",
-                      "POST /v1/timelines/resolve",
-                      "POST /v1/identifier_links",
-                      "GET /v1/milestone_definitions"
+                      "api-reference/3pl/data-network/register-a-participant-did",
+                      "api-reference/3pl/data-network/list-participants",
+                      "api-reference/3pl/data-network/retrieve-a-participant",
+                      "api-reference/3pl/data-network/attach-a-verifiable-credential",
+                      "api-reference/3pl/data-network/rotate-participant-keys",
+                      "api-reference/3pl/data-network/write-a-record",
+                      "api-reference/3pl/data-network/list-records",
+                      "api-reference/3pl/data-network/query-records",
+                      "api-reference/3pl/data-network/verify-a-record",
+                      "api-reference/3pl/data-network/change-feed",
+                      "api-reference/3pl/data-network/crypto-shred-personal-data",
+                      "api-reference/3pl/data-network/retrieve-an-anchor",
+                      "api-reference/3pl/data-network/grant-access",
+                      "api-reference/3pl/data-network/list-access-grants",
+                      "api-reference/3pl/data-network/retrieve-a-accessgrant",
+                      "api-reference/3pl/data-network/revoke-a-grant",
+                      "api-reference/3pl/data-network/create-an-attestation",
+                      "api-reference/3pl/data-network/list-attestations",
+                      "api-reference/3pl/data-network/retrieve-a-attestation",
+                      "api-reference/3pl/data-network/create-a-dataset-extract",
+                      "api-reference/3pl/data-network/end-to-end-timeline",
+                      "api-reference/3pl/data-network/merged-events-with-provenance",
+                      "api-reference/3pl/data-network/resolve-an-identifier-to-shipments",
+                      "api-reference/3pl/data-network/link-identifiers",
+                      "api-reference/3pl/data-network/milestone-definition-set"
                     ]
                   },
                   {
                     "group": "Integrations",
                     "pages": [
-                      "GET /v1/integrations",
-                      "GET /v1/integrations/{id}",
-                      "POST /v1/address_validations",
-                      "GET /v1/address_validations/{id}",
-                      "POST /v1/insurance_quotes",
-                      "POST /v1/coverages",
-                      "GET /v1/coverages",
-                      "GET /v1/coverages/{id}",
-                      "POST /v1/coverages/{id}/cancel",
-                      "POST /v1/claims",
-                      "GET /v1/claims",
-                      "GET /v1/claims/{id}",
-                      "POST /v1/claims/{id}",
-                      "POST /v1/claims/{id}/withdraw"
+                      "api-reference/3pl/integrations/list-integrations",
+                      "api-reference/3pl/integrations/retrieve-an-integration",
+                      "api-reference/3pl/integrations/validate-an-address",
+                      "api-reference/3pl/integrations/retrieve-an-address-validation",
+                      "api-reference/3pl/integrations/quote-insurance",
+                      "api-reference/3pl/integrations/buy-coverage",
+                      "api-reference/3pl/integrations/list-coverages",
+                      "api-reference/3pl/integrations/retrieve-a-coverage",
+                      "api-reference/3pl/integrations/cancel-coverage",
+                      "api-reference/3pl/integrations/submit-a-claim",
+                      "api-reference/3pl/integrations/list-claims",
+                      "api-reference/3pl/integrations/retrieve-a-claim",
+                      "api-reference/3pl/integrations/update-a-claim",
+                      "api-reference/3pl/integrations/withdraw-a-claim"
                     ]
                   }
                 ]
@@ -1638,10 +1622,6 @@
           {
             "item": "Fleet",
             "description": "183 operations",
-            "openapi": {
-              "source": "openapi/fleet.yaml",
-              "directory": "api-reference/fleet"
-            },
             "groups": [
               {
                 "group": "Overview",
@@ -1655,119 +1635,119 @@
                   {
                     "group": "Rates",
                     "pages": [
-                      "POST /v1/rates",
-                      "GET /v1/rate_quotes/{id}"
+                      "api-reference/fleet/rates/get-live-rates",
+                      "api-reference/fleet/rates/retrieve-a-rate-quote"
                     ]
                   },
                   {
                     "group": "Shipments",
                     "pages": [
-                      "POST /v1/shipments",
-                      "GET /v1/shipments",
-                      "GET /v1/shipments/search",
-                      "GET /v1/shipments/{id}",
-                      "POST /v1/shipments/{id}",
-                      "DELETE /v1/shipments/{id}",
-                      "POST /v1/shipments/{id}/purchase",
-                      "POST /v1/shipments/{id}/void",
-                      "POST /v1/shipments/{id}/rates",
-                      "POST /v1/shipments/{id}/return",
-                      "POST /v1/shipments/{id}/label"
+                      "api-reference/fleet/shipments/create-a-shipment-draft-or-purchase-with-purchase-true",
+                      "api-reference/fleet/shipments/list-shipments",
+                      "api-reference/fleet/shipments/search-shipments",
+                      "api-reference/fleet/shipments/retrieve-a-shipment",
+                      "api-reference/fleet/shipments/update-a-shipment",
+                      "api-reference/fleet/shipments/delete-a-draft-shipment",
+                      "api-reference/fleet/shipments/purchase-a-label",
+                      "api-reference/fleet/shipments/void-a-label",
+                      "api-reference/fleet/shipments/re-rate-a-draft-shipment",
+                      "api-reference/fleet/shipments/create-a-return-shipment",
+                      "api-reference/fleet/shipments/re-render-the-label"
                     ]
                   },
                   {
                     "group": "Tracking",
                     "pages": [
-                      "POST /v1/trackers",
-                      "GET /v1/trackers",
-                      "GET /v1/trackers/search",
-                      "GET /v1/trackers/{id}",
-                      "POST /v1/trackers/{id}",
-                      "DELETE /v1/trackers/{id}",
-                      "POST /v1/trackers/{id}/refresh",
-                      "GET /v1/trackers/{id}/events"
+                      "api-reference/fleet/tracking/create-a-tracker",
+                      "api-reference/fleet/tracking/list-trackers",
+                      "api-reference/fleet/tracking/search-trackers",
+                      "api-reference/fleet/tracking/retrieve-a-tracker",
+                      "api-reference/fleet/tracking/update-a-tracker",
+                      "api-reference/fleet/tracking/discard-a-tracker",
+                      "api-reference/fleet/tracking/force-a-carrier-poll",
+                      "api-reference/fleet/tracking/list-tracking-events"
                     ]
                   },
                   {
                     "group": "Webhooks",
                     "pages": [
-                      "POST /v1/webhook_endpoints",
-                      "GET /v1/webhook_endpoints",
-                      "GET /v1/webhook_endpoints/{id}",
-                      "POST /v1/webhook_endpoints/{id}",
-                      "DELETE /v1/webhook_endpoints/{id}",
-                      "POST /v1/webhook_endpoints/{id}/rotate_secret",
-                      "POST /v1/webhook_endpoints/{id}/test"
+                      "api-reference/fleet/webhooks/create-a-webhook-endpoint",
+                      "api-reference/fleet/webhooks/list-webhook-endpoints",
+                      "api-reference/fleet/webhooks/retrieve-a-webhookendpoint",
+                      "api-reference/fleet/webhooks/update-a-webhookendpoint",
+                      "api-reference/fleet/webhooks/delete-a-webhookendpoint",
+                      "api-reference/fleet/webhooks/rotate-the-signing-secret",
+                      "api-reference/fleet/webhooks/send-a-test-event"
                     ]
                   },
                   {
                     "group": "Events",
                     "pages": [
-                      "GET /v1/events",
-                      "GET /v1/events/{id}",
-                      "GET /v1/events/{id}/deliveries",
-                      "POST /v1/events/{id}/redeliver"
+                      "api-reference/fleet/events/list-events",
+                      "api-reference/fleet/events/retrieve-an-event",
+                      "api-reference/fleet/events/list-delivery-attempts",
+                      "api-reference/fleet/events/redeliver-an-event"
                     ]
                   },
                   {
                     "group": "Inbound",
                     "pages": [
-                      "POST /v1/inbound/{connection_id}",
-                      "POST /v1/inbound_events",
-                      "GET /v1/inbound_events",
-                      "GET /v1/inbound_events/{id}"
+                      "api-reference/fleet/inbound/carrier-push-receiver-carrier-native-payload",
+                      "api-reference/fleet/inbound/inject-canonical-events",
+                      "api-reference/fleet/inbound/list-inbound-events",
+                      "api-reference/fleet/inbound/retrieve-a-inboundevent"
                     ]
                   },
                   {
                     "group": "Carriers",
                     "pages": [
-                      "GET /v1/carriers",
-                      "GET /v1/carriers/{id}"
+                      "api-reference/fleet/carriers/list-carriers",
+                      "api-reference/fleet/carriers/retrieve-a-carrier"
                     ]
                   },
                   {
                     "group": "Batches",
                     "pages": [
-                      "POST /v1/batches",
-                      "GET /v1/batches/{id}"
+                      "api-reference/fleet/batches/create-a-batch",
+                      "api-reference/fleet/batches/retrieve-a-batch"
                     ]
                   },
                   {
                     "group": "Test Helpers",
                     "pages": [
-                      "POST /v1/test_helpers/trackers/{id}/advance",
-                      "POST /v1/test_helpers/shipments/{id}/charge_adjustment"
+                      "api-reference/fleet/test-helpers/advance-a-test-tracker",
+                      "api-reference/fleet/test-helpers/simulate-a-carrier-charge-adjustment"
                     ]
                   },
                   {
                     "group": "Catalog",
                     "pages": [
-                      "POST /v1/service_availability"
+                      "api-reference/fleet/catalog/check-serviceability"
                     ]
                   },
                   {
                     "group": "Routes",
                     "pages": [
-                      "POST /v1/journeys/plan",
-                      "GET /v1/shipments/{id}/journey"
+                      "api-reference/fleet/routes/plan-a-journey",
+                      "api-reference/fleet/routes/retrieve-a-shipment-s-journey"
                     ]
                   },
                   {
                     "group": "Jobs",
                     "pages": [
-                      "POST /v1/jobs",
-                      "GET /v1/jobs",
-                      "GET /v1/jobs/{id}",
-                      "POST /v1/jobs/{id}/cancel",
-                      "POST /v1/jobs/{id}/retry",
-                      "GET /v1/jobs/{id}/logs",
-                      "GET /v1/jobs/{id}/stream"
+                      "api-reference/fleet/jobs/start-a-job",
+                      "api-reference/fleet/jobs/list-jobs",
+                      "api-reference/fleet/jobs/retrieve-a-job",
+                      "api-reference/fleet/jobs/cancel-a-job",
+                      "api-reference/fleet/jobs/retry-a-job",
+                      "api-reference/fleet/jobs/job-logs",
+                      "api-reference/fleet/jobs/stream-job-progress-sse"
                     ]
                   },
                   {
                     "group": "Discovery",
                     "pages": [
-                      "GET /.well-known/shipping-configuration"
+                      "api-reference/fleet/discovery/shipping-configuration-document"
                     ]
                   }
                 ]
@@ -1778,191 +1758,191 @@
                   {
                     "group": "Pickups",
                     "pages": [
-                      "POST /v1/pickups/availability",
-                      "POST /v1/pickups",
-                      "GET /v1/pickups",
-                      "GET /v1/pickups/search",
-                      "GET /v1/pickups/{id}",
-                      "POST /v1/pickups/{id}",
-                      "POST /v1/pickups/{id}/cancel"
+                      "api-reference/fleet/pickups/check-pickup-availability",
+                      "api-reference/fleet/pickups/book-a-pickup",
+                      "api-reference/fleet/pickups/list-pickups",
+                      "api-reference/fleet/pickups/search-pickups",
+                      "api-reference/fleet/pickups/retrieve-a-pickup",
+                      "api-reference/fleet/pickups/update-a-pickup",
+                      "api-reference/fleet/pickups/cancel-a-pickup"
                     ]
                   },
                   {
                     "group": "Connections",
                     "pages": [
-                      "POST /v1/connections",
-                      "GET /v1/connections",
-                      "GET /v1/connections/{id}",
-                      "POST /v1/connections/{id}",
-                      "DELETE /v1/connections/{id}",
-                      "POST /v1/connections/{id}/verify",
-                      "POST /v1/connect_sessions",
-                      "GET /v1/connect_sessions/{id}",
-                      "GET /v1/oauth/callback"
+                      "api-reference/fleet/connections/create-a-credentials-based-connection",
+                      "api-reference/fleet/connections/list-connections",
+                      "api-reference/fleet/connections/retrieve-a-connection",
+                      "api-reference/fleet/connections/update-a-connection",
+                      "api-reference/fleet/connections/delete-a-connection",
+                      "api-reference/fleet/connections/verify-connection-credentials",
+                      "api-reference/fleet/connections/start-an-oauth-oidc-connect-flow",
+                      "api-reference/fleet/connections/retrieve-a-connect-session",
+                      "api-reference/fleet/connections/carrier-oauth-redirect-target"
                     ]
                   },
                   {
                     "group": "Pickup Schedules",
                     "pages": [
-                      "POST /v1/pickup_schedules",
-                      "GET /v1/pickup_schedules",
-                      "GET /v1/pickup_schedules/{id}",
-                      "POST /v1/pickup_schedules/{id}",
-                      "POST /v1/pickup_schedules/{id}/pause",
-                      "POST /v1/pickup_schedules/{id}/resume",
-                      "POST /v1/pickup_schedules/{id}/cancel",
-                      "POST /v1/pickup_schedules/{id}/skip",
-                      "POST /v1/pickup_schedules/{id}/add",
-                      "GET /v1/pickup_schedules/{id}/occurrences"
+                      "api-reference/fleet/pickup-schedules/create-a-pickup-schedule",
+                      "api-reference/fleet/pickup-schedules/list-pickup-schedules",
+                      "api-reference/fleet/pickup-schedules/retrieve-a-pickupschedule",
+                      "api-reference/fleet/pickup-schedules/update-a-pickupschedule",
+                      "api-reference/fleet/pickup-schedules/pause-a-pickup-schedule",
+                      "api-reference/fleet/pickup-schedules/resume-a-pickup-schedule",
+                      "api-reference/fleet/pickup-schedules/cancel-a-pickup-schedule",
+                      "api-reference/fleet/pickup-schedules/skip-a-pickup-schedule",
+                      "api-reference/fleet/pickup-schedules/add-a-pickup-schedule",
+                      "api-reference/fleet/pickup-schedules/list-occurrences"
                     ]
                   },
                   {
                     "group": "Injection",
                     "pages": [
-                      "POST /v1/shipments/{id}/cancel_injection",
-                      "POST /v1/asns",
-                      "GET /v1/asns",
-                      "GET /v1/asns/{id}",
-                      "POST /v1/asns/{id}",
-                      "POST /v1/asns/{id}/dispatch",
-                      "POST /v1/asns/{id}/arrive",
-                      "POST /v1/asns/{id}/cancel",
-                      "POST /v1/asns/{id}/close",
-                      "POST /v1/asns/{id}/receive"
+                      "api-reference/fleet/injection/cancel-an-injected-shipment",
+                      "api-reference/fleet/injection/create-an-advance-shipping-notice",
+                      "api-reference/fleet/injection/list-asns",
+                      "api-reference/fleet/injection/retrieve-a-asn",
+                      "api-reference/fleet/injection/update-a-asn",
+                      "api-reference/fleet/injection/asn-dispatch",
+                      "api-reference/fleet/injection/asn-arrive",
+                      "api-reference/fleet/injection/asn-cancel",
+                      "api-reference/fleet/injection/asn-close",
+                      "api-reference/fleet/injection/asn-receive"
                     ]
                   },
                   {
                     "group": "Accounts",
                     "pages": [
-                      "POST /v1/accounts",
-                      "GET /v1/accounts",
-                      "GET /v1/accounts/{id}",
-                      "POST /v1/accounts/{id}",
-                      "GET /v1/account"
+                      "api-reference/fleet/accounts/create-a-child-account",
+                      "api-reference/fleet/accounts/list-accounts",
+                      "api-reference/fleet/accounts/retrieve-a-account",
+                      "api-reference/fleet/accounts/update-a-account",
+                      "api-reference/fleet/accounts/retrieve-the-current-account"
                     ]
                   },
                   {
                     "group": "Products",
                     "pages": [
-                      "POST /v1/products",
-                      "GET /v1/products",
-                      "GET /v1/products/search",
-                      "GET /v1/products/{id}",
-                      "POST /v1/products/{id}",
-                      "DELETE /v1/products/{id}",
-                      "POST /v1/products/upsert",
-                      "POST /v1/products/import",
-                      "POST /v1/products/{id}/archive",
-                      "POST /v1/products/{id}/unarchive"
+                      "api-reference/fleet/products/create-a-product",
+                      "api-reference/fleet/products/list-products",
+                      "api-reference/fleet/products/search-products",
+                      "api-reference/fleet/products/retrieve-a-product",
+                      "api-reference/fleet/products/update-a-product",
+                      "api-reference/fleet/products/delete-an-unreferenced-product",
+                      "api-reference/fleet/products/upsert-a-product",
+                      "api-reference/fleet/products/import-products-from-a-file",
+                      "api-reference/fleet/products/archive-a-product",
+                      "api-reference/fleet/products/unarchive-a-product"
                     ]
                   },
                   {
                     "group": "IoT",
                     "pages": [
-                      "POST /v1/device_events",
-                      "GET /v1/device_events",
-                      "GET /v1/shipments/{id}/conditions"
+                      "api-reference/fleet/iot/ingest-device-events",
+                      "api-reference/fleet/iot/list-device-events",
+                      "api-reference/fleet/iot/condition-readings-and-excursions"
                     ]
                   },
                   {
                     "group": "Data Network",
                     "pages": [
-                      "POST /v1/participants",
-                      "GET /v1/participants",
-                      "GET /v1/participants/{id}",
-                      "POST /v1/participants/{id}/credentials",
-                      "POST /v1/participants/{id}/rotate_keys",
-                      "POST /v1/records",
-                      "GET /v1/records",
-                      "POST /v1/records/query",
-                      "POST /v1/records/verify",
-                      "GET /v1/records/feed",
-                      "POST /v1/records/erase",
-                      "GET /v1/anchors/{id}",
-                      "POST /v1/access_grants",
-                      "GET /v1/access_grants",
-                      "GET /v1/access_grants/{id}",
-                      "POST /v1/access_grants/{id}/revoke",
-                      "POST /v1/attestations",
-                      "GET /v1/attestations",
-                      "GET /v1/attestations/{id}",
-                      "POST /v1/datasets",
-                      "GET /v1/timelines/{shipment_id}",
-                      "GET /v1/timelines/{shipment_id}/events",
-                      "POST /v1/timelines/resolve",
-                      "POST /v1/identifier_links",
-                      "GET /v1/milestone_definitions"
+                      "api-reference/fleet/data-network/register-a-participant-did",
+                      "api-reference/fleet/data-network/list-participants",
+                      "api-reference/fleet/data-network/retrieve-a-participant",
+                      "api-reference/fleet/data-network/attach-a-verifiable-credential",
+                      "api-reference/fleet/data-network/rotate-participant-keys",
+                      "api-reference/fleet/data-network/write-a-record",
+                      "api-reference/fleet/data-network/list-records",
+                      "api-reference/fleet/data-network/query-records",
+                      "api-reference/fleet/data-network/verify-a-record",
+                      "api-reference/fleet/data-network/change-feed",
+                      "api-reference/fleet/data-network/crypto-shred-personal-data",
+                      "api-reference/fleet/data-network/retrieve-an-anchor",
+                      "api-reference/fleet/data-network/grant-access",
+                      "api-reference/fleet/data-network/list-access-grants",
+                      "api-reference/fleet/data-network/retrieve-a-accessgrant",
+                      "api-reference/fleet/data-network/revoke-a-grant",
+                      "api-reference/fleet/data-network/create-an-attestation",
+                      "api-reference/fleet/data-network/list-attestations",
+                      "api-reference/fleet/data-network/retrieve-a-attestation",
+                      "api-reference/fleet/data-network/create-a-dataset-extract",
+                      "api-reference/fleet/data-network/end-to-end-timeline",
+                      "api-reference/fleet/data-network/merged-events-with-provenance",
+                      "api-reference/fleet/data-network/resolve-an-identifier-to-shipments",
+                      "api-reference/fleet/data-network/link-identifiers",
+                      "api-reference/fleet/data-network/milestone-definition-set"
                     ]
                   },
                   {
                     "group": "Consolidation",
                     "pages": [
-                      "GET /v1/shipments/{id}/custody"
+                      "api-reference/fleet/consolidation/custody-chain"
                     ]
                   },
                   {
                     "group": "Templates",
                     "pages": [
-                      "POST /v1/documents/generate",
-                      "GET /v1/documents",
-                      "GET /v1/documents/{id}",
-                      "DELETE /v1/documents/{id}",
-                      "POST /v1/document_jobs",
-                      "GET /v1/document_jobs",
-                      "GET /v1/document_jobs/{id}",
-                      "GET /v1/label_specs",
-                      "GET /v1/label_specs/{id}",
-                      "POST /v1/label_specs/{id}/certify",
-                      "POST /v1/label_specs/{id}/tracking_ranges",
-                      "POST /v1/documents/ingest",
-                      "GET /v1/document_ingestions",
-                      "GET /v1/document_ingestions/{id}",
-                      "POST /v1/document_ingestions/{id}/apply",
-                      "POST /v1/document_ingestions/{id}/reject"
+                      "api-reference/fleet/templates/generate-a-document",
+                      "api-reference/fleet/templates/list-documents",
+                      "api-reference/fleet/templates/retrieve-a-document",
+                      "api-reference/fleet/templates/delete-a-standalone-document",
+                      "api-reference/fleet/templates/create-a-document-job",
+                      "api-reference/fleet/templates/list-document-jobs",
+                      "api-reference/fleet/templates/retrieve-a-documentjob",
+                      "api-reference/fleet/templates/list-label-specs",
+                      "api-reference/fleet/templates/retrieve-a-labelspec",
+                      "api-reference/fleet/templates/certify-labels-against-the-spec",
+                      "api-reference/fleet/templates/allocate-tracking-numbers",
+                      "api-reference/fleet/templates/ingest-a-document",
+                      "api-reference/fleet/templates/list-document-ingestions",
+                      "api-reference/fleet/templates/retrieve-a-documentingestion",
+                      "api-reference/fleet/templates/apply-extracted-data",
+                      "api-reference/fleet/templates/reject-an-ingestion"
                     ]
                   },
                   {
                     "group": "Integrations",
                     "pages": [
-                      "GET /v1/integrations",
-                      "GET /v1/integrations/{id}",
-                      "POST /v1/address_validations",
-                      "GET /v1/address_validations/{id}",
-                      "POST /v1/insurance_quotes",
-                      "POST /v1/coverages",
-                      "GET /v1/coverages",
-                      "GET /v1/coverages/{id}",
-                      "POST /v1/coverages/{id}/cancel",
-                      "POST /v1/claims",
-                      "GET /v1/claims",
-                      "GET /v1/claims/{id}",
-                      "POST /v1/claims/{id}",
-                      "POST /v1/claims/{id}/withdraw"
+                      "api-reference/fleet/integrations/list-integrations",
+                      "api-reference/fleet/integrations/retrieve-an-integration",
+                      "api-reference/fleet/integrations/validate-an-address",
+                      "api-reference/fleet/integrations/retrieve-an-address-validation",
+                      "api-reference/fleet/integrations/quote-insurance",
+                      "api-reference/fleet/integrations/buy-coverage",
+                      "api-reference/fleet/integrations/list-coverages",
+                      "api-reference/fleet/integrations/retrieve-a-coverage",
+                      "api-reference/fleet/integrations/cancel-coverage",
+                      "api-reference/fleet/integrations/submit-a-claim",
+                      "api-reference/fleet/integrations/list-claims",
+                      "api-reference/fleet/integrations/retrieve-a-claim",
+                      "api-reference/fleet/integrations/update-a-claim",
+                      "api-reference/fleet/integrations/withdraw-a-claim"
                     ]
                   },
                   {
                     "group": "Billing",
                     "pages": [
-                      "GET /v1/invoices",
-                      "GET /v1/invoices/{id}",
-                      "POST /v1/invoices/{id}/dispute",
-                      "POST /v1/invoices/{id}/pay",
-                      "GET /v1/invoices/{id}/export",
-                      "GET /v1/invoices/upcoming",
-                      "POST /v1/usage_records",
-                      "GET /v1/usage_records",
-                      "GET /v1/usage_records/{id}",
-                      "POST /v1/usage_records/import",
-                      "GET /v1/usage_summaries",
-                      "GET /v1/balance",
-                      "POST /v1/balance/top_up",
-                      "GET /v1/balance_transactions",
-                      "POST /v1/payment_methods/setup",
-                      "GET /v1/payment_methods",
-                      "GET /v1/payment_methods/{id}",
-                      "DELETE /v1/payment_methods/{id}",
-                      "GET /v1/payments",
-                      "GET /v1/payments/{id}"
+                      "api-reference/fleet/billing/list-invoices",
+                      "api-reference/fleet/billing/retrieve-a-invoice",
+                      "api-reference/fleet/billing/invoice-dispute",
+                      "api-reference/fleet/billing/pay-an-invoice",
+                      "api-reference/fleet/billing/export-an-invoice",
+                      "api-reference/fleet/billing/preview-the-upcoming-usage-invoice",
+                      "api-reference/fleet/billing/report-usage",
+                      "api-reference/fleet/billing/list-usage-records",
+                      "api-reference/fleet/billing/retrieve-a-usagerecord",
+                      "api-reference/fleet/billing/import-usage-records",
+                      "api-reference/fleet/billing/usage-summary-per-meter",
+                      "api-reference/fleet/billing/retrieve-the-prepaid-balance",
+                      "api-reference/fleet/billing/top-up-the-balance",
+                      "api-reference/fleet/billing/list-balance-transactions",
+                      "api-reference/fleet/billing/start-hosted-payment-method-setup",
+                      "api-reference/fleet/billing/list-payment-methods",
+                      "api-reference/fleet/billing/retrieve-a-paymentmethod",
+                      "api-reference/fleet/billing/delete-a-paymentmethod",
+                      "api-reference/fleet/billing/list-payments",
+                      "api-reference/fleet/billing/retrieve-a-payment"
                     ]
                   }
                 ]
@@ -1972,10 +1952,6 @@
           {
             "item": "Data Network",
             "description": "63 operations",
-            "openapi": {
-              "source": "openapi/data-network.yaml",
-              "directory": "api-reference/data-network"
-            },
             "groups": [
               {
                 "group": "Overview",
@@ -1989,124 +1965,124 @@
                   {
                     "group": "Rates",
                     "pages": [
-                      "GET /v1/rate_quotes/{id}"
+                      "api-reference/data-network/rates/retrieve-a-rate-quote"
                     ]
                   },
                   {
                     "group": "Shipments",
                     "pages": [
-                      "GET /v1/shipments",
-                      "GET /v1/shipments/search",
-                      "GET /v1/shipments/{id}"
+                      "api-reference/data-network/shipments/list-shipments",
+                      "api-reference/data-network/shipments/search-shipments",
+                      "api-reference/data-network/shipments/retrieve-a-shipment"
                     ]
                   },
                   {
                     "group": "Tracking",
                     "pages": [
-                      "GET /v1/trackers",
-                      "GET /v1/trackers/search",
-                      "GET /v1/trackers/{id}",
-                      "GET /v1/trackers/{id}/events"
+                      "api-reference/data-network/tracking/list-trackers",
+                      "api-reference/data-network/tracking/search-trackers",
+                      "api-reference/data-network/tracking/retrieve-a-tracker",
+                      "api-reference/data-network/tracking/list-tracking-events"
                     ]
                   },
                   {
                     "group": "Webhooks",
                     "pages": [
-                      "POST /v1/webhook_endpoints",
-                      "GET /v1/webhook_endpoints",
-                      "GET /v1/webhook_endpoints/{id}",
-                      "POST /v1/webhook_endpoints/{id}",
-                      "DELETE /v1/webhook_endpoints/{id}",
-                      "POST /v1/webhook_endpoints/{id}/rotate_secret",
-                      "POST /v1/webhook_endpoints/{id}/test"
+                      "api-reference/data-network/webhooks/create-a-webhook-endpoint",
+                      "api-reference/data-network/webhooks/list-webhook-endpoints",
+                      "api-reference/data-network/webhooks/retrieve-a-webhookendpoint",
+                      "api-reference/data-network/webhooks/update-a-webhookendpoint",
+                      "api-reference/data-network/webhooks/delete-a-webhookendpoint",
+                      "api-reference/data-network/webhooks/rotate-the-signing-secret",
+                      "api-reference/data-network/webhooks/send-a-test-event"
                     ]
                   },
                   {
                     "group": "Events",
                     "pages": [
-                      "GET /v1/events",
-                      "GET /v1/events/{id}",
-                      "GET /v1/events/{id}/deliveries"
+                      "api-reference/data-network/events/list-events",
+                      "api-reference/data-network/events/retrieve-an-event",
+                      "api-reference/data-network/events/list-delivery-attempts"
                     ]
                   },
                   {
                     "group": "Inbound",
                     "pages": [
-                      "POST /v1/inbound/{connection_id}",
-                      "POST /v1/inbound_events",
-                      "GET /v1/inbound_events",
-                      "GET /v1/inbound_events/{id}"
+                      "api-reference/data-network/inbound/carrier-push-receiver-carrier-native-payload",
+                      "api-reference/data-network/inbound/inject-canonical-events",
+                      "api-reference/data-network/inbound/list-inbound-events",
+                      "api-reference/data-network/inbound/retrieve-a-inboundevent"
                     ]
                   },
                   {
                     "group": "Carriers",
                     "pages": [
-                      "GET /v1/carriers",
-                      "GET /v1/carriers/{id}"
+                      "api-reference/data-network/carriers/list-carriers",
+                      "api-reference/data-network/carriers/retrieve-a-carrier"
                     ]
                   },
                   {
                     "group": "Batches",
                     "pages": [
-                      "GET /v1/batches/{id}"
+                      "api-reference/data-network/batches/retrieve-a-batch"
                     ]
                   },
                   {
                     "group": "Accounts",
                     "pages": [
-                      "POST /v1/accounts",
-                      "GET /v1/accounts",
-                      "GET /v1/accounts/{id}",
-                      "POST /v1/accounts/{id}",
-                      "GET /v1/account"
+                      "api-reference/data-network/accounts/create-a-child-account",
+                      "api-reference/data-network/accounts/list-accounts",
+                      "api-reference/data-network/accounts/retrieve-a-account",
+                      "api-reference/data-network/accounts/update-a-account",
+                      "api-reference/data-network/accounts/retrieve-the-current-account"
                     ]
                   },
                   {
                     "group": "Data Network",
                     "pages": [
-                      "POST /v1/participants",
-                      "GET /v1/participants",
-                      "GET /v1/participants/{id}",
-                      "POST /v1/participants/{id}/credentials",
-                      "POST /v1/participants/{id}/rotate_keys",
-                      "POST /v1/records",
-                      "GET /v1/records",
-                      "POST /v1/records/query",
-                      "POST /v1/records/verify",
-                      "GET /v1/records/feed",
-                      "POST /v1/records/erase",
-                      "GET /v1/anchors/{id}",
-                      "POST /v1/access_grants",
-                      "GET /v1/access_grants",
-                      "GET /v1/access_grants/{id}",
-                      "POST /v1/access_grants/{id}/revoke",
-                      "POST /v1/attestations",
-                      "GET /v1/attestations",
-                      "GET /v1/attestations/{id}",
-                      "POST /v1/datasets",
-                      "GET /v1/timelines/{shipment_id}",
-                      "GET /v1/timelines/{shipment_id}/events",
-                      "POST /v1/timelines/resolve",
-                      "POST /v1/identifier_links",
-                      "GET /v1/milestone_definitions"
+                      "api-reference/data-network/data-network/register-a-participant-did",
+                      "api-reference/data-network/data-network/list-participants",
+                      "api-reference/data-network/data-network/retrieve-a-participant",
+                      "api-reference/data-network/data-network/attach-a-verifiable-credential",
+                      "api-reference/data-network/data-network/rotate-participant-keys",
+                      "api-reference/data-network/data-network/write-a-record",
+                      "api-reference/data-network/data-network/list-records",
+                      "api-reference/data-network/data-network/query-records",
+                      "api-reference/data-network/data-network/verify-a-record",
+                      "api-reference/data-network/data-network/change-feed",
+                      "api-reference/data-network/data-network/crypto-shred-personal-data",
+                      "api-reference/data-network/data-network/retrieve-an-anchor",
+                      "api-reference/data-network/data-network/grant-access",
+                      "api-reference/data-network/data-network/list-access-grants",
+                      "api-reference/data-network/data-network/retrieve-a-accessgrant",
+                      "api-reference/data-network/data-network/revoke-a-grant",
+                      "api-reference/data-network/data-network/create-an-attestation",
+                      "api-reference/data-network/data-network/list-attestations",
+                      "api-reference/data-network/data-network/retrieve-a-attestation",
+                      "api-reference/data-network/data-network/create-a-dataset-extract",
+                      "api-reference/data-network/data-network/end-to-end-timeline",
+                      "api-reference/data-network/data-network/merged-events-with-provenance",
+                      "api-reference/data-network/data-network/resolve-an-identifier-to-shipments",
+                      "api-reference/data-network/data-network/link-identifiers",
+                      "api-reference/data-network/data-network/milestone-definition-set"
                     ]
                   },
                   {
                     "group": "Jobs",
                     "pages": [
-                      "POST /v1/jobs",
-                      "GET /v1/jobs",
-                      "GET /v1/jobs/{id}",
-                      "POST /v1/jobs/{id}/cancel",
-                      "POST /v1/jobs/{id}/retry",
-                      "GET /v1/jobs/{id}/logs",
-                      "GET /v1/jobs/{id}/stream"
+                      "api-reference/data-network/jobs/start-a-job",
+                      "api-reference/data-network/jobs/list-jobs",
+                      "api-reference/data-network/jobs/retrieve-a-job",
+                      "api-reference/data-network/jobs/cancel-a-job",
+                      "api-reference/data-network/jobs/retry-a-job",
+                      "api-reference/data-network/jobs/job-logs",
+                      "api-reference/data-network/jobs/stream-job-progress-sse"
                     ]
                   },
                   {
                     "group": "Discovery",
                     "pages": [
-                      "GET /.well-known/shipping-configuration"
+                      "api-reference/data-network/discovery/shipping-configuration-document"
                     ]
                   }
                 ]
