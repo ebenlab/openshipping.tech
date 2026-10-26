@@ -7,3 +7,12 @@
 /*
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
+
+/shipping.md
+  Content-Type: text/markdown; charset=utf-8
+
+/openapi.yaml
+  Content-Type: application/yaml; charset=utf-8
+
+/graphql/schema.graphql
+  Content-Type: text/plain; charset=utf-8

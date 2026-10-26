@@ -18,4 +18,7 @@ unzip -q "$tmp/export.zip" -d _site
 # Drop the export's local-viewer helpers; Cloudflare serves the files directly.
 rm -f _site/serve.js "_site/Start Docs.command" "_site/Start Docs.bat" _site/README.md
 cp _headers _site/_headers
+# Raw machine-readable files for agents and tooling.
+cp shipping.md openapi.yaml _site/
+mkdir -p _site/graphql && cp graphql/schema.graphql graphql/operations.json _site/graphql/
 echo "built _site ($(find _site -type f | wc -l | tr -d ' ') files)"
