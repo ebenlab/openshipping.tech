@@ -17,7 +17,7 @@ mkdir _site
 unzip -q "$tmp/export.zip" -d _site
 # Drop the export's local-viewer helpers; Cloudflare serves the files directly.
 rm -f _site/serve.js "_site/Start Docs.command" "_site/Start Docs.bat" _site/README.md
-cp _headers _site/_headers
+cp _headers _redirects _site/
 # Raw machine-readable files for agents and tooling.
 cp shipping.md openapi.yaml _site/
 mkdir -p _site/openapi && cp openapi/*.yaml _site/openapi/
