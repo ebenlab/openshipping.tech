@@ -1,0 +1,129 @@
+---
+title: "surcharges"
+description: "List surcharges"
+---
+
+`query` · Module: **Pricing** · Requires `pricing:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `kind` | `String` | Filter by kind. |
+| `status` | `String` | Filter by status. |
+| `createdGte` | `Int` | Filter by created gte. |
+| `createdLte` | `Int` | Filter by created lte. |
+| `limit` | `Int` | Page size, 1–100 (default 10). |
+| `startingAfter` | `ID` | Cursor: return objects after this ID. |
+| `endingBefore` | `ID` | Cursor: return objects before this ID. |
+
+## Returns
+
+`SurchargeList!`
+
+| Field | Type |
+|---|---|
+| `data` | `[Surcharge!]!` |
+| `has_more` | `Boolean` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query Surcharges($limit: Int) {
+  surcharges(limit: $limit) {
+    data {
+      id
+      object
+      name
+      status
+      livemode
+      created
+      updated
+      kind
+      calculation {
+        type
+        amount {
+          amount
+          currency
+        }
+        rate
+        basis
+        per {
+          value
+          unit
+        }
+      }
+      schedule {
+        effective_from
+        rate
+        amount {
+          amount
+          currency
+        }
+      }
+    }
+    has_more
+  }
+}
+```
+
+```json Variables
+{
+  "limit": 10
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "surcharges": {
+      "data": [
+        {
+          "id": "sur_1a2B3c",
+          "object": "surcharge",
+          "name": "Example",
+          "status": "active",
+          "livemode": true,
+          "created": 1791302400,
+          "updated": 1791302400,
+          "kind": "example",
+          "calculation": {
+            "type": "fixed",
+            "amount": {
+              "amount": 1299,
+              "currency": "usd"
+            },
+            "rate": 0.145,
+            "basis": "base",
+            "per": {
+              "value": 1.5,
+              "unit": "kg"
+            }
+          },
+          "schedule": [
+            {
+              "effective_from": "2026-10-07",
+              "rate": 0.145,
+              "amount": {
+                "amount": 1299,
+                "currency": "usd"
+              }
+            }
+          ]
+        }
+      ],
+      "has_more": true
+    }
+  }
+}
+```
+
+</ResponseExample>

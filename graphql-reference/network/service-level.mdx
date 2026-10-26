@@ -1,0 +1,86 @@
+---
+title: "serviceLevel"
+description: "Retrieve a NetworkServiceLevel"
+---
+
+`query` · Module: **Network** · Requires `network:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+
+## Returns
+
+`NetworkServiceLevel!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `NetworkServiceLevelObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `carrier` | `String!` |
+| `metric` | `NetworkServiceLevelMetric!` |
+| `target` | `Float!` |
+| `window_days` | `Int` |
+| `achieved` | `Float` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query ServiceLevel($id: ID!) {
+  serviceLevel(id: $id) {
+    id
+    object
+    livemode
+    created
+    updated
+    carrier
+    metric
+    target
+    window_days
+    achieved
+  }
+}
+```
+
+```json Variables
+{
+  "id": "sla_1a2B3c"
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "serviceLevel": {
+      "id": "sla_1a2B3c",
+      "object": "network_service_level",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "carrier": "dhl_express",
+      "metric": "on_time_delivery",
+      "target": 1.5,
+      "window_days": 2,
+      "achieved": 1.5
+    }
+  }
+}
+```
+
+</ResponseExample>

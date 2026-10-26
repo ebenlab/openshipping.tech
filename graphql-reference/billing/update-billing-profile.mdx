@@ -1,0 +1,162 @@
+---
+title: "updateBillingProfile"
+description: "Update the billing profile"
+---
+
+`mutation` · Module: **Billing**
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `input` | `BillingProfileInput` | The fields for this operation. |
+
+### `BillingProfileInput` fields
+
+| Field | Type |
+|---|---|
+| `account` | `String` |
+| `currency` | `String` |
+| `cycle` | `BillingProfileInputCycleInput` |
+| `plans` | `[String!]` |
+| `payment_methods` | `BillingProfileInputPaymentMethodsInput` |
+| `collection` | `BillingProfileInputCollection` |
+| `balance` | `BillingProfileInputBalanceInput` |
+| `invoice_delivery` | `BillingProfileInputInvoiceDeliveryInput` |
+| `tax` | `BillingProfileInputTaxInput` |
+| `payments_connection` | `String` |
+
+## Returns
+
+`BillingProfile!`
+
+| Field | Type |
+|---|---|
+| `object` | `BillingProfileObject!` |
+| `account` | `String!` |
+| `currency` | `String` |
+| `cycle` | `BillingProfileCycle` |
+| `plans` | `[String!]` |
+| `payment_methods` | `BillingProfilePaymentMethods` |
+| `collection` | `BillingProfileCollection` |
+| `balance` | `BillingProfileBalance` |
+| `invoice_delivery` | `BillingProfileInvoiceDelivery` |
+| `tax` | `BillingProfileTax` |
+| `payments_connection` | `String` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+mutation UpdateBillingProfile($input: BillingProfileInput!) {
+  updateBillingProfile(input: $input) {
+    object
+    account
+    currency
+    cycle {
+      interval
+      anchor_day
+    }
+    plans
+    payment_methods {
+      default
+      fallback
+    }
+    collection
+    balance {
+      enabled
+    }
+    invoice_delivery {
+      email
+      formats
+    }
+    tax {
+      ids {
+        type
+        value
+        country
+      }
+      exempt
+    }
+    payments_connection
+  }
+}
+```
+
+```json Variables
+{
+  "input": {
+    "account": "acct_ada",
+    "currency": "usd",
+    "cycle": {
+      "interval": "week",
+      "anchor_day": 2
+    },
+    "plans": [
+      "example"
+    ],
+    "payment_methods": {
+      "default": "example",
+      "fallback": "example"
+    },
+    "collection": "charge_automatically",
+    "balance": {
+      "enabled": true
+    },
+    "payments_connection": "example"
+  }
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "updateBillingProfile": {
+      "object": "billing_profile",
+      "account": "acct_ada",
+      "currency": "usd",
+      "cycle": {
+        "interval": "week",
+        "anchor_day": 2
+      },
+      "plans": [
+        "example"
+      ],
+      "payment_methods": {
+        "default": "example",
+        "fallback": "example"
+      },
+      "collection": "charge_automatically",
+      "balance": {
+        "enabled": true
+      },
+      "invoice_delivery": {
+        "email": "ops@example.com",
+        "formats": [
+          "example"
+        ]
+      },
+      "tax": {
+        "ids": [
+          {
+            "type": "eori",
+            "value": "example",
+            "country": "GB"
+          }
+        ],
+        "exempt": true
+      },
+      "payments_connection": "example"
+    }
+  }
+}
+```
+
+</ResponseExample>

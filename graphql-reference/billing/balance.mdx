@@ -1,0 +1,82 @@
+---
+title: "balance"
+description: "Retrieve the prepaid balance"
+---
+
+`query` · Module: **Billing**
+
+## Arguments
+
+None.
+
+## Returns
+
+`Balance!`
+
+| Field | Type |
+|---|---|
+| `object` | `BalanceObject` |
+| `account` | `String` |
+| `available` | `Money` |
+| `pending` | `Money` |
+| `low_balance_threshold` | `Money` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query Balance {
+  balance {
+    object
+    account
+    available {
+      amount
+      currency
+    }
+    pending {
+      amount
+      currency
+    }
+    low_balance_threshold {
+      amount
+      currency
+    }
+  }
+}
+```
+
+```json Variables
+{}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "balance": {
+      "object": "balance",
+      "account": "acct_ada",
+      "available": {
+        "amount": 1299,
+        "currency": "usd"
+      },
+      "pending": {
+        "amount": 1299,
+        "currency": "usd"
+      },
+      "low_balance_threshold": {
+        "amount": 1299,
+        "currency": "usd"
+      }
+    }
+  }
+}
+```
+
+</ResponseExample>

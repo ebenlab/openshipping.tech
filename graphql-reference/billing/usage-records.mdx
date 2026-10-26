@@ -1,0 +1,100 @@
+---
+title: "usageRecords"
+description: "List usage records"
+---
+
+`query` · Module: **Billing** · Requires `billing:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `meter` | `String` | Filter by meter. |
+| `account` | `String` | Filter by account. |
+| `occurredAtGte` | `String` | Filter by occurred at gte. |
+| `createdGte` | `Int` | Filter by created gte. |
+| `createdLte` | `Int` | Filter by created lte. |
+| `limit` | `Int` | Page size, 1–100 (default 10). |
+| `startingAfter` | `ID` | Cursor: return objects after this ID. |
+| `endingBefore` | `ID` | Cursor: return objects before this ID. |
+
+## Returns
+
+`UsageRecordList!`
+
+| Field | Type |
+|---|---|
+| `data` | `[UsageRecord!]!` |
+| `has_more` | `Boolean` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query UsageRecords($limit: Int) {
+  usageRecords(limit: $limit) {
+    data {
+      id
+      object
+      livemode
+      created
+      updated
+      meter
+      account
+      quantity
+      occurred_at
+      subject {
+        type
+        id
+      }
+      source
+      event
+    }
+    has_more
+  }
+}
+```
+
+```json Variables
+{
+  "limit": 10
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "usageRecords": {
+      "data": [
+        {
+          "id": "ur_1a2B3c",
+          "object": "usage_record",
+          "livemode": true,
+          "created": 1791302400,
+          "updated": 1791302400,
+          "meter": "example",
+          "account": "acct_ada",
+          "quantity": 1.5,
+          "occurred_at": "2026-10-07T09:00:00Z",
+          "subject": {
+            "type": "example",
+            "id": "obj_1a2B3c"
+          },
+          "source": "event",
+          "event": "example"
+        }
+      ],
+      "has_more": true
+    }
+  }
+}
+```
+
+</ResponseExample>

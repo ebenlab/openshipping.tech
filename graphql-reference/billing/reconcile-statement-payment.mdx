@@ -1,0 +1,137 @@
+---
+title: "reconcileStatementPayment"
+description: "Reconcile an ISO 20022 camt.053 statement"
+---
+
+`mutation` · Module: **Billing**
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `input` | `ReconcileStatementPaymentInput` | The fields for this operation. |
+
+### `ReconcileStatementPaymentInput` fields
+
+| Field | Type |
+|---|---|
+| `file` | `String` |
+
+## Returns
+
+`Job!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `JobObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `type` | `String!` |
+| `status` | `JobStatus!` |
+| `source` | `JobSource!` |
+| `schedule` | `String` |
+| `subject` | `JobSubject` |
+| `parameters` | `JSON` |
+| `progress` | `JobProgress!` |
+| `attempt` | `Int` |
+| `max_attempts` | `Int` |
+| `priority` | `JobPriority` |
+| `queued_at` | `Int` |
+| `started_at` | `Int` |
+| `finished_at` | `Int` |
+| `result` | `JobResult` |
+| `errors` | `[JobErrorsItem!]` |
+| `created_by` | `JobCreatedBy` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+mutation ReconcileStatementPayment($input: ReconcileStatementPaymentInput!) {
+  reconcileStatementPayment(input: $input) {
+    id
+    object
+    type
+    status
+    livemode
+    created
+    updated
+    source
+    schedule
+    subject {
+      type
+      id
+    }
+    progress {
+      total
+      completed
+      failed
+      percent
+      eta_seconds
+      stage
+    }
+    attempt
+    max_attempts
+    priority
+    queued_at
+    started_at
+  }
+}
+```
+
+```json Variables
+{
+  "input": {
+    "file": "file_6Yu8"
+  }
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "reconcileStatementPayment": {
+      "id": "job_1a2B3c",
+      "object": "job",
+      "type": "example",
+      "status": "queued",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "source": "api",
+      "schedule": "example",
+      "subject": {
+        "type": "example",
+        "id": "obj_1a2B3c"
+      },
+      "progress": {
+        "total": 1299,
+        "completed": 2,
+        "failed": 2,
+        "percent": 1.5,
+        "eta_seconds": 2,
+        "stage": "example"
+      },
+      "attempt": 2,
+      "max_attempts": 2,
+      "priority": "low",
+      "queued_at": 1791302400,
+      "started_at": 1791302400
+    }
+  }
+}
+```
+
+</ResponseExample>

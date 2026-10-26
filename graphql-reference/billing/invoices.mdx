@@ -1,0 +1,170 @@
+---
+title: "invoices"
+description: "List invoices"
+---
+
+`query` · Module: **Billing** · Requires `billing:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `kind` | `String` | Filter by kind. |
+| `direction` | `String` | Filter by direction. |
+| `status` | `String` | Filter by status. |
+| `issuerIntegration` | `String` | Filter by issuer.integration. |
+| `periodFrom` | `String` | Filter by period.from. |
+| `createdGte` | `Int` | Filter by created gte. |
+| `createdLte` | `Int` | Filter by created lte. |
+| `limit` | `Int` | Page size, 1–100 (default 10). |
+| `startingAfter` | `ID` | Cursor: return objects after this ID. |
+| `endingBefore` | `ID` | Cursor: return objects before this ID. |
+
+## Returns
+
+`InvoiceList!`
+
+| Field | Type |
+|---|---|
+| `data` | `[Invoice!]!` |
+| `has_more` | `Boolean` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query Invoices($limit: Int) {
+  invoices(limit: $limit) {
+    data {
+      id
+      object
+      status
+      livemode
+      created
+      updated
+      kind
+      direction
+      issuer {
+        name
+        account
+        integration
+        connection
+        tax_ids {
+          type
+          value
+          country
+        }
+      }
+      recipient {
+        name
+        account
+        integration
+        connection
+        tax_ids {
+          type
+          value
+          country
+        }
+      }
+      number
+      issued_on
+      due_on
+      period {
+        from
+        to
+      }
+      currency
+      lines {
+        id
+        kind
+        shipment
+        tracking_number
+        service
+        description
+      }
+    }
+    has_more
+  }
+}
+```
+
+```json Variables
+{
+  "limit": 10
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "invoices": {
+      "data": [
+        {
+          "id": "invc_1a2B3c",
+          "object": "invoice",
+          "status": "draft",
+          "livemode": true,
+          "created": 1791302400,
+          "updated": 1791302400,
+          "kind": "transport",
+          "direction": "payable",
+          "issuer": {
+            "name": "Example",
+            "account": "acct_ada",
+            "integration": "example",
+            "connection": "conn_9f8e",
+            "tax_ids": [
+              {
+                "type": "eori",
+                "value": "example",
+                "country": "GB"
+              }
+            ]
+          },
+          "recipient": {
+            "name": "Example",
+            "account": "acct_ada",
+            "integration": "example",
+            "connection": "conn_9f8e",
+            "tax_ids": [
+              {
+                "type": "eori",
+                "value": "example",
+                "country": "GB"
+              }
+            ]
+          },
+          "number": "SEAL-00918",
+          "issued_on": "2026-10-07",
+          "due_on": "2026-10-07",
+          "period": {
+            "from": "2026-10-07",
+            "to": "2026-10-07"
+          },
+          "currency": "usd",
+          "lines": [
+            {
+              "id": "obj_1a2B3c",
+              "kind": "transport",
+              "shipment": "shp_1Q2w3E4r5T6y",
+              "tracking_number": "1Z999AA10123456784",
+              "service": "dhl_express_worldwide",
+              "description": "Example description"
+            }
+          ]
+        }
+      ],
+      "has_more": true
+    }
+  }
+}
+```
+
+</ResponseExample>

@@ -1,0 +1,110 @@
+---
+title: "stock"
+description: "List stock"
+---
+
+`query` · Module: **Inventory** · Requires `inventory:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `product` | `String` | Filter by product. |
+| `facility` | `String` | Filter by facility. |
+| `location` | `String` | Filter by location. |
+| `status` | `String` | Filter by status. |
+| `owner` | `String` | Filter by owner. |
+| `createdGte` | `Int` | Filter by created gte. |
+| `createdLte` | `Int` | Filter by created lte. |
+| `limit` | `Int` | Page size, 1–100 (default 10). |
+| `startingAfter` | `ID` | Cursor: return objects after this ID. |
+| `endingBefore` | `ID` | Cursor: return objects before this ID. |
+
+## Returns
+
+`StockList!`
+
+| Field | Type |
+|---|---|
+| `data` | `[Stock!]!` |
+| `has_more` | `Boolean` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query Stock($limit: Int) {
+  stock(limit: $limit) {
+    data {
+      id
+      object
+      status
+      livemode
+      created
+      updated
+      owner
+      product
+      facility
+      location
+      quantity
+      lot {
+        number
+        manufactured_on
+        expires_on
+      }
+      serials
+      handling_unit
+    }
+    has_more
+  }
+}
+```
+
+```json Variables
+{
+  "limit": 10
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "stock": {
+      "data": [
+        {
+          "id": "stk_1a2B3c",
+          "object": "stock",
+          "status": "available",
+          "livemode": true,
+          "created": 1791302400,
+          "updated": 1791302400,
+          "owner": "acct_ada",
+          "product": "prod_ts_red_m",
+          "facility": "fac_lon_hub",
+          "location": "loc_lon_a12_03_b",
+          "quantity": 2,
+          "lot": {
+            "number": "SEAL-00918",
+            "manufactured_on": "2026-10-07",
+            "expires_on": "2026-10-07"
+          },
+          "serials": [
+            "example"
+          ],
+          "handling_unit": "example"
+        }
+      ],
+      "has_more": true
+    }
+  }
+}
+```
+
+</ResponseExample>

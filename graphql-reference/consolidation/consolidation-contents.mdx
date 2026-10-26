@@ -1,0 +1,64 @@
+---
+title: "consolidationContents"
+description: "List contents"
+---
+
+`query` · Module: **Consolidation**
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+| `recursive` | `Boolean` | Filter by recursive. |
+
+## Returns
+
+`ConsolidationContentsResult!`
+
+| Field | Type |
+|---|---|
+| `consolidations` | `[String!]` |
+| `handling_units` | `[String!]` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query ConsolidationContents($id: ID!) {
+  consolidationContents(id: $id) {
+    consolidations
+    handling_units
+  }
+}
+```
+
+```json Variables
+{
+  "id": "obj_1a2B3c"
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "consolidationContents": {
+      "consolidations": [
+        "example"
+      ],
+      "handling_units": [
+        "example"
+      ]
+    }
+  }
+}
+```
+
+</ResponseExample>

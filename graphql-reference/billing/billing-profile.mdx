@@ -1,0 +1,124 @@
+---
+title: "billingProfile"
+description: "Retrieve the billing profile"
+---
+
+`query` · Module: **Billing**
+
+## Arguments
+
+None.
+
+## Returns
+
+`BillingProfile!`
+
+| Field | Type |
+|---|---|
+| `object` | `BillingProfileObject!` |
+| `account` | `String!` |
+| `currency` | `String` |
+| `cycle` | `BillingProfileCycle` |
+| `plans` | `[String!]` |
+| `payment_methods` | `BillingProfilePaymentMethods` |
+| `collection` | `BillingProfileCollection` |
+| `balance` | `BillingProfileBalance` |
+| `invoice_delivery` | `BillingProfileInvoiceDelivery` |
+| `tax` | `BillingProfileTax` |
+| `payments_connection` | `String` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query BillingProfile {
+  billingProfile {
+    object
+    account
+    currency
+    cycle {
+      interval
+      anchor_day
+    }
+    plans
+    payment_methods {
+      default
+      fallback
+    }
+    collection
+    balance {
+      enabled
+    }
+    invoice_delivery {
+      email
+      formats
+    }
+    tax {
+      ids {
+        type
+        value
+        country
+      }
+      exempt
+    }
+    payments_connection
+  }
+}
+```
+
+```json Variables
+{}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "billingProfile": {
+      "object": "billing_profile",
+      "account": "acct_ada",
+      "currency": "usd",
+      "cycle": {
+        "interval": "week",
+        "anchor_day": 2
+      },
+      "plans": [
+        "example"
+      ],
+      "payment_methods": {
+        "default": "example",
+        "fallback": "example"
+      },
+      "collection": "charge_automatically",
+      "balance": {
+        "enabled": true
+      },
+      "invoice_delivery": {
+        "email": "ops@example.com",
+        "formats": [
+          "example"
+        ]
+      },
+      "tax": {
+        "ids": [
+          {
+            "type": "eori",
+            "value": "example",
+            "country": "GB"
+          }
+        ],
+        "exempt": true
+      },
+      "payments_connection": "example"
+    }
+  }
+}
+```
+
+</ResponseExample>

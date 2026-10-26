@@ -1,0 +1,99 @@
+---
+title: "usageRecord"
+description: "Retrieve a UsageRecord"
+---
+
+`query` · Module: **Billing** · Requires `billing:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+
+## Returns
+
+`UsageRecord!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `UsageRecordObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `meter` | `String!` |
+| `account` | `String!` |
+| `quantity` | `Float!` |
+| `occurred_at` | `String!` |
+| `subject` | `UsageRecordSubject` |
+| `properties` | `JSON` |
+| `source` | `UsageRecordSource` |
+| `event` | `String` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query UsageRecord($id: ID!) {
+  usageRecord(id: $id) {
+    id
+    object
+    livemode
+    created
+    updated
+    meter
+    account
+    quantity
+    occurred_at
+    subject {
+      type
+      id
+    }
+    source
+    event
+  }
+}
+```
+
+```json Variables
+{
+  "id": "ur_1a2B3c"
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "usageRecord": {
+      "id": "ur_1a2B3c",
+      "object": "usage_record",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "meter": "example",
+      "account": "acct_ada",
+      "quantity": 1.5,
+      "occurred_at": "2026-10-07T09:00:00Z",
+      "subject": {
+        "type": "example",
+        "id": "obj_1a2B3c"
+      },
+      "source": "event",
+      "event": "example"
+    }
+  }
+}
+```
+
+</ResponseExample>

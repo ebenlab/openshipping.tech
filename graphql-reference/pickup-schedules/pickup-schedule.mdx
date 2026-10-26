@@ -1,0 +1,188 @@
+---
+title: "pickupSchedule"
+description: "Retrieve a PickupSchedule"
+---
+
+`query` · Module: **Pickup Schedules** · Requires `pickups:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+
+## Returns
+
+`PickupSchedule!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `PickupScheduleObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `status` | `PickupScheduleStatus!` |
+| `connection` | `String!` |
+| `carrier` | `String` |
+| `management` | `PickupScheduleManagement!` |
+| `contact` | `Contact` |
+| `recurrence` | `Recurrence!` |
+| `window` | `PickupWindow!` |
+| `location` | `String` |
+| `instructions` | `String` |
+| `estimate` | `PickupScheduleEstimate` |
+| `booking` | `PickupScheduleBooking` |
+| `carrier_configs` | `CarrierConfigs` |
+| `paused_until` | `String` |
+| `next_occurrences` | `[PickupScheduleNextOccurrencesItem!]` |
+| `carrier_reference` | `String` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query PickupSchedule($id: ID!) {
+  pickupSchedule(id: $id) {
+    id
+    object
+    status
+    livemode
+    created
+    updated
+    connection
+    carrier
+    management
+    contact {
+      name
+      company
+      email
+      phone
+      tax_ids {
+        type
+        value
+        country
+      }
+      address {
+        line1
+        street_number
+        line2
+        city
+      }
+    }
+    recurrence {
+      frequency
+      interval
+      days
+      day_of_month
+      times
+      timezone
+    }
+    window {
+      ready_at
+      close_at
+    }
+    location
+    instructions
+    estimate {
+      handling_unit_count
+      total_weight {
+        value
+        unit
+      }
+    }
+    booking {
+      book_ahead_hours
+      skip_if_empty
+      empty_check_at
+      attach_shipments
+    }
+  }
+}
+```
+
+```json Variables
+{
+  "id": "psch_1a2B3c"
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "pickupSchedule": {
+      "id": "psch_1a2B3c",
+      "object": "pickup_schedule",
+      "status": "pending",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "connection": "conn_9f8e",
+      "carrier": "dhl_express",
+      "management": "carrier",
+      "contact": {
+        "name": "Example",
+        "company": "example",
+        "email": "ops@example.com",
+        "phone": "+447700900123",
+        "tax_ids": [
+          {
+            "type": "eori",
+            "value": "example",
+            "country": "GB"
+          }
+        ],
+        "address": {
+          "line1": "Downing St",
+          "street_number": "10",
+          "line2": "example",
+          "city": "London"
+        }
+      },
+      "recurrence": {
+        "frequency": "daily",
+        "interval": 2,
+        "days": [
+          "mon"
+        ],
+        "day_of_month": 2,
+        "times": [
+          "example"
+        ],
+        "timezone": "Europe/London"
+      },
+      "window": {
+        "ready_at": "15:00",
+        "close_at": "18:00"
+      },
+      "location": "loc_lon_a12_03_b",
+      "instructions": "example",
+      "estimate": {
+        "handling_unit_count": 2,
+        "total_weight": {
+          "value": 1.5,
+          "unit": "g"
+        }
+      },
+      "booking": {
+        "book_ahead_hours": 2,
+        "skip_if_empty": true,
+        "empty_check_at": "2026-10-07T09:00:00Z",
+        "attach_shipments": "eligible"
+      }
+    }
+  }
+}
+```
+
+</ResponseExample>

@@ -1,0 +1,111 @@
+---
+title: "participant"
+description: "Retrieve a Participant"
+---
+
+`query` · Module: **Data Network** · Requires `data:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+
+## Returns
+
+`Participant!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `ParticipantObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `did` | `String!` |
+| `account` | `String` |
+| `kinds` | `[String!]!` |
+| `verification_methods` | `[ParticipantVerificationMethodsItem!]` |
+| `credentials` | `[ParticipantCredentialsItem!]` |
+| `status` | `ParticipantStatus!` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query Participant($id: ID!) {
+  participant(id: $id) {
+    id
+    object
+    status
+    livemode
+    created
+    updated
+    did
+    account
+    kinds
+    verification_methods {
+      id
+      type
+    }
+    credentials {
+      type
+      issuer
+      valid_until
+      vc
+    }
+  }
+}
+```
+
+```json Variables
+{
+  "id": "ptc_1a2B3c"
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "participant": {
+      "id": "ptc_1a2B3c",
+      "object": "participant",
+      "status": "active",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "did": "did:web:swiftair.example",
+      "account": "acct_ada",
+      "kinds": [
+        "example"
+      ],
+      "verification_methods": [
+        {
+          "id": "obj_1a2B3c",
+          "type": "example"
+        }
+      ],
+      "credentials": [
+        {
+          "type": "example",
+          "issuer": "https://ada.okta.com/oauth2/default",
+          "valid_until": "example",
+          "vc": "example"
+        }
+      ]
+    }
+  }
+}
+```
+
+</ResponseExample>

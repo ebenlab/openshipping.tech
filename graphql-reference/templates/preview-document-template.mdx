@@ -1,0 +1,120 @@
+---
+title: "previewDocumentTemplate"
+description: "Preview a template"
+---
+
+`mutation` · Module: **Templates** · Requires `templates:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+| `input` | `PreviewDocumentTemplateInput` | The fields for this operation. |
+
+### `PreviewDocumentTemplateInput` fields
+
+| Field | Type |
+|---|---|
+| `data` | `JSON` |
+| `format` | `String` |
+| `version` | `String` |
+
+## Returns
+
+`Document!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `DocumentObject!` |
+| `type` | `DocumentType!` |
+| `format` | `DocumentFormat!` |
+| `size` | `String` |
+| `url` | `String` |
+| `url_expires_at` | `Int` |
+| `data` | `String` |
+| `handling_unit` | `String` |
+| `bundle` | `[String!]` |
+| `template` | `String` |
+| `template_version` | `Int` |
+| `related` | `DocumentRelated` |
+| `file` | `String` |
+| `sha256` | `String` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+mutation PreviewDocumentTemplate($id: ID!, $input: PreviewDocumentTemplateInput!) {
+  previewDocumentTemplate(id: $id, input: $input) {
+    id
+    object
+    type
+    format
+    size
+    url
+    url_expires_at
+    data
+    handling_unit
+    bundle
+    template
+    template_version
+    related {
+      type
+      id
+    }
+    file
+    sha256
+  }
+}
+```
+
+```json Variables
+{
+  "id": "obj_1a2B3c",
+  "input": {
+    "data": {},
+    "format": "pdf",
+    "version": "example"
+  }
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "previewDocumentTemplate": {
+      "id": "obj_1a2B3c",
+      "object": "document",
+      "type": "label",
+      "format": "pdf",
+      "size": "4x6",
+      "url": "https://example.com/resource",
+      "url_expires_at": 1791302400,
+      "data": "example",
+      "handling_unit": "example",
+      "bundle": [
+        "example"
+      ],
+      "template": "dtpl_packslip_v2",
+      "template_version": 2,
+      "related": {
+        "type": "example",
+        "id": "obj_1a2B3c"
+      },
+      "file": "file_6Yu8",
+      "sha256": "example"
+    }
+  }
+}
+```
+
+</ResponseExample>

@@ -1,0 +1,138 @@
+---
+title: "updateOption"
+description: "Update a CatalogOption"
+---
+
+`mutation` · Module: **Catalog** · Requires `catalog:write`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+| `input` | `CatalogOptionInput` | The fields for this operation. |
+
+### `CatalogOptionInput` fields
+
+| Field | Type |
+|---|---|
+| `key` | `String` |
+| `standardized` | `Boolean` |
+| `carrier_code` | `String` |
+| `name` | `String` |
+| `description` | `String` |
+| `schema` | `JsonSchemaInput` |
+| `conflicts_with` | `[String!]` |
+| `requires` | `[String!]` |
+| `surcharge` | `String` |
+| `status` | `CatalogOptionInputStatus` |
+| `version` | `Int` |
+| `user_metadata` | `UserMetadataInput` |
+
+## Returns
+
+`CatalogOption!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `CatalogOptionObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `key` | `String!` |
+| `standardized` | `Boolean` |
+| `carrier_code` | `String` |
+| `name` | `String` |
+| `description` | `String` |
+| `schema` | `JsonSchema!` |
+| `conflicts_with` | `[String!]` |
+| `requires` | `[String!]` |
+| `surcharge` | `String` |
+| `status` | `CatalogOptionStatus!` |
+| `version` | `Int` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+mutation UpdateOption($id: ID!, $input: CatalogOptionInput!) {
+  updateOption(id: $id, input: $input) {
+    id
+    object
+    name
+    status
+    livemode
+    created
+    updated
+    key
+    standardized
+    carrier_code
+    description
+    conflicts_with
+    requires
+    surcharge
+    version
+  }
+}
+```
+
+```json Variables
+{
+  "id": "opt_1a2B3c",
+  "input": {
+    "key": "signature",
+    "standardized": true,
+    "carrier_code": "EXPRESS_WORLDWIDE",
+    "name": "Example",
+    "description": "Example description",
+    "conflicts_with": [
+      "example"
+    ],
+    "requires": [
+      "example"
+    ],
+    "surcharge": "example"
+  }
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "updateOption": {
+      "id": "opt_1a2B3c",
+      "object": "option",
+      "name": "Example",
+      "status": "draft",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "key": "signature",
+      "standardized": true,
+      "carrier_code": "EXPRESS_WORLDWIDE",
+      "description": "Example description",
+      "conflicts_with": [
+        "example"
+      ],
+      "requires": [
+        "example"
+      ],
+      "surcharge": "example",
+      "version": 3
+    }
+  }
+}
+```
+
+</ResponseExample>

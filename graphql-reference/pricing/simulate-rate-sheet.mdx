@@ -1,0 +1,273 @@
+---
+title: "simulateRateSheet"
+description: "Simulate prices"
+---
+
+`mutation` · Module: **Pricing** · Requires `pricing:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+| `input` | `SimulateRateSheetInput` | The fields for this operation. |
+
+### `SimulateRateSheetInput` fields
+
+| Field | Type |
+|---|---|
+| `ship_from` | `ContactInput` |
+| `ship_to` | `ContactInput` |
+| `return_to` | `ContactInput` |
+| `bill_to` | `ContactInput` |
+| `billing` | `BillingInput` |
+| `handling_units` | `[HandlingUnitInput!]` |
+| `order` | `OrderInput` |
+| `customs_declaration` | `CustomsDeclarationInput` |
+| `carrier_configs` | `CarrierConfigsInput` |
+| `ship_date` | `String` |
+| `returns` | `SimulateRateSheetInputReturnsInput` |
+| `version` | `String` |
+
+## Returns
+
+`RateList!`
+
+| Field | Type |
+|---|---|
+| `data` | `[Rate!]!` |
+| `has_more` | `Boolean` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+mutation SimulateRateSheet($id: ID!, $input: SimulateRateSheetInput!) {
+  simulateRateSheet(id: $id, input: $input) {
+    data {
+      id
+      object
+      service {
+        code
+        name
+        carrier
+        connection
+        level
+        carrier_code
+      }
+      total {
+        amount
+        currency
+      }
+      total_in_account_currency {
+        amount
+        currency
+      }
+      charges {
+        name
+        kind
+        option
+        amount {
+          amount
+          currency
+        }
+        carrier_code
+      }
+      landed_cost {
+        id
+        object
+        livemode
+        created
+        updated
+        expires_at
+      }
+      delivery {
+        days
+        date
+        window {
+          start
+          end
+        }
+        guaranteed
+        business_days
+      }
+      billable_weight {
+        value
+        unit
+      }
+      zone
+      pricing
+      composition {
+        segments {
+          sequence
+          segment
+          carrier
+          service
+        }
+        interline_agreements
+      }
+      pricing_details {
+        rate_sheet
+        version
+        origin_zone
+        destination_zone
+        billable_weight {
+          value
+          unit
+        }
+        band_index
+      }
+      tags
+      documents {
+        label_formats
+        label_sizes
+      }
+      requires
+    }
+    has_more
+  }
+}
+```
+
+```json Variables
+{
+  "id": "obj_1a2B3c",
+  "input": {
+    "ship_from": {
+      "name": "Example",
+      "company": "example",
+      "email": "ops@example.com",
+      "phone": "+447700900123"
+    },
+    "ship_to": {
+      "name": "Example",
+      "company": "example",
+      "email": "ops@example.com",
+      "phone": "+447700900123"
+    },
+    "return_to": {
+      "name": "Example",
+      "company": "example",
+      "email": "ops@example.com",
+      "phone": "+447700900123"
+    },
+    "ship_date": "2026-10-07",
+    "version": "example"
+  }
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "simulateRateSheet": {
+      "data": [
+        {
+          "id": "obj_1a2B3c",
+          "object": "rate",
+          "service": {
+            "code": "dhl_express_worldwide",
+            "name": "Example",
+            "carrier": "dhl_express",
+            "connection": "conn_9f8e",
+            "level": "same_day",
+            "carrier_code": "EXPRESS_WORLDWIDE"
+          },
+          "total": {
+            "amount": 1299,
+            "currency": "usd"
+          },
+          "total_in_account_currency": {
+            "amount": 1299,
+            "currency": "usd"
+          },
+          "charges": [
+            {
+              "name": "Example",
+              "kind": "base",
+              "option": "example",
+              "amount": {
+                "amount": 1299,
+                "currency": "usd"
+              },
+              "carrier_code": "EXPRESS_WORLDWIDE"
+            }
+          ],
+          "landed_cost": {
+            "id": "lc_1a2B3c",
+            "object": "landed_cost",
+            "livemode": true,
+            "created": 1791302400,
+            "updated": 1791302400,
+            "expires_at": 1791302400
+          },
+          "delivery": {
+            "days": 2,
+            "date": "2026-10-07",
+            "window": {
+              "start": "example",
+              "end": "example"
+            },
+            "guaranteed": true,
+            "business_days": true
+          },
+          "billable_weight": {
+            "value": 1.5,
+            "unit": "g"
+          },
+          "zone": "zone_gb_mainland",
+          "pricing": "list",
+          "composition": {
+            "segments": [
+              {
+                "sequence": 2,
+                "segment": "first_mile",
+                "carrier": "dhl_express",
+                "service": "dhl_express_worldwide"
+              }
+            ],
+            "interline_agreements": [
+              "example"
+            ]
+          },
+          "pricing_details": {
+            "rate_sheet": "example",
+            "version": 3,
+            "origin_zone": "zone_gb_mainland",
+            "destination_zone": "zone_gb_mainland",
+            "billable_weight": {
+              "value": 1.5,
+              "unit": "g"
+            },
+            "band_index": 2
+          },
+          "tags": [
+            "cheapest"
+          ],
+          "documents": {
+            "label_formats": [
+              "example"
+            ],
+            "label_sizes": [
+              "example"
+            ]
+          },
+          "requires": [
+            "example"
+          ]
+        }
+      ],
+      "has_more": true
+    }
+  }
+}
+```
+
+</ResponseExample>

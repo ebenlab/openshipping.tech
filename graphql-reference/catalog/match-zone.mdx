@@ -1,0 +1,90 @@
+---
+title: "matchZone"
+description: "Match an address to zones"
+---
+
+`mutation` · Module: **Catalog**
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `input` | `MatchZoneInput` | The fields for this operation. |
+
+### `MatchZoneInput` fields
+
+| Field | Type |
+|---|---|
+| `address` | `AddressInput` |
+| `purpose` | `String` |
+
+## Returns
+
+`ZoneMatch!`
+
+| Field | Type |
+|---|---|
+| `object` | `ZoneMatchObject` |
+| `data` | `[Zone!]` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+mutation MatchZone($input: MatchZoneInput!) {
+  matchZone(input: $input) {
+    object
+    data {
+      id
+      object
+      name
+      status
+      livemode
+      created
+    }
+  }
+}
+```
+
+```json Variables
+{
+  "input": {
+    "address": {
+      "line1": "Downing St",
+      "street_number": "10",
+      "line2": "example",
+      "city": "London"
+    },
+    "purpose": "example"
+  }
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "matchZone": {
+      "object": "zone_match",
+      "data": [
+        {
+          "id": "zone_1a2B3c",
+          "object": "zone",
+          "name": "Example",
+          "status": "draft",
+          "livemode": true,
+          "created": 1791302400
+        }
+      ]
+    }
+  }
+}
+```
+
+</ResponseExample>

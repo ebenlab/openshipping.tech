@@ -1,0 +1,142 @@
+---
+title: "identityProvider"
+description: "Retrieve a IdentityProvider"
+---
+
+`query` · Module: **Accounts** · Requires `accounts:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+
+## Returns
+
+`IdentityProvider!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `IdentityProviderObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `account` | `String!` |
+| `type` | `IdentityProviderType!` |
+| `status` | `IdentityProviderStatus` |
+| `issuer` | `String!` |
+| `client_id` | `String` |
+| `client_secret` | `String` |
+| `scopes` | `[String!]` |
+| `domains` | `[IdentityProviderDomainsItem!]` |
+| `claims` | `IdentityProviderClaims` |
+| `role_mapping` | `[IdentityProviderRoleMappingItem!]` |
+| `default_role` | `String` |
+| `provisioning` | `IdentityProviderProvisioning` |
+| `enforce` | `Boolean` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query IdentityProvider($id: ID!) {
+  identityProvider(id: $id) {
+    id
+    object
+    type
+    status
+    livemode
+    created
+    updated
+    account
+    issuer
+    client_id
+    client_secret
+    scopes
+    domains {
+      domain
+      verified
+      verification {
+        type
+        name
+        value
+      }
+    }
+    claims {
+      name
+      email
+      groups
+    }
+    role_mapping {
+      group
+      role
+    }
+    default_role
+  }
+}
+```
+
+```json Variables
+{
+  "id": "idp_1a2B3c"
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "identityProvider": {
+      "id": "idp_1a2B3c",
+      "object": "identity_provider",
+      "type": "oidc",
+      "status": "pending",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "account": "acct_ada",
+      "issuer": "https://ada.okta.com/oauth2/default",
+      "client_id": "0oa1b2c3",
+      "client_secret": "example",
+      "scopes": [
+        "example"
+      ],
+      "domains": [
+        {
+          "domain": "example",
+          "verified": true,
+          "verification": {
+            "type": "example",
+            "name": "Example",
+            "value": "example"
+          }
+        }
+      ],
+      "claims": {
+        "name": "Example",
+        "email": "ops@example.com",
+        "groups": "example"
+      },
+      "role_mapping": [
+        {
+          "group": "dock-a",
+          "role": "example"
+        }
+      ],
+      "default_role": "example"
+    }
+  }
+}
+```
+
+</ResponseExample>

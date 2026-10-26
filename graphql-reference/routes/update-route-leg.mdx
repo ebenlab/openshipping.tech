@@ -1,0 +1,197 @@
+---
+title: "updateRouteLeg"
+description: "Update a leg"
+---
+
+`mutation` · Module: **Routes**
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+| `legId` | `ID!` | The leg id. |
+| `input` | `LegUpdate` | The fields for this operation. |
+
+### `LegUpdate` fields
+
+| Field | Type |
+|---|---|
+| `mode` | `String` |
+| `operator` | `LegUpdateOperatorInput` |
+| `vehicle_type` | `String` |
+| `duration_minutes` | `Int` |
+| `distance` | `LegUpdateDistanceInput` |
+| `capacity` | `LegUpdateCapacityInput` |
+| `cost` | `MoneyInput` |
+
+## Returns
+
+`Leg!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `from_stop` | `String!` |
+| `to_stop` | `String!` |
+| `mode` | `LegMode!` |
+| `operator` | `LegOperator!` |
+| `vehicle_type` | `String` |
+| `air` | `LegAir` |
+| `duration_minutes` | `Int` |
+| `distance` | `LegDistance` |
+| `capacity` | `LegCapacity` |
+| `cost` | `Money` |
+| `carrier_metadata` | `CarrierMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+mutation UpdateRouteLeg($id: ID!, $legId: ID!, $input: LegUpdate!) {
+  updateRouteLeg(id: $id, legId: $legId, input: $input) {
+    id
+    from_stop
+    to_stop
+    mode
+    operator {
+      type
+      name
+      connection
+      service
+      reference
+    }
+    vehicle_type
+    air {
+      flight_number
+      awb_prefix
+      uld_assignments {
+        uld_id
+        uld_type
+        position
+        handling_units
+      }
+    }
+    duration_minutes
+    distance {
+      value
+      unit
+    }
+    capacity {
+      weight {
+        value
+        unit
+      }
+      volume {
+        value
+        unit
+      }
+      handling_units
+      pallets
+    }
+    cost {
+      amount
+      currency
+    }
+  }
+}
+```
+
+```json Variables
+{
+  "id": "obj_1a2B3c",
+  "legId": "example_id",
+  "input": {
+    "mode": "example",
+    "operator": {
+      "type": "self",
+      "connection": "conn_9f8e",
+      "service": "dhl_express_worldwide",
+      "name": "Example"
+    },
+    "vehicle_type": "example",
+    "duration_minutes": 2,
+    "distance": {
+      "value": 1.5,
+      "unit": "kg"
+    },
+    "capacity": {
+      "weight": {
+        "value": 1.5,
+        "unit": "g"
+      },
+      "volume": {
+        "value": 1.5,
+        "unit": "kg"
+      },
+      "handling_units": 2,
+      "pallets": 2
+    }
+  }
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "updateRouteLeg": {
+      "id": "obj_1a2B3c",
+      "from_stop": "example",
+      "to_stop": "example",
+      "mode": "road",
+      "operator": {
+        "type": "self",
+        "name": "Example",
+        "connection": "conn_9f8e",
+        "service": "dhl_express_worldwide",
+        "reference": "ORDER-1001"
+      },
+      "vehicle_type": "example",
+      "air": {
+        "flight_number": "SW123",
+        "awb_prefix": "example",
+        "uld_assignments": [
+          {
+            "uld_id": "example",
+            "uld_type": "example",
+            "position": "example",
+            "handling_units": [
+              "example"
+            ]
+          }
+        ]
+      },
+      "duration_minutes": 2,
+      "distance": {
+        "value": 1.5,
+        "unit": "kg"
+      },
+      "capacity": {
+        "weight": {
+          "value": 1.5,
+          "unit": "g"
+        },
+        "volume": {
+          "value": 1.5,
+          "unit": "kg"
+        },
+        "handling_units": 2,
+        "pallets": 2
+      },
+      "cost": {
+        "amount": 1299,
+        "currency": "usd"
+      }
+    }
+  }
+}
+```
+
+</ResponseExample>

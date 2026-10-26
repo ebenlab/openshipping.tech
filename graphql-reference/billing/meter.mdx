@@ -1,0 +1,99 @@
+---
+title: "meter"
+description: "Retrieve a Meter"
+---
+
+`query` · Module: **Billing** · Requires `billing:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+
+## Returns
+
+`Meter!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `MeterObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `key` | `String!` |
+| `name` | `String` |
+| `source` | `MeterSource!` |
+| `aggregation` | `MeterAggregation!` |
+| `value_path` | `String` |
+| `filters` | `JSON` |
+| `unit` | `String` |
+| `status` | `MeterStatus` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query Meter($id: ID!) {
+  meter(id: $id) {
+    id
+    object
+    name
+    status
+    livemode
+    created
+    updated
+    key
+    source {
+      event
+      reported
+    }
+    aggregation
+    value_path
+    unit
+  }
+}
+```
+
+```json Variables
+{
+  "id": "mtr_1a2B3c"
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "meter": {
+      "id": "mtr_1a2B3c",
+      "object": "meter",
+      "name": "Example",
+      "status": "active",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "key": "signature",
+      "source": {
+        "event": "example",
+        "reported": true
+      },
+      "aggregation": "count",
+      "value_path": "example",
+      "unit": "kg"
+    }
+  }
+}
+```
+
+</ResponseExample>

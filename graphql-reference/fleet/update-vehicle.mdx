@@ -1,0 +1,184 @@
+---
+title: "updateVehicle"
+description: "Update a Vehicle"
+---
+
+`mutation` · Module: **Fleet** · Requires `fleet:write`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+| `input` | `VehicleInput` | The fields for this operation. |
+
+### `VehicleInput` fields
+
+| Field | Type |
+|---|---|
+| `name` | `String` |
+| `type` | `VehicleInputType` |
+| `class` | `JSON` |
+| `status` | `VehicleInputStatus` |
+| `registration` | `VehicleInputRegistrationInput` |
+| `capacity` | `VehicleInputCapacityInput` |
+| `features` | `[String!]` |
+| `home_facility` | `String` |
+| `range` | `VehicleInputRangeInput` |
+| `telematics` | `VehicleInputTelematicsInput` |
+| `user_metadata` | `UserMetadataInput` |
+
+## Returns
+
+`Vehicle!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `VehicleObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `name` | `String!` |
+| `type` | `VehicleType!` |
+| `class` | `JSON` |
+| `status` | `VehicleStatus!` |
+| `registration` | `VehicleRegistration` |
+| `capacity` | `VehicleCapacity` |
+| `features` | `[String!]` |
+| `home_facility` | `String` |
+| `range` | `VehicleRange` |
+| `telematics` | `VehicleTelematics` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+mutation UpdateVehicle($id: ID!, $input: VehicleInput!) {
+  updateVehicle(id: $id, input: $input) {
+    id
+    object
+    name
+    type
+    status
+    livemode
+    created
+    updated
+    registration {
+      plate
+      country
+    }
+    capacity {
+      weight {
+        value
+        unit
+      }
+      volume {
+        value
+        unit
+      }
+      handling_units
+      pallets
+    }
+    features
+    home_facility
+    range {
+      value
+      unit
+    }
+    telematics {
+      provider
+      device_id
+    }
+  }
+}
+```
+
+```json Variables
+{
+  "id": "veh_1a2B3c",
+  "input": {
+    "name": "Example",
+    "type": "car",
+    "class": {},
+    "status": "active",
+    "registration": {
+      "plate": "LX26 ABC",
+      "country": "GB"
+    },
+    "capacity": {
+      "weight": {
+        "value": 1.5,
+        "unit": "g"
+      },
+      "volume": {
+        "value": 1.5,
+        "unit": "kg"
+      },
+      "handling_units": 2,
+      "pallets": 2
+    },
+    "features": [
+      "example"
+    ],
+    "home_facility": "fac_lon_hub"
+  }
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "updateVehicle": {
+      "id": "veh_1a2B3c",
+      "object": "vehicle",
+      "name": "Example",
+      "type": "car",
+      "status": "active",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "registration": {
+        "plate": "LX26 ABC",
+        "country": "GB"
+      },
+      "capacity": {
+        "weight": {
+          "value": 1.5,
+          "unit": "g"
+        },
+        "volume": {
+          "value": 1.5,
+          "unit": "kg"
+        },
+        "handling_units": 2,
+        "pallets": 2
+      },
+      "features": [
+        "example"
+      ],
+      "home_facility": "fac_lon_hub",
+      "range": {
+        "value": 1.5,
+        "unit": "kg"
+      },
+      "telematics": {
+        "provider": "example",
+        "device_id": "example"
+      }
+    }
+  }
+}
+```
+
+</ResponseExample>

@@ -1,0 +1,108 @@
+---
+title: "stockGet"
+description: "Retrieve a Stock"
+---
+
+`query` · Module: **Inventory** · Requires `inventory:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+
+## Returns
+
+`Stock!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `StockObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `owner` | `String!` |
+| `product` | `String!` |
+| `facility` | `String!` |
+| `location` | `String` |
+| `status` | `StockStatus!` |
+| `quantity` | `Int!` |
+| `lot` | `StockLot` |
+| `serials` | `[String!]` |
+| `handling_unit` | `String` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query StockGet($id: ID!) {
+  stockGet(id: $id) {
+    id
+    object
+    status
+    livemode
+    created
+    updated
+    owner
+    product
+    facility
+    location
+    quantity
+    lot {
+      number
+      manufactured_on
+      expires_on
+    }
+    serials
+    handling_unit
+  }
+}
+```
+
+```json Variables
+{
+  "id": "stk_1a2B3c"
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "stockGet": {
+      "id": "stk_1a2B3c",
+      "object": "stock",
+      "status": "available",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "owner": "acct_ada",
+      "product": "prod_ts_red_m",
+      "facility": "fac_lon_hub",
+      "location": "loc_lon_a12_03_b",
+      "quantity": 2,
+      "lot": {
+        "number": "SEAL-00918",
+        "manufactured_on": "2026-10-07",
+        "expires_on": "2026-10-07"
+      },
+      "serials": [
+        "example"
+      ],
+      "handling_unit": "example"
+    }
+  }
+}
+```
+
+</ResponseExample>

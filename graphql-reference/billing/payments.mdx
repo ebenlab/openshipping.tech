@@ -1,0 +1,114 @@
+---
+title: "payments"
+description: "List payments"
+---
+
+`query` · Module: **Billing** · Requires `billing:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `status` | `String` | Filter by status. |
+| `invoice` | `String` | Filter by invoice. |
+| `purpose` | `String` | Filter by purpose. |
+| `createdGte` | `Int` | Filter by created gte. |
+| `createdLte` | `Int` | Filter by created lte. |
+| `limit` | `Int` | Page size, 1–100 (default 10). |
+| `startingAfter` | `ID` | Cursor: return objects after this ID. |
+| `endingBefore` | `ID` | Cursor: return objects before this ID. |
+
+## Returns
+
+`PaymentList!`
+
+| Field | Type |
+|---|---|
+| `data` | `[Payment!]!` |
+| `has_more` | `Boolean` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query Payments($limit: Int) {
+  payments(limit: $limit) {
+    data {
+      id
+      object
+      status
+      livemode
+      created
+      updated
+      amount {
+        amount
+        currency
+      }
+      invoice
+      purpose
+      payment_method
+      connection
+      failure {
+        code
+        message
+      }
+      refunded {
+        amount
+        currency
+      }
+    }
+    has_more
+  }
+}
+```
+
+```json Variables
+{
+  "limit": 10
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "payments": {
+      "data": [
+        {
+          "id": "pay_1a2B3c",
+          "object": "payment",
+          "status": "requires_action",
+          "livemode": true,
+          "created": 1791302400,
+          "updated": 1791302400,
+          "amount": {
+            "amount": 1299,
+            "currency": "usd"
+          },
+          "invoice": "invc_7Ff2",
+          "purpose": "invoice",
+          "payment_method": "example",
+          "connection": "conn_9f8e",
+          "failure": {
+            "code": "dhl_express_worldwide",
+            "message": "example"
+          },
+          "refunded": {
+            "amount": 1299,
+            "currency": "usd"
+          }
+        }
+      ],
+      "has_more": true
+    }
+  }
+}
+```
+
+</ResponseExample>

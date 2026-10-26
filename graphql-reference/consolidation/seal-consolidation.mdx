@@ -1,0 +1,169 @@
+---
+title: "sealConsolidation"
+description: "Consolidation: seal"
+---
+
+`mutation` · Module: **Consolidation** · Requires `consolidation:write`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+| `input` | `SealConsolidationInput` | The fields for this operation. |
+
+### `SealConsolidationInput` fields
+
+| Field | Type |
+|---|---|
+| `number` | `String` |
+| `type` | `String` |
+
+## Returns
+
+`Consolidation!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `ConsolidationObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `type` | `ConsolidationType!` |
+| `status` | `ConsolidationStatus!` |
+| `owner` | `String!` |
+| `identifiers` | `ConsolidationIdentifiers` |
+| `type_code` | `String` |
+| `parent` | `String` |
+| `contents` | `ConsolidationContents` |
+| `counts` | `ConsolidationCounts` |
+| `weight` | `Weight` |
+| `dimensions` | `Dimensions` |
+| `origin` | `String` |
+| `destination` | `String` |
+| `seal` | `ConsolidationSeal` |
+| `dangerous_goods` | `ConsolidationDangerousGoods` |
+| `customs` | `ConsolidationCustoms` |
+| `conveyance` | `String` |
+| `documents` | `[Document!]` |
+| `location` | `ConsolidationLocation` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+mutation SealConsolidation($id: ID!, $input: SealConsolidationInput!) {
+  sealConsolidation(id: $id, input: $input) {
+    id
+    object
+    type
+    status
+    livemode
+    created
+    updated
+    owner
+    identifiers {
+      sscc
+      label
+      uld_id
+      container_number
+      postal_receptacle
+    }
+    type_code
+    parent
+    contents {
+      consolidations
+      handling_units
+    }
+    counts {
+      handling_units
+      shipments
+      consolidations
+    }
+    weight {
+      value
+      unit
+    }
+    dimensions {
+      length
+      width
+      height
+      unit
+    }
+    origin
+  }
+}
+```
+
+```json Variables
+{
+  "id": "csl_1a2B3c",
+  "input": {
+    "number": "SEAL-00918",
+    "type": "example"
+  }
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "sealConsolidation": {
+      "id": "csl_1a2B3c",
+      "object": "consolidation",
+      "type": "bag",
+      "status": "open",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "owner": "acct_ada",
+      "identifiers": {
+        "sscc": "example",
+        "label": "Example",
+        "uld_id": "example",
+        "container_number": "example",
+        "postal_receptacle": "example"
+      },
+      "type_code": "GB",
+      "parent": "example",
+      "contents": {
+        "consolidations": [
+          "example"
+        ],
+        "handling_units": [
+          "example"
+        ]
+      },
+      "counts": {
+        "handling_units": 2,
+        "shipments": 2,
+        "consolidations": 2
+      },
+      "weight": {
+        "value": 1.5,
+        "unit": "g"
+      },
+      "dimensions": {
+        "length": 1.5,
+        "width": 1.5,
+        "height": 1.5,
+        "unit": "mm"
+      },
+      "origin": "example"
+    }
+  }
+}
+```
+
+</ResponseExample>

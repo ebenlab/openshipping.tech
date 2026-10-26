@@ -1,0 +1,119 @@
+---
+title: "rateSheetVersions"
+description: "List rate sheet versions"
+---
+
+`query` · Module: **Pricing**
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+
+## Returns
+
+`RateSheetList!`
+
+| Field | Type |
+|---|---|
+| `data` | `[RateSheet!]!` |
+| `has_more` | `Boolean` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query RateSheetVersions($id: ID!) {
+  rateSheetVersions(id: $id) {
+    data {
+      id
+      object
+      name
+      status
+      livemode
+      created
+      updated
+      version
+      currency
+      effective_from
+      effective_until
+      services
+      origin_zones
+      weight_rounding {
+        increment {
+          value
+          unit
+        }
+        mode
+      }
+      dimensional_weight {
+        divisor
+        unit
+        applies
+      }
+      aggregate
+    }
+    has_more
+  }
+}
+```
+
+```json Variables
+{
+  "id": "obj_1a2B3c"
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "rateSheetVersions": {
+      "data": [
+        {
+          "id": "rs_1a2B3c",
+          "object": "rate_sheet",
+          "name": "Example",
+          "status": "draft",
+          "livemode": true,
+          "created": 1791302400,
+          "updated": 1791302400,
+          "version": 3,
+          "currency": "usd",
+          "effective_from": "2026-10-07",
+          "effective_until": "2026-10-07",
+          "services": [
+            "example"
+          ],
+          "origin_zones": [
+            "example"
+          ],
+          "weight_rounding": {
+            "increment": {
+              "value": 1.5,
+              "unit": "g"
+            },
+            "mode": "up"
+          },
+          "dimensional_weight": {
+            "divisor": 1.5,
+            "unit": "kg",
+            "applies": "example"
+          },
+          "aggregate": "handling_unit"
+        }
+      ],
+      "has_more": true
+    }
+  }
+}
+```
+
+</ResponseExample>

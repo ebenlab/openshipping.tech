@@ -1,0 +1,86 @@
+---
+title: "attestation"
+description: "Retrieve a Attestation"
+---
+
+`query` · Module: **Data Network** · Requires `data:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+
+## Returns
+
+`Attestation!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `AttestationObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `attester` | `String!` |
+| `about` | `String!` |
+| `statement` | `String!` |
+| `evidence` | `[String!]` |
+| `signature` | `JSON` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query Attestation($id: ID!) {
+  attestation(id: $id) {
+    id
+    object
+    livemode
+    created
+    updated
+    attester
+    about
+    statement
+    evidence
+  }
+}
+```
+
+```json Variables
+{
+  "id": "att_1a2B3c"
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "attestation": {
+      "id": "att_1a2B3c",
+      "object": "attestation",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "attester": "example",
+      "about": "example",
+      "statement": "example",
+      "evidence": [
+        "example"
+      ]
+    }
+  }
+}
+```
+
+</ResponseExample>

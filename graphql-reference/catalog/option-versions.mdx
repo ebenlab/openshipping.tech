@@ -1,0 +1,97 @@
+---
+title: "optionVersions"
+description: "List option versions"
+---
+
+`query` · Module: **Catalog**
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+
+## Returns
+
+`CatalogOptionList!`
+
+| Field | Type |
+|---|---|
+| `data` | `[CatalogOption!]!` |
+| `has_more` | `Boolean` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query OptionVersions($id: ID!) {
+  optionVersions(id: $id) {
+    data {
+      id
+      object
+      name
+      status
+      livemode
+      created
+      updated
+      key
+      standardized
+      carrier_code
+      description
+      conflicts_with
+      requires
+      surcharge
+      version
+    }
+    has_more
+  }
+}
+```
+
+```json Variables
+{
+  "id": "obj_1a2B3c"
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "optionVersions": {
+      "data": [
+        {
+          "id": "opt_1a2B3c",
+          "object": "option",
+          "name": "Example",
+          "status": "draft",
+          "livemode": true,
+          "created": 1791302400,
+          "updated": 1791302400,
+          "key": "signature",
+          "standardized": true,
+          "carrier_code": "EXPRESS_WORLDWIDE",
+          "description": "Example description",
+          "conflicts_with": [
+            "example"
+          ],
+          "requires": [
+            "example"
+          ],
+          "surcharge": "example",
+          "version": 3
+        }
+      ],
+      "has_more": true
+    }
+  }
+}
+```
+
+</ResponseExample>

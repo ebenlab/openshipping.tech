@@ -1,0 +1,165 @@
+---
+title: "updateSurcharge"
+description: "Update a Surcharge"
+---
+
+`mutation` · Module: **Pricing** · Requires `pricing:write`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+| `input` | `SurchargeInput` | The fields for this operation. |
+
+### `SurchargeInput` fields
+
+| Field | Type |
+|---|---|
+| `name` | `String` |
+| `kind` | `String` |
+| `calculation` | `SurchargeInputCalculationInput` |
+| `conditions` | `JSON` |
+| `schedule` | `[SurchargeInputScheduleItemInput!]` |
+| `status` | `SurchargeInputStatus` |
+| `user_metadata` | `UserMetadataInput` |
+
+## Returns
+
+`Surcharge!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `SurchargeObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `name` | `String!` |
+| `kind` | `String!` |
+| `calculation` | `SurchargeCalculation!` |
+| `conditions` | `JSON` |
+| `schedule` | `[SurchargeScheduleItem!]` |
+| `status` | `SurchargeStatus` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+mutation UpdateSurcharge($id: ID!, $input: SurchargeInput!) {
+  updateSurcharge(id: $id, input: $input) {
+    id
+    object
+    name
+    status
+    livemode
+    created
+    updated
+    kind
+    calculation {
+      type
+      amount {
+        amount
+        currency
+      }
+      rate
+      basis
+      per {
+        value
+        unit
+      }
+    }
+    schedule {
+      effective_from
+      rate
+      amount {
+        amount
+        currency
+      }
+    }
+  }
+}
+```
+
+```json Variables
+{
+  "id": "sur_1a2B3c",
+  "input": {
+    "name": "Example",
+    "kind": "example",
+    "calculation": {
+      "type": "fixed",
+      "amount": {
+        "amount": 1299,
+        "currency": "usd"
+      },
+      "rate": 0.145,
+      "basis": "base"
+    },
+    "conditions": {},
+    "schedule": [
+      {
+        "effective_from": "2026-10-07",
+        "rate": 0.145,
+        "amount": {
+          "amount": 1299,
+          "currency": "usd"
+        }
+      }
+    ],
+    "status": "active"
+  }
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "updateSurcharge": {
+      "id": "sur_1a2B3c",
+      "object": "surcharge",
+      "name": "Example",
+      "status": "active",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "kind": "example",
+      "calculation": {
+        "type": "fixed",
+        "amount": {
+          "amount": 1299,
+          "currency": "usd"
+        },
+        "rate": 0.145,
+        "basis": "base",
+        "per": {
+          "value": 1.5,
+          "unit": "kg"
+        }
+      },
+      "schedule": [
+        {
+          "effective_from": "2026-10-07",
+          "rate": 0.145,
+          "amount": {
+            "amount": 1299,
+            "currency": "usd"
+          }
+        }
+      ]
+    }
+  }
+}
+```
+
+</ResponseExample>

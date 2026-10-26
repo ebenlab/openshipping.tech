@@ -1,0 +1,107 @@
+---
+title: "createDataset"
+description: "Create a dataset extract"
+---
+
+`mutation` · Module: **Data Network**
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `input` | `CreateDatasetInput` | The fields for this operation. |
+
+### `CreateDatasetInput` fields
+
+| Field | Type |
+|---|---|
+| `query` | `JSON` |
+| `format` | `CreateDatasetInputFormat` |
+| `anonymization` | `String` |
+
+## Returns
+
+`File!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `FileObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `purpose` | `FilePurpose!` |
+| `filename` | `String` |
+| `content_type` | `String` |
+| `size` | `Int!` |
+| `sha256` | `String` |
+| `url` | `String` |
+| `url_expires_at` | `Int` |
+| `expires_at` | `Int` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+mutation CreateDataset($input: CreateDatasetInput!) {
+  createDataset(input: $input) {
+    id
+    object
+    livemode
+    created
+    updated
+    purpose
+    filename
+    content_type
+    size
+    sha256
+    url
+    url_expires_at
+    expires_at
+  }
+}
+```
+
+```json Variables
+{
+  "input": {
+    "query": {},
+    "format": "parquet",
+    "anonymization": "example"
+  }
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "createDataset": {
+      "id": "file_1a2B3c",
+      "object": "file",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "purpose": "customs_document",
+      "filename": "example",
+      "content_type": "example",
+      "size": 2,
+      "sha256": "example",
+      "url": "https://example.com/resource",
+      "url_expires_at": 1791302400,
+      "expires_at": 1791302400
+    }
+  }
+}
+```
+
+</ResponseExample>

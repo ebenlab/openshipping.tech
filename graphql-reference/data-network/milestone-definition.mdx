@@ -1,0 +1,70 @@
+---
+title: "milestoneDefinition"
+description: "Milestone definition set"
+---
+
+`query` · Module: **Data Network**
+
+## Arguments
+
+None.
+
+## Returns
+
+`MilestoneDefinitions!`
+
+| Field | Type |
+|---|---|
+| `object` | `MilestoneDefinitionsObject` |
+| `version` | `String` |
+| `milestones` | `[MilestoneDefinitionsMilestonesItem!]` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query MilestoneDefinition {
+  milestoneDefinition {
+    object
+    version
+    milestones {
+      milestone
+      derived_from
+      order
+    }
+  }
+}
+```
+
+```json Variables
+{}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "milestoneDefinition": {
+      "object": "milestone_definitions",
+      "version": "example",
+      "milestones": [
+        {
+          "milestone": "example",
+          "derived_from": [
+            "example"
+          ],
+          "order": 2
+        }
+      ]
+    }
+  }
+}
+```
+
+</ResponseExample>

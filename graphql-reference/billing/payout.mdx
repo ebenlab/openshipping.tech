@@ -1,0 +1,95 @@
+---
+title: "payout"
+description: "Retrieve a Payout"
+---
+
+`query` · Module: **Billing** · Requires `billing:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+
+## Returns
+
+`Payout!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `PayoutObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `account` | `String!` |
+| `amount` | `Money!` |
+| `settlement` | `String` |
+| `connection` | `String` |
+| `status` | `PayoutStatus!` |
+| `arrival_date` | `String` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query Payout($id: ID!) {
+  payout(id: $id) {
+    id
+    object
+    status
+    livemode
+    created
+    updated
+    account
+    amount {
+      amount
+      currency
+    }
+    settlement
+    connection
+    arrival_date
+  }
+}
+```
+
+```json Variables
+{
+  "id": "po_1a2B3c"
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "payout": {
+      "id": "po_1a2B3c",
+      "object": "payout",
+      "status": "pending",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "account": "acct_ada",
+      "amount": {
+        "amount": 1299,
+        "currency": "usd"
+      },
+      "settlement": "example",
+      "connection": "conn_9f8e",
+      "arrival_date": "example"
+    }
+  }
+}
+```
+
+</ResponseExample>

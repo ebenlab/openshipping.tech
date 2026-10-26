@@ -1,0 +1,125 @@
+---
+title: "createMeter"
+description: "Create a meter"
+---
+
+`mutation` · Module: **Billing** · Requires `billing:write`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `input` | `MeterInput` | The fields for this operation. |
+
+### `MeterInput` fields
+
+| Field | Type |
+|---|---|
+| `key` | `String` |
+| `name` | `String` |
+| `source` | `MeterInputSourceInput` |
+| `aggregation` | `MeterInputAggregation` |
+| `value_path` | `String` |
+| `filters` | `JSON` |
+| `unit` | `String` |
+| `status` | `MeterInputStatus` |
+| `user_metadata` | `UserMetadataInput` |
+
+## Returns
+
+`Meter!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `MeterObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `key` | `String!` |
+| `name` | `String` |
+| `source` | `MeterSource!` |
+| `aggregation` | `MeterAggregation!` |
+| `value_path` | `String` |
+| `filters` | `JSON` |
+| `unit` | `String` |
+| `status` | `MeterStatus` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+mutation CreateMeter($input: MeterInput!) {
+  createMeter(input: $input) {
+    id
+    object
+    name
+    status
+    livemode
+    created
+    updated
+    key
+    source {
+      event
+      reported
+    }
+    aggregation
+    value_path
+    unit
+  }
+}
+```
+
+```json Variables
+{
+  "input": {
+    "key": "signature",
+    "name": "Example",
+    "source": {
+      "event": "example",
+      "reported": true
+    },
+    "aggregation": "count",
+    "value_path": "example",
+    "filters": {},
+    "unit": "kg",
+    "status": "active"
+  }
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "createMeter": {
+      "id": "mtr_1a2B3c",
+      "object": "meter",
+      "name": "Example",
+      "status": "active",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "key": "signature",
+      "source": {
+        "event": "example",
+        "reported": true
+      },
+      "aggregation": "count",
+      "value_path": "example",
+      "unit": "kg"
+    }
+  }
+}
+```
+
+</ResponseExample>

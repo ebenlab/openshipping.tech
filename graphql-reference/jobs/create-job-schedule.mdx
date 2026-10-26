@@ -1,0 +1,133 @@
+---
+title: "createJobSchedule"
+description: "Create a job schedule"
+---
+
+`mutation` · Module: **Jobs** · Requires `jobs:write`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `input` | `JobScheduleInput` | The fields for this operation. |
+
+### `JobScheduleInput` fields
+
+| Field | Type |
+|---|---|
+| `type` | `String` |
+| `parameters` | `JSON` |
+| `recurrence` | `RecurrenceInput` |
+| `overlap` | `JobScheduleInputOverlap` |
+| `user_metadata` | `UserMetadataInput` |
+
+## Returns
+
+`JobSchedule!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `JobScheduleObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `status` | `JobScheduleStatus!` |
+| `type` | `String!` |
+| `parameters` | `JSON` |
+| `recurrence` | `Recurrence!` |
+| `overlap` | `JobScheduleOverlap` |
+| `next_run_at` | `Int` |
+| `last_job` | `String` |
+| `last_status` | `JobScheduleLastStatus` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+mutation CreateJobSchedule($input: JobScheduleInput!) {
+  createJobSchedule(input: $input) {
+    id
+    object
+    status
+    type
+    livemode
+    created
+    updated
+    recurrence {
+      frequency
+      interval
+      days
+      day_of_month
+      times
+      timezone
+    }
+    overlap
+    next_run_at
+    last_job
+    last_status
+  }
+}
+```
+
+```json Variables
+{
+  "input": {
+    "type": "example",
+    "parameters": {},
+    "recurrence": {
+      "frequency": "daily",
+      "interval": 2,
+      "days": [
+        "mon"
+      ],
+      "day_of_month": 2
+    },
+    "overlap": "skip"
+  }
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "createJobSchedule": {
+      "id": "jsch_1a2B3c",
+      "object": "job_schedule",
+      "status": "active",
+      "type": "example",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "recurrence": {
+        "frequency": "daily",
+        "interval": 2,
+        "days": [
+          "mon"
+        ],
+        "day_of_month": 2,
+        "times": [
+          "example"
+        ],
+        "timezone": "Europe/London"
+      },
+      "overlap": "skip",
+      "next_run_at": 1791302400,
+      "last_job": "example",
+      "last_status": "queued"
+    }
+  }
+}
+```
+
+</ResponseExample>

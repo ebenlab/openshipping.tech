@@ -1,0 +1,119 @@
+---
+title: "inventoryCounts"
+description: "List inventory counts"
+---
+
+`query` · Module: **Inventory** · Requires `inventory:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `facility` | `String` | Filter by facility. |
+| `status` | `String` | Filter by status. |
+| `createdGte` | `Int` | Filter by created gte. |
+| `createdLte` | `Int` | Filter by created lte. |
+| `limit` | `Int` | Page size, 1–100 (default 10). |
+| `startingAfter` | `ID` | Cursor: return objects after this ID. |
+| `endingBefore` | `ID` | Cursor: return objects before this ID. |
+
+## Returns
+
+`InventoryCountList!`
+
+| Field | Type |
+|---|---|
+| `data` | `[InventoryCount!]!` |
+| `has_more` | `Boolean` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query InventoryCounts($limit: Int) {
+  inventoryCounts(limit: $limit) {
+    data {
+      id
+      object
+      type
+      status
+      livemode
+      created
+      updated
+      facility
+      blind
+      scope {
+        locations
+        products
+        zone
+      }
+      lines {
+        location
+        product
+        lot
+        expected
+        counted
+        variance
+      }
+    }
+    has_more
+  }
+}
+```
+
+```json Variables
+{
+  "limit": 10
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "inventoryCounts": {
+      "data": [
+        {
+          "id": "cnt_1a2B3c",
+          "object": "inventory_count",
+          "type": "cycle",
+          "status": "open",
+          "livemode": true,
+          "created": 1791302400,
+          "updated": 1791302400,
+          "facility": "fac_lon_hub",
+          "blind": true,
+          "scope": {
+            "locations": [
+              "example"
+            ],
+            "products": [
+              "example"
+            ],
+            "zone": "zone_gb_mainland"
+          },
+          "lines": [
+            {
+              "location": "loc_lon_a12_03_b",
+              "product": "prod_ts_red_m",
+              "lot": "example",
+              "expected": 2,
+              "counted": 2,
+              "variance": 2
+            }
+          ]
+        }
+      ],
+      "has_more": true
+    }
+  }
+}
+```
+
+</ResponseExample>

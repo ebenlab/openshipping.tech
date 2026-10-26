@@ -1,0 +1,123 @@
+---
+title: "settlements"
+description: "List settlements"
+---
+
+`query` · Module: **Network** · Requires `network:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `account` | `String` | Filter by account. |
+| `status` | `String` | Filter by status. |
+| `createdGte` | `Int` | Filter by created gte. |
+| `createdLte` | `Int` | Filter by created lte. |
+| `limit` | `Int` | Page size, 1–100 (default 10). |
+| `startingAfter` | `ID` | Cursor: return objects after this ID. |
+| `endingBefore` | `ID` | Cursor: return objects before this ID. |
+
+## Returns
+
+`SettlementList!`
+
+| Field | Type |
+|---|---|
+| `data` | `[Settlement!]!` |
+| `has_more` | `Boolean` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query Settlements($limit: Int) {
+  settlements(limit: $limit) {
+    data {
+      id
+      object
+      status
+      livemode
+      created
+      updated
+      account
+      period {
+        from
+        to
+      }
+      currency
+      totals {
+        debits {
+          amount
+          currency
+        }
+        credits {
+          amount
+          currency
+        }
+        net {
+          amount
+          currency
+        }
+      }
+      statement
+    }
+    has_more
+  }
+}
+```
+
+```json Variables
+{
+  "limit": 10
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "settlements": {
+      "data": [
+        {
+          "id": "stl_1a2B3c",
+          "object": "settlement",
+          "status": "open",
+          "livemode": true,
+          "created": 1791302400,
+          "updated": 1791302400,
+          "account": "acct_ada",
+          "period": {
+            "from": "2026-10-07",
+            "to": "2026-10-07"
+          },
+          "currency": "usd",
+          "totals": {
+            "debits": {
+              "amount": 1299,
+              "currency": "usd"
+            },
+            "credits": {
+              "amount": 1299,
+              "currency": "usd"
+            },
+            "net": {
+              "amount": 1299,
+              "currency": "usd"
+            }
+          },
+          "statement": "example"
+        }
+      ],
+      "has_more": true
+    }
+  }
+}
+```
+
+</ResponseExample>

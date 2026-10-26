@@ -1,0 +1,149 @@
+---
+title: "labelSpecs"
+description: "List label specs"
+---
+
+`query` · Module: **Templates** · Requires `templates:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `carrier` | `String` | Filter by carrier. |
+| `status` | `String` | Filter by status. |
+| `createdGte` | `Int` | Filter by created gte. |
+| `createdLte` | `Int` | Filter by created lte. |
+| `limit` | `Int` | Page size, 1–100 (default 10). |
+| `startingAfter` | `ID` | Cursor: return objects after this ID. |
+| `endingBefore` | `ID` | Cursor: return objects before this ID. |
+
+## Returns
+
+`LabelSpecList!`
+
+| Field | Type |
+|---|---|
+| `data` | `[LabelSpec!]!` |
+| `has_more` | `Boolean` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query LabelSpecs($limit: Int) {
+  labelSpecs(limit: $limit) {
+    data {
+      id
+      object
+      status
+      livemode
+      created
+      updated
+      owner
+      carrier
+      template
+      services
+      sizes
+      dpi
+      required_fields
+      barcodes {
+        role
+        symbology
+        payload
+        payload_schema
+        min_module_width_mm
+        quiet_zone_mm
+      }
+      zones {
+        name
+        x_mm
+        y_mm
+        w_mm
+        h_mm
+        required
+      }
+      tracking_numbers {
+        format
+        allocation
+        check_digit
+      }
+    }
+    has_more
+  }
+}
+```
+
+```json Variables
+{
+  "limit": 10
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "labelSpecs": {
+      "data": [
+        {
+          "id": "lspec_1a2B3c",
+          "object": "label",
+          "status": "draft",
+          "livemode": true,
+          "created": 1791302400,
+          "updated": 1791302400,
+          "owner": "acct_ada",
+          "carrier": "dhl_express",
+          "template": "dtpl_packslip_v2",
+          "services": [
+            "example"
+          ],
+          "sizes": [
+            "example"
+          ],
+          "dpi": [
+            2
+          ],
+          "required_fields": [
+            "example"
+          ],
+          "barcodes": [
+            {
+              "role": "example",
+              "symbology": "example",
+              "payload": "example",
+              "payload_schema": "example",
+              "min_module_width_mm": 1.5,
+              "quiet_zone_mm": 1.5
+            }
+          ],
+          "zones": [
+            {
+              "name": "Example",
+              "x_mm": 1.5,
+              "y_mm": 1.5,
+              "w_mm": 1.5,
+              "h_mm": 1.5,
+              "required": true
+            }
+          ],
+          "tracking_numbers": {
+            "format": "pdf",
+            "allocation": "range",
+            "check_digit": "example"
+          }
+        }
+      ],
+      "has_more": true
+    }
+  }
+}
+```
+
+</ResponseExample>

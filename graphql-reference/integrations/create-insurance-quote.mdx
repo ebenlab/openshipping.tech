@@ -1,0 +1,128 @@
+---
+title: "createInsuranceQuote"
+description: "Quote insurance"
+---
+
+`mutation` · Module: **Integrations**
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `input` | `InsuranceQuoteRequest` | The fields for this operation. |
+
+### `InsuranceQuoteRequest` fields
+
+| Field | Type |
+|---|---|
+| `shipment` | `String` |
+| `insured_value` | `MoneyInput` |
+| `coverage_types` | `[InsuranceQuoteRequestCoverageTypesItem!]` |
+| `connections` | `[String!]` |
+
+## Returns
+
+`InsuranceQuoteList!`
+
+| Field | Type |
+|---|---|
+| `data` | `[InsuranceQuote!]!` |
+| `has_more` | `Boolean` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+mutation CreateInsuranceQuote($input: InsuranceQuoteRequest!) {
+  createInsuranceQuote(input: $input) {
+    data {
+      id
+      object
+      connection
+      provider
+      premium {
+        amount
+        currency
+      }
+      insured_value {
+        amount
+        currency
+      }
+      deductible {
+        amount
+        currency
+      }
+      coverage_types
+      exclusions
+      terms_url
+      expires_at
+    }
+    has_more
+  }
+}
+```
+
+```json Variables
+{
+  "input": {
+    "shipment": "shp_1Q2w3E4r5T6y",
+    "insured_value": {
+      "amount": 1299,
+      "currency": "usd"
+    },
+    "coverage_types": [
+      "loss"
+    ],
+    "connections": [
+      "example"
+    ]
+  }
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "createInsuranceQuote": {
+      "data": [
+        {
+          "id": "obj_1a2B3c",
+          "object": "insurance_quote",
+          "connection": "conn_9f8e",
+          "provider": "example",
+          "premium": {
+            "amount": 1299,
+            "currency": "usd"
+          },
+          "insured_value": {
+            "amount": 1299,
+            "currency": "usd"
+          },
+          "deductible": {
+            "amount": 1299,
+            "currency": "usd"
+          },
+          "coverage_types": [
+            "example"
+          ],
+          "exclusions": [
+            "example"
+          ],
+          "terms_url": "https://example.com/terms",
+          "expires_at": 1791302400
+        }
+      ],
+      "has_more": true
+    }
+  }
+}
+```
+
+</ResponseExample>

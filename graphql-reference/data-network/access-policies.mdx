@@ -1,0 +1,101 @@
+---
+title: "accessPolicies"
+description: "List access policies"
+---
+
+`query` · Module: **Data Network** · Requires `data:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `createdGte` | `Int` | Filter by created gte. |
+| `createdLte` | `Int` | Filter by created lte. |
+| `limit` | `Int` | Page size, 1–100 (default 10). |
+| `startingAfter` | `ID` | Cursor: return objects after this ID. |
+| `endingBefore` | `ID` | Cursor: return objects before this ID. |
+
+## Returns
+
+`AccessPolicyList!`
+
+| Field | Type |
+|---|---|
+| `data` | `[AccessPolicy!]!` |
+| `has_more` | `Boolean` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query AccessPolicies($limit: Int) {
+  accessPolicies(limit: $limit) {
+    data {
+      id
+      object
+      livemode
+      created
+      updated
+      rules {
+        role
+        objects
+        fields
+        scope
+        deny
+        require_credentials
+      }
+    }
+    has_more
+  }
+}
+```
+
+```json Variables
+{
+  "limit": 10
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "accessPolicies": {
+      "data": [
+        {
+          "id": "pol_1a2B3c",
+          "object": "access_policy",
+          "livemode": true,
+          "created": 1791302400,
+          "updated": 1791302400,
+          "rules": [
+            {
+              "role": "example",
+              "objects": [
+                "example"
+              ],
+              "fields": [
+                "example"
+              ],
+              "scope": "example",
+              "deny": true,
+              "require_credentials": [
+                "example"
+              ]
+            }
+          ]
+        }
+      ],
+      "has_more": true
+    }
+  }
+}
+```
+
+</ResponseExample>

@@ -1,0 +1,138 @@
+---
+title: "updateClaim"
+description: "Update a Claim"
+---
+
+`mutation` · Module: **Integrations** · Requires `integrations:write`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+| `input` | `ClaimInput` | The fields for this operation. |
+
+### `ClaimInput` fields
+
+| Field | Type |
+|---|---|
+| `coverage` | `String` |
+| `type` | `String` |
+| `amount` | `MoneyInput` |
+| `description` | `String` |
+| `evidence` | `[String!]` |
+| `user_metadata` | `UserMetadataInput` |
+
+## Returns
+
+`Claim!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `ClaimObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `coverage` | `String!` |
+| `type` | `ClaimType!` |
+| `amount` | `Money!` |
+| `description` | `String` |
+| `evidence` | `[String!]` |
+| `status` | `ClaimStatus!` |
+| `resolution` | `ClaimResolution` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+mutation UpdateClaim($id: ID!, $input: ClaimInput!) {
+  updateClaim(id: $id, input: $input) {
+    id
+    object
+    type
+    status
+    livemode
+    created
+    updated
+    coverage
+    amount {
+      amount
+      currency
+    }
+    description
+    evidence
+    resolution {
+      amount {
+        amount
+        currency
+      }
+      paid_at
+      reason
+    }
+  }
+}
+```
+
+```json Variables
+{
+  "id": "clm_1a2B3c",
+  "input": {
+    "coverage": "example",
+    "type": "example",
+    "amount": {
+      "amount": 1299,
+      "currency": "usd"
+    },
+    "description": "Example description",
+    "evidence": [
+      "example"
+    ]
+  }
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "updateClaim": {
+      "id": "clm_1a2B3c",
+      "object": "claim",
+      "type": "loss",
+      "status": "submitted",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "coverage": "example",
+      "amount": {
+        "amount": 1299,
+        "currency": "usd"
+      },
+      "description": "Example description",
+      "evidence": [
+        "example"
+      ],
+      "resolution": {
+        "amount": {
+          "amount": 1299,
+          "currency": "usd"
+        },
+        "paid_at": 1791302400,
+        "reason": "example"
+      }
+    }
+  }
+}
+```
+
+</ResponseExample>

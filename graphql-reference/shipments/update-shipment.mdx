@@ -1,0 +1,390 @@
+---
+title: "updateShipment"
+description: "Update a Shipment"
+---
+
+`mutation` · Module: **Shipments** · Requires `shipments:write`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+| `input` | `ShipmentUpdate` | The fields for this operation. |
+
+### `ShipmentUpdate` fields
+
+| Field | Type |
+|---|---|
+| `ship_from` | `ContactInput` |
+| `ship_to` | `ContactInput` |
+| `return_to` | `ContactInput` |
+| `bill_to` | `ContactInput` |
+| `billing` | `BillingInput` |
+| `handling_units` | `[HandlingUnitInput!]` |
+| `order` | `OrderInput` |
+| `customs_declaration` | `CustomsDeclarationInput` |
+| `carrier_configs` | `CarrierConfigsInput` |
+| `ship_date` | `String` |
+| `reference` | `String` |
+| `handover` | `ShipmentUpdateHandoverInput` |
+| `returns` | `ShipmentUpdateReturnsInput` |
+| `user_metadata` | `UserMetadataInput` |
+| `redact` | `Boolean` |
+
+## Returns
+
+`Shipment!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `ShipmentObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `status` | `ShipmentStatusEnum!` |
+| `reference` | `String` |
+| `ship_date` | `String` |
+| `ship_from` | `Contact` |
+| `ship_to` | `Contact` |
+| `return_to` | `Contact` |
+| `bill_to` | `Contact` |
+| `billing` | `Billing` |
+| `handling_units` | `[HandlingUnit!]` |
+| `order` | `Order` |
+| `customs_declaration` | `CustomsDeclaration` |
+| `carrier_configs` | `CarrierConfigs` |
+| `purchase` | `ShipmentPurchaseInfo` |
+| `tracking` | `ShipmentTracking` |
+| `handover` | `ShipmentHandover` |
+| `injection` | `Injection` |
+| `returns` | `ShipmentReturns` |
+| `documents` | `[Document!]` |
+| `messages` | `[Message!]` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+mutation UpdateShipment($id: ID!, $input: ShipmentUpdate!) {
+  updateShipment(id: $id, input: $input) {
+    id
+    object
+    status
+    livemode
+    created
+    updated
+    reference
+    ship_date
+    ship_from {
+      name
+      company
+      email
+      phone
+      tax_ids {
+        type
+        value
+        country
+      }
+      address {
+        line1
+        street_number
+        line2
+        city
+      }
+    }
+    ship_to {
+      name
+      company
+      email
+      phone
+      tax_ids {
+        type
+        value
+        country
+      }
+      address {
+        line1
+        street_number
+        line2
+        city
+      }
+    }
+    return_to {
+      name
+      company
+      email
+      phone
+      tax_ids {
+        type
+        value
+        country
+      }
+      address {
+        line1
+        street_number
+        line2
+        city
+      }
+    }
+    bill_to {
+      name
+      company
+      email
+      phone
+      tax_ids {
+        type
+        value
+        country
+      }
+      address {
+        line1
+        street_number
+        line2
+        city
+      }
+    }
+    billing {
+      paid_by
+      account_number
+    }
+    handling_units {
+      id
+      type
+      weight {
+        value
+        unit
+      }
+      dimensions {
+        length
+        width
+        height
+        unit
+      }
+      packaging
+      freight {
+        pallet_standard
+        stackable
+        piece_count
+        freight_class
+      }
+    }
+    order {
+      id
+      reference
+      channel
+      ordered_at
+      currency
+      subtotal {
+        amount
+        currency
+      }
+    }
+    customs_declaration {
+      contents_type
+      contents_explanation
+      incoterm
+      duties {
+        paid_by
+        account_number
+      }
+      landed_cost
+      import_broker {
+        name
+        company
+        email
+        phone
+      }
+    }
+  }
+}
+```
+
+```json Variables
+{
+  "id": "shp_1a2B3c",
+  "input": {
+    "ship_from": {
+      "name": "Example",
+      "company": "example",
+      "email": "ops@example.com",
+      "phone": "+447700900123"
+    },
+    "ship_to": {
+      "name": "Example",
+      "company": "example",
+      "email": "ops@example.com",
+      "phone": "+447700900123"
+    },
+    "return_to": {
+      "name": "Example",
+      "company": "example",
+      "email": "ops@example.com",
+      "phone": "+447700900123"
+    },
+    "ship_date": "2026-10-07",
+    "reference": "ORDER-1001",
+    "redact": true
+  }
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "updateShipment": {
+      "id": "shp_1a2B3c",
+      "object": "shipment",
+      "status": "draft",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "reference": "ORDER-1001",
+      "ship_date": "2026-10-07",
+      "ship_from": {
+        "name": "Example",
+        "company": "example",
+        "email": "ops@example.com",
+        "phone": "+447700900123",
+        "tax_ids": [
+          {
+            "type": "eori",
+            "value": "example",
+            "country": "GB"
+          }
+        ],
+        "address": {
+          "line1": "Downing St",
+          "street_number": "10",
+          "line2": "example",
+          "city": "London"
+        }
+      },
+      "ship_to": {
+        "name": "Example",
+        "company": "example",
+        "email": "ops@example.com",
+        "phone": "+447700900123",
+        "tax_ids": [
+          {
+            "type": "eori",
+            "value": "example",
+            "country": "GB"
+          }
+        ],
+        "address": {
+          "line1": "Downing St",
+          "street_number": "10",
+          "line2": "example",
+          "city": "London"
+        }
+      },
+      "return_to": {
+        "name": "Example",
+        "company": "example",
+        "email": "ops@example.com",
+        "phone": "+447700900123",
+        "tax_ids": [
+          {
+            "type": "eori",
+            "value": "example",
+            "country": "GB"
+          }
+        ],
+        "address": {
+          "line1": "Downing St",
+          "street_number": "10",
+          "line2": "example",
+          "city": "London"
+        }
+      },
+      "bill_to": {
+        "name": "Example",
+        "company": "example",
+        "email": "ops@example.com",
+        "phone": "+447700900123",
+        "tax_ids": [
+          {
+            "type": "eori",
+            "value": "example",
+            "country": "GB"
+          }
+        ],
+        "address": {
+          "line1": "Downing St",
+          "street_number": "10",
+          "line2": "example",
+          "city": "London"
+        }
+      },
+      "billing": {
+        "paid_by": "sender",
+        "account_number": "example"
+      },
+      "handling_units": [
+        {
+          "id": "obj_1a2B3c",
+          "type": "parcel",
+          "weight": {
+            "value": 1.5,
+            "unit": "g"
+          },
+          "dimensions": {
+            "length": 1.5,
+            "width": 1.5,
+            "height": 1.5,
+            "unit": "mm"
+          },
+          "packaging": "example",
+          "freight": {
+            "pallet_standard": "eur1",
+            "stackable": true,
+            "piece_count": 2,
+            "freight_class": "example"
+          }
+        }
+      ],
+      "order": {
+        "id": "obj_1a2B3c",
+        "reference": "ORDER-1001",
+        "channel": "example",
+        "ordered_at": "2026-10-07T09:00:00Z",
+        "currency": "usd",
+        "subtotal": {
+          "amount": 1299,
+          "currency": "usd"
+        }
+      },
+      "customs_declaration": {
+        "contents_type": "merchandise",
+        "contents_explanation": "example",
+        "incoterm": "DAP",
+        "duties": {
+          "paid_by": "sender",
+          "account_number": "example"
+        },
+        "landed_cost": "example",
+        "import_broker": {
+          "name": "Example",
+          "company": "example",
+          "email": "ops@example.com",
+          "phone": "+447700900123"
+        }
+      }
+    }
+  }
+}
+```
+
+</ResponseExample>

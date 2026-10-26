@@ -1,0 +1,133 @@
+---
+title: "packaging"
+description: "Retrieve a Packaging"
+---
+
+`query` · Module: **Catalog** · Requires `catalog:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+
+## Returns
+
+`Packaging!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `PackagingObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `code` | `String!` |
+| `name` | `String` |
+| `type` | `PackagingType!` |
+| `inner_dimensions` | `Dimensions` |
+| `outer_dimensions` | `Dimensions` |
+| `tare_weight` | `Weight` |
+| `max_weight` | `Weight` |
+| `flat_rate` | `Boolean` |
+| `status` | `PackagingStatus!` |
+| `version` | `Int` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query Packaging($id: ID!) {
+  packaging(id: $id) {
+    id
+    object
+    code
+    name
+    type
+    status
+    livemode
+    created
+    updated
+    inner_dimensions {
+      length
+      width
+      height
+      unit
+    }
+    outer_dimensions {
+      length
+      width
+      height
+      unit
+    }
+    tare_weight {
+      value
+      unit
+    }
+    max_weight {
+      value
+      unit
+    }
+    flat_rate
+    version
+  }
+}
+```
+
+```json Variables
+{
+  "id": "pkg_1a2B3c"
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "packaging": {
+      "id": "pkg_1a2B3c",
+      "object": "packaging",
+      "code": "dhl_express_worldwide",
+      "name": "Example",
+      "type": "envelope",
+      "status": "draft",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "inner_dimensions": {
+        "length": 1.5,
+        "width": 1.5,
+        "height": 1.5,
+        "unit": "mm"
+      },
+      "outer_dimensions": {
+        "length": 1.5,
+        "width": 1.5,
+        "height": 1.5,
+        "unit": "mm"
+      },
+      "tare_weight": {
+        "value": 1.5,
+        "unit": "g"
+      },
+      "max_weight": {
+        "value": 1.5,
+        "unit": "g"
+      },
+      "flat_rate": true,
+      "version": 3
+    }
+  }
+}
+```
+
+</ResponseExample>

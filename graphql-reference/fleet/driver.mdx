@@ -1,0 +1,169 @@
+---
+title: "driver"
+description: "Retrieve a Driver"
+---
+
+`query` · Module: **Fleet** · Requires `fleet:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+
+## Returns
+
+`Driver!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `DriverObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `contact` | `Contact!` |
+| `status` | `DriverStatus!` |
+| `home_facility` | `String` |
+| `qualifications` | `[DriverQualificationsItem!]` |
+| `skills` | `[String!]` |
+| `shifts` | `Recurrence` |
+| `availability_exceptions` | `[DriverAvailabilityExceptionsItem!]` |
+| `app_user` | `String` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query Driver($id: ID!) {
+  driver(id: $id) {
+    id
+    object
+    status
+    livemode
+    created
+    updated
+    contact {
+      name
+      company
+      email
+      phone
+      tax_ids {
+        type
+        value
+        country
+      }
+      address {
+        line1
+        street_number
+        line2
+        city
+      }
+    }
+    home_facility
+    qualifications {
+      type
+      class
+      expires_on
+    }
+    skills
+    shifts {
+      frequency
+      interval
+      days
+      day_of_month
+      times
+      timezone
+    }
+    availability_exceptions {
+      date
+      available
+      reason
+    }
+    app_user
+  }
+}
+```
+
+```json Variables
+{
+  "id": "drv_1a2B3c"
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "driver": {
+      "id": "drv_1a2B3c",
+      "object": "driver",
+      "status": "active",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "contact": {
+        "name": "Example",
+        "company": "example",
+        "email": "ops@example.com",
+        "phone": "+447700900123",
+        "tax_ids": [
+          {
+            "type": "eori",
+            "value": "example",
+            "country": "GB"
+          }
+        ],
+        "address": {
+          "line1": "Downing St",
+          "street_number": "10",
+          "line2": "example",
+          "city": "London"
+        }
+      },
+      "home_facility": "fac_lon_hub",
+      "qualifications": [
+        {
+          "type": "example",
+          "class": "example",
+          "expires_on": "2026-10-07"
+        }
+      ],
+      "skills": [
+        "example"
+      ],
+      "shifts": {
+        "frequency": "daily",
+        "interval": 2,
+        "days": [
+          "mon"
+        ],
+        "day_of_month": 2,
+        "times": [
+          "example"
+        ],
+        "timezone": "Europe/London"
+      },
+      "availability_exceptions": [
+        {
+          "date": "2026-10-07",
+          "available": true,
+          "reason": "example"
+        }
+      ],
+      "app_user": "example"
+    }
+  }
+}
+```
+
+</ResponseExample>

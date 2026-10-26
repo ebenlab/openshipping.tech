@@ -1,0 +1,196 @@
+---
+title: "createStorageLocation"
+description: "Create a storage location"
+---
+
+`mutation` · Module: **Inventory** · Requires `inventory:write`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `input` | `StorageLocationInput` | The fields for this operation. |
+
+### `StorageLocationInput` fields
+
+| Field | Type |
+|---|---|
+| `facility` | `String` |
+| `code` | `String` |
+| `path` | `StorageLocationInputPathInput` |
+| `type` | `StorageLocationInputType` |
+| `temperature_class` | `StorageLocationInputTemperatureClass` |
+| `capacity` | `StorageLocationInputCapacityInput` |
+| `restrictions` | `StorageLocationInputRestrictionsInput` |
+| `status` | `StorageLocationInputStatus` |
+| `barcode` | `String` |
+| `pick_sequence` | `Int` |
+| `user_metadata` | `UserMetadataInput` |
+
+## Returns
+
+`StorageLocation!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `StorageLocationObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `facility` | `String!` |
+| `code` | `String!` |
+| `path` | `StorageLocationPath` |
+| `type` | `StorageLocationType!` |
+| `temperature_class` | `StorageLocationTemperatureClass` |
+| `capacity` | `StorageLocationCapacity` |
+| `restrictions` | `StorageLocationRestrictions` |
+| `status` | `StorageLocationStatus` |
+| `barcode` | `String` |
+| `pick_sequence` | `Int` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+mutation CreateStorageLocation($input: StorageLocationInput!) {
+  createStorageLocation(input: $input) {
+    id
+    object
+    code
+    type
+    status
+    livemode
+    created
+    updated
+    facility
+    path {
+      zone
+      aisle
+      rack
+      shelf
+      bin
+    }
+    temperature_class
+    capacity {
+      volume {
+        value
+        unit
+      }
+      weight {
+        value
+        unit
+      }
+      units
+      pallets
+    }
+    restrictions {
+      hazmat_classes
+      owners
+      max_sku_count
+    }
+    barcode
+    pick_sequence
+  }
+}
+```
+
+```json Variables
+{
+  "input": {
+    "facility": "fac_lon_hub",
+    "code": "dhl_express_worldwide",
+    "path": {
+      "zone": "zone_gb_mainland",
+      "aisle": "example",
+      "rack": "example",
+      "shelf": "example"
+    },
+    "type": "pick_face",
+    "temperature_class": "ambient",
+    "capacity": {
+      "volume": {
+        "value": 1.5,
+        "unit": "kg"
+      },
+      "weight": {
+        "value": 1.5,
+        "unit": "g"
+      },
+      "units": 2,
+      "pallets": 2
+    },
+    "restrictions": {
+      "hazmat_classes": [
+        "example"
+      ],
+      "owners": [
+        "example"
+      ],
+      "max_sku_count": 2
+    },
+    "status": "active"
+  }
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "createStorageLocation": {
+      "id": "loc_1a2B3c",
+      "object": "storage_location",
+      "code": "dhl_express_worldwide",
+      "type": "pick_face",
+      "status": "active",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "facility": "fac_lon_hub",
+      "path": {
+        "zone": "zone_gb_mainland",
+        "aisle": "example",
+        "rack": "example",
+        "shelf": "example",
+        "bin": "example"
+      },
+      "temperature_class": "ambient",
+      "capacity": {
+        "volume": {
+          "value": 1.5,
+          "unit": "kg"
+        },
+        "weight": {
+          "value": 1.5,
+          "unit": "g"
+        },
+        "units": 2,
+        "pallets": 2
+      },
+      "restrictions": {
+        "hazmat_classes": [
+          "example"
+        ],
+        "owners": [
+          "example"
+        ],
+        "max_sku_count": 2
+      },
+      "barcode": "LOC-A12-03-B",
+      "pick_sequence": 2
+    }
+  }
+}
+```
+
+</ResponseExample>

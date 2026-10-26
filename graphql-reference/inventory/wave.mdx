@@ -1,0 +1,88 @@
+---
+title: "wave"
+description: "Retrieve a Wave"
+---
+
+`query` · Module: **Inventory** · Requires `inventory:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+
+## Returns
+
+`Wave!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `WaveObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `facility` | `String!` |
+| `strategy` | `WaveStrategy` |
+| `status` | `WaveStatus!` |
+| `fulfillment_orders` | `[String!]` |
+| `pick_list` | `String` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query Wave($id: ID!) {
+  wave(id: $id) {
+    id
+    object
+    status
+    livemode
+    created
+    updated
+    facility
+    strategy
+    fulfillment_orders
+    pick_list
+  }
+}
+```
+
+```json Variables
+{
+  "id": "wave_1a2B3c"
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "wave": {
+      "id": "wave_1a2B3c",
+      "object": "wave",
+      "status": "released",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "facility": "fac_lon_hub",
+      "strategy": "zone",
+      "fulfillment_orders": [
+        "example"
+      ],
+      "pick_list": "example"
+    }
+  }
+}
+```
+
+</ResponseExample>

@@ -1,0 +1,69 @@
+---
+title: "certificateDevice"
+description: "Issue a device certificate"
+---
+
+`mutation` · Module: **IoT** · Requires `iot:write`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+| `input` | `CertificateDeviceInput` | The fields for this operation. |
+
+### `CertificateDeviceInput` fields
+
+| Field | Type |
+|---|---|
+| `csr` | `String` |
+
+## Returns
+
+`CertificateDeviceResult!`
+
+| Field | Type |
+|---|---|
+| `certificate` | `String` |
+| `expires_at` | `Int` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+mutation CertificateDevice($id: ID!, $input: CertificateDeviceInput!) {
+  certificateDevice(id: $id, input: $input) {
+    certificate
+    expires_at
+  }
+}
+```
+
+```json Variables
+{
+  "id": "obj_1a2B3c",
+  "input": {
+    "csr": "example"
+  }
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "certificateDevice": {
+      "certificate": "example",
+      "expires_at": 1791302400
+    }
+  }
+}
+```
+
+</ResponseExample>

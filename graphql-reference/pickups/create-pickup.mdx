@@ -1,0 +1,191 @@
+---
+title: "createPickup"
+description: "Book a pickup"
+---
+
+`mutation` · Module: **Pickups** · Requires `pickups:write` · `Idempotency-Key` header required · **Spends money**: confirm before calling
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `input` | `PickupCreate` | The fields for this operation. |
+
+### `PickupCreate` fields
+
+| Field | Type |
+|---|---|
+| `connection` | `String` |
+| `contact` | `ContactInput` |
+| `date` | `String` |
+| `window` | `PickupWindowInput` |
+| `shipments` | `[String!]` |
+| `handling_unit_count` | `Int` |
+| `total_weight` | `WeightInput` |
+| `location` | `PickupCreateLocation` |
+| `instructions` | `String` |
+| `carrier_configs` | `CarrierConfigsInput` |
+| `user_metadata` | `UserMetadataInput` |
+
+## Returns
+
+`Pickup!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `PickupObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `status` | `PickupStatus!` |
+| `connection` | `String!` |
+| `carrier` | `String` |
+| `confirmation_number` | `String` |
+| `contact` | `Contact` |
+| `date` | `String!` |
+| `timezone` | `String` |
+| `window` | `PickupWindow!` |
+| `location` | `PickupLocation` |
+| `instructions` | `String` |
+| `shipments` | `[String!]` |
+| `manifest` | `Manifest` |
+| `handling_unit_count` | `Int` |
+| `total_weight` | `Weight` |
+| `type` | `PickupType` |
+| `schedule` | `PickupSchedule` |
+| `amount` | `Money` |
+| `documents` | `[Document!]` |
+| `cancellation` | `PickupCancellation` |
+| `messages` | `[Message!]` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+mutation CreatePickup($input: PickupCreate!) {
+  createPickup(input: $input) {
+    id
+    object
+    status
+    type
+    livemode
+    created
+    updated
+    connection
+    carrier
+    confirmation_number
+    contact {
+      name
+      company
+      email
+      phone
+      tax_ids {
+        type
+        value
+        country
+      }
+      address {
+        line1
+        street_number
+        line2
+        city
+      }
+    }
+    date
+    timezone
+    window {
+      ready_at
+      close_at
+    }
+    location
+    instructions
+  }
+}
+```
+
+```json Variables
+{
+  "input": {
+    "connection": "conn_9f8e",
+    "contact": {
+      "name": "Example",
+      "company": "example",
+      "email": "ops@example.com",
+      "phone": "+447700900123"
+    },
+    "date": "2026-10-07",
+    "window": {
+      "ready_at": "15:00",
+      "close_at": "18:00"
+    },
+    "shipments": [
+      "example"
+    ],
+    "handling_unit_count": 2,
+    "total_weight": {
+      "value": 1.5,
+      "unit": "g"
+    },
+    "location": "front_door"
+  }
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "createPickup": {
+      "id": "pck_1a2B3c",
+      "object": "pickup",
+      "status": "scheduled",
+      "type": "one_time",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "connection": "conn_9f8e",
+      "carrier": "dhl_express",
+      "confirmation_number": "example",
+      "contact": {
+        "name": "Example",
+        "company": "example",
+        "email": "ops@example.com",
+        "phone": "+447700900123",
+        "tax_ids": [
+          {
+            "type": "eori",
+            "value": "example",
+            "country": "GB"
+          }
+        ],
+        "address": {
+          "line1": "Downing St",
+          "street_number": "10",
+          "line2": "example",
+          "city": "London"
+        }
+      },
+      "date": "2026-10-07",
+      "timezone": "Europe/London",
+      "window": {
+        "ready_at": "15:00",
+        "close_at": "18:00"
+      },
+      "location": "front_door",
+      "instructions": "example"
+    }
+  }
+}
+```
+
+</ResponseExample>

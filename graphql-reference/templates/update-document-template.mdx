@@ -1,0 +1,151 @@
+---
+title: "updateDocumentTemplate"
+description: "Update a DocumentTemplate"
+---
+
+`mutation` · Module: **Templates** · Requires `templates:write`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+| `input` | `DocumentTemplateInput` | The fields for this operation. |
+
+### `DocumentTemplateInput` fields
+
+| Field | Type |
+|---|---|
+| `name` | `String` |
+| `slug` | `String` |
+| `type` | `String` |
+| `related_object` | `String` |
+| `engine` | `String` |
+| `source` | `String` |
+| `assets` | `JSON` |
+| `page` | `JSON` |
+| `formats` | `[String!]` |
+| `locale` | `String` |
+| `triggers` | `[JSON!]` |
+| `attach_to` | `String` |
+| `default_for` | `[String!]` |
+| `user_metadata` | `UserMetadataInput` |
+
+## Returns
+
+`DocumentTemplate!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `DocumentTemplateObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `name` | `String!` |
+| `slug` | `String` |
+| `type` | `String!` |
+| `status` | `DocumentTemplateStatus!` |
+| `version` | `Int` |
+| `related_object` | `DocumentTemplateRelatedObject!` |
+| `engine` | `DocumentTemplateEngine!` |
+| `source` | `String!` |
+| `assets` | `JSON` |
+| `page` | `DocumentTemplatePage` |
+| `formats` | `[DocumentTemplateFormatsItem!]` |
+| `locale` | `String` |
+| `triggers` | `[DocumentTemplateTriggersItem!]` |
+| `attach_to` | `DocumentTemplateAttachTo` |
+| `default_for` | `[String!]` |
+| `preview` | `DocumentTemplatePreview` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+mutation UpdateDocumentTemplate($id: ID!, $input: DocumentTemplateInput!) {
+  updateDocumentTemplate(id: $id, input: $input) {
+    id
+    object
+    name
+    type
+    status
+    livemode
+    created
+    updated
+    slug
+    version
+    related_object
+    engine
+    source
+    page {
+      size
+      orientation
+      margins_mm
+      dpi
+    }
+    formats
+    locale
+  }
+}
+```
+
+```json Variables
+{
+  "id": "dtpl_1a2B3c",
+  "input": {
+    "name": "Example",
+    "slug": "example",
+    "type": "example",
+    "related_object": "example",
+    "engine": "example",
+    "source": "api",
+    "assets": {},
+    "page": {}
+  }
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "updateDocumentTemplate": {
+      "id": "dtpl_1a2B3c",
+      "object": "document_template",
+      "name": "Example",
+      "type": "example",
+      "status": "draft",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "slug": "example",
+      "version": 3,
+      "related_object": "shipment",
+      "engine": "liquid",
+      "source": "api",
+      "page": {
+        "size": "4x6",
+        "orientation": "portrait",
+        "margins_mm": 1.5,
+        "dpi": 2
+      },
+      "formats": [
+        "pdf"
+      ],
+      "locale": "example"
+    }
+  }
+}
+```
+
+</ResponseExample>

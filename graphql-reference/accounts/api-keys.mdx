@@ -1,0 +1,103 @@
+---
+title: "apiKeys"
+description: "List api keys"
+---
+
+`query` · Module: **Accounts** · Requires `accounts:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `mode` | `String` | Filter by mode. |
+| `type` | `String` | Filter by type. |
+| `createdGte` | `Int` | Filter by created gte. |
+| `createdLte` | `Int` | Filter by created lte. |
+| `limit` | `Int` | Page size, 1–100 (default 10). |
+| `startingAfter` | `ID` | Cursor: return objects after this ID. |
+| `endingBefore` | `ID` | Cursor: return objects before this ID. |
+
+## Returns
+
+`ApiKeyList!`
+
+| Field | Type |
+|---|---|
+| `data` | `[ApiKey!]!` |
+| `has_more` | `Boolean` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query ApiKeys($limit: Int) {
+  apiKeys(limit: $limit) {
+    data {
+      id
+      object
+      name
+      type
+      livemode
+      created
+      updated
+      account
+      mode
+      scopes
+      prefix
+      last4
+      secret
+      created_by
+      last_used_at
+      expires_at
+    }
+    has_more
+  }
+}
+```
+
+```json Variables
+{
+  "limit": 10
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "apiKeys": {
+      "data": [
+        {
+          "id": "key_1a2B3c",
+          "object": "api_key",
+          "name": "Example",
+          "type": "secret",
+          "livemode": true,
+          "created": 1791302400,
+          "updated": 1791302400,
+          "account": "acct_ada",
+          "mode": "test",
+          "scopes": [
+            "example"
+          ],
+          "prefix": "example",
+          "last4": "example",
+          "secret": "example",
+          "created_by": "example",
+          "last_used_at": 1791302400,
+          "expires_at": 1791302400
+        }
+      ],
+      "has_more": true
+    }
+  }
+}
+```
+
+</ResponseExample>

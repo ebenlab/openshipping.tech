@@ -1,0 +1,127 @@
+---
+title: "deactivateDevice"
+description: "Deactivate a device"
+---
+
+`mutation` · Module: **IoT** · Requires `iot:write`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+
+## Returns
+
+`Device!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `DeviceObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `type` | `DeviceType!` |
+| `status` | `DeviceStatus!` |
+| `name` | `String` |
+| `manufacturer` | `String` |
+| `model` | `String` |
+| `serial_number` | `String` |
+| `attached_to` | `DeviceAttachedTo` |
+| `capabilities` | `[String!]` |
+| `authentication` | `DeviceAuthentication` |
+| `default_location` | `DeviceDefaultLocation` |
+| `last_seen_at` | `Int` |
+| `firmware` | `String` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+mutation DeactivateDevice($id: ID!) {
+  deactivateDevice(id: $id) {
+    id
+    object
+    type
+    status
+    name
+    livemode
+    created
+    updated
+    manufacturer
+    model
+    serial_number
+    attached_to {
+      facility
+      vehicle
+      handling_unit
+    }
+    capabilities
+    authentication {
+      method
+      certificate_fingerprint
+      expires_at
+    }
+    default_location {
+      facility
+    }
+    last_seen_at
+  }
+}
+```
+
+```json Variables
+{
+  "id": "dev_1a2B3c"
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "deactivateDevice": {
+      "id": "dev_1a2B3c",
+      "object": "device",
+      "type": "scanner",
+      "status": "active",
+      "name": "Example",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "manufacturer": "example",
+      "model": "example",
+      "serial_number": "example",
+      "attached_to": {
+        "facility": "fac_lon_hub",
+        "vehicle": "veh_van07",
+        "handling_unit": "example"
+      },
+      "capabilities": [
+        "example"
+      ],
+      "authentication": {
+        "method": "mtls",
+        "certificate_fingerprint": "example",
+        "expires_at": 1791302400
+      },
+      "default_location": {
+        "facility": "fac_lon_hub"
+      },
+      "last_seen_at": 1791302400
+    }
+  }
+}
+```
+
+</ResponseExample>

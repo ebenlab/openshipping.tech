@@ -1,0 +1,136 @@
+---
+title: "complianceScreening"
+description: "Retrieve a ComplianceScreening"
+---
+
+`query` · Module: **Trade** · Requires `trade:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+
+## Returns
+
+`ComplianceScreening!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `ComplianceScreeningObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `decision` | `ComplianceScreeningDecision!` |
+| `parties` | `[ComplianceScreeningPartiesItem!]` |
+| `items` | `[ComplianceScreeningItemsItem!]` |
+| `embargo` | `ComplianceScreeningEmbargo` |
+| `lists_version` | `String` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query ComplianceScreening($id: ID!) {
+  complianceScreening(id: $id) {
+    id
+    object
+    livemode
+    created
+    updated
+    decision
+    parties {
+      role
+      decision
+      matches {
+        name
+        list
+        score
+        entry_id
+      }
+    }
+    items {
+      index
+      decision
+      restrictions {
+        code
+        country
+        level
+        agency
+      }
+    }
+    embargo {
+      country
+      program
+    }
+    lists_version
+  }
+}
+```
+
+```json Variables
+{
+  "id": "scr_1a2B3c"
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "complianceScreening": {
+      "id": "scr_1a2B3c",
+      "object": "compliance_screening",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "decision": "clear",
+      "parties": [
+        {
+          "role": "example",
+          "decision": "clear",
+          "matches": [
+            {
+              "name": "Example",
+              "list": "example",
+              "score": 1.5,
+              "entry_id": "example"
+            }
+          ]
+        }
+      ],
+      "items": [
+        {
+          "index": 2,
+          "decision": "clear",
+          "restrictions": [
+            {
+              "code": "dhl_express_worldwide",
+              "country": "GB",
+              "level": "prohibited",
+              "agency": "example"
+            }
+          ]
+        }
+      ],
+      "embargo": {
+        "country": "GB",
+        "program": "example"
+      },
+      "lists_version": "example"
+    }
+  }
+}
+```
+
+</ResponseExample>

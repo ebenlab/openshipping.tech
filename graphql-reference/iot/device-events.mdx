@@ -1,0 +1,117 @@
+---
+title: "deviceEvents"
+description: "List device events"
+---
+
+`query` · Module: **IoT** · Requires `iot:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `device` | `String` | Filter by device. |
+| `status` | `String` | Filter by status. |
+| `limit` | `Int` | Page size, 1–100 (default 10). |
+| `startingAfter` | `ID` | Cursor: return objects after this ID. |
+| `endingBefore` | `ID` | Cursor: return objects before this ID. |
+
+## Returns
+
+`DeviceEventList!`
+
+| Field | Type |
+|---|---|
+| `data` | `[DeviceEvent!]!` |
+| `has_more` | `Boolean` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query DeviceEvents($limit: Int) {
+  deviceEvents(limit: $limit) {
+    data {
+      id
+      type
+      device
+      at
+      barcode {
+        symbology
+        value
+      }
+      parent
+      action
+      reason
+      location {
+        facility
+        zone
+      }
+      latitude
+      longitude
+      speed {
+        value
+        unit
+      }
+      geofence
+      transition
+      slot
+      pin_issued
+    }
+    has_more
+  }
+}
+```
+
+```json Variables
+{
+  "limit": 10
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "deviceEvents": {
+      "data": [
+        {
+          "id": "obj_1a2B3c",
+          "type": "scan",
+          "device": "example",
+          "at": "example",
+          "barcode": {
+            "symbology": "example",
+            "value": "example"
+          },
+          "parent": "example",
+          "action": "inbound",
+          "reason": "example",
+          "location": {
+            "facility": "fac_lon_hub",
+            "zone": "zone_gb_mainland"
+          },
+          "latitude": 51.5074,
+          "longitude": -0.1278,
+          "speed": {
+            "value": 1.5,
+            "unit": "kg"
+          },
+          "geofence": "example",
+          "transition": "enter",
+          "slot": "example",
+          "pin_issued": true
+        }
+      ],
+      "has_more": true
+    }
+  }
+}
+```
+
+</ResponseExample>

@@ -1,0 +1,761 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>html,body{margin:0}[hidden]{display:none!important}</style>
+<title>Logistics Industry Map</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: header with view switcher and filters; stage = active view (left) + detail panel (right); stacks on narrow screens. */
+:root {
+  --bg: #f4f1ea; --ink: #112220; --primary: #134e3a; --ok: #6fb89a; --warn: #d4922a; --bad: #c4561e;
+  --muted: #4d5f5b; --line: rgba(17, 34, 32, 0.16); --line-strong: rgba(19, 78, 58, 0.6);
+  --panel: #fbfaf6; --chip: rgba(19, 78, 58, 0.08); --node-party: #fbfaf6; --node-module: #e6ece6;
+  --node-object: #134e3a; --node-object-ink: #f4f1ea; --focus: #134e3a; --plane: rgba(19, 78, 58, 0.05);
+  --display: "Lora", Georgia, "Times New Roman", serif;
+  --sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1c1a; --ink: #f4f1ea; --primary: #6fb89a; --ok: #6fb89a; --warn: #e0a54a; --bad: #e07a4a;
+    --muted: #a9b8b3; --line: rgba(244, 241, 234, 0.14); --line-strong: rgba(111, 184, 154, 0.7);
+    --panel: #142624; --chip: rgba(111, 184, 154, 0.12); --node-party: #183230; --node-module: #1f3d38;
+    --node-object: #6fb89a; --node-object-ink: #0f1c1a; --focus: #6fb89a; --plane: rgba(111, 184, 154, 0.06); color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1c1a; --ink: #f4f1ea; --primary: #6fb89a; --ok: #6fb89a; --warn: #e0a54a; --bad: #e07a4a;
+  --muted: #a9b8b3; --line: rgba(244, 241, 234, 0.14); --line-strong: rgba(111, 184, 154, 0.7);
+  --panel: #142624; --chip: rgba(111, 184, 154, 0.12); --node-party: #183230; --node-module: #1f3d38;
+  --node-object: #6fb89a; --node-object-ink: #0f1c1a; --focus: #6fb89a; --plane: rgba(111, 184, 154, 0.06); color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 14px; line-height: 1.5; }
+.wrap { padding-inline: clamp(16px, 3vw, 36px); padding-block: 20px 28px; max-width: 1480px; margin: 0 auto; display: grid; gap: 14px; }
+header { display: grid; gap: 10px; }
+.eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--primary); }
+h1 { font-family: var(--display); font-weight: 600; font-size: clamp(26px, 3.4vw, 40px); line-height: 1.1; margin: 0; text-wrap: balance; }
+.lede { margin: 0; max-width: 72ch; color: var(--muted); }
+.views { display: flex; flex-wrap: wrap; gap: 0; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; width: fit-content; max-width: 100%; }
+.views button { border: 0; border-right: 1px solid var(--line); background: var(--panel); padding: 8px 14px; cursor: pointer; display: grid; text-align: left; gap: 0; min-width: 0; }
+.views button:last-child { border-right: 0; }
+.views button b { font-weight: 600; font-size: 13.5px; }
+.views button small { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.views button[aria-pressed="true"] { background: var(--primary); color: var(--bg); }
+.views button[aria-pressed="true"] small { color: var(--bg); opacity: 0.8; }
+.controls { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; }
+.group { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.group > .label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-right: 2px; }
+button, select, input { font: inherit; color: inherit; }
+.chip { border: 1px solid var(--line); background: transparent; padding: 4px 10px; border-radius: 999px; cursor: pointer; font-size: 13px; }
+.chip[aria-pressed="true"] { background: var(--primary); color: var(--bg); border-color: var(--primary); }
+.btn { border: 1px solid var(--primary); background: var(--primary); color: var(--bg); padding: 6px 12px; border-radius: 6px; cursor: pointer; font-weight: 500; }
+.btn.ghost { background: transparent; color: var(--primary); }
+select, input[type="search"], input[type="url"] { border: 1px solid var(--line); background: var(--panel); padding: 5px 8px; border-radius: 6px; min-width: 0; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.stage { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 16px; align-items: start; }
+@media (max-width: 1180px) { .stage { grid-template-columns: minmax(0, 1fr); } }
+.viewport { position: relative; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); overflow: hidden; min-width: 0; min-height: 420px; }
+.viewport svg { display: block; width: 100%; height: auto; user-select: none; }
+.viewport svg.grab { cursor: grab; touch-action: none; }
+.viewport svg.grab.dragging { cursor: grabbing; }
+.hint { position: absolute; right: 12px; top: 10px; font-size: 12px; color: var(--muted); pointer-events: none; background: var(--panel); padding: 0 4px; border-radius: 4px; }
+.legend { position: absolute; left: 12px; bottom: 10px; display: flex; flex-wrap: wrap; gap: 10px; font-size: 12px; color: var(--muted); pointer-events: none; background: var(--panel); padding: 2px 6px; border-radius: 4px; }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.sw { width: 12px; height: 12px; display: inline-block; border: 1.5px solid var(--primary); }
+.sw.party { border-radius: 50%; background: var(--node-party); }
+.sw.module { border-radius: 3px; background: var(--node-module); }
+.sw.object { border-radius: 2px; background: var(--node-object); transform: rotate(45deg); width: 10px; height: 10px; }
+.fallback { padding: 40px 20px; text-align: center; color: var(--muted); }
+/* shared SVG */
+.ring { fill: none; stroke: var(--line); stroke-dasharray: 2 5; }
+.edge { fill: none; stroke: var(--line); stroke-width: 1.1; transition: stroke 0.2s, opacity 0.2s; }
+.edge.on { stroke: var(--line-strong); stroke-width: 1.9; }
+.edge.dim { opacity: 0.15; }
+.node { cursor: pointer; }
+.node .shape { stroke: var(--primary); stroke-width: 1.5; }
+.node.party .shape { fill: var(--node-party); }
+.node.module .shape { fill: var(--node-module); }
+.node.object .shape, .node.center .shape { fill: var(--node-object); }
+.node.center .shape { stroke-width: 2.5; }
+.node text { font-family: var(--display); fill: var(--ink); pointer-events: none; }
+.node text.inside { fill: var(--node-object-ink); font-family: var(--sans); font-weight: 600; }
+.node.sel .shape, .node:hover .shape, .node:focus-visible .shape { stroke-width: 3.2; }
+.node.dim { opacity: 0.25; }
+.node.hit .shape { stroke-width: 3.6; }
+.node.state-ok .shape { stroke: var(--ok); stroke-width: 4; }
+.node.state-warn .shape { stroke: var(--warn); stroke-width: 4; }
+.node.state-bad .shape { stroke: var(--bad); stroke-width: 4; }
+.token { fill: var(--primary); stroke: var(--bg); stroke-width: 2; }
+.token.warn { fill: var(--warn); } .token.bad { fill: var(--bad); }
+.lane-head { font-family: var(--mono); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; fill: var(--muted); }
+.lane-title { font-family: var(--display); font-size: 19px; font-weight: 600; fill: var(--ink); }
+.band-label { font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; fill: var(--muted); }
+.band { fill: var(--plane); }
+.colsep { stroke: var(--line); stroke-dasharray: 3 6; }
+/* 3D */
+.labels3d { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.labels3d button { position: absolute; transform: translate(-50%, 0); pointer-events: auto; border: 0; background: transparent; padding: 1px 4px; border-radius: 4px; font-family: var(--display); color: var(--ink); cursor: pointer; white-space: nowrap; line-height: 1.2; }
+.labels3d button.sel { background: var(--primary); color: var(--bg); }
+.labels3d button.dim { opacity: 0.25; }
+.labels3d button.state-ok { box-shadow: inset 0 -2px 0 var(--ok); } .labels3d button.state-warn { box-shadow: inset 0 -2px 0 var(--warn); } .labels3d button.state-bad { box-shadow: inset 0 -2px 0 var(--bad); }
+/* matrix */
+.matrix { overflow: auto; max-height: 78vh; }
+.matrix table { border-collapse: separate; border-spacing: 0; font-size: 13px; }
+.matrix th, .matrix td { padding: 0; }
+.matrix thead th { position: sticky; top: 0; background: var(--panel); z-index: 2; height: 150px; vertical-align: bottom; }
+.matrix thead th .rot { writing-mode: vertical-rl; transform: rotate(180deg); font-family: var(--display); font-weight: 500; padding: 8px 6px; white-space: nowrap; cursor: pointer; border: 0; background: transparent; }
+.matrix thead th:first-child { left: 0; z-index: 3; }
+.matrix tbody th { position: sticky; left: 0; background: var(--panel); z-index: 1; text-align: left; font-weight: 400; border-bottom: 1px solid var(--line); }
+.matrix tbody th button { border: 0; background: transparent; cursor: pointer; padding: 6px 10px; font-family: var(--display); text-align: left; width: 100%; white-space: nowrap; }
+.matrix tr.grp th { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding: 10px 10px 4px; background: var(--panel); }
+.matrix td { width: 34px; min-width: 34px; height: 32px; text-align: center; border-bottom: 1px solid var(--line); border-left: 1px solid var(--line); }
+.matrix .dot { display: inline-block; width: 12px; height: 12px; border-radius: 50%; background: var(--primary); }
+.matrix .dot.via { background: transparent; border: 2px solid var(--line-strong); }
+.matrix tr.sel th button, .matrix th.colsel .rot { color: var(--primary); font-weight: 600; }
+.matrix tr.sel td, .matrix td.colsel { background: var(--chip); }
+.matrix tr.dim { opacity: 0.3; }
+.matrix tr.state-ok th button { box-shadow: inset 3px 0 0 var(--ok); } .matrix tr.state-warn th button { box-shadow: inset 3px 0 0 var(--warn); } .matrix tr.state-bad th button { box-shadow: inset 3px 0 0 var(--bad); }
+.mlegend { display: flex; gap: 14px; padding: 10px 12px; font-size: 12px; color: var(--muted); border-top: 1px solid var(--line); }
+.mlegend span { display: inline-flex; gap: 6px; align-items: center; }
+/* panel */
+aside { border: 1px solid var(--line); border-radius: 10px; background: var(--panel); min-width: 0; display: grid; }
+.ptitle { padding: 14px 16px 6px; display: grid; gap: 4px; }
+.ptitle .kind { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.ptitle h2 { font-family: var(--display); font-size: 22px; font-weight: 600; margin: 0; line-height: 1.2; }
+.modes { display: flex; flex-wrap: wrap; gap: 4px; }
+.tag { font-size: 11.5px; padding: 1px 8px; border-radius: 999px; background: var(--chip); color: var(--primary); font-weight: 500; }
+[role="tablist"] { display: flex; gap: 2px; padding: 8px 12px 0; border-bottom: 1px solid var(--line); overflow-x: auto; }
+[role="tab"] { border: 0; background: transparent; padding: 8px 10px; cursor: pointer; color: var(--muted); border-bottom: 2px solid transparent; font-weight: 500; white-space: nowrap; }
+[role="tab"][aria-selected="true"] { color: var(--ink); border-bottom-color: var(--primary); }
+.tabpanel { padding: 14px 16px 16px; display: grid; gap: 10px; min-width: 0; }
+.tabpanel p { margin: 0; }
+.value { border-left: 2px solid var(--primary); padding-left: 10px; font-family: var(--display); font-style: italic; }
+.list { display: grid; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.list code, .code { font-family: var(--mono); font-size: 12.5px; background: var(--chip); padding: 2px 6px; border-radius: 4px; overflow-wrap: anywhere; }
+.objchips { display: flex; flex-wrap: wrap; gap: 6px; }
+.objchips button { border: 1px solid var(--line); background: transparent; border-radius: 6px; padding: 3px 8px; cursor: pointer; font-family: var(--mono); font-size: 12.5px; }
+.links { display: grid; gap: 8px; }
+.links a { display: flex; justify-content: space-between; gap: 8px; color: var(--primary); text-decoration: none; border: 1px solid var(--line); border-radius: 6px; padding: 8px 10px; }
+.links a:hover { border-color: var(--primary); }
+.links a span:last-child { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.sim { border-top: 1px solid var(--line); padding: 12px 16px 16px; display: grid; gap: 8px; }
+.sim h3 { margin: 0; font-family: var(--display); font-size: 16px; font-weight: 600; }
+.simrow { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.simrow select { flex: 1 1 180px; }
+.log { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; max-height: 260px; overflow-y: auto; font-size: 13px; }
+.log li { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 6px; align-items: start; }
+.log .dot { width: 10px; height: 10px; border-radius: 50%; margin-top: 5px; background: var(--primary); justify-self: center; }
+.log .dot.ok { background: var(--ok); } .log .dot.warn { background: var(--warn); } .log .dot.bad { background: var(--bad); }
+.log .ev { font-family: var(--mono); font-size: 12px; color: var(--primary); }
+.log .who { color: var(--muted); font-size: 12px; }
+.log li.future { opacity: 0.38; }
+footer { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; color: var(--muted); font-size: 12.5px; }
+footer label { display: inline-flex; gap: 6px; align-items: center; }
+footer input { width: min(320px, 70vw); }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+@media (prefers-reduced-motion: reduce) { .edge { transition: none; } }
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Shipping Internals · Open Logistics Specification 0.1</div>
+    <h1>The logistics industry, as one network of parties and objects</h1>
+    <p class="lede">Twenty-two parties, twelve platform modules and the canonical objects they read and write, shown three ways. Select anything to see what it owns, the operations it performs and where the spec defines them. Run a scenario to watch one shipment move through the network.</p>
+    <div class="views" role="group" aria-label="Visualization">
+      <button data-view="orbit" aria-pressed="true"><small>2.5D</small><b>Orbit</b></button>
+      <button data-view="lanes" aria-pressed="false"><small>Flat</small><b>Journey lanes</b></button>
+      <button data-view="matrix" aria-pressed="false"><small>Flat</small><b>Matrix</b></button>
+    </div>
+    <div class="controls">
+      <div class="group" role="group" aria-label="Filter by mode">
+        <span class="label">Mode</span>
+        <button class="chip" data-mode="all" aria-pressed="true">All</button>
+        <button class="chip" data-mode="universal" aria-pressed="false">Universal</button>
+        <button class="chip" data-mode="carrier" aria-pressed="false">Carrier</button>
+        <button class="chip" data-mode="network" aria-pressed="false">Network</button>
+        <button class="chip" data-mode="3pl" aria-pressed="false">3PL</button>
+        <button class="chip" data-mode="fleet" aria-pressed="false">Fleet</button>
+        <button class="chip" data-mode="data" aria-pressed="false">Data Network</button>
+      </div>
+      <div class="group">
+        <label class="sr" for="search">Find a party, module or object</label>
+        <input type="search" id="search" placeholder="Find: airline, ULD, claims…" autocomplete="off">
+      </div>
+    </div>
+  </header>
+
+  <div class="stage">
+    <div class="viewport" id="viewport"></div>
+    <aside aria-live="polite">
+      <div class="ptitle">
+        <span class="kind" id="p-kind">Canonical object</span>
+        <h2 id="p-name">Shipment</h2>
+        <div class="modes" id="p-modes"></div>
+      </div>
+      <div role="tablist" aria-label="Details">
+        <button role="tab" id="tab-overview" aria-controls="panel" aria-selected="true">Overview</button>
+        <button role="tab" id="tab-objects" aria-controls="panel" aria-selected="false">Objects</button>
+        <button role="tab" id="tab-ops" aria-controls="panel" aria-selected="false">Operations</button>
+        <button role="tab" id="tab-specs" aria-controls="panel" aria-selected="false">Specs &amp; guides</button>
+      </div>
+      <div class="tabpanel" id="panel" role="tabpanel" tabindex="0"></div>
+      <div class="sim">
+        <h3>Simulate a shipment</h3>
+        <div class="simrow">
+          <label class="sr" for="scenario">Scenario</label>
+          <select id="scenario"></select>
+          <button class="btn" id="play">Play</button>
+          <button class="btn ghost" id="step">Step</button>
+          <button class="btn ghost" id="reset">Reset</button>
+        </div>
+        <p id="sim-summary" style="margin:0;color:var(--muted);font-size:13px"></p>
+        <ol class="log" id="log"></ol>
+      </div>
+    </aside>
+  </div>
+
+  <footer>
+    <label for="docs-base">Spec site</label>
+    <input type="url" id="docs-base" value="" placeholder="https://shippinginternals.dev" spellcheck="false">
+    <span>Spec links open in a new tab. For a local preview, point this at your <span class="code">mint dev</span> address.</span>
+  </footer>
+</div>
+
+<script>
+(() => {
+  // ---------- Data ----------
+  const CH = {
+    "00": ["Conventions", "spec/00-conventions"], "01": ["Core objects", "spec/01-core-objects"], "02": ["Live rates", "spec/02-rates"],
+    "03": ["Shipments & labels", "spec/03-shipments"], "04": ["Pickups", "spec/04-pickups"], "05": ["Manifests & end of day", "spec/05-manifests"],
+    "06": ["Customs documents", "spec/06-documents"], "07": ["Tracking", "spec/07-tracking"], "08": ["Webhooks & events", "spec/08-webhooks"],
+    "09": ["Carriers, connections & apps", "spec/09-connections"], "12": ["Modes", "spec/12-modes"], "13": ["Trade engine", "spec/13-trade"],
+    "14": ["Service catalog", "spec/14-catalog"], "15": ["Rate sheets & pricing", "spec/15-pricing"], "16": ["Routes", "spec/16-routes"],
+    "17": ["Fleet", "spec/17-fleet"], "18": ["Shipment injection", "spec/18-injection"], "19": ["Merchants & identity", "spec/19-accounts"],
+    "20": ["Products", "spec/20-products"], "21": ["Carrier & LSP networks", "spec/21-network"], "22": ["IoT & devices", "spec/22-iot"],
+    "23": ["Logistics data network", "spec/23-data-network"], "24": ["Consolidation & transport units", "spec/24-consolidation"],
+    "25": ["Document templates & generation", "spec/25-documents-generation"], "26": ["Integrations & interfaces", "spec/26-integrations"],
+    "27": ["Background jobs", "spec/27-jobs"], "28": ["Billing & payments", "spec/28-billing"], "29": ["Inventory & fulfillment", "spec/29-inventory"], "B": ["Standards mapping", "spec/B-standards"], "AR": ["Architecture", "spec/architecture"],
+    "AG": ["shipping.md agent guide", "shipping"], "GQL": ["GraphQL Interface", "spec/graphql"]
+  };
+  const ALL = ["universal", "carrier", "network", "3pl", "fleet", "data"];
+
+  const N = [
+    // center
+    { id: "shipment", kind: "center", label: "Shipment", modes: ALL, ring: 0,
+      summary: "The record of moving handling units from one party to another. Two lifecycles live on it: status (commercial) and tracking.status (physical).",
+      value: "Every party in the industry reads or writes this one object, under the access its role allows.",
+      objects: ["handling_unit", "customs", "tracker", "rate_quote", "document"], ops: ["POST /v1/shipments", "POST /v1/shipments/{id}/purchase", "POST /v1/shipments/{id}/void", "GET /v1/shipments/{id}/custody", "event shipment.purchased"],
+      specs: ["03", "01", "AR"] },
+    // inner ring: objects
+    { id: "rate_quote", kind: "object", label: "Rate quote", short: "rates", modes: ALL, ring: 1, summary: "An expiring snapshot of what each service costs for this exact shipment, across every eligible carrier or member.", value: "Partial carrier failure never breaks checkout.", objects: ["shipment"], ops: ["POST /v1/rates", "GET /v1/rate_quotes/{id}"], specs: ["02", "15"] },
+    { id: "handling_unit", kind: "object", label: "Handling unit", short: "units", modes: ALL, ring: 1, summary: "Anything that gets its own label: a parcel, an envelope, a pallet, a crate, a ULD. It holds items, which hold dangerous goods and HS codes.", value: "Parcel and freight share one model.", objects: ["consolidation", "product"], ops: ["handling_units[].items[]", "handling_units[].freight", "handling_units[].conditions"], specs: ["01"] },
+    { id: "customs", kind: "object", label: "Customs declaration", short: "customs", modes: ["universal", "carrier", "3pl", "network"], ring: 1, summary: "The legal declaration: incoterm, duties, importer and exporter of record, certification, documents. Goods data comes from the items.", value: "Exact DDP pricing at rating time.", objects: ["shipment", "document"], ops: ["customs_declaration.incoterm", "customs_declaration.landed_cost", "POST /v1/document_uploads"], specs: ["01", "06", "13"] },
+    { id: "tracker", kind: "object", label: "Tracker", short: "tracking", modes: ALL, ring: 1, summary: "A lossless log of carrier and device events, with a small canonical status projected from it.", value: "One tracking API, whoever moved the parcel.", objects: ["shipment"], ops: ["POST /v1/trackers", "DELETE /v1/trackers/{id}", "event tracker.status_changed"], specs: ["07"] },
+    { id: "pickup", kind: "object", label: "Pickup", short: "pickups", modes: ["universal", "carrier", "network", "3pl", "fleet"], ring: 1, summary: "A collection window at an address, booked once or generated from a recurring pickup schedule.", value: "Standing pickups without daily bookings.", objects: ["manifest"], ops: ["POST /v1/pickups", "POST /v1/pickup_schedules", "POST /v1/pickups/{id}/cancel"], specs: ["04"] },
+    { id: "manifest", kind: "object", label: "Manifest", short: "end of day", modes: ["universal", "carrier", "network", "3pl"], ring: 1, summary: "The end-of-day close-out: SCAN forms, bordereaux, order summaries. Preview, close all or part of the day, receive one or several carrier manifests.", value: "Nobody forgets to close the day.", objects: ["pickup", "document"], ops: ["POST /v1/manifests/preview", "POST /v1/manifests", "event manifest.due"], specs: ["05"] },
+    { id: "consolidation", kind: "object", label: "Consolidation", short: "bags · ULDs", modes: ["carrier", "network", "3pl", "fleet"], ring: 1, summary: "Bags, sacks, gaylords, pallets, ULDs, containers and trailers, nested. An event on a container applies to everything inside it.", value: "One scan moves 700 parcels.", objects: ["handling_unit", "conveyance"], ops: ["GraphQL Interface mutation addConsolidation", "GraphQL Interface mutation sealConsolidation", "GraphQL Interface mutation loadConsolidation"], specs: ["24", "B"] },
+    { id: "conveyance", kind: "object", label: "Conveyance", short: "flights · voyages", modes: ["carrier", "network", "fleet"], ring: 1, summary: "One departure of one vehicle carrying consolidations: a flight, a voyage, a truck trip, a train.", value: "Door-to-door visibility across modes.", objects: ["consolidation", "journey"], ops: ["GraphQL Interface mutation departConveyance", "GraphQL Interface query conveyanceManifest"], specs: ["24", "17"] },
+    { id: "journey", kind: "object", label: "Journey & route run", short: "journeys", modes: ["carrier", "network", "3pl", "fleet"], ring: 1, summary: "A shipment's path through the network across route runs, including legs subcontracted to other carriers.", value: "Delivery dates from real capacity, not tables.", objects: ["conveyance", "tracker"], ops: ["POST /v1/journeys/plan", "GraphQL Interface mutation completeRouteRunStop"], specs: ["16"] },
+    { id: "document", kind: "object", label: "Document", short: "documents", modes: ALL, ring: 1, summary: "Labels, invoices, CN23s, gaylord tags, air waybills: carrier-issued or rendered from portable templates.", value: "Templates that work on any implementer.", objects: ["shipment"], ops: ["POST /v1/documents/generate", "POST /v1/document_jobs"], specs: ["25", "06"] },
+    { id: "product", kind: "object", label: "Product", short: "products", modes: ["universal", "3pl", "carrier"], ring: 1, summary: "The commodity master: per-country HS codes, origin, weights, dangerous goods. Items reference it, and values are snapshotted at purchase.", value: "Trade data entered once.", objects: ["handling_unit"], ops: ["POST /v1/products/upsert", "GET /v1/products/search"], specs: ["20"] },
+    { id: "ledger", kind: "object", label: "Ledger & settlement", short: "settlement", modes: ["network"], ring: 1, summary: "Every money movement between shipper, network and members, rolled up into periodic settlements.", value: "Who owes whom, per shipment.", objects: ["shipment"], ops: ["GraphQL Interface query ledgerEntries", "GraphQL Interface mutation closeSettlement"], specs: ["21"] },
+    { id: "record", kind: "object", label: "Record", short: "records", modes: ["data"], ring: 1, summary: "A signed, content-addressed version of any canonical object, anchored to a ledger. Payloads are encrypted, and personal data is erasable.", value: "Proof of who said what, and when.", objects: ["shipment", "tracker"], ops: ["POST /v1/records/verify", "GET /v1/records/feed", "POST /v1/attestations"], specs: ["23"] },
+
+    // middle ring: modules
+    { id: "accounts", kind: "module", label: "Accounts & identity", modes: ALL, ring: 2, summary: "Accounts (merchant, carrier, partner, platform), memberships, roles and API keys. Identity stays in each customer's OIDC provider.", value: "SSO into every merchant account, with per-person audit.", objects: ["shipment"], ops: ["POST /v1/accounts", "GraphQL Interface mutation createIdentityProvider", "POST /oauth/token (token-exchange)"], specs: ["19", "GQL"] },
+    { id: "integrations", kind: "module", label: "Integrations", modes: ["universal", "3pl", "network"], ring: 2, summary: "One OAuth app and connection wrapper for every provider, with typed interfaces: lsp, address_validation, insurance.", value: "Providers that implement the spec federate with zero adapter code.", objects: ["rate_quote"], ops: ["GET /v1/integrations", "POST /v1/connect_sessions", "POST /v1/address_validations"], specs: ["26", "09", "GQL"] },
+    { id: "catalog", kind: "module", label: "Catalog & pricing", modes: ["carrier", "network", "3pl", "fleet"], ring: 2, summary: "Services, options, packagings and zones, plus rate sheets, surcharges and pricing rules, all versioned and simulated before publish.", value: "Every price is reproducible.", objects: ["rate_quote"], ops: ["GraphQL Interface mutation publishService", "GraphQL Interface mutation simulateRateSheet"], specs: ["14", "15", "GQL"] },
+    { id: "routes", kind: "module", label: "Routes & fleet", modes: ["carrier", "network", "3pl", "fleet"], ring: 2, summary: "Facilities, routes, stops and legs, route runs, vehicles (vans to aircraft and drones), drivers, optimization.", value: "Operations write tracking automatically.", objects: ["journey", "conveyance"], ops: ["GraphQL Interface mutation createRoute", "GraphQL Interface mutation createOptimization", "GraphQL Interface mutation dispatchRouteRun"], specs: ["16", "17", "GQL"] },
+    { id: "iot", kind: "module", label: "IoT ingestion", modes: ["carrier", "network", "3pl", "fleet"], ring: 2, summary: "Scanners, lockers, telematics, tags and sensors send scan, sensor, position and geofence events through one endpoint.", value: "Device events become canonical events.", objects: ["tracker", "consolidation"], ops: ["POST /v1/device_events", "GraphQL Interface mutation createDevice"], specs: ["22", "GQL"] },
+    { id: "trade", kind: "module", label: "Trade engine", modes: ["carrier", "3pl", "universal"], ring: 2, summary: "HS classification, compliance screening, guaranteed landed cost, tariffs, duty collections.", value: "Clear goods before they fly.", objects: ["customs", "product"], ops: ["POST /v1/classifications", "POST /v1/compliance_screenings", "POST /v1/landed_costs"], specs: ["13"] },
+    { id: "datanet", kind: "module", label: "Data network", modes: ["data"], ring: 2, summary: "Participants with DIDs, signed and anchored records, and field-level access by shipment role. Identifier links build one identity graph per shipment, so scans from every party merge into one end-to-end timeline with consolidated milestones.", value: "End-to-end tracking that no single carrier can provide.", objects: ["record", "tracker"], ops: ["GET /v1/timelines/{shipment_id}", "POST /v1/identifier_links", "POST /v1/timelines/resolve", "POST /v1/access_grants"], specs: ["23", "GQL"] },
+    { id: "templates", kind: "module", label: "Document templates", modes: ["3pl", "carrier", "universal", "network", "fleet"], ring: 2, summary: "Portable Liquid and ZPL templates, carrier-published label specs with certification, triggered and batch generation, and ingestion of PDFs, scans and EDI into structured objects.", value: "Packing slips and tags from one template, anywhere.", objects: ["document"], ops: ["GraphQL Interface mutation createDocumentTemplate", "POST /v1/documents/generate"], specs: ["25", "GQL"] },
+    { id: "jobs", kind: "module", label: "Background jobs", modes: ALL, ring: 2, summary: "One job envelope for every asynchronous operation, with recurring job schedules. The implementer's own automations are visible too.", value: "One place to see what ran at 17:30.", objects: ["manifest", "document"], ops: ["GET /v1/jobs", "POST /v1/jobs/{id}/retry", "GraphQL Interface mutation createJobSchedule"], specs: ["27", "GQL"] },
+    { id: "inventory", kind: "module", label: "Inventory", modes: ["3pl", "universal", "carrier", "network"], ring: 2, summary: "Storage locations, lot and serial-aware stock, an append-only movement ledger, and fulfillment orders that pick, pack and ship into shipments.", value: "Every stock discrepancy explained by its movements.", objects: ["product", "shipment"], ops: ["GET /v1/inventory/levels", "POST /v1/fulfillment_orders", "GraphQL Interface mutation createStockMovement", "GraphQL Interface mutation createInventoryCount"], specs: ["29", "GQL"] },
+    { id: "billing", kind: "module", label: "Billing & payments", modes: ["universal", "carrier", "network", "3pl", "fleet"], ring: 2, summary: "Carrier and LSP invoices (EDI 210, INVOIC, UBL) with line-level reconciliation, usage meters and price plans, prepaid balances, and a provider-neutral payments interface.", value: "Reweighs, duplicates and billed voids caught automatically.", objects: ["ledger", "shipment"], ops: ["GraphQL Interface mutation importInvoice", "GraphQL Interface mutation createReconciliation", "POST /v1/usage_records", "POST /v1/payment_methods/setup"], specs: ["28", "GQL"] },
+    { id: "webhooks", kind: "module", label: "Webhooks & events", modes: ALL, ring: 2, summary: "Signed, at-least-once events out. Carrier pushes and canonical injection in.", value: "Every change, pushed to whoever needs it.", objects: ["tracker"], ops: ["POST /v1/webhook_endpoints", "POST /v1/inbound_events"], specs: ["08"] },
+
+    // outer ring: parties
+    { id: "merchant", kind: "party", label: "Merchant", modes: ALL, ring: 3, summary: "Sells goods and creates shipments, from a single shop to an enterprise brand.", value: "One integration for every carrier, network and 3PL.", objects: ["shipment", "pickup", "manifest", "product", "rate_quote"], ops: ["POST /v1/rates", "POST /v1/shipments", "POST /v1/pickups", "POST /v1/manifests"], specs: ["02", "03", "04", "05", "AG"] },
+    { id: "ecom", kind: "party", label: "E-com platform / OMS", modes: ["universal", "3pl", "network"], ring: 3, summary: "Acts for many merchants: storefronts, order management, ERP.", value: "Ship for every merchant without per-carrier code.", objects: ["accounts", "product", "shipment"], ops: ["POST /oauth/token (token-exchange)", "POST /v1/products/upsert", "Shipping-Account header"], specs: ["19", "20", "18"] },
+    { id: "marketplace", kind: "party", label: "Marketplace", modes: ["network", "3pl"], ring: 3, summary: "Sells for many sellers and often controls fulfillment promises.", value: "Delivery promises computed from real journeys.", objects: ["shipment", "catalog"], ops: ["POST /v1/shipments (injection)", "GraphQL Interface mutation createPricingRule"], specs: ["18", "15"] },
+    { id: "multicarrier", kind: "party", label: "Multi-carrier platform", modes: ["universal"], ring: 3, summary: "Brokers access to many carriers through one API.", value: "Federated carriers with no adapter code.", objects: ["integrations", "rate_quote", "tracker"], ops: ["POST /v1/connect_sessions", "POST /v1/rates (fan-out)"], specs: ["09", "26", "02"] },
+    { id: "network", kind: "party", label: "Carrier / LSP network", modes: ["network"], ring: 3, summary: "A venue where carriers and LSPs publish services, tariffs and routes as first-, middle- or last-mile members: couriers, freight forwarders, airlines, last-mile fleets. Shippers buy composed journeys across them.", value: "Reach beyond any single member.", objects: ["ledger", "routes", "catalog"], ops: ["GraphQL Interface mutation createInterlineAgreement", "GraphQL Interface query settlements"], specs: ["21", "GQL"] },
+    { id: "threepl", kind: "party", label: "3PL / fulfillment", modes: ["3pl"], ring: 3, summary: "Stores, picks and ships for merchants from facilities with declared functions (storage, fulfillment, sortation, cross-dock), mixing its own routes with subcontracted carriers.", value: "Inbound from any platform, outbound to any carrier.", objects: ["shipment", "product", "templates", "inventory"], ops: ["POST /v1/asns", "POST /v1/asns/{id}/receive", "POST /v1/document_jobs"], specs: ["18", "20", "25"] },
+    { id: "forwarder", kind: "party", label: "Forwarder / consolidator", modes: ["3pl", "network"], ring: 3, summary: "Buys line-haul, consolidates freight, often brokers customs.", value: "Owns the journey across modes and partners.", objects: ["consolidation", "customs", "shipment"], ops: ["GraphQL Interface mutation createConsolidation", "POST /v1/shipments (injection)"], specs: ["24", "18", "13"] },
+    { id: "carrier", kind: "party", label: "Parcel carrier", modes: ["carrier"], ring: 3, summary: "Moves parcels on its own network.", value: "Distribution through every platform at once.", objects: ["catalog", "routes", "tracker", "manifest"], ops: ["GraphQL Interface mutation createService", "GraphQL Interface mutation createRateSheet", "GraphQL Interface mutation createRouteRun"], specs: ["14", "15", "16", "GQL"] },
+    { id: "postal", kind: "party", label: "Postal operator", modes: ["carrier"], ring: 3, summary: "Universal service and international mail, with UPU receptacles and dispatches.", value: "UPU EDI and the e-commerce API as one model.", objects: ["consolidation", "conveyance", "customs"], ops: ["consolidation type sack", "identifiers.postal_receptacle"], specs: ["24", "B"] },
+    { id: "airline", kind: "party", label: "Airline cargo", modes: ["carrier", "fleet", "network"], ring: 3, summary: "Line-haul by air: flights as conveyances, ULDs as consolidations, air waybills as documents.", value: "ONE Record aligned, interline-ready.", objects: ["conveyance", "consolidation", "routes"], ops: ["legs[].air", "GraphQL Interface mutation departConveyance", "consolidation type uld"], specs: ["24", "17", "B"] },
+    { id: "ocean", kind: "party", label: "Ocean carrier", modes: ["carrier", "fleet"], ring: 3, summary: "Line-haul by sea: voyages and containers.", value: "DCSA aligned, door-to-door visibility.", objects: ["conveyance", "consolidation"], ops: ["consolidation type container", "conveyance mode sea"], specs: ["24", "B"] },
+    { id: "lastmile", kind: "party", label: "Last-mile fleet", modes: ["fleet"], ring: 3, summary: "Final delivery with vans, bikes and walkers. Optimized runs, live ETAs, proof of delivery.", value: "Tracking from operations, no extra integration.", objects: ["journey", "tracker", "iot"], ops: ["GraphQL Interface mutation createOptimization", "GraphQL Interface mutation createRouteRunPosition"], specs: ["17", "16"] },
+    { id: "drone", kind: "party", label: "Drone operator", modes: ["fleet"], ring: 3, summary: "Autonomous delivery within an approved operating area.", value: "Same API as vans.", objects: ["journey", "iot"], ops: ["vehicle type drone", "dispatch payload and range checks"], specs: ["17"] },
+    { id: "broker", kind: "party", label: "Import broker", modes: ["carrier", "3pl", "network", "universal"], ring: 3, summary: "A licensed customs broker that files the import entry, classifies goods and pays duties and taxes on the importer's behalf.", value: "Complete, structured data before the goods arrive.", objects: ["trade", "customs"], ops: ["customs_declaration.import_broker", "POST /v1/classifications/{id}/apply", "POST /v1/landed_costs", "attestation customs_release"], specs: ["13", "01", "23"] },
+    { id: "exportbroker", kind: "party", label: "Export broker", modes: ["carrier", "3pl", "network", "universal"], ring: 3, summary: "A forwarder or filing agent that submits export declarations (AES/EEI in the US, the EU export system) and obtains the ITN or MRN before loading.", value: "The export filing comes from the same item data as the import.", objects: ["customs", "trade"], ops: ["customs_declaration.export_broker", "customs_declaration.export_declaration", "POST /v1/compliance_screenings"], specs: ["01", "13", "B"] },
+    { id: "ioreor", kind: "party", label: "IOR / EOR provider", modes: ["carrier", "3pl", "universal"], ring: 3, summary: "Acts as importer or exporter of record for sellers with no local entity, taking legal responsibility and remitting duties and VAT.", value: "Cross-border selling without a foreign entity.", objects: ["customs", "trade"], ops: ["customs_declaration.importer_of_record", "customs_declaration.exporter_of_record", "landed_cost guaranteed"], specs: ["01", "13"] },
+    { id: "authority", kind: "party", label: "Customs authority", modes: ["data"], ring: 3, summary: "Regulates the border. It reads pre-arrival data and attests releases and holds.", value: "Verifiable, tamper-evident filings.", objects: ["datanet", "record"], ops: ["POST /v1/attestations", "POST /v1/records/verify"], specs: ["23", "13"] },
+    { id: "insurer", kind: "party", label: "Insurer / financier", modes: ["universal", "data"], ring: 3, summary: "Covers loss and damage, and finances goods in transit.", value: "Claims settled on signed evidence.", objects: ["integrations", "datanet"], ops: ["POST /v1/insurance_quotes", "POST /v1/claims"], specs: ["26", "23"] },
+    { id: "datanode", kind: "party", label: "Data network node", modes: ["data"], ring: 3, summary: "Keeps the shared record: stores, anchors and releases keys under policy.", value: "Neutral infrastructure for the whole network.", objects: ["datanet", "record"], ops: ["anchor.confirmed", "GET /v1/records/feed"], specs: ["23"] },
+    { id: "consumer", kind: "party", label: "End consumer", modes: ALL, ring: 3, summary: "Receives goods. Tracks, collects, confirms receipt and starts returns, through a pairwise identity.", value: "Privacy by default, one timeline.", objects: ["tracker", "datanet"], ops: ["tracker.public_url", "attestation received_in_good_condition"], specs: ["07", "23"] },
+    { id: "psp", kind: "party", label: "Payment provider", modes: ["universal", "carrier", "network", "3pl", "fleet"], ring: 3, summary: "Stripe, Adyen, PayPal, acquirers for the card networks, and bank rails, reached through the payments interface.", value: "Swap providers without touching invoices or usage.", objects: ["billing"], ops: ["hosted payment method setup", "webhooks to /v1/inbound/{connection_id}", "camt.053 statement reconciliation"], specs: ["28", "26"] },
+    { id: "devices", kind: "party", label: "IoT & devices", modes: ["carrier", "fleet", "3pl", "network"], ring: 3, summary: "Scanners, lockers, telematics, tags and sensors.", value: "One ingestion interface for every customer.", objects: ["iot"], ops: ["POST /v1/device_events", "MQTT devices/{id}/events"], specs: ["22"] },
+  ];
+  const byId = Object.fromEntries(N.map(n => [n.id, n]));
+
+  // Edges: party/module -> what it writes; objects -> shipment
+  const E = [];
+  N.forEach(n => {
+    if (n.kind === "party" || n.kind === "module") n.objects.forEach(t => { if (byId[t]) E.push({ a: n.id, b: t }); });
+    if (n.kind === "object") E.push({ a: n.id, b: "shipment" });
+  });
+
+  // ---------- Scenarios ----------
+  const S = [
+    { id: "xborder", name: "Cross-border DDP by air, through a network",
+      summary: "A UK shopper buys from a US brand. Duties are guaranteed at checkout, and the parcel flies in a ULD, is held briefly at customs, then is handed to a last-mile fleet.",
+      steps: [
+        ["ecom", "product.updated", "The storefront syncs the product with its per-country HS codes."],
+        ["exportbroker", "export_declaration filed", "The export broker files the EEI and receives the ITN before loading."],
+        ["trade", "landed_cost.created", "A guaranteed landed cost quote for GB: duty 0, VAT £4.78."],
+        ["network", "rate_quote.created", "Composed rate: SwiftAir air and ZoomVan last mile."],
+        ["merchant", "shipment.purchased", "Purchased with Idempotency-Key. Journey of three segments.", "ok"],
+        ["pickup", "pickup.scheduled", "Collected by the first-mile route run."],
+        ["forwarder", "consolidation.closed", "Bagged, gaylorded, built onto ULD AKE12345SW."],
+        ["airline", "conveyance.departed", "Flight SW123 LHR. Every contained shipment moves at once."],
+        ["authority", "tracker exception customs_hold", "Documentation query at import.", "warn"],
+        ["broker", "attestation customs_release", "The import broker supplies the invoice. Release is attested.", "ok"],
+        ["network", "interline handoff, ASN closed", "Custody transfers to ZoomVan on its receive scan."],
+        ["lastmile", "route_run.eta_updated", "Out for delivery. The ETA window is 10:40 to 11:20."],
+        ["devices", "device_event delivery", "Proof-of-delivery photo from the driver app."],
+        ["consumer", "tracker.delivered", "Delivered to a safe place. The consumer attests receipt.", "ok"],
+        ["datanode", "timeline.milestone_reached delivered", "Scans from six parties merged through bag, ULD and AWB links into one timeline. 41 records anchored.", "ok"],
+      ] },
+    { id: "domestic", name: "Domestic parcel through a universal API",
+      summary: "A merchant rates across connected carriers, buys the cheapest express service, closes the day, and tracks to delivery.",
+      steps: [
+        ["merchant", "POST /v1/rates", "Rates fanned out to three connected carriers."],
+        ["multicarrier", "rate_quote.created", "One carrier timed out and is listed in errors[]. The status is still 200."],
+        ["merchant", "shipment.purchased", "Label in documents[], tracker created.", "ok"],
+        ["templates", "document.generated", "Packing slip rendered by a trigger."],
+        ["manifest", "manifest.submitted", "End-of-day auto-close at 17:30 (job_schedule)."],
+        ["carrier", "tracker.status_changed in_transit", "First scan at the origin hub."],
+        ["consumer", "tracker.delivered", "Delivered and signed for.", "ok"],
+      ] },
+    { id: "injection", name: "Marketplace orders injected into a 3PL",
+      summary: "A marketplace pushes orders. The 3PL receives freight against an ASN, relabels, and subcontracts the last mile.",
+      steps: [
+        ["marketplace", "shipment.injection_accepted", "Upsert by upstream reference. label_mode is relabel."],
+        ["threepl", "asn.arrived", "A trailer of 1,204 units at fac_lon_hub."],
+        ["devices", "device_event scan inbound", "Receive scans reconcile against the ASN."],
+        ["threepl", "asn.closed", "Two missing, one damaged. Discrepancies recorded.", "warn"],
+        ["templates", "document_job.completed", "4,210 labels merged into one print run."],
+        ["carrier", "tracker.updated", "Subcontracted carrier events merged into the parent tracker."],
+        ["consumer", "tracker.delivered", "Tracking fed back to the marketplace under its own numbers.", "ok"],
+      ] },
+    { id: "ocean", name: "Ocean container, factory to warehouse",
+      summary: "A forwarder consolidates cartons into a 40-foot container, which sails, clears and is delivered to a 3PL.",
+      steps: [
+        ["forwarder", "consolidation.sealed", "Container MSKU1234565, seal SEAL-00918."],
+        ["ocean", "conveyance.departed", "Voyage 241W. DCSA transport event mapped."],
+        ["broker", "landed_cost.created", "Entry prepared from item-level HS codes."],
+        ["ocean", "conveyance.arrived", "Discharged at NLRTM."],
+        ["threepl", "consolidation.deconsolidated", "Cartons received and put away.", "ok"],
+      ] },
+    { id: "claim", name: "Damaged parcel and insurance claim",
+      summary: "A shock sensor flags an excursion, the consumer attests damage, and the insurer pays on signed evidence.",
+      steps: [
+        ["merchant", "coverage.activated", "Third-party coverage of $250 bought with the label."],
+        ["devices", "handling_unit.condition_breached", "Shock of 7.2 g against a limit of 5 g.", "warn"],
+        ["consumer", "attestation damaged_on_receipt", "Photo evidence, signed with a pairwise DID.", "bad"],
+        ["insurer", "claim.submitted", "Evidence cites data network records, with no screenshots."],
+        ["datanode", "POST /v1/records/verify", "Custody chain and sensor readings verified."],
+        ["insurer", "claim.paid", "Paid in 2 days.", "ok"],
+      ] },
+    { id: "audit", name: "Carrier invoice audit and payment",
+      summary: "A weekly carrier invoice is imported, reconciled line by line, reweighs are rebilled to the merchant, a duplicate is disputed, and the rest is paid through the payment provider.",
+      steps: [
+        ["carrier", "invoice.imported", "Weekly invoice in EDI 210, with 1,182 lines."],
+        ["billing", "reconciliation.completed", "1,170 matched, 9 reweighs, 2 duplicates, 1 billed void.", "warn"],
+        ["merchant", "shipment.charges_adjusted", "Reweighs rebilled at cost under the rule set."],
+        ["carrier", "invoice.disputed", "Duplicates and the billed void disputed, with the void record as evidence."],
+        ["psp", "payment.succeeded", "Accepted lines paid through the payments connection.", "ok"],
+        ["network", "payout.paid", "Network members paid their segment share at settlement close.", "ok"],
+      ] },
+  ];
+
+
+  // ---------- Shared state ----------
+  const NS = "http://www.w3.org/2000/svg";
+  const reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const state = { selected: "shipment", hovered: null, mode: "all", hits: null, tab: "overview", sim: {} };
+  const STAGES = [["01", "Sell"], ["02", "Book & pay"], ["03", "Fulfil & collect"], ["04", "Move & clear"], ["05", "Deliver & assure"]];
+  const STAGE = {
+    merchant: 0, ecom: 0, marketplace: 0, accounts: 0, product: 0,
+    multicarrier: 1, network: 1, psp: 1, integrations: 1, catalog: 1, billing: 1, jobs: 1, rate_quote: 1, ledger: 1, shipment: 1,
+    threepl: 2, carrier: 2, devices: 2, inventory: 2, templates: 2, handling_unit: 2, pickup: 2, manifest: 2, document: 2,
+    forwarder: 3, airline: 3, ocean: 3, postal: 3, exportbroker: 3, broker: 3, ioreor: 3, authority: 3, routes: 3, trade: 3, customs: 3, consolidation: 3, conveyance: 3, journey: 3,
+    lastmile: 4, drone: 4, consumer: 4, datanode: 4, insurer: 4, iot: 4, webhooks: 4, datanet: 4, tracker: 4, record: 4
+  };
+  const stageOf = n => (STAGE[n.id] ?? 2);
+  function el(tag, attrs, parent) { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; }
+  function esc(s) { return String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])); }
+  const relCache = {};
+  function related(id) {
+    if (relCache[id]) return relCache[id];
+    const s = new Set([id]);
+    E.forEach(e => { if (e.a === id) s.add(e.b); if (e.b === id) s.add(e.a); });
+    return (relCache[id] = s);
+  }
+  const inMode = n => state.mode === "all" || n.kind === "center" || n.modes.includes(state.mode);
+  const isHit = n => !state.hits || state.hits.has(n.id);
+  function look(n) {
+    const rel = state.hovered ? related(state.hovered) : null;
+    return {
+      dim: !inMode(n) || !isHit(n) || (!!rel && !rel.has(n.id)),
+      sel: n.id === state.selected,
+      hit: !!state.hits && state.hits.has(n.id),
+      sim: state.sim[n.id] || null
+    };
+  }
+  function edgeLook(e) {
+    const f = state.hovered || state.selected;
+    const on = e.a === f || e.b === f;
+    const vis = state.mode === "all" || (inMode(byId[e.a]) && inMode(byId[e.b]));
+    return { on, dim: !vis || (!!state.hovered && !on) };
+  }
+  function css(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+
+  // Shared SVG node factory
+  function svgNode(n, parent, opts = {}) {
+    const g = el("g", { class: "node " + n.kind, tabindex: "0", role: "button", "aria-label": n.label + ", " + (n.kind === "center" ? "object" : n.kind) }, parent);
+    const inner = el("g", {}, g);
+    if (n.kind === "party") el("circle", { class: "shape", r: 17 }, inner);
+    else if (n.kind === "module") el("rect", { class: "shape", x: -18, y: -14, width: 36, height: 28, rx: 5 }, inner);
+    else if (n.kind === "object") el("rect", { class: "shape", x: -12, y: -12, width: 24, height: 24, rx: 3, transform: "rotate(45)" }, inner);
+    else { el("circle", { class: "shape", r: opts.centerR || 50 }, inner); const t = el("text", { class: "inside", "text-anchor": "middle", y: 6, "font-size": opts.centerFont || 18 }, inner); t.textContent = "Shipment"; }
+    let label = null;
+    if (n.kind !== "center") {
+      label = el("text", { "text-anchor": opts.anchor || "middle", "font-size": opts.font || (n.kind === "party" ? 19 : n.kind === "module" ? 17 : 16), y: opts.labelY || (n.kind === "party" ? 38 : 34), x: opts.labelX || 0 }, g);
+      label.textContent = n.kind === "object" && !opts.fullLabel ? (n.short || n.label) : n.label;
+    }
+    g.addEventListener("click", ev => { if (g.__dragged) { g.__dragged = false; return; } select(n.id); });
+    g.addEventListener("keydown", ev => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); select(n.id); } });
+    g.addEventListener("mouseenter", () => hover(n.id));
+    g.addEventListener("mouseleave", () => hover(null));
+    return { g, label };
+  }
+  function paintSvg(nodeEls, edgeEls) {
+    N.forEach(n => {
+      const r = nodeEls.get(n.id); if (!r) return;
+      const L = look(n), c = r.g.classList;
+      c.toggle("dim", L.dim); c.toggle("sel", L.sel); c.toggle("hit", L.hit);
+      ["ok", "warn", "bad"].forEach(s => c.toggle("state-" + s, L.sim === s));
+    });
+    edgeEls.forEach(x => { const L = edgeLook(x.e); x.el.classList.toggle("on", L.on); x.el.classList.toggle("dim", L.dim); });
+  }
+  function curve(a, b, cx, cy, pull) {
+    const mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2;
+    const qx = mx + (cx - mx) * pull, qy = my + (cy - my) * pull;
+    return { d: `M${a.x.toFixed(1)},${a.y.toFixed(1)} Q${qx.toFixed(1)},${qy.toFixed(1)} ${b.x.toFixed(1)},${b.y.toFixed(1)}`, qx, qy };
+  }
+
+  // ---------- View: Orbit (2.5D) ----------
+  const orbitView = (() => {
+    let svg, gE, gN, gT, nodeEls, edgeEls, ringEls, raf = 0, rot = 0, drag = null, alive = false;
+    const CX = 600, CY = 450, RAD = { 0: 0, 1: 150, 2: 285, 3: 405 }, TILT = 0.6, DIR = { 1: 1.6, 2: -1, 3: 0.55 };
+    const rings = { 1: [], 2: [], 3: [] };
+    N.forEach(n => { if (n.ring) rings[n.ring].push(n); });
+    const base = {};
+    Object.entries(rings).forEach(([r, arr]) => arr.forEach((n, i) => { base[n.id] = (i / arr.length) * Math.PI * 2 + (r == 2 ? 0.15 : r == 3 ? -0.08 : 0); }));
+    function pos(n) {
+      if (n.ring === 0) return { x: CX, y: CY + 40, s: 1, z: 0.5 };
+      const a = base[n.id] + rot * DIR[n.ring], r = RAD[n.ring];
+      const depth = (Math.sin(a) + 1) / 2;
+      return { x: CX + r * Math.cos(a), y: CY + 40 + r * Math.sin(a) * TILT, s: 0.72 + 0.38 * depth, z: depth, a };
+    }
+    function draw() {
+      const P = {}; N.forEach(n => { P[n.id] = pos(n); });
+      edgeEls.forEach(x => x.el.setAttribute("d", curve(P[x.e.a], P[x.e.b], CX, CY + 40, 0.25).d));
+      N.slice().sort((p, q) => P[p.id].z - P[q.id].z).forEach(n => {
+        const p = P[n.id], r = nodeEls.get(n.id);
+        r.g.setAttribute("transform", `translate(${p.x.toFixed(1)},${p.y.toFixed(1)}) scale(${p.s.toFixed(3)})`);
+        if (r.label) r.label.setAttribute("y", (n.ring !== 3 || Math.sin(p.a) > -0.2) ? (n.kind === "party" ? 38 : 34) : -28);
+        gN.appendChild(r.g);
+      });
+    }
+    return {
+      name: "orbit", hint: "Drag to rotate · select to explore",
+      mount(vp) {
+        alive = true;
+        svg = el("svg", { viewBox: "0 0 1200 900", role: "img", "aria-label": "Orbit view: parties, modules and objects on concentric rings", class: "grab" }, vp);
+        const gR = el("g", {}, svg); gE = el("g", {}, svg); gN = el("g", {}, svg); gT = el("g", {}, svg);
+        ringEls = [1, 2, 3].map(r => el("ellipse", { class: "ring", cx: CX, cy: CY + 40, rx: RAD[r], ry: RAD[r] * TILT }, gR));
+        edgeEls = E.map(e => ({ e, el: el("path", { class: "edge" }, gE) }));
+        nodeEls = new Map(N.map(n => [n.id, svgNode(n, gN)]));
+        svg.addEventListener("pointerdown", ev => { drag = { x: ev.clientX, r: rot }; svg.classList.add("dragging"); });
+        this._move = ev => { if (!drag) return; rot = drag.r + (ev.clientX - drag.x) * 0.004; draw(); };
+        this._up = () => { drag = null; svg && svg.classList.remove("dragging"); };
+        window.addEventListener("pointermove", this._move); window.addEventListener("pointerup", this._up);
+        draw();
+        const loop = () => { if (!alive) return; if (!drag && !reduceMotion && !sim.playing) { rot += 0.0009; draw(); } raf = requestAnimationFrame(loop); };
+        raf = requestAnimationFrame(loop);
+        this.tokenLayer = gT;
+      },
+      unmount() { alive = false; cancelAnimationFrame(raf); window.removeEventListener("pointermove", this._move); window.removeEventListener("pointerup", this._up); },
+      paint() { paintSvg(nodeEls, edgeEls); },
+      point(id) { const p = pos(byId[id]); return { x: p.x, y: p.y }; },
+      center: () => ({ x: CX, y: CY + 40 })
+    };
+  })();
+
+  // ---------- View: Journey lanes (flat) ----------
+  const lanesView = (() => {
+    let svg, gE, gN, gT, nodeEls, edgeEls, P;
+    const W = 1400, H = 900, LEFT = 56, COLW = (W - LEFT - 16) / 5;
+    const BANDS = { party: { y: 96, h: 360, label: "Parties" }, module: { y: 476, h: 190, label: "Platform modules" }, object: { y: 686, h: 200, label: "Canonical objects" } };
+    function layout() {
+      P = {};
+      const cells = {};
+      N.forEach(n => { const band = n.kind === "center" ? "object" : n.kind; const k = band + ":" + stageOf(n); (cells[k] = cells[k] || []).push(n); });
+      Object.entries(cells).forEach(([k, arr]) => {
+        const [band, st] = k.split(":"); const B = BANDS[band];
+        const cx = LEFT + COLW * (+st) + COLW / 2;
+        const rows = arr.length;
+        const step = Math.min(B.h / rows, band === "party" ? 70 : 64);
+        const top = B.y + (B.h - step * rows) / 2;
+        const x0 = LEFT + COLW * (+st) + 34;
+        arr.sort((a, b) => (a.kind === "center" ? -1 : b.kind === "center" ? 1 : 0)).forEach((n, r) => {
+          P[n.id] = { x: n.kind === "center" ? x0 + 14 : x0, y: top + step * r + step / 2 };
+        });
+      });
+    }
+    return {
+      name: "lanes", hint: "Read left to right · select to explore",
+      mount(vp) {
+        layout();
+        svg = el("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "Journey lanes: parties, modules and objects arranged by stage of a shipment's life" }, vp);
+        const gB = el("g", {}, svg);
+        Object.values(BANDS).forEach(B => {
+          el("rect", { class: "band", x: LEFT - 8, y: B.y, width: W - LEFT - 8, height: B.h, rx: 8 }, gB);
+          const t = el("text", { class: "band-label", x: 22, y: B.y + B.h / 2, transform: `rotate(-90 22 ${B.y + B.h / 2})`, "text-anchor": "middle" }, gB); t.textContent = B.label;
+        });
+        STAGES.forEach(([num, name], i) => {
+          const x = LEFT + COLW * i + COLW / 2;
+          const a = el("text", { class: "lane-head", x, y: 38, "text-anchor": "middle" }, gB); a.textContent = num;
+          const b = el("text", { class: "lane-title", x, y: 66, "text-anchor": "middle" }, gB); b.textContent = name;
+          if (i) el("line", { class: "colsep", x1: LEFT + COLW * i, x2: LEFT + COLW * i, y1: 84, y2: H - 8 }, gB);
+        });
+        gE = el("g", {}, svg); gN = el("g", {}, svg); gT = el("g", {}, svg);
+        edgeEls = E.map(e => {
+          const a = P[e.a], b = P[e.b];
+          const d = `M${a.x},${a.y} C${a.x},${(a.y + b.y) / 2} ${b.x},${(a.y + b.y) / 2} ${b.x},${b.y}`;
+          return { e, el: el("path", { class: "edge", d }, gE) };
+        });
+        nodeEls = new Map(N.map(n => {
+          const r = svgNode(n, gN, { centerR: 30, centerFont: 13, font: n.kind === "party" ? 17 : 16, labelY: 6, labelX: n.kind === "party" ? 26 : 24, anchor: "start", fullLabel: true });
+          r.g.setAttribute("transform", `translate(${P[n.id].x},${P[n.id].y}) scale(0.85)`);
+          return [n.id, r];
+        }));
+        this.tokenLayer = gT;
+      },
+      unmount() {},
+      paint() { paintSvg(nodeEls, edgeEls); },
+      point(id) { return P[id]; },
+      center: () => ({ x: W / 2, y: H / 2 })
+    };
+  })();
+
+  // ---------- View: Matrix (flat) ----------
+  const matrixView = (() => {
+    let root, rowsEl, colsEl;
+    const cols = N.filter(n => n.kind === "object" || n.kind === "center").sort((a, b) => stageOf(a) - stageOf(b));
+    const rowGroups = [["Parties", N.filter(n => n.kind === "party")], ["Platform modules", N.filter(n => n.kind === "module")]];
+    rowGroups.forEach(g => g[1].sort((a, b) => stageOf(a) - stageOf(b)));
+    const direct = new Set(E.map(e => e.a + ">" + e.b));
+    function via(rowId, colId) {
+      return N.some(m => m.kind === "module" && direct.has(rowId + ">" + m.id) && direct.has(m.id + ">" + colId));
+    }
+    return {
+      name: "matrix", hint: "",
+      mount(vp) {
+        root = document.createElement("div"); root.className = "matrix";
+        let html = '<table><thead><tr><th scope="col"><span class="sr">Party or module</span></th>';
+        html += cols.map(c => `<th scope="col" data-col="${c.id}"><button class="rot" data-go="${c.id}">${esc(c.label)}</button></th>`).join("") + "</tr></thead><tbody>";
+        rowGroups.forEach(([name, rows]) => {
+          html += `<tr class="grp"><th colspan="${cols.length + 1}">${esc(name)}</th></tr>`;
+          rows.forEach(r => {
+            html += `<tr data-row="${r.id}"><th scope="row"><button data-go="${r.id}">${esc(r.label)}</button></th>`;
+            html += cols.map(c => {
+              const d = direct.has(r.id + ">" + c.id), v = !d && r.kind === "party" && via(r.id, c.id);
+              const t = d ? `${r.label} writes ${c.label}` : v ? `${r.label} reaches ${c.label} through a module` : "";
+              return `<td data-col="${c.id}"${t ? ` title="${esc(t)}"` : ""}>${d ? '<span class="dot" aria-label="writes"></span>' : v ? '<span class="dot via" aria-label="through a module"></span>' : ""}</td>`;
+            }).join("") + "</tr>";
+          });
+        });
+        html += "</tbody></table>";
+        root.innerHTML = html;
+        vp.appendChild(root);
+        const leg = document.createElement("div"); leg.className = "mlegend";
+        leg.innerHTML = '<span><i class="dot" style="display:inline-block;width:12px;height:12px;border-radius:50%;background:var(--primary)"></i>Writes directly</span><span><i style="display:inline-block;width:12px;height:12px;border-radius:50%;border:2px solid var(--line-strong)"></i>Reaches through a platform module</span>';
+        vp.appendChild(leg);
+        root.querySelectorAll("[data-go]").forEach(b => b.addEventListener("click", () => select(b.dataset.go)));
+        root.querySelectorAll("tr[data-row]").forEach(tr => { tr.addEventListener("mouseenter", () => hover(tr.dataset.row)); tr.addEventListener("mouseleave", () => hover(null)); });
+        rowsEl = root.querySelectorAll("tr[data-row]"); colsEl = root.querySelectorAll("[data-col]");
+      },
+      unmount() {},
+      paint() {
+        rowsEl.forEach(tr => {
+          const n = byId[tr.dataset.row], L = look(n);
+          tr.classList.toggle("sel", L.sel); tr.classList.toggle("dim", L.dim);
+          ["ok", "warn", "bad"].forEach(s => tr.classList.toggle("state-" + s, L.sim === s));
+        });
+        colsEl.forEach(c => c.classList.toggle("colsel", c.dataset.col === state.selected));
+      },
+      focus(id) { const tr = root && root.querySelector(`tr[data-row="${id}"]`); if (tr) tr.scrollIntoView({ block: "nearest", behavior: reduceMotion ? "auto" : "smooth" }); }
+    };
+  })();
+
+  const VIEWS = { orbit: orbitView, lanes: lanesView, matrix: matrixView };
+
+  // ---------- View switching ----------
+  const vp = document.getElementById("viewport");
+  let current = null, svgToken = null, svgAnim = 0;
+  function setView(name) {
+    if (!VIEWS[name]) name = "orbit";
+    if (current) current.unmount();
+    vp.innerHTML = ""; svgToken = null;
+    current = VIEWS[name];
+    current.mount(vp);
+    if (current.hint) { const h = document.createElement("div"); h.className = "hint"; h.textContent = current.hint; vp.appendChild(h); }
+    if (name !== "matrix" && !current.failed) {
+      const lg = document.createElement("div"); lg.className = "legend"; lg.setAttribute("aria-hidden", "true");
+      lg.innerHTML = '<span><i class="sw party"></i>Party</span><span><i class="sw module"></i>Platform module</span><span><i class="sw object"></i>Canonical object</span>';
+      vp.appendChild(lg);
+    }
+    document.querySelectorAll("[data-view]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.view === name)));
+    try { localStorage.setItem("imap-view", name); } catch (e) {}
+    try { history.replaceState(null, "", "#" + name); } catch (e) {}
+    paint();
+  }
+  document.querySelectorAll("[data-view]").forEach(b => b.addEventListener("click", () => setView(b.dataset.view)));
+  function paint() { if (current && current.paint) current.paint(); }
+  function animateToken(fromId, toId, st) {
+    if (!current || current.failed) return;
+    if (current.animate) return current.animate(fromId, toId, st);
+    if (current.focus) return current.focus(toId);
+    if (!current.tokenLayer) return;
+    if (!svgToken || !svgToken.isConnected) svgToken = el("circle", { class: "token", r: 9 }, current.tokenLayer);
+    svgToken.setAttribute("class", "token" + (st === "warn" ? " warn" : st === "bad" ? " bad" : ""));
+    const t0 = performance.now(), dur = reduceMotion ? 1 : 850;
+    cancelAnimationFrame(svgAnim);
+    const view = current;
+    const tick = now => {
+      if (view !== current) return;
+      const k = Math.min(1, (now - t0) / dur), e = k < 0.5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+      const a = view.point(fromId), b = view.point(toId), c = view.center();
+      const q = curve(a, b, c.x, c.y, 0.3);
+      const x = (1 - e) * (1 - e) * a.x + 2 * (1 - e) * e * q.qx + e * e * b.x;
+      const y = (1 - e) * (1 - e) * a.y + 2 * (1 - e) * e * q.qy + e * e * b.y;
+      svgToken.setAttribute("cx", x.toFixed(1)); svgToken.setAttribute("cy", y.toFixed(1));
+      if (k < 1) svgAnim = requestAnimationFrame(tick);
+    };
+    svgAnim = requestAnimationFrame(tick);
+  }
+
+  // ---------- Panel ----------
+  const KIND = { party: "Party", module: "Platform module", object: "Canonical object", center: "Canonical object" };
+  const panel = document.getElementById("panel");
+  const tabs = { overview: "tab-overview", objects: "tab-objects", ops: "tab-ops", specs: "tab-specs" };
+  const docsInput = document.getElementById("docs-base");
+  try { const saved = localStorage.getItem("imap-docs-base"); if (saved) docsInput.value = saved; } catch (e) {}
+  docsInput.addEventListener("change", () => { try { localStorage.setItem("imap-docs-base", docsInput.value); } catch (e) {} if (state.tab === "specs") renderPanel(); });
+  const localDocs = /^https?:$/.test(location.protocol) && /^(localhost|127\.0\.0\.1|\[::1\])$|\.localhost$/.test(location.hostname);
+  const docUrl = path => (docsInput.value || (localDocs ? location.origin : "https://shippinginternals.dev")).replace(/\/+$/, "") + "/" + path;
+  function renderPanel() {
+    const n = byId[state.selected];
+    document.getElementById("p-kind").textContent = KIND[n.kind];
+    document.getElementById("p-name").textContent = n.label;
+    document.getElementById("p-modes").innerHTML = (n.modes.length === ALL.length ? ["every mode"] : n.modes).map(m => `<span class="tag">${esc(m === "3pl" ? "3PL" : m === "data" ? "Data Network" : m)}</span>`).join("") + `<span class="tag">Stage: ${esc(STAGES[stageOf(n)][1])}</span>`;
+    Object.entries(tabs).forEach(([k, id]) => document.getElementById(id).setAttribute("aria-selected", String(k === state.tab)));
+    panel.setAttribute("aria-labelledby", tabs[state.tab]);
+    if (state.tab === "overview") panel.innerHTML = `<p>${esc(n.summary)}</p><p class="value">${esc(n.value)}</p>`;
+    else if (state.tab === "objects") {
+      const own = n.objects.filter(o => byId[o]);
+      const users = E.filter(e => e.b === n.id).map(e => e.a);
+      panel.innerHTML = `<p>${n.kind === "party" || n.kind === "module" ? "Writes or calls:" : "Related objects:"}</p><div class="objchips">${own.map(o => `<button data-go="${o}">${esc(byId[o].label)}</button>`).join("")}</div>` +
+        (users.length ? `<p>Written or called by:</p><div class="objchips">${users.map(o => `<button data-go="${o}">${esc(byId[o].label)}</button>`).join("")}</div>` : "");
+    } else if (state.tab === "ops") panel.innerHTML = `<ul class="list">${n.ops.map(o => `<li><code>${esc(o)}</code></li>`).join("")}</ul>`;
+    else panel.innerHTML = `<div class="links">${n.specs.map(c => `<a href="${esc(docUrl(CH[c][1]))}" target="_blank" rel="noopener"><span>${esc(CH[c][0])}</span><span>${/^\d+$/.test(c) ? "ch. " + c : c === "B" ? "appx B" : ""}</span></a>`).join("")}<a href="${esc(docUrl("api-reference"))}" target="_blank" rel="noopener"><span>API reference</span><span>OpenAPI</span></a></div>`;
+    panel.querySelectorAll("[data-go]").forEach(b => b.addEventListener("click", () => select(b.dataset.go)));
+  }
+  function select(id) { state.selected = id; renderPanel(); paint(); if (current && current.focus) current.focus(id); }
+  function hover(id) { state.hovered = id; paint(); }
+  Object.entries(tabs).forEach(([k, id]) => document.getElementById(id).addEventListener("click", () => { state.tab = k; renderPanel(); }));
+  document.querySelector('[role="tablist"]').addEventListener("keydown", ev => {
+    const keys = Object.keys(tabs); let i = keys.indexOf(state.tab);
+    if (ev.key === "ArrowRight") i = (i + 1) % keys.length; else if (ev.key === "ArrowLeft") i = (i - 1 + keys.length) % keys.length; else return;
+    state.tab = keys[i]; renderPanel(); document.getElementById(tabs[state.tab]).focus();
+  });
+
+  // ---------- Filters ----------
+  document.querySelectorAll("[data-mode]").forEach(b => b.addEventListener("click", () => {
+    state.mode = b.dataset.mode;
+    document.querySelectorAll("[data-mode]").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+    paint();
+  }));
+  document.getElementById("search").addEventListener("input", ev => {
+    const q = ev.target.value.trim().toLowerCase();
+    if (!q) { state.hits = null; paint(); return; }
+    state.hits = new Set(N.filter(n => (n.label + " " + n.summary + " " + n.ops.join(" ") + " " + (n.short || "")).toLowerCase().includes(q)).map(n => n.id));
+    const first = N.find(n => state.hits.has(n.id));
+    if (first) select(first.id); else paint();
+  });
+
+  // ---------- Simulation ----------
+  const sim = { playing: false, idx: -1, timer: null, scen: S[0] };
+  const scenSel = document.getElementById("scenario"), logEl = document.getElementById("log"), summ = document.getElementById("sim-summary"), playBtn = document.getElementById("play");
+  S.forEach(s => { const o = document.createElement("option"); o.value = s.id; o.textContent = s.name; scenSel.appendChild(o); });
+  function renderLog() {
+    summ.textContent = sim.scen.summary;
+    logEl.innerHTML = sim.scen.steps.map((st, i) => `<li class="${i > sim.idx ? "future" : ""}"><span class="dot ${st[3] || ""}"></span><span><span class="ev">${esc(st[1])}</span> <span class="who">· ${esc(byId[st[0]].label)}</span><br>${esc(st[2])}</span></li>`).join("");
+    const cur = logEl.children[sim.idx]; if (cur) cur.scrollIntoView({ block: "nearest" });
+  }
+  function stop() { sim.playing = false; clearInterval(sim.timer); playBtn.textContent = "Play"; }
+  function resetSim() { stop(); sim.idx = -1; state.sim = {}; if (svgToken) { svgToken.remove(); svgToken = null; } renderLog(); paint(); }
+  function stepSim() {
+    if (sim.idx >= sim.scen.steps.length - 1) { stop(); return false; }
+    const prev = sim.idx >= 0 ? sim.scen.steps[sim.idx][0] : "shipment";
+    sim.idx++;
+    const st = sim.scen.steps[sim.idx];
+    state.sim[st[0]] = st[3] || "ok";
+    state.selected = st[0]; renderPanel(); renderLog(); paint();
+    animateToken(prev, st[0], st[3]);
+    return true;
+  }
+  playBtn.addEventListener("click", () => {
+    if (sim.playing) { stop(); return; }
+    if (sim.idx >= sim.scen.steps.length - 1) resetSim();
+    sim.playing = true; playBtn.textContent = "Pause";
+    stepSim(); sim.timer = setInterval(() => { if (!stepSim()) stop(); }, 1700);
+  });
+  document.getElementById("step").addEventListener("click", () => { stop(); stepSim(); });
+  document.getElementById("reset").addEventListener("click", resetSim);
+  scenSel.addEventListener("change", () => { sim.scen = S.find(s => s.id === scenSel.value); resetSim(); });
+
+  // ---------- Start ----------
+  let start = "orbit";
+  try { const h = (location.hash || "").replace("#", ""); if (VIEWS[h]) start = h; else { const saved = localStorage.getItem("imap-view"); if (VIEWS[saved]) start = saved; } } catch (e) {}
+  renderPanel(); renderLog(); setView(start);
+
+})();
+</script>
+
+</body>
+</html>

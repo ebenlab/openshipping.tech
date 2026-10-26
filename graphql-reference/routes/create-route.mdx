@@ -1,0 +1,202 @@
+---
+title: "createRoute"
+description: "Create a route"
+---
+
+`mutation` · Module: **Routes** · Requires `routes:write`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `input` | `RouteCreate` | The fields for this operation. |
+
+### `RouteCreate` fields
+
+| Field | Type |
+|---|---|
+| `name` | `String` |
+| `type` | `RouteCreateType` |
+| `recurrence` | `RecurrenceInput` |
+| `generate_runs_ahead_days` | `Int` |
+| `stops` | `[StopInput!]` |
+| `user_metadata` | `UserMetadataInput` |
+
+## Returns
+
+`Route!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `RouteObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `name` | `String!` |
+| `type` | `RouteType!` |
+| `status` | `RouteStatus!` |
+| `recurrence` | `Recurrence` |
+| `generate_runs_ahead_days` | `Int` |
+| `stops` | `[Stop!]!` |
+| `legs` | `[Leg!]` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+mutation CreateRoute($input: RouteCreate!) {
+  createRoute(input: $input) {
+    id
+    object
+    name
+    type
+    status
+    livemode
+    created
+    updated
+    recurrence {
+      frequency
+      interval
+      days
+      day_of_month
+      times
+      timezone
+    }
+    generate_runs_ahead_days
+    stops {
+      id
+      sequence
+      facility
+      contact {
+        name
+        company
+        email
+        phone
+      }
+      activities
+      arrive_offset
+    }
+    legs {
+      id
+      from_stop
+      to_stop
+      mode
+      operator {
+        type
+        name
+        connection
+        service
+      }
+      vehicle_type
+    }
+  }
+}
+```
+
+```json Variables
+{
+  "input": {
+    "name": "Example",
+    "type": "linehaul",
+    "recurrence": {
+      "frequency": "daily",
+      "interval": 2,
+      "days": [
+        "mon"
+      ],
+      "day_of_month": 2
+    },
+    "generate_runs_ahead_days": 2,
+    "stops": [
+      {
+        "sequence": 2,
+        "facility": "fac_lon_hub",
+        "contact": {
+          "name": "Example",
+          "company": "example",
+          "email": "ops@example.com",
+          "phone": "+447700900123"
+        },
+        "activities": [
+          "load"
+        ]
+      }
+    ]
+  }
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "createRoute": {
+      "id": "rte_1a2B3c",
+      "object": "route",
+      "name": "Example",
+      "type": "linehaul",
+      "status": "draft",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "recurrence": {
+        "frequency": "daily",
+        "interval": 2,
+        "days": [
+          "mon"
+        ],
+        "day_of_month": 2,
+        "times": [
+          "example"
+        ],
+        "timezone": "Europe/London"
+      },
+      "generate_runs_ahead_days": 2,
+      "stops": [
+        {
+          "id": "obj_1a2B3c",
+          "sequence": 2,
+          "facility": "fac_lon_hub",
+          "contact": {
+            "name": "Example",
+            "company": "example",
+            "email": "ops@example.com",
+            "phone": "+447700900123"
+          },
+          "activities": [
+            "load"
+          ],
+          "arrive_offset": "example"
+        }
+      ],
+      "legs": [
+        {
+          "id": "obj_1a2B3c",
+          "from_stop": "example",
+          "to_stop": "example",
+          "mode": "road",
+          "operator": {
+            "type": "self",
+            "name": "Example",
+            "connection": "conn_9f8e",
+            "service": "dhl_express_worldwide"
+          },
+          "vehicle_type": "example"
+        }
+      ]
+    }
+  }
+}
+```
+
+</ResponseExample>

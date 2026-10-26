@@ -1,0 +1,137 @@
+---
+title: "dutyCollection"
+description: "Retrieve a DutyCollection"
+---
+
+`query` · Module: **Trade** · Requires `trade:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+
+## Returns
+
+`DutyCollection!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `DutyCollectionObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `status` | `DutyCollectionStatus!` |
+| `shipment` | `String!` |
+| `landed_cost` | `String` |
+| `assessed` | `DutyCollectionAssessed` |
+| `total` | `Money` |
+| `variance` | `Money` |
+| `assessed_at` | `Int` |
+| `due_by` | `String` |
+| `entry_number` | `String` |
+| `payment` | `JSON` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query DutyCollection($id: ID!) {
+  dutyCollection(id: $id) {
+    id
+    object
+    status
+    livemode
+    created
+    updated
+    shipment
+    landed_cost
+    assessed {
+      duties {
+        amount
+        currency
+      }
+      taxes {
+        amount
+        currency
+      }
+      fees {
+        amount
+        currency
+      }
+    }
+    total {
+      amount
+      currency
+    }
+    variance {
+      amount
+      currency
+    }
+    assessed_at
+    due_by
+    entry_number
+  }
+}
+```
+
+```json Variables
+{
+  "id": "dcol_1a2B3c"
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "dutyCollection": {
+      "id": "dcol_1a2B3c",
+      "object": "duty_collection",
+      "status": "pending_assessment",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "shipment": "shp_1Q2w3E4r5T6y",
+      "landed_cost": "example",
+      "assessed": {
+        "duties": {
+          "amount": 1299,
+          "currency": "usd"
+        },
+        "taxes": {
+          "amount": 1299,
+          "currency": "usd"
+        },
+        "fees": {
+          "amount": 1299,
+          "currency": "usd"
+        }
+      },
+      "total": {
+        "amount": 1299,
+        "currency": "usd"
+      },
+      "variance": {
+        "amount": 1299,
+        "currency": "usd"
+      },
+      "assessed_at": 1791302400,
+      "due_by": "2026-10-07",
+      "entry_number": "example"
+    }
+  }
+}
+```
+
+</ResponseExample>

@@ -1,0 +1,139 @@
+---
+title: "createRecord"
+description: "Write a record"
+---
+
+`mutation` · Module: **Data Network** · Requires `data:write`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `input` | `RecordCreate` | The fields for this operation. |
+
+### `RecordCreate` fields
+
+| Field | Type |
+|---|---|
+| `subject` | `RecordCreateSubjectInput` |
+| `role` | `String` |
+
+## Returns
+
+`Record!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `RecordObject!` |
+| `cid` | `String!` |
+| `subject` | `RecordSubject!` |
+| `previous` | `String` |
+| `producer` | `String!` |
+| `role` | `String` |
+| `produced_at` | `String` |
+| `schema` | `String` |
+| `payload` | `RecordPayload` |
+| `public_fields` | `JSON` |
+| `signature` | `RecordSignature!` |
+| `anchor` | `RecordAnchor` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+mutation CreateRecord($input: RecordCreate!) {
+  createRecord(input: $input) {
+    id
+    object
+    cid
+    subject {
+      type
+      id
+      shipment
+    }
+    previous
+    producer
+    role
+    produced_at
+    schema
+    payload {
+      encryption
+      key_id
+      location
+      size
+    }
+    signature {
+      alg
+      kid
+      value
+    }
+    anchor {
+      status
+      batch
+      merkle_proof
+    }
+  }
+}
+```
+
+```json Variables
+{
+  "input": {
+    "subject": {
+      "type": "example",
+      "shipment": "shp_1Q2w3E4r5T6y"
+    },
+    "role": "example"
+  }
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "createRecord": {
+      "id": "obj_1a2B3c",
+      "object": "record",
+      "cid": "example",
+      "subject": {
+        "type": "example",
+        "id": "obj_1a2B3c",
+        "shipment": "shp_1Q2w3E4r5T6y"
+      },
+      "previous": "example",
+      "producer": "example",
+      "role": "example",
+      "produced_at": "2026-10-07T09:00:00Z",
+      "schema": "example",
+      "payload": {
+        "encryption": "example",
+        "key_id": "example",
+        "location": "loc_lon_a12_03_b",
+        "size": 2
+      },
+      "signature": {
+        "alg": "example",
+        "kid": "example",
+        "value": "example"
+      },
+      "anchor": {
+        "status": "example",
+        "batch": "example",
+        "merkle_proof": [
+          "example"
+        ]
+      }
+    }
+  }
+}
+```
+
+</ResponseExample>

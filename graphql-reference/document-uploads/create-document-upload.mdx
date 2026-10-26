@@ -1,0 +1,166 @@
+---
+title: "createDocumentUpload"
+description: "Submit customs documents to a carrier"
+---
+
+`mutation` · Module: **Document Uploads** · Requires `documents:write`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `input` | `DocumentUploadCreate` | The fields for this operation. |
+
+### `DocumentUploadCreate` fields
+
+| Field | Type |
+|---|---|
+| `shipment` | `String` |
+| `connection` | `String` |
+| `tracking_number` | `String` |
+| `origin_country` | `String` |
+| `destination_country` | `String` |
+| `documents` | `[DocumentUploadCreateDocumentsItemInput!]` |
+| `reference` | `String` |
+| `user_metadata` | `UserMetadataInput` |
+
+## Returns
+
+`DocumentUpload!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `DocumentUploadObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `status` | `DocumentUploadStatus!` |
+| `connection` | `String` |
+| `carrier` | `String` |
+| `shipment` | `String` |
+| `tracking_number` | `String` |
+| `stage` | `DocumentUploadStage!` |
+| `origin_country` | `String` |
+| `destination_country` | `String` |
+| `documents` | `[DocumentUploadDocumentsItem!]!` |
+| `reference` | `String` |
+| `messages` | `[Message!]` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+mutation CreateDocumentUpload($input: DocumentUploadCreate!) {
+  createDocumentUpload(input: $input) {
+    id
+    object
+    status
+    livemode
+    created
+    updated
+    connection
+    carrier
+    shipment
+    tracking_number
+    stage
+    origin_country
+    destination_country
+    documents {
+      type
+      name
+      status
+      file
+      carrier_reference
+      error {
+        code
+        message
+      }
+    }
+    reference
+    messages {
+      code
+      level
+      message
+      param
+      carrier
+    }
+  }
+}
+```
+
+```json Variables
+{
+  "input": {
+    "shipment": "shp_1Q2w3E4r5T6y",
+    "connection": "conn_9f8e",
+    "tracking_number": "1Z999AA10123456784",
+    "origin_country": "PT",
+    "destination_country": "GB",
+    "documents": [
+      {
+        "type": "commercial_invoice",
+        "name": "Example"
+      }
+    ],
+    "reference": "ORDER-1001"
+  }
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "createDocumentUpload": {
+      "id": "dupl_1a2B3c",
+      "object": "document_upload",
+      "status": "pending",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "connection": "conn_9f8e",
+      "carrier": "dhl_express",
+      "shipment": "shp_1Q2w3E4r5T6y",
+      "tracking_number": "1Z999AA10123456784",
+      "stage": "pre_shipment",
+      "origin_country": "PT",
+      "destination_country": "GB",
+      "documents": [
+        {
+          "type": "commercial_invoice",
+          "name": "Example",
+          "status": "pending",
+          "file": "file_6Yu8",
+          "carrier_reference": "example",
+          "error": {
+            "code": "dhl_express_worldwide",
+            "message": "example"
+          }
+        }
+      ],
+      "reference": "ORDER-1001",
+      "messages": [
+        {
+          "code": "dhl_express_worldwide",
+          "level": "info",
+          "message": "example",
+          "param": "example",
+          "carrier": "dhl_express"
+        }
+      ]
+    }
+  }
+}
+```
+
+</ResponseExample>

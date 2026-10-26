@@ -1,0 +1,121 @@
+---
+title: "webhookEndpoint"
+description: "Retrieve a WebhookEndpoint"
+---
+
+`query` · Module: **Webhooks** · Requires `webhooks:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+
+## Returns
+
+`WebhookEndpoint!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `WebhookEndpointObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `url` | `String!` |
+| `description` | `String` |
+| `enabled_events` | `[String!]!` |
+| `status` | `WebhookEndpointStatus!` |
+| `api_version` | `String` |
+| `filters` | `WebhookEndpointFilters` |
+| `secret` | `String` |
+| `secret_preview` | `String` |
+| `disabled_reason` | `String` |
+| `delivery` | `WebhookEndpointDelivery` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query WebhookEndpoint($id: ID!) {
+  webhookEndpoint(id: $id) {
+    id
+    object
+    status
+    livemode
+    created
+    updated
+    url
+    description
+    enabled_events
+    api_version
+    filters {
+      carriers
+      connections
+    }
+    secret
+    secret_preview
+    disabled_reason
+    delivery {
+      last_success_at
+      last_failure_at
+      failure_streak
+    }
+  }
+}
+```
+
+```json Variables
+{
+  "id": "we_1a2B3c"
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "webhookEndpoint": {
+      "id": "we_1a2B3c",
+      "object": "webhook_endpoint",
+      "status": "enabled",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "url": "https://example.com/resource",
+      "description": "Example description",
+      "enabled_events": [
+        "example"
+      ],
+      "api_version": "example",
+      "filters": {
+        "carriers": [
+          "example"
+        ],
+        "connections": [
+          "example"
+        ]
+      },
+      "secret": "example",
+      "secret_preview": "example",
+      "disabled_reason": "example",
+      "delivery": {
+        "last_success_at": 1791302400,
+        "last_failure_at": 1791302400,
+        "failure_streak": 2
+      }
+    }
+  }
+}
+```
+
+</ResponseExample>

@@ -1,0 +1,107 @@
+---
+title: "createWave"
+description: "Release a wave"
+---
+
+`mutation` · Module: **Inventory** · Requires `inventory:write`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `input` | `WaveInput` | The fields for this operation. |
+
+### `WaveInput` fields
+
+| Field | Type |
+|---|---|
+| `facility` | `String` |
+| `strategy` | `WaveInputStrategy` |
+| `status` | `WaveInputStatus` |
+| `fulfillment_orders` | `[String!]` |
+| `pick_list` | `String` |
+| `user_metadata` | `UserMetadataInput` |
+
+## Returns
+
+`Wave!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `WaveObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `facility` | `String!` |
+| `strategy` | `WaveStrategy` |
+| `status` | `WaveStatus!` |
+| `fulfillment_orders` | `[String!]` |
+| `pick_list` | `String` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+mutation CreateWave($input: WaveInput!) {
+  createWave(input: $input) {
+    id
+    object
+    status
+    livemode
+    created
+    updated
+    facility
+    strategy
+    fulfillment_orders
+    pick_list
+  }
+}
+```
+
+```json Variables
+{
+  "input": {
+    "facility": "fac_lon_hub",
+    "strategy": "zone",
+    "status": "released",
+    "fulfillment_orders": [
+      "example"
+    ],
+    "pick_list": "example"
+  }
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "createWave": {
+      "id": "wave_1a2B3c",
+      "object": "wave",
+      "status": "released",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "facility": "fac_lon_hub",
+      "strategy": "zone",
+      "fulfillment_orders": [
+        "example"
+      ],
+      "pick_list": "example"
+    }
+  }
+}
+```
+
+</ResponseExample>

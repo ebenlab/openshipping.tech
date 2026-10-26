@@ -1,0 +1,129 @@
+---
+title: "connection"
+description: "Retrieve a Connection"
+---
+
+`query` · Module: **Connections** · Requires `connections:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+
+## Returns
+
+`Connection!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `ConnectionObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `integration` | `String` |
+| `interfaces` | `[String!]` |
+| `carrier` | `String!` |
+| `method` | `ConnectionMethodEnum!` |
+| `display_name` | `String` |
+| `account_number` | `String` |
+| `status` | `ConnectionStatus!` |
+| `default` | `Boolean` |
+| `capabilities` | `[String!]` |
+| `config` | `JSON` |
+| `credentials` | `JSON` |
+| `credentials_preview` | `JSON` |
+| `oauth` | `ConnectionOauth` |
+| `ownership` | `ConnectionOwnership` |
+| `inbound` | `ConnectionInbound` |
+| `verification` | `ConnectionVerification` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query Connection($id: ID!) {
+  connection(id: $id) {
+    id
+    object
+    status
+    livemode
+    created
+    updated
+    integration
+    interfaces
+    carrier
+    method
+    display_name
+    account_number
+    default
+    capabilities
+    oauth {
+      status
+      app
+      issuer
+      subject
+      scopes
+      access_token_expires_at
+    }
+    ownership
+  }
+}
+```
+
+```json Variables
+{
+  "id": "conn_1a2B3c"
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "connection": {
+      "id": "conn_1a2B3c",
+      "object": "connection",
+      "status": "active",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "integration": "example",
+      "interfaces": [
+        "example"
+      ],
+      "carrier": "dhl_express",
+      "method": "credentials",
+      "display_name": "example",
+      "account_number": "example",
+      "default": true,
+      "capabilities": [
+        "example"
+      ],
+      "oauth": {
+        "status": "valid",
+        "app": "example",
+        "issuer": "https://ada.okta.com/oauth2/default",
+        "subject": "example",
+        "scopes": [
+          "example"
+        ],
+        "access_token_expires_at": 1791302400
+      },
+      "ownership": "account"
+    }
+  }
+}
+```
+
+</ResponseExample>

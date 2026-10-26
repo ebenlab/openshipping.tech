@@ -1,0 +1,159 @@
+---
+title: "addressValidation"
+description: "Retrieve an address validation"
+---
+
+`query` · Module: **Integrations**
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+
+## Returns
+
+`AddressValidation!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `AddressValidationObject!` |
+| `status` | `AddressValidationStatus!` |
+| `deliverability` | `AddressValidationDeliverability` |
+| `input` | `Address` |
+| `suggested` | `Address` |
+| `alternatives` | `[Address!]` |
+| `components` | `JSON` |
+| `residential` | `Boolean` |
+| `geocode` | `AddressValidationGeocode` |
+| `changes` | `[String!]` |
+| `connection` | `String` |
+| `messages` | `[Message!]` |
+| `carrier_metadata` | `CarrierMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query AddressValidation($id: ID!) {
+  addressValidation(id: $id) {
+    id
+    object
+    status
+    deliverability
+    input {
+      line1
+      street_number
+      line2
+      city
+      state
+      postal_code
+    }
+    suggested {
+      line1
+      street_number
+      line2
+      city
+      state
+      postal_code
+    }
+    alternatives {
+      line1
+      street_number
+      line2
+      city
+      state
+      postal_code
+    }
+    residential
+    geocode {
+      latitude
+      longitude
+      accuracy
+    }
+    changes
+    connection
+    messages {
+      code
+      level
+      message
+      param
+      carrier
+    }
+  }
+}
+```
+
+```json Variables
+{
+  "id": "obj_1a2B3c"
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "addressValidation": {
+      "id": "obj_1a2B3c",
+      "object": "address_validation",
+      "status": "verified",
+      "deliverability": "deliverable",
+      "input": {
+        "line1": "Downing St",
+        "street_number": "10",
+        "line2": "example",
+        "city": "London",
+        "state": "example",
+        "postal_code": "SW1A 2AA"
+      },
+      "suggested": {
+        "line1": "Downing St",
+        "street_number": "10",
+        "line2": "example",
+        "city": "London",
+        "state": "example",
+        "postal_code": "SW1A 2AA"
+      },
+      "alternatives": [
+        {
+          "line1": "Downing St",
+          "street_number": "10",
+          "line2": "example",
+          "city": "London",
+          "state": "example",
+          "postal_code": "SW1A 2AA"
+        }
+      ],
+      "residential": true,
+      "geocode": {
+        "latitude": 51.5074,
+        "longitude": -0.1278,
+        "accuracy": "rooftop"
+      },
+      "changes": [
+        "example"
+      ],
+      "connection": "conn_9f8e",
+      "messages": [
+        {
+          "code": "dhl_express_worldwide",
+          "level": "info",
+          "message": "example",
+          "param": "example",
+          "carrier": "dhl_express"
+        }
+      ]
+    }
+  }
+}
+```
+
+</ResponseExample>

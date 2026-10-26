@@ -1,0 +1,287 @@
+---
+title: "createLandedCost"
+description: "Quote landed cost"
+---
+
+`mutation` · Module: **Trade** · Requires `trade:write`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `input` | `LandedCostCreate` | The fields for this operation. |
+
+### `LandedCostCreate` fields
+
+| Field | Type |
+|---|---|
+| `ship_from` | `ContactInput` |
+| `ship_to` | `ContactInput` |
+| `items` | `[ItemInput!]` |
+| `order` | `OrderInput` |
+| `customs_declaration` | `CustomsDeclarationInput` |
+| `shipment` | `String` |
+| `service` | `String` |
+| `currency` | `String` |
+| `user_metadata` | `UserMetadataInput` |
+
+## Returns
+
+`LandedCost!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `LandedCostObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `expires_at` | `Int` |
+| `guaranteed` | `Boolean!` |
+| `currency` | `String` |
+| `incoterm` | `String` |
+| `regime` | `LandedCostRegime` |
+| `de_minimis` | `LandedCostDeMinimis` |
+| `items` | `[LandedCostItemsItem!]` |
+| `fees` | `[Charge!]` |
+| `totals` | `LandedCostTotals!` |
+| `messages` | `[Message!]` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+mutation CreateLandedCost($input: LandedCostCreate!) {
+  createLandedCost(input: $input) {
+    id
+    object
+    livemode
+    created
+    updated
+    expires_at
+    guaranteed
+    currency
+    incoterm
+    regime {
+      type
+      threshold {
+        amount
+        currency
+      }
+      collected_at
+    }
+    de_minimis {
+      duty {
+        amount
+        currency
+      }
+      tax {
+        amount
+        currency
+      }
+      duty_applied
+      tax_applied
+    }
+    items {
+      index
+      import_hs_code
+      customs_value {
+        amount
+        currency
+      }
+      duties {
+        name
+        kind
+        rate
+        basis
+      }
+      taxes {
+        name
+        kind
+        rate
+        basis
+      }
+    }
+    fees {
+      name
+      kind
+      option
+      amount {
+        amount
+        currency
+      }
+      carrier_code
+    }
+    totals {
+      duties {
+        amount
+        currency
+      }
+      taxes {
+        amount
+        currency
+      }
+      fees {
+        amount
+        currency
+      }
+      total {
+        amount
+        currency
+      }
+    }
+    messages {
+      code
+      level
+      message
+      param
+      carrier
+    }
+  }
+}
+```
+
+```json Variables
+{
+  "input": {
+    "ship_from": {
+      "name": "Example",
+      "company": "example",
+      "email": "ops@example.com",
+      "phone": "+447700900123"
+    },
+    "ship_to": {
+      "name": "Example",
+      "company": "example",
+      "email": "ops@example.com",
+      "phone": "+447700900123"
+    },
+    "items": [
+      {
+        "title": "Example",
+        "description": "Example description",
+        "sku": "TS-RED-M",
+        "quantity": 2
+      }
+    ],
+    "shipment": "shp_1Q2w3E4r5T6y",
+    "service": "dhl_express_worldwide",
+    "currency": "usd"
+  }
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "createLandedCost": {
+      "id": "lc_1a2B3c",
+      "object": "landed_cost",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "expires_at": 1791302400,
+      "guaranteed": true,
+      "currency": "usd",
+      "incoterm": "example",
+      "regime": {
+        "type": "standard",
+        "threshold": {
+          "amount": 1299,
+          "currency": "usd"
+        },
+        "collected_at": "point_of_sale"
+      },
+      "de_minimis": {
+        "duty": {
+          "amount": 1299,
+          "currency": "usd"
+        },
+        "tax": {
+          "amount": 1299,
+          "currency": "usd"
+        },
+        "duty_applied": true,
+        "tax_applied": true
+      },
+      "items": [
+        {
+          "index": 2,
+          "import_hs_code": "GB",
+          "customs_value": {
+            "amount": 1299,
+            "currency": "usd"
+          },
+          "duties": [
+            {
+              "name": "Example",
+              "kind": "example",
+              "rate": 0.145,
+              "basis": "example"
+            }
+          ],
+          "taxes": [
+            {
+              "name": "Example",
+              "kind": "example",
+              "rate": 0.145,
+              "basis": "example"
+            }
+          ]
+        }
+      ],
+      "fees": [
+        {
+          "name": "Example",
+          "kind": "base",
+          "option": "example",
+          "amount": {
+            "amount": 1299,
+            "currency": "usd"
+          },
+          "carrier_code": "EXPRESS_WORLDWIDE"
+        }
+      ],
+      "totals": {
+        "duties": {
+          "amount": 1299,
+          "currency": "usd"
+        },
+        "taxes": {
+          "amount": 1299,
+          "currency": "usd"
+        },
+        "fees": {
+          "amount": 1299,
+          "currency": "usd"
+        },
+        "total": {
+          "amount": 1299,
+          "currency": "usd"
+        }
+      },
+      "messages": [
+        {
+          "code": "dhl_express_worldwide",
+          "level": "info",
+          "message": "example",
+          "param": "example",
+          "carrier": "dhl_express"
+        }
+      ]
+    }
+  }
+}
+```
+
+</ResponseExample>

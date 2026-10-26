@@ -1,0 +1,119 @@
+---
+title: "products"
+description: "List products"
+---
+
+`query` · Module: **Products** · Requires `products:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `status` | `String` | Filter by status. |
+| `category` | `String` | Filter by category. |
+| `originCountry` | `String` | Filter by origin country. |
+| `variantOf` | `String` | Filter by variant of. |
+| `updatedGte` | `Int` | Filter by updated gte. |
+| `externalIdsSource` | `String` | Filter by external ids source. |
+| `createdGte` | `Int` | Filter by created gte. |
+| `createdLte` | `Int` | Filter by created lte. |
+| `limit` | `Int` | Page size, 1–100 (default 10). |
+| `startingAfter` | `ID` | Cursor: return objects after this ID. |
+| `endingBefore` | `ID` | Cursor: return objects before this ID. |
+
+## Returns
+
+`ProductList!`
+
+| Field | Type |
+|---|---|
+| `data` | `[Product!]!` |
+| `has_more` | `Boolean` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query Products($limit: Int) {
+  products(limit: $limit) {
+    data {
+      id
+      object
+      status
+      livemode
+      created
+      updated
+      sku
+      title
+      description
+      variant_of
+      category
+      brand
+      material
+      origin_country
+      manufacturer {
+        name
+        country
+        mid
+      }
+      unit_value {
+        amount
+        currency
+      }
+    }
+    has_more
+  }
+}
+```
+
+```json Variables
+{
+  "limit": 10
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "products": {
+      "data": [
+        {
+          "id": "prod_1a2B3c",
+          "object": "product",
+          "status": "active",
+          "livemode": true,
+          "created": 1791302400,
+          "updated": 1791302400,
+          "sku": "TS-RED-M",
+          "title": "Example",
+          "description": "Example description",
+          "variant_of": "example",
+          "category": "example",
+          "brand": "example",
+          "material": "example",
+          "origin_country": "PT",
+          "manufacturer": {
+            "name": "Example",
+            "country": "GB",
+            "mid": "example"
+          },
+          "unit_value": {
+            "amount": 1299,
+            "currency": "usd"
+          }
+        }
+      ],
+      "has_more": true
+    }
+  }
+}
+```
+
+</ResponseExample>

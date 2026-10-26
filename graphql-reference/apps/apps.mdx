@@ -1,0 +1,106 @@
+---
+title: "apps"
+description: "List apps"
+---
+
+`query` · Module: **Apps** · Requires `connections:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `carrier` | `String` | Filter by carrier. |
+| `visibility` | `String` | Filter by visibility. |
+| `status` | `String` | Filter by status. |
+| `createdGte` | `Int` | Filter by created gte. |
+| `createdLte` | `Int` | Filter by created lte. |
+| `limit` | `Int` | Page size, 1–100 (default 10). |
+| `startingAfter` | `ID` | Cursor: return objects after this ID. |
+| `endingBefore` | `ID` | Cursor: return objects before this ID. |
+
+## Returns
+
+`AppList!`
+
+| Field | Type |
+|---|---|
+| `data` | `[App!]!` |
+| `has_more` | `Boolean` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query Apps($limit: Int) {
+  apps(limit: $limit) {
+    data {
+      id
+      object
+      name
+      status
+      livemode
+      created
+      updated
+      carrier
+      client_id
+      client_secret
+      client_secret_preview
+      client_secret_expires_at
+      redirect_uris
+      scopes
+      issuer
+      openid
+    }
+    has_more
+  }
+}
+```
+
+```json Variables
+{
+  "limit": 10
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "apps": {
+      "data": [
+        {
+          "id": "app_1a2B3c",
+          "object": "app",
+          "name": "Example",
+          "status": "active",
+          "livemode": true,
+          "created": 1791302400,
+          "updated": 1791302400,
+          "carrier": "dhl_express",
+          "client_id": "0oa1b2c3",
+          "client_secret": "example",
+          "client_secret_preview": "example",
+          "client_secret_expires_at": 1791302400,
+          "redirect_uris": [
+            "example"
+          ],
+          "scopes": [
+            "example"
+          ],
+          "issuer": "https://ada.okta.com/oauth2/default",
+          "openid": true
+        }
+      ],
+      "has_more": true
+    }
+  }
+}
+```
+
+</ResponseExample>

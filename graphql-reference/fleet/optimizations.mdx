@@ -1,0 +1,139 @@
+---
+title: "optimizations"
+description: "List optimizations"
+---
+
+`query` · Module: **Fleet** · Requires `fleet:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `createdGte` | `Int` | Filter by created gte. |
+| `createdLte` | `Int` | Filter by created lte. |
+| `limit` | `Int` | Page size, 1–100 (default 10). |
+| `startingAfter` | `ID` | Cursor: return objects after this ID. |
+| `endingBefore` | `ID` | Cursor: return objects before this ID. |
+
+## Returns
+
+`OptimizationList!`
+
+| Field | Type |
+|---|---|
+| `data` | `[Optimization!]!` |
+| `has_more` | `Boolean` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query Optimizations($limit: Int) {
+  optimizations(limit: $limit) {
+    data {
+      id
+      object
+      status
+      livemode
+      created
+      updated
+      date
+      depot
+      proposed_runs {
+        vehicle
+        driver
+        stops {
+          sequence
+          facility
+          activities
+          arrive_offset
+        }
+        distance {
+          value
+          unit
+        }
+        duration_minutes
+        load {
+          handling_units
+        }
+      }
+      unassigned {
+        shipment
+        reason
+      }
+      runs
+    }
+    has_more
+  }
+}
+```
+
+```json Variables
+{
+  "limit": 10
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "optimizations": {
+      "data": [
+        {
+          "id": "optj_1a2B3c",
+          "object": "optimization",
+          "status": "pending",
+          "livemode": true,
+          "created": 1791302400,
+          "updated": 1791302400,
+          "date": "2026-10-07",
+          "depot": "fac_lon_hub",
+          "proposed_runs": [
+            {
+              "vehicle": "veh_van07",
+              "driver": "drv_ama",
+              "stops": [
+                {
+                  "sequence": 2,
+                  "facility": "fac_lon_hub",
+                  "activities": [
+                    "load"
+                  ],
+                  "arrive_offset": "example"
+                }
+              ],
+              "distance": {
+                "value": 1.5,
+                "unit": "kg"
+              },
+              "duration_minutes": 2,
+              "load": {
+                "handling_units": 2
+              }
+            }
+          ],
+          "unassigned": [
+            {
+              "shipment": "shp_1Q2w3E4r5T6y",
+              "reason": "example"
+            }
+          ],
+          "runs": [
+            "example"
+          ]
+        }
+      ],
+      "has_more": true
+    }
+  }
+}
+```
+
+</ResponseExample>

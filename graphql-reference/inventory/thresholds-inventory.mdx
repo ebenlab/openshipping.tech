@@ -1,0 +1,60 @@
+---
+title: "thresholdsInventory"
+description: "Set low-stock thresholds"
+---
+
+`mutation` · Module: **Inventory**
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `input` | `ThresholdsInventoryInput` | The fields for this operation. |
+
+### `ThresholdsInventoryInput` fields
+
+| Field | Type |
+|---|---|
+| `product` | `String` |
+| `facility` | `String` |
+| `available_below` | `Int` |
+
+## Returns
+
+`JSON!`
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+mutation ThresholdsInventory($input: ThresholdsInventoryInput!) {
+  thresholdsInventory(input: $input)
+}
+```
+
+```json Variables
+{
+  "input": {
+    "product": "prod_ts_red_m",
+    "facility": "fac_lon_hub",
+    "available_below": 2
+  }
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "thresholdsInventory": {}
+  }
+}
+```
+
+</ResponseExample>

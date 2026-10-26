@@ -1,0 +1,119 @@
+---
+title: "documentIngestion"
+description: "Retrieve a DocumentIngestion"
+---
+
+`query` · Module: **Templates** · Requires `templates:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+
+## Returns
+
+`DocumentIngestion!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `DocumentIngestionObject!` |
+| `status` | `DocumentIngestionStatus!` |
+| `type` | `String` |
+| `detected_type` | `String` |
+| `format` | `DocumentIngestionFormat` |
+| `file` | `String!` |
+| `extraction` | `DocumentIngestionExtraction` |
+| `attach_to` | `DocumentIngestionAttachTo` |
+| `document` | `String` |
+| `job` | `String` |
+| `messages` | `[Message!]` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query DocumentIngestion($id: ID!) {
+  documentIngestion(id: $id) {
+    id
+    object
+    status
+    type
+    detected_type
+    format
+    file
+    extraction {
+      mapped {
+        target
+      }
+    }
+    attach_to {
+      type
+      id
+    }
+    document
+    job
+    messages {
+      code
+      level
+      message
+      param
+      carrier
+    }
+  }
+}
+```
+
+```json Variables
+{
+  "id": "obj_1a2B3c"
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "documentIngestion": {
+      "id": "obj_1a2B3c",
+      "object": "document_ingestion",
+      "status": "processing",
+      "type": "example",
+      "detected_type": "example",
+      "format": "pdf_text",
+      "file": "file_6Yu8",
+      "extraction": {
+        "mapped": [
+          {
+            "target": "example"
+          }
+        ]
+      },
+      "attach_to": {
+        "type": "example",
+        "id": "obj_1a2B3c"
+      },
+      "document": "example",
+      "job": "example",
+      "messages": [
+        {
+          "code": "dhl_express_worldwide",
+          "level": "info",
+          "message": "example",
+          "param": "example",
+          "carrier": "dhl_express"
+        }
+      ]
+    }
+  }
+}
+```
+
+</ResponseExample>

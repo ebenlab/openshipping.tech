@@ -1,0 +1,101 @@
+---
+title: "accessGrants"
+description: "List access grants"
+---
+
+`query` · Module: **Data Network** · Requires `data:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `grantee` | `String` | Filter by grantee. |
+| `status` | `String` | Filter by status. |
+| `createdGte` | `Int` | Filter by created gte. |
+| `createdLte` | `Int` | Filter by created lte. |
+| `limit` | `Int` | Page size, 1–100 (default 10). |
+| `startingAfter` | `ID` | Cursor: return objects after this ID. |
+| `endingBefore` | `ID` | Cursor: return objects before this ID. |
+
+## Returns
+
+`AccessGrantList!`
+
+| Field | Type |
+|---|---|
+| `data` | `[AccessGrant!]!` |
+| `has_more` | `Boolean` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query AccessGrants($limit: Int) {
+  accessGrants(limit: $limit) {
+    data {
+      id
+      object
+      status
+      livemode
+      created
+      updated
+      grantor
+      grantee
+      subjects {
+        shipments
+      }
+      fields
+      purpose
+      expires_at
+    }
+    has_more
+  }
+}
+```
+
+```json Variables
+{
+  "limit": 10
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "accessGrants": {
+      "data": [
+        {
+          "id": "grt_1a2B3c",
+          "object": "access_grant",
+          "status": "active",
+          "livemode": true,
+          "created": 1791302400,
+          "updated": 1791302400,
+          "grantor": "example",
+          "grantee": "example",
+          "subjects": {
+            "shipments": [
+              "example"
+            ]
+          },
+          "fields": [
+            "example"
+          ],
+          "purpose": "example",
+          "expires_at": 1791302400
+        }
+      ],
+      "has_more": true
+    }
+  }
+}
+```
+
+</ResponseExample>

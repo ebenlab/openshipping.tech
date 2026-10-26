@@ -1,0 +1,223 @@
+---
+title: "fulfillmentOrders"
+description: "List fulfillment orders"
+---
+
+`query` · Module: **Inventory** · Requires `inventory:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `status` | `String` | Filter by status. |
+| `facility` | `String` | Filter by facility. |
+| `owner` | `String` | Filter by owner. |
+| `channelUpstreamReference` | `String` | Filter by channel.upstream reference. |
+| `createdGte` | `Int` | Filter by created gte. |
+| `createdLte` | `Int` | Filter by created lte. |
+| `limit` | `Int` | Page size, 1–100 (default 10). |
+| `startingAfter` | `ID` | Cursor: return objects after this ID. |
+| `endingBefore` | `ID` | Cursor: return objects before this ID. |
+
+## Returns
+
+`FulfillmentOrderList!`
+
+| Field | Type |
+|---|---|
+| `data` | `[FulfillmentOrder!]!` |
+| `has_more` | `Boolean` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query FulfillmentOrders($limit: Int) {
+  fulfillmentOrders(limit: $limit) {
+    data {
+      id
+      object
+      status
+      livemode
+      created
+      updated
+      owner
+      channel {
+        source
+        order_id
+        upstream_reference
+      }
+      order {
+        id
+        reference
+        channel
+        ordered_at
+        currency
+        subtotal {
+          amount
+          currency
+        }
+      }
+      ship_to {
+        name
+        company
+        email
+        phone
+        tax_ids {
+          type
+          value
+          country
+        }
+        address {
+          line1
+          street_number
+          line2
+          city
+        }
+      }
+      lines {
+        product
+        quantity
+        allocated
+        picked
+        packed
+        lot_policy
+      }
+      facility
+      allocation {
+        strategy
+        split_allowed
+        decided_at
+      }
+      shipping {
+        promise {
+          deliver_by
+        }
+      }
+      packing {
+        packaging
+        inserts
+        gift_message
+      }
+      tasks {
+        type
+        status
+        location
+        product
+        quantity
+        wave
+      }
+    }
+    has_more
+  }
+}
+```
+
+```json Variables
+{
+  "limit": 10
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "fulfillmentOrders": {
+      "data": [
+        {
+          "id": "fo_1a2B3c",
+          "object": "fulfillment_order",
+          "status": "received",
+          "livemode": true,
+          "created": 1791302400,
+          "updated": 1791302400,
+          "owner": "acct_ada",
+          "channel": {
+            "source": "api",
+            "order_id": "example",
+            "upstream_reference": "example"
+          },
+          "order": {
+            "id": "obj_1a2B3c",
+            "reference": "ORDER-1001",
+            "channel": "example",
+            "ordered_at": "2026-10-07T09:00:00Z",
+            "currency": "usd",
+            "subtotal": {
+              "amount": 1299,
+              "currency": "usd"
+            }
+          },
+          "ship_to": {
+            "name": "Example",
+            "company": "example",
+            "email": "ops@example.com",
+            "phone": "+447700900123",
+            "tax_ids": [
+              {
+                "type": "eori",
+                "value": "example",
+                "country": "GB"
+              }
+            ],
+            "address": {
+              "line1": "Downing St",
+              "street_number": "10",
+              "line2": "example",
+              "city": "London"
+            }
+          },
+          "lines": [
+            {
+              "product": "prod_ts_red_m",
+              "quantity": 2,
+              "allocated": 2,
+              "picked": 2,
+              "packed": 2,
+              "lot_policy": "fefo"
+            }
+          ],
+          "facility": "fac_lon_hub",
+          "allocation": {
+            "strategy": "example",
+            "split_allowed": true,
+            "decided_at": 1791302400
+          },
+          "shipping": {
+            "promise": {
+              "deliver_by": "example"
+            }
+          },
+          "packing": {
+            "packaging": "example",
+            "inserts": [
+              "example"
+            ],
+            "gift_message": "example"
+          },
+          "tasks": [
+            {
+              "type": "example",
+              "status": "example",
+              "location": "loc_lon_a12_03_b",
+              "product": "prod_ts_red_m",
+              "quantity": 2,
+              "wave": "example"
+            }
+          ]
+        }
+      ],
+      "has_more": true
+    }
+  }
+}
+```
+
+</ResponseExample>

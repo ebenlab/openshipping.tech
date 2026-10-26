@@ -1,0 +1,139 @@
+---
+title: "documentUploads"
+description: "List document uploads"
+---
+
+`query` · Module: **Document Uploads** · Requires `documents:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `status` | `String` | Filter by status. |
+| `stage` | `String` | Filter by stage. |
+| `shipment` | `String` | Filter by shipment. |
+| `connection` | `String` | Filter by connection. |
+| `createdGte` | `Int` | Filter by created gte. |
+| `createdLte` | `Int` | Filter by created lte. |
+| `limit` | `Int` | Page size, 1–100 (default 10). |
+| `startingAfter` | `ID` | Cursor: return objects after this ID. |
+| `endingBefore` | `ID` | Cursor: return objects before this ID. |
+
+## Returns
+
+`DocumentUploadList!`
+
+| Field | Type |
+|---|---|
+| `data` | `[DocumentUpload!]!` |
+| `has_more` | `Boolean` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query DocumentUploads($limit: Int) {
+  documentUploads(limit: $limit) {
+    data {
+      id
+      object
+      status
+      livemode
+      created
+      updated
+      connection
+      carrier
+      shipment
+      tracking_number
+      stage
+      origin_country
+      destination_country
+      documents {
+        type
+        name
+        status
+        file
+        carrier_reference
+        error {
+          code
+          message
+        }
+      }
+      reference
+      messages {
+        code
+        level
+        message
+        param
+        carrier
+      }
+    }
+    has_more
+  }
+}
+```
+
+```json Variables
+{
+  "limit": 10
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "documentUploads": {
+      "data": [
+        {
+          "id": "dupl_1a2B3c",
+          "object": "document_upload",
+          "status": "pending",
+          "livemode": true,
+          "created": 1791302400,
+          "updated": 1791302400,
+          "connection": "conn_9f8e",
+          "carrier": "dhl_express",
+          "shipment": "shp_1Q2w3E4r5T6y",
+          "tracking_number": "1Z999AA10123456784",
+          "stage": "pre_shipment",
+          "origin_country": "PT",
+          "destination_country": "GB",
+          "documents": [
+            {
+              "type": "commercial_invoice",
+              "name": "Example",
+              "status": "pending",
+              "file": "file_6Yu8",
+              "carrier_reference": "example",
+              "error": {
+                "code": "dhl_express_worldwide",
+                "message": "example"
+              }
+            }
+          ],
+          "reference": "ORDER-1001",
+          "messages": [
+            {
+              "code": "dhl_express_worldwide",
+              "level": "info",
+              "message": "example",
+              "param": "example",
+              "carrier": "dhl_express"
+            }
+          ]
+        }
+      ],
+      "has_more": true
+    }
+  }
+}
+```
+
+</ResponseExample>

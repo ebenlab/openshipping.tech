@@ -1,0 +1,99 @@
+---
+title: "membership"
+description: "Retrieve a Membership"
+---
+
+`query` · Module: **Accounts** · Requires `accounts:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+
+## Returns
+
+`Membership!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `MembershipObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `account` | `String!` |
+| `identity` | `MembershipIdentity!` |
+| `role` | `String!` |
+| `status` | `MembershipStatus!` |
+| `source` | `MembershipSource` |
+| `last_sign_in_at` | `Int` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query Membership($id: ID!) {
+  membership(id: $id) {
+    id
+    object
+    status
+    livemode
+    created
+    updated
+    account
+    identity {
+      name
+      issuer
+      subject
+      email
+    }
+    role
+    source
+    last_sign_in_at
+  }
+}
+```
+
+```json Variables
+{
+  "id": "mbr_1a2B3c"
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "membership": {
+      "id": "mbr_1a2B3c",
+      "object": "membership",
+      "status": "invited",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "account": "acct_ada",
+      "identity": {
+        "name": "Example",
+        "issuer": "https://ada.okta.com/oauth2/default",
+        "subject": "example",
+        "email": "ops@example.com"
+      },
+      "role": "example",
+      "source": "invitation",
+      "last_sign_in_at": 1791302400
+    }
+  }
+}
+```
+
+</ResponseExample>

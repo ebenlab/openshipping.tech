@@ -1,0 +1,133 @@
+---
+title: "zone"
+description: "Retrieve a Zone"
+---
+
+`query` · Module: **Catalog** · Requires `catalog:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+
+## Returns
+
+`Zone!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `ZoneObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `name` | `String!` |
+| `purpose` | `[ZonePurposeItem!]` |
+| `area` | `Area!` |
+| `priority` | `Int` |
+| `status` | `ZoneStatus!` |
+| `version` | `Int` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query Zone($id: ID!) {
+  zone(id: $id) {
+    id
+    object
+    name
+    status
+    livemode
+    created
+    updated
+    purpose
+    area {
+      countries
+      subdivisions
+      postal_codes
+      cities {
+        name
+        country
+        state
+      }
+      exclude {
+        countries
+        subdivisions
+        postal_codes
+      }
+    }
+    priority
+    version
+  }
+}
+```
+
+```json Variables
+{
+  "id": "zone_1a2B3c"
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "zone": {
+      "id": "zone_1a2B3c",
+      "object": "zone",
+      "name": "Example",
+      "status": "draft",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "purpose": [
+        "coverage"
+      ],
+      "area": {
+        "countries": [
+          "example"
+        ],
+        "subdivisions": [
+          "example"
+        ],
+        "postal_codes": [
+          "example"
+        ],
+        "cities": [
+          {
+            "name": "Example",
+            "country": "GB",
+            "state": "example"
+          }
+        ],
+        "exclude": {
+          "countries": [
+            "example"
+          ],
+          "subdivisions": [
+            "example"
+          ],
+          "postal_codes": [
+            "example"
+          ]
+        }
+      },
+      "priority": 100,
+      "version": 3
+    }
+  }
+}
+```
+
+</ResponseExample>

@@ -1,0 +1,119 @@
+---
+title: "replanShipmentJourney"
+description: "Replan a journey"
+---
+
+`mutation` · Module: **Routes** · Requires `routes:write`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+| `input` | `ReplanShipmentJourneyInput` | The fields for this operation. |
+
+### `ReplanShipmentJourneyInput` fields
+
+| Field | Type |
+|---|---|
+| `reason` | `String` |
+| `avoid` | `ReplanShipmentJourneyInputAvoidInput` |
+
+## Returns
+
+`Journey!`
+
+| Field | Type |
+|---|---|
+| `id` | `String` |
+| `object` | `JourneyObject!` |
+| `shipment` | `String` |
+| `status` | `JourneyStatus!` |
+| `segments` | `[JourneySegmentsItem!]!` |
+| `planned_delivery` | `String` |
+| `estimated_delivery` | `String` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+mutation ReplanShipmentJourney($id: ID!, $input: ReplanShipmentJourneyInput!) {
+  replanShipmentJourney(id: $id, input: $input) {
+    id
+    object
+    status
+    shipment
+    segments {
+      type
+      sequence
+      run
+      leg
+      operator {
+        type
+        name
+        connection
+        service
+      }
+      from
+    }
+    planned_delivery
+    estimated_delivery
+  }
+}
+```
+
+```json Variables
+{
+  "id": "obj_1a2B3c",
+  "input": {
+    "reason": "example",
+    "avoid": {
+      "facilities": [
+        "example"
+      ],
+      "runs": [
+        "example"
+      ]
+    }
+  }
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "replanShipmentJourney": {
+      "id": "obj_1a2B3c",
+      "object": "journey",
+      "status": "planned",
+      "shipment": "shp_1Q2w3E4r5T6y",
+      "segments": [
+        {
+          "type": "first_mile",
+          "sequence": 2,
+          "run": "example",
+          "leg": "example",
+          "operator": {
+            "type": "self",
+            "name": "Example",
+            "connection": "conn_9f8e",
+            "service": "dhl_express_worldwide"
+          },
+          "from": "2026-10-07"
+        }
+      ],
+      "planned_delivery": "example",
+      "estimated_delivery": "example"
+    }
+  }
+}
+```
+
+</ResponseExample>

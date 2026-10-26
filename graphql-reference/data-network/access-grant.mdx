@@ -1,0 +1,100 @@
+---
+title: "accessGrant"
+description: "Retrieve a AccessGrant"
+---
+
+`query` · Module: **Data Network** · Requires `data:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+
+## Returns
+
+`AccessGrant!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `AccessGrantObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `grantor` | `String!` |
+| `grantee` | `String!` |
+| `subjects` | `AccessGrantSubjects` |
+| `fields` | `[String!]` |
+| `purpose` | `String` |
+| `expires_at` | `Int` |
+| `status` | `AccessGrantStatus!` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query AccessGrant($id: ID!) {
+  accessGrant(id: $id) {
+    id
+    object
+    status
+    livemode
+    created
+    updated
+    grantor
+    grantee
+    subjects {
+      shipments
+    }
+    fields
+    purpose
+    expires_at
+  }
+}
+```
+
+```json Variables
+{
+  "id": "grt_1a2B3c"
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "accessGrant": {
+      "id": "grt_1a2B3c",
+      "object": "access_grant",
+      "status": "active",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "grantor": "example",
+      "grantee": "example",
+      "subjects": {
+        "shipments": [
+          "example"
+        ]
+      },
+      "fields": [
+        "example"
+      ],
+      "purpose": "example",
+      "expires_at": 1791302400
+    }
+  }
+}
+```
+
+</ResponseExample>

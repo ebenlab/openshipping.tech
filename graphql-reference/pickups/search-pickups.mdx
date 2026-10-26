@@ -1,0 +1,77 @@
+---
+title: "searchPickups"
+description: "Search pickups"
+---
+
+`query` · Module: **Pickups** · Requires `pickups:read`
+
+## Arguments
+
+None.
+
+## Returns
+
+`SearchPickupsResult!`
+
+| Field | Type |
+|---|---|
+| `object` | `SearchPickupsResultObject!` |
+| `has_more` | `Boolean!` |
+| `next_page` | `String` |
+| `data` | `[Pickup!]!` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query SearchPickups {
+  searchPickups {
+    object
+    has_more
+    next_page
+    data {
+      id
+      object
+      status
+      type
+      livemode
+      created
+    }
+  }
+}
+```
+
+```json Variables
+{}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "searchPickups": {
+      "object": "search_pickups_result",
+      "has_more": true,
+      "next_page": "example",
+      "data": [
+        {
+          "id": "pck_1a2B3c",
+          "object": "pickup",
+          "status": "scheduled",
+          "type": "one_time",
+          "livemode": true,
+          "created": 1791302400
+        }
+      ]
+    }
+  }
+}
+```
+
+</ResponseExample>

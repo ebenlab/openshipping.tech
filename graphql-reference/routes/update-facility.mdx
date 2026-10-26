@@ -1,0 +1,205 @@
+---
+title: "updateFacility"
+description: "Update a Facility"
+---
+
+`mutation` · Module: **Routes** · Requires `routes:write`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+| `input` | `FacilityInput` | The fields for this operation. |
+
+### `FacilityInput` fields
+
+| Field | Type |
+|---|---|
+| `name` | `String` |
+| `type` | `FacilityInputType` |
+| `status` | `FacilityInputStatus` |
+| `contact` | `ContactInput` |
+| `location` | `FacilityInputLocationInput` |
+| `timezone` | `String` |
+| `operating_hours` | `RecurrenceInput` |
+| `codes` | `JSON` |
+| `capabilities` | `[String!]` |
+| `service_zones` | `[String!]` |
+| `functions` | `FacilityInputFunctionsInput` |
+| `user_metadata` | `UserMetadataInput` |
+
+## Returns
+
+`Facility!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `FacilityObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `name` | `String!` |
+| `type` | `FacilityType!` |
+| `status` | `FacilityStatus` |
+| `contact` | `Contact!` |
+| `location` | `FacilityLocation` |
+| `timezone` | `String!` |
+| `operating_hours` | `Recurrence` |
+| `codes` | `JSON` |
+| `capabilities` | `[String!]` |
+| `service_zones` | `[String!]` |
+| `functions` | `FacilityFunctions` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+mutation UpdateFacility($id: ID!, $input: FacilityInput!) {
+  updateFacility(id: $id, input: $input) {
+    id
+    object
+    name
+    type
+    status
+    livemode
+    created
+    updated
+    contact {
+      name
+      company
+      email
+      phone
+      tax_ids {
+        type
+        value
+        country
+      }
+      address {
+        line1
+        street_number
+        line2
+        city
+      }
+    }
+    location {
+      latitude
+      longitude
+    }
+    timezone
+    operating_hours {
+      frequency
+      interval
+      days
+      day_of_month
+      times
+      timezone
+    }
+    capabilities
+    service_zones
+  }
+}
+```
+
+```json Variables
+{
+  "id": "fac_1a2B3c",
+  "input": {
+    "name": "Example",
+    "type": "hub",
+    "status": "active",
+    "contact": {
+      "name": "Example",
+      "company": "example",
+      "email": "ops@example.com",
+      "phone": "+447700900123"
+    },
+    "location": {
+      "latitude": 51.5074,
+      "longitude": -0.1278
+    },
+    "timezone": "Europe/London",
+    "operating_hours": {
+      "frequency": "daily",
+      "interval": 2,
+      "days": [
+        "mon"
+      ],
+      "day_of_month": 2
+    },
+    "codes": {}
+  }
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "updateFacility": {
+      "id": "fac_1a2B3c",
+      "object": "facility",
+      "name": "Example",
+      "type": "hub",
+      "status": "active",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "contact": {
+        "name": "Example",
+        "company": "example",
+        "email": "ops@example.com",
+        "phone": "+447700900123",
+        "tax_ids": [
+          {
+            "type": "eori",
+            "value": "example",
+            "country": "GB"
+          }
+        ],
+        "address": {
+          "line1": "Downing St",
+          "street_number": "10",
+          "line2": "example",
+          "city": "London"
+        }
+      },
+      "location": {
+        "latitude": 51.5074,
+        "longitude": -0.1278
+      },
+      "timezone": "Europe/London",
+      "operating_hours": {
+        "frequency": "daily",
+        "interval": 2,
+        "days": [
+          "mon"
+        ],
+        "day_of_month": 2,
+        "times": [
+          "example"
+        ],
+        "timezone": "Europe/London"
+      },
+      "capabilities": [
+        "example"
+      ],
+      "service_zones": [
+        "example"
+      ]
+    }
+  }
+}
+```
+
+</ResponseExample>

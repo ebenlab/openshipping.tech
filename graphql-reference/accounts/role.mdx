@@ -1,0 +1,82 @@
+---
+title: "role"
+description: "Retrieve a Role"
+---
+
+`query` · Module: **Accounts** · Requires `accounts:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+
+## Returns
+
+`Role!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `RoleObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `name` | `String!` |
+| `scopes` | `[String!]!` |
+| `built_in` | `Boolean` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query Role($id: ID!) {
+  role(id: $id) {
+    id
+    object
+    name
+    livemode
+    created
+    updated
+    scopes
+    built_in
+  }
+}
+```
+
+```json Variables
+{
+  "id": "role_1a2B3c"
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "role": {
+      "id": "role_1a2B3c",
+      "object": "role",
+      "name": "Example",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "scopes": [
+        "example"
+      ],
+      "built_in": true
+    }
+  }
+}
+```
+
+</ResponseExample>

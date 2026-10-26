@@ -1,0 +1,96 @@
+---
+title: "accessPolicy"
+description: "Retrieve a AccessPolicy"
+---
+
+`query` · Module: **Data Network** · Requires `data:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+
+## Returns
+
+`AccessPolicy!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `AccessPolicyObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `rules` | `[AccessPolicyRulesItem!]!` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query AccessPolicy($id: ID!) {
+  accessPolicy(id: $id) {
+    id
+    object
+    livemode
+    created
+    updated
+    rules {
+      role
+      objects
+      fields
+      scope
+      deny
+      require_credentials
+    }
+  }
+}
+```
+
+```json Variables
+{
+  "id": "pol_1a2B3c"
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "accessPolicy": {
+      "id": "pol_1a2B3c",
+      "object": "access_policy",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "rules": [
+        {
+          "role": "example",
+          "objects": [
+            "example"
+          ],
+          "fields": [
+            "example"
+          ],
+          "scope": "example",
+          "deny": true,
+          "require_credentials": [
+            "example"
+          ]
+        }
+      ]
+    }
+  }
+}
+```
+
+</ResponseExample>

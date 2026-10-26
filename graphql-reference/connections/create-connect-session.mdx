@@ -1,0 +1,127 @@
+---
+title: "createConnectSession"
+description: "Start an OAuth/OIDC connect flow"
+---
+
+`mutation` · Module: **Connections** · Requires `connections:write`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `input` | `ConnectSessionCreate` | The fields for this operation. |
+
+### `ConnectSessionCreate` fields
+
+| Field | Type |
+|---|---|
+| `carrier` | `String` |
+| `app` | `String` |
+| `mode` | `ConnectSessionCreateMode` |
+| `return_url` | `String` |
+| `display_name` | `String` |
+| `config` | `JSON` |
+| `scopes` | `[String!]` |
+| `connection` | `String` |
+| `login_hint` | `String` |
+| `user_metadata` | `UserMetadataInput` |
+
+## Returns
+
+`ConnectSession!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `ConnectSessionObject!` |
+| `livemode` | `Boolean` |
+| `created` | `Int` |
+| `status` | `ConnectSessionStatus!` |
+| `mode` | `ConnectSessionMode` |
+| `carrier` | `String!` |
+| `app` | `String` |
+| `url` | `String!` |
+| `user_code` | `String` |
+| `expires_at` | `Int!` |
+| `return_url` | `String` |
+| `connection` | `String` |
+| `error` | `ConnectSessionError` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+mutation CreateConnectSession($input: ConnectSessionCreate!) {
+  createConnectSession(input: $input) {
+    id
+    object
+    status
+    livemode
+    created
+    mode
+    carrier
+    app
+    url
+    user_code
+    expires_at
+    return_url
+    connection
+    error {
+      code
+      message
+    }
+  }
+}
+```
+
+```json Variables
+{
+  "input": {
+    "carrier": "dhl_express",
+    "app": "example",
+    "mode": "redirect",
+    "return_url": "https://example.com/return",
+    "display_name": "example",
+    "config": {},
+    "scopes": [
+      "example"
+    ],
+    "connection": "conn_9f8e"
+  }
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "createConnectSession": {
+      "id": "obj_1a2B3c",
+      "object": "connect_session",
+      "status": "open",
+      "livemode": true,
+      "created": 1791302400,
+      "mode": "redirect",
+      "carrier": "dhl_express",
+      "app": "example",
+      "url": "https://example.com/resource",
+      "user_code": "GB",
+      "expires_at": 1791302400,
+      "return_url": "https://example.com/return",
+      "connection": "conn_9f8e",
+      "error": {
+        "code": "access_denied",
+        "message": "example"
+      }
+    }
+  }
+}
+```
+
+</ResponseExample>

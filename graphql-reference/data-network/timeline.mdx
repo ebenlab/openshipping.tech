@@ -1,0 +1,143 @@
+---
+title: "timeline"
+description: "End-to-end timeline"
+---
+
+`query` · Module: **Data Network** · Requires `data:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `shipmentId` | `ID!` | The shipment id. |
+
+## Returns
+
+`Timeline!`
+
+| Field | Type |
+|---|---|
+| `object` | `TimelineObject!` |
+| `shipment` | `String!` |
+| `identifiers` | `[TimelineIdentifiersItem!]` |
+| `milestones` | `[TimelineMilestonesItem!]!` |
+| `events` | `TimelineEvents` |
+| `gaps` | `[TimelineGapsItem!]` |
+| `eta` | `TimelineEta` |
+| `as_of` | `Int` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query Timeline($shipmentId: ID!) {
+  timeline(shipmentId: $shipmentId) {
+    object
+    shipment
+    identifiers {
+      scheme
+      value
+      carrier
+    }
+    milestones {
+      status
+      milestone
+      occurred_at
+      sources {
+        record
+        producer
+      }
+      conflicts {
+        record
+        producer
+        statement
+      }
+    }
+    events {
+      count
+      url
+    }
+    gaps {
+      expected
+      after
+      reason
+      severity
+    }
+    eta {
+      date
+      source
+    }
+    as_of
+  }
+}
+```
+
+```json Variables
+{
+  "shipmentId": "example_id"
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "timeline": {
+      "object": "timeline",
+      "shipment": "shp_1Q2w3E4r5T6y",
+      "identifiers": [
+        {
+          "scheme": "tracking_number",
+          "value": "example",
+          "carrier": "dhl_express"
+        }
+      ],
+      "milestones": [
+        {
+          "status": "confirmed",
+          "milestone": "example",
+          "occurred_at": "2026-10-07T09:00:00Z",
+          "sources": [
+            {
+              "record": "example",
+              "producer": "example"
+            }
+          ],
+          "conflicts": [
+            {
+              "record": "example",
+              "producer": "example",
+              "statement": "example"
+            }
+          ]
+        }
+      ],
+      "events": {
+        "count": 2,
+        "url": "https://example.com/resource"
+      },
+      "gaps": [
+        {
+          "expected": "example",
+          "after": "example",
+          "reason": "example",
+          "severity": "info"
+        }
+      ],
+      "eta": {
+        "date": "2026-10-07",
+        "source": "api"
+      },
+      "as_of": 2
+    }
+  }
+}
+```
+
+</ResponseExample>

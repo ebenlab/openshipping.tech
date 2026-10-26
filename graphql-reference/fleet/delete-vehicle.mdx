@@ -1,0 +1,52 @@
+---
+title: "deleteVehicle"
+description: "Delete a Vehicle"
+---
+
+`mutation` · Module: **Fleet** · Requires `fleet:write`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+
+## Returns
+
+`DeletedObject!`
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+mutation DeleteVehicle($id: ID!) {
+  deleteVehicle(id: $id)
+}
+```
+
+```json Variables
+{
+  "id": "obj_1a2B3c"
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "deleteVehicle": {
+      "id": "obj_1a2B3c",
+      "object": "deleted",
+      "deleted": true
+    }
+  }
+}
+```
+
+</ResponseExample>

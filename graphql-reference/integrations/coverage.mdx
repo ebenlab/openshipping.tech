@@ -1,0 +1,125 @@
+---
+title: "coverage"
+description: "Retrieve a Coverage"
+---
+
+`query` · Module: **Integrations** · Requires `integrations:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+
+## Returns
+
+`Coverage!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `CoverageObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `status` | `CoverageStatus!` |
+| `shipment` | `String!` |
+| `connection` | `String` |
+| `policy_number` | `String` |
+| `insured_value` | `Money!` |
+| `premium` | `Money` |
+| `coverage_types` | `[String!]` |
+| `period` | `CoveragePeriod` |
+| `certificate` | `String` |
+| `claims` | `[String!]` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query Coverage($id: ID!) {
+  coverage(id: $id) {
+    id
+    object
+    status
+    livemode
+    created
+    updated
+    shipment
+    connection
+    policy_number
+    insured_value {
+      amount
+      currency
+    }
+    premium {
+      amount
+      currency
+    }
+    coverage_types
+    period {
+      starts
+      ends
+      days
+    }
+    certificate
+    claims
+  }
+}
+```
+
+```json Variables
+{
+  "id": "cov_1a2B3c"
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "coverage": {
+      "id": "cov_1a2B3c",
+      "object": "coverage",
+      "status": "pending",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "shipment": "shp_1Q2w3E4r5T6y",
+      "connection": "conn_9f8e",
+      "policy_number": "example",
+      "insured_value": {
+        "amount": 1299,
+        "currency": "usd"
+      },
+      "premium": {
+        "amount": 1299,
+        "currency": "usd"
+      },
+      "coverage_types": [
+        "example"
+      ],
+      "period": {
+        "starts": "example",
+        "ends": "example",
+        "days": 2
+      },
+      "certificate": "example",
+      "claims": [
+        "example"
+      ]
+    }
+  }
+}
+```
+
+</ResponseExample>

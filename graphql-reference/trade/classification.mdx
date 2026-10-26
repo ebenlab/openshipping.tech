@@ -1,0 +1,132 @@
+---
+title: "classification"
+description: "Retrieve a Classification"
+---
+
+`query` · Module: **Trade** · Requires `trade:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+
+## Returns
+
+`Classification!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `ClassificationObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `status` | `ClassificationStatus!` |
+| `items` | `[ClassificationItemsItem!]!` |
+| `messages` | `[Message!]` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query Classification($id: ID!) {
+  classification(id: $id) {
+    id
+    object
+    status
+    livemode
+    created
+    updated
+    items {
+      index
+      sku
+      export {
+        country
+        hs_code
+        description
+        confidence
+      }
+      import {
+        country
+        hs_code
+        description
+        confidence
+      }
+      requires_review
+      rationale
+    }
+    messages {
+      code
+      level
+      message
+      param
+      carrier
+    }
+  }
+}
+```
+
+```json Variables
+{
+  "id": "cls_1a2B3c"
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "classification": {
+      "id": "cls_1a2B3c",
+      "object": "classification",
+      "status": "pending",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "items": [
+        {
+          "index": 2,
+          "sku": "TS-RED-M",
+          "export": {
+            "country": "GB",
+            "hs_code": "6109100010",
+            "description": "Example description",
+            "confidence": 0.94
+          },
+          "import": [
+            {
+              "country": "GB",
+              "hs_code": "6109100010",
+              "description": "Example description",
+              "confidence": 0.94
+            }
+          ],
+          "requires_review": true,
+          "rationale": "example"
+        }
+      ],
+      "messages": [
+        {
+          "code": "dhl_express_worldwide",
+          "level": "info",
+          "message": "example",
+          "param": "example",
+          "carrier": "dhl_express"
+        }
+      ]
+    }
+  }
+}
+```
+
+</ResponseExample>

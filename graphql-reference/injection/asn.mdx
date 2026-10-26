@@ -1,0 +1,181 @@
+---
+title: "asn"
+description: "Retrieve a Asn"
+---
+
+`query` · Module: **Injection** · Requires `injection:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+
+## Returns
+
+`Asn!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `AsnObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `partner` | `String!` |
+| `facility` | `String!` |
+| `status` | `AsnStatus!` |
+| `expected_at` | `String` |
+| `arrived_at` | `Int` |
+| `transport` | `AsnTransport` |
+| `shipments` | `[String!]` |
+| `expected` | `AsnExpected` |
+| `received` | `AsnReceived` |
+| `discrepancies` | `[AsnDiscrepanciesItem!]` |
+| `closed_at` | `Int` |
+| `documents` | `[Document!]` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query Asn($id: ID!) {
+  asn(id: $id) {
+    id
+    object
+    status
+    livemode
+    created
+    updated
+    partner
+    facility
+    expected_at
+    arrived_at
+    transport {
+      mode
+      carrier_name
+      vehicle
+      registration
+      seal_number
+      reference
+    }
+    shipments
+    expected {
+      shipments
+      handling_units
+      weight {
+        value
+        unit
+      }
+      containers {
+        type
+        count
+      }
+    }
+    received {
+      handling_units
+      damaged
+      unexpected
+    }
+    discrepancies {
+      type
+      shipment
+      tracking_number
+      note
+      declared {
+        value
+        unit
+      }
+      measured {
+        value
+        unit
+      }
+    }
+    closed_at
+  }
+}
+```
+
+```json Variables
+{
+  "id": "asn_1a2B3c"
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "asn": {
+      "id": "asn_1a2B3c",
+      "object": "asn",
+      "status": "announced",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "partner": "acct_dpd_intl",
+      "facility": "fac_lon_hub",
+      "expected_at": "2026-10-07T09:00:00Z",
+      "arrived_at": 1791302400,
+      "transport": {
+        "mode": "example",
+        "carrier_name": "example",
+        "vehicle": "veh_van07",
+        "registration": "AB12 CDE",
+        "seal_number": "SEAL-00918",
+        "reference": "ORDER-1001"
+      },
+      "shipments": [
+        "example"
+      ],
+      "expected": {
+        "shipments": 2,
+        "handling_units": 2,
+        "weight": {
+          "value": 1.5,
+          "unit": "g"
+        },
+        "containers": [
+          {
+            "type": "example",
+            "count": 2
+          }
+        ]
+      },
+      "received": {
+        "handling_units": 2,
+        "damaged": 2,
+        "unexpected": 2
+      },
+      "discrepancies": [
+        {
+          "type": "missing",
+          "shipment": "shp_1Q2w3E4r5T6y",
+          "tracking_number": "1Z999AA10123456784",
+          "note": "example",
+          "declared": {
+            "value": 1.5,
+            "unit": "g"
+          },
+          "measured": {
+            "value": 1.5,
+            "unit": "g"
+          }
+        }
+      ],
+      "closed_at": 1791302400
+    }
+  }
+}
+```
+
+</ResponseExample>

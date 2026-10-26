@@ -1,0 +1,80 @@
+---
+title: "vehiclePosition"
+description: "Latest vehicle position"
+---
+
+`query` · Module: **Fleet**
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+
+## Returns
+
+`Position!`
+
+| Field | Type |
+|---|---|
+| `at` | `String!` |
+| `latitude` | `Float!` |
+| `longitude` | `Float!` |
+| `heading` | `Float` |
+| `speed` | `PositionSpeed` |
+| `accuracy_m` | `Float` |
+| `source` | `PositionSource` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query VehiclePosition($id: ID!) {
+  vehiclePosition(id: $id) {
+    at
+    latitude
+    longitude
+    heading
+    speed {
+      value
+      unit
+    }
+    accuracy_m
+    source
+  }
+}
+```
+
+```json Variables
+{
+  "id": "obj_1a2B3c"
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "vehiclePosition": {
+      "at": "example",
+      "latitude": 51.5074,
+      "longitude": -0.1278,
+      "heading": 1.5,
+      "speed": {
+        "value": 1.5,
+        "unit": "kg"
+      },
+      "accuracy_m": 1.5,
+      "source": "driver_app"
+    }
+  }
+}
+```
+
+</ResponseExample>

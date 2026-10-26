@@ -1,0 +1,111 @@
+---
+title: "jobSchedule"
+description: "Retrieve a JobSchedule"
+---
+
+`query` · Module: **Jobs** · Requires `jobs:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+
+## Returns
+
+`JobSchedule!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `JobScheduleObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `status` | `JobScheduleStatus!` |
+| `type` | `String!` |
+| `parameters` | `JSON` |
+| `recurrence` | `Recurrence!` |
+| `overlap` | `JobScheduleOverlap` |
+| `next_run_at` | `Int` |
+| `last_job` | `String` |
+| `last_status` | `JobScheduleLastStatus` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query JobSchedule($id: ID!) {
+  jobSchedule(id: $id) {
+    id
+    object
+    status
+    type
+    livemode
+    created
+    updated
+    recurrence {
+      frequency
+      interval
+      days
+      day_of_month
+      times
+      timezone
+    }
+    overlap
+    next_run_at
+    last_job
+    last_status
+  }
+}
+```
+
+```json Variables
+{
+  "id": "jsch_1a2B3c"
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "jobSchedule": {
+      "id": "jsch_1a2B3c",
+      "object": "job_schedule",
+      "status": "active",
+      "type": "example",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "recurrence": {
+        "frequency": "daily",
+        "interval": 2,
+        "days": [
+          "mon"
+        ],
+        "day_of_month": 2,
+        "times": [
+          "example"
+        ],
+        "timezone": "Europe/London"
+      },
+      "overlap": "skip",
+      "next_run_at": 1791302400,
+      "last_job": "example",
+      "last_status": "queued"
+    }
+  }
+}
+```
+
+</ResponseExample>

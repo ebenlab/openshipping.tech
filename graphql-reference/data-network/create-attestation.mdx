@@ -1,0 +1,105 @@
+---
+title: "createAttestation"
+description: "Create an attestation"
+---
+
+`mutation` · Module: **Data Network** · Requires `data:write`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `input` | `AttestationInput` | The fields for this operation. |
+
+### `AttestationInput` fields
+
+| Field | Type |
+|---|---|
+| `attester` | `String` |
+| `about` | `String` |
+| `statement` | `String` |
+| `evidence` | `[String!]` |
+| `signature` | `JSON` |
+| `user_metadata` | `UserMetadataInput` |
+
+## Returns
+
+`Attestation!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `AttestationObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `attester` | `String!` |
+| `about` | `String!` |
+| `statement` | `String!` |
+| `evidence` | `[String!]` |
+| `signature` | `JSON` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+mutation CreateAttestation($input: AttestationInput!) {
+  createAttestation(input: $input) {
+    id
+    object
+    livemode
+    created
+    updated
+    attester
+    about
+    statement
+    evidence
+  }
+}
+```
+
+```json Variables
+{
+  "input": {
+    "attester": "example",
+    "about": "example",
+    "statement": "example",
+    "evidence": [
+      "example"
+    ],
+    "signature": {}
+  }
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "createAttestation": {
+      "id": "att_1a2B3c",
+      "object": "attestation",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "attester": "example",
+      "about": "example",
+      "statement": "example",
+      "evidence": [
+        "example"
+      ]
+    }
+  }
+}
+```
+
+</ResponseExample>

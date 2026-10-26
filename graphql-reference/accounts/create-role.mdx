@@ -1,0 +1,97 @@
+---
+title: "createRole"
+description: "Create a custom role"
+---
+
+`mutation` · Module: **Accounts** · Requires `accounts:write`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `input` | `RoleInput` | The fields for this operation. |
+
+### `RoleInput` fields
+
+| Field | Type |
+|---|---|
+| `name` | `String` |
+| `scopes` | `[String!]` |
+| `built_in` | `Boolean` |
+| `user_metadata` | `UserMetadataInput` |
+
+## Returns
+
+`Role!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `RoleObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `name` | `String!` |
+| `scopes` | `[String!]!` |
+| `built_in` | `Boolean` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+mutation CreateRole($input: RoleInput!) {
+  createRole(input: $input) {
+    id
+    object
+    name
+    livemode
+    created
+    updated
+    scopes
+    built_in
+  }
+}
+```
+
+```json Variables
+{
+  "input": {
+    "name": "Example",
+    "scopes": [
+      "example"
+    ],
+    "built_in": true
+  }
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "createRole": {
+      "id": "role_1a2B3c",
+      "object": "role",
+      "name": "Example",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "scopes": [
+        "example"
+      ],
+      "built_in": true
+    }
+  }
+}
+```
+
+</ResponseExample>

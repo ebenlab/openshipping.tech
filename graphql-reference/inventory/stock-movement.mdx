@@ -1,0 +1,129 @@
+---
+title: "stockMovement"
+description: "Retrieve a StockMovement"
+---
+
+`query` · Module: **Inventory** · Requires `inventory:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+
+## Returns
+
+`StockMovement!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `StockMovementObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `type` | `StockMovementType!` |
+| `owner` | `String!` |
+| `product` | `String!` |
+| `quantity` | `Int!` |
+| `from` | `StockMovementFrom` |
+| `to` | `StockMovementTo` |
+| `lot` | `String` |
+| `serials` | `[String!]` |
+| `reason` | `StockMovementReason` |
+| `reference` | `StockMovementReference` |
+| `source` | `StockMovementSource` |
+| `device_event` | `String` |
+| `performed_by` | `StockMovementPerformedBy` |
+| `occurred_at` | `String` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query StockMovement($id: ID!) {
+  stockMovement(id: $id) {
+    id
+    object
+    type
+    livemode
+    created
+    updated
+    owner
+    product
+    quantity
+    from {
+      status
+      location
+    }
+    to {
+      status
+      location
+    }
+    lot
+    serials
+    reason
+    reference {
+      fulfillment_order
+      asn
+      count
+    }
+    source
+  }
+}
+```
+
+```json Variables
+{
+  "id": "mov_1a2B3c"
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "stockMovement": {
+      "id": "mov_1a2B3c",
+      "object": "stock_movement",
+      "type": "receive",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "owner": "acct_ada",
+      "product": "prod_ts_red_m",
+      "quantity": 2,
+      "from": {
+        "status": "available",
+        "location": "loc_lon_a12_03_b"
+      },
+      "to": {
+        "status": "available",
+        "location": "loc_lon_a12_03_b"
+      },
+      "lot": "example",
+      "serials": [
+        "example"
+      ],
+      "reason": "count_variance",
+      "reference": {
+        "fulfillment_order": "example",
+        "asn": "example",
+        "count": "example"
+      },
+      "source": "api"
+    }
+  }
+}
+```
+
+</ResponseExample>

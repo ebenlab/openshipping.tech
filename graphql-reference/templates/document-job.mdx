@@ -1,0 +1,110 @@
+---
+title: "documentJob"
+description: "Retrieve a DocumentJob"
+---
+
+`query` · Module: **Templates** · Requires `templates:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+
+## Returns
+
+`DocumentJob!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `DocumentJobObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `template` | `String` |
+| `type` | `String` |
+| `status` | `DocumentJobStatus!` |
+| `counts` | `DocumentJobCounts` |
+| `output` | `DocumentJobOutput!` |
+| `result_file` | `String` |
+| `errors` | `[DocumentJobErrorsItem!]` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query DocumentJob($id: ID!) {
+  documentJob(id: $id) {
+    id
+    object
+    type
+    status
+    livemode
+    created
+    updated
+    template
+    counts {
+      total
+      succeeded
+      failed
+    }
+    output
+    result_file
+    errors {
+      object
+      code
+      message
+    }
+  }
+}
+```
+
+```json Variables
+{
+  "id": "djob_1a2B3c"
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "documentJob": {
+      "id": "djob_1a2B3c",
+      "object": "document_job",
+      "type": "example",
+      "status": "processing",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "template": "dtpl_packslip_v2",
+      "counts": {
+        "total": 1299,
+        "succeeded": 2,
+        "failed": 2
+      },
+      "output": "merged",
+      "result_file": "example",
+      "errors": [
+        {
+          "object": "document_job_errors_item",
+          "code": "dhl_express_worldwide",
+          "message": "example"
+        }
+      ]
+    }
+  }
+}
+```
+
+</ResponseExample>

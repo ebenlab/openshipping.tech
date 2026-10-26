@@ -1,0 +1,153 @@
+---
+title: "pickup"
+description: "Retrieve a Pickup"
+---
+
+`query` · Module: **Pickups** · Requires `pickups:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+
+## Returns
+
+`Pickup!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `PickupObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `status` | `PickupStatus!` |
+| `connection` | `String!` |
+| `carrier` | `String` |
+| `confirmation_number` | `String` |
+| `contact` | `Contact` |
+| `date` | `String!` |
+| `timezone` | `String` |
+| `window` | `PickupWindow!` |
+| `location` | `PickupLocation` |
+| `instructions` | `String` |
+| `shipments` | `[String!]` |
+| `manifest` | `Manifest` |
+| `handling_unit_count` | `Int` |
+| `total_weight` | `Weight` |
+| `type` | `PickupType` |
+| `schedule` | `PickupSchedule` |
+| `amount` | `Money` |
+| `documents` | `[Document!]` |
+| `cancellation` | `PickupCancellation` |
+| `messages` | `[Message!]` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query Pickup($id: ID!) {
+  pickup(id: $id) {
+    id
+    object
+    status
+    type
+    livemode
+    created
+    updated
+    connection
+    carrier
+    confirmation_number
+    contact {
+      name
+      company
+      email
+      phone
+      tax_ids {
+        type
+        value
+        country
+      }
+      address {
+        line1
+        street_number
+        line2
+        city
+      }
+    }
+    date
+    timezone
+    window {
+      ready_at
+      close_at
+    }
+    location
+    instructions
+  }
+}
+```
+
+```json Variables
+{
+  "id": "pck_1a2B3c"
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "pickup": {
+      "id": "pck_1a2B3c",
+      "object": "pickup",
+      "status": "scheduled",
+      "type": "one_time",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "connection": "conn_9f8e",
+      "carrier": "dhl_express",
+      "confirmation_number": "example",
+      "contact": {
+        "name": "Example",
+        "company": "example",
+        "email": "ops@example.com",
+        "phone": "+447700900123",
+        "tax_ids": [
+          {
+            "type": "eori",
+            "value": "example",
+            "country": "GB"
+          }
+        ],
+        "address": {
+          "line1": "Downing St",
+          "street_number": "10",
+          "line2": "example",
+          "city": "London"
+        }
+      },
+      "date": "2026-10-07",
+      "timezone": "Europe/London",
+      "window": {
+        "ready_at": "15:00",
+        "close_at": "18:00"
+      },
+      "location": "front_door",
+      "instructions": "example"
+    }
+  }
+}
+```
+
+</ResponseExample>

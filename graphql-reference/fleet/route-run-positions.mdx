@@ -1,0 +1,88 @@
+---
+title: "routeRunPositions"
+description: "List positions"
+---
+
+`query` · Module: **Fleet**
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+| `since` | `String` | Filter by since. |
+| `limit` | `Int` | Page size, 1–100 (default 10). |
+| `startingAfter` | `ID` | Cursor: return objects after this ID. |
+| `endingBefore` | `ID` | Cursor: return objects before this ID. |
+
+## Returns
+
+`PositionList!`
+
+| Field | Type |
+|---|---|
+| `data` | `[Position!]!` |
+| `has_more` | `Boolean` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query RouteRunPositions($id: ID!, $limit: Int) {
+  routeRunPositions(id: $id, limit: $limit) {
+    data {
+      at
+      latitude
+      longitude
+      heading
+      speed {
+        value
+        unit
+      }
+      accuracy_m
+      source
+    }
+    has_more
+  }
+}
+```
+
+```json Variables
+{
+  "id": "obj_1a2B3c",
+  "limit": 10
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "routeRunPositions": {
+      "data": [
+        {
+          "at": "example",
+          "latitude": 51.5074,
+          "longitude": -0.1278,
+          "heading": 1.5,
+          "speed": {
+            "value": 1.5,
+            "unit": "kg"
+          },
+          "accuracy_m": 1.5,
+          "source": "driver_app"
+        }
+      ],
+      "has_more": true
+    }
+  }
+}
+```
+
+</ResponseExample>

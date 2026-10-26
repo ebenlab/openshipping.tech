@@ -1,0 +1,168 @@
+---
+title: "drivers"
+description: "List drivers"
+---
+
+`query` · Module: **Fleet** · Requires `fleet:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `status` | `String` | Filter by status. |
+| `createdGte` | `Int` | Filter by created gte. |
+| `createdLte` | `Int` | Filter by created lte. |
+| `limit` | `Int` | Page size, 1–100 (default 10). |
+| `startingAfter` | `ID` | Cursor: return objects after this ID. |
+| `endingBefore` | `ID` | Cursor: return objects before this ID. |
+
+## Returns
+
+`DriverList!`
+
+| Field | Type |
+|---|---|
+| `data` | `[Driver!]!` |
+| `has_more` | `Boolean` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query Drivers($limit: Int) {
+  drivers(limit: $limit) {
+    data {
+      id
+      object
+      status
+      livemode
+      created
+      updated
+      contact {
+        name
+        company
+        email
+        phone
+        tax_ids {
+          type
+          value
+          country
+        }
+        address {
+          line1
+          street_number
+          line2
+          city
+        }
+      }
+      home_facility
+      qualifications {
+        type
+        class
+        expires_on
+      }
+      skills
+      shifts {
+        frequency
+        interval
+        days
+        day_of_month
+        times
+        timezone
+      }
+      availability_exceptions {
+        date
+        available
+        reason
+      }
+      app_user
+    }
+    has_more
+  }
+}
+```
+
+```json Variables
+{
+  "limit": 10
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "drivers": {
+      "data": [
+        {
+          "id": "drv_1a2B3c",
+          "object": "driver",
+          "status": "active",
+          "livemode": true,
+          "created": 1791302400,
+          "updated": 1791302400,
+          "contact": {
+            "name": "Example",
+            "company": "example",
+            "email": "ops@example.com",
+            "phone": "+447700900123",
+            "tax_ids": [
+              {
+                "type": "eori",
+                "value": "example",
+                "country": "GB"
+              }
+            ],
+            "address": {
+              "line1": "Downing St",
+              "street_number": "10",
+              "line2": "example",
+              "city": "London"
+            }
+          },
+          "home_facility": "fac_lon_hub",
+          "qualifications": [
+            {
+              "type": "example",
+              "class": "example",
+              "expires_on": "2026-10-07"
+            }
+          ],
+          "skills": [
+            "example"
+          ],
+          "shifts": {
+            "frequency": "daily",
+            "interval": 2,
+            "days": [
+              "mon"
+            ],
+            "day_of_month": 2,
+            "times": [
+              "example"
+            ],
+            "timezone": "Europe/London"
+          },
+          "availability_exceptions": [
+            {
+              "date": "2026-10-07",
+              "available": true,
+              "reason": "example"
+            }
+          ],
+          "app_user": "example"
+        }
+      ],
+      "has_more": true
+    }
+  }
+}
+```
+
+</ResponseExample>

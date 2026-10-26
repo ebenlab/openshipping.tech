@@ -1,0 +1,105 @@
+---
+title: "updateServiceLevel"
+description: "Update a NetworkServiceLevel"
+---
+
+`mutation` · Module: **Network** · Requires `network:write`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+| `input` | `NetworkServiceLevelInput` | The fields for this operation. |
+
+### `NetworkServiceLevelInput` fields
+
+| Field | Type |
+|---|---|
+| `carrier` | `String` |
+| `metric` | `NetworkServiceLevelInputMetric` |
+| `target` | `Float` |
+| `window_days` | `Int` |
+| `achieved` | `Float` |
+| `user_metadata` | `UserMetadataInput` |
+
+## Returns
+
+`NetworkServiceLevel!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `NetworkServiceLevelObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `carrier` | `String!` |
+| `metric` | `NetworkServiceLevelMetric!` |
+| `target` | `Float!` |
+| `window_days` | `Int` |
+| `achieved` | `Float` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+mutation UpdateServiceLevel($id: ID!, $input: NetworkServiceLevelInput!) {
+  updateServiceLevel(id: $id, input: $input) {
+    id
+    object
+    livemode
+    created
+    updated
+    carrier
+    metric
+    target
+    window_days
+    achieved
+  }
+}
+```
+
+```json Variables
+{
+  "id": "sla_1a2B3c",
+  "input": {
+    "carrier": "dhl_express",
+    "metric": "on_time_delivery",
+    "target": 1.5,
+    "window_days": 2,
+    "achieved": 1.5
+  }
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "updateServiceLevel": {
+      "id": "sla_1a2B3c",
+      "object": "network_service_level",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "carrier": "dhl_express",
+      "metric": "on_time_delivery",
+      "target": 1.5,
+      "window_days": 2,
+      "achieved": 1.5
+    }
+  }
+}
+```
+
+</ResponseExample>

@@ -1,0 +1,169 @@
+---
+title: "suspendInterlineAgreement"
+description: "Suspend an interline agreement"
+---
+
+`mutation` · Module: **Network** · Requires `network:write`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+
+## Returns
+
+`InterlineAgreement!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `InterlineAgreementObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `status` | `InterlineAgreementStatus!` |
+| `from_carrier` | `String!` |
+| `to_carrier` | `String!` |
+| `handoff_points` | `[InterlineAgreementHandoffPointsItem!]` |
+| `services` | `InterlineAgreementServices` |
+| `label` | `InterlineAgreementLabel` |
+| `tracking_number` | `InterlineAgreementTrackingNumber` |
+| `handoff_fee` | `InterlineAgreementHandoffFee` |
+| `pricing` | `InterlineAgreementPricing` |
+| `liability` | `InterlineAgreementLiability` |
+| `data_sharing` | `InterlineAgreementDataSharing` |
+| `effective_from` | `String` |
+| `effective_until` | `String` |
+| `signatures` | `[InterlineAgreementSignaturesItem!]` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+mutation SuspendInterlineAgreement($id: ID!) {
+  suspendInterlineAgreement(id: $id) {
+    id
+    object
+    status
+    livemode
+    created
+    updated
+    from_carrier
+    to_carrier
+    handoff_points {
+      facility
+      cutoff_local_time
+      days
+    }
+    services {
+      from
+      to
+    }
+    label
+    tracking_number
+    handoff_fee {
+      amount
+      currency
+      paid_by
+    }
+    pricing {
+      basis
+      rate_sheet
+      share
+      amount {
+        amount
+        currency
+      }
+    }
+    liability {
+      transfers_at
+      max_per_kg {
+        amount
+        currency
+      }
+    }
+    data_sharing {
+      policy
+    }
+  }
+}
+```
+
+```json Variables
+{
+  "id": "ila_1a2B3c"
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "suspendInterlineAgreement": {
+      "id": "ila_1a2B3c",
+      "object": "interline_agreement",
+      "status": "proposed",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "from_carrier": "example",
+      "to_carrier": "example",
+      "handoff_points": [
+        {
+          "facility": "fac_lon_hub",
+          "cutoff_local_time": "example",
+          "days": [
+            "mon"
+          ]
+        }
+      ],
+      "services": {
+        "from": [
+          "2026-10-07"
+        ],
+        "to": [
+          "2026-10-07"
+        ]
+      },
+      "label": "first_carrier",
+      "tracking_number": "first_carrier",
+      "handoff_fee": {
+        "amount": 1299,
+        "currency": "usd",
+        "paid_by": "example"
+      },
+      "pricing": {
+        "basis": "to_carrier_rate_sheet",
+        "rate_sheet": "example",
+        "share": 1.5,
+        "amount": {
+          "amount": 1299,
+          "currency": "usd"
+        }
+      },
+      "liability": {
+        "transfers_at": "receive_scan",
+        "max_per_kg": {
+          "amount": 1299,
+          "currency": "usd"
+        }
+      },
+      "data_sharing": {
+        "policy": "example"
+      }
+    }
+  }
+}
+```
+
+</ResponseExample>

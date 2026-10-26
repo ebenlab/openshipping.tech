@@ -1,0 +1,59 @@
+---
+title: "tokenDevice"
+description: "Issue a device token"
+---
+
+`mutation` · Module: **IoT** · Requires `iot:write`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+
+## Returns
+
+`TokenDeviceResult!`
+
+| Field | Type |
+|---|---|
+| `token` | `String` |
+| `expires_at` | `Int` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+mutation TokenDevice($id: ID!) {
+  tokenDevice(id: $id) {
+    token
+    expires_at
+  }
+}
+```
+
+```json Variables
+{
+  "id": "obj_1a2B3c"
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "tokenDevice": {
+      "token": "example",
+      "expires_at": 1791302400
+    }
+  }
+}
+```
+
+</ResponseExample>

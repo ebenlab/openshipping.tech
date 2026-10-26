@@ -1,0 +1,121 @@
+---
+title: "documentTemplate"
+description: "Retrieve a DocumentTemplate"
+---
+
+`query` · Module: **Templates** · Requires `templates:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+
+## Returns
+
+`DocumentTemplate!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `DocumentTemplateObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `name` | `String!` |
+| `slug` | `String` |
+| `type` | `String!` |
+| `status` | `DocumentTemplateStatus!` |
+| `version` | `Int` |
+| `related_object` | `DocumentTemplateRelatedObject!` |
+| `engine` | `DocumentTemplateEngine!` |
+| `source` | `String!` |
+| `assets` | `JSON` |
+| `page` | `DocumentTemplatePage` |
+| `formats` | `[DocumentTemplateFormatsItem!]` |
+| `locale` | `String` |
+| `triggers` | `[DocumentTemplateTriggersItem!]` |
+| `attach_to` | `DocumentTemplateAttachTo` |
+| `default_for` | `[String!]` |
+| `preview` | `DocumentTemplatePreview` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query DocumentTemplate($id: ID!) {
+  documentTemplate(id: $id) {
+    id
+    object
+    name
+    type
+    status
+    livemode
+    created
+    updated
+    slug
+    version
+    related_object
+    engine
+    source
+    page {
+      size
+      orientation
+      margins_mm
+      dpi
+    }
+    formats
+    locale
+  }
+}
+```
+
+```json Variables
+{
+  "id": "dtpl_1a2B3c"
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "documentTemplate": {
+      "id": "dtpl_1a2B3c",
+      "object": "document_template",
+      "name": "Example",
+      "type": "example",
+      "status": "draft",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "slug": "example",
+      "version": 3,
+      "related_object": "shipment",
+      "engine": "liquid",
+      "source": "api",
+      "page": {
+        "size": "4x6",
+        "orientation": "portrait",
+        "margins_mm": 1.5,
+        "dpi": 2
+      },
+      "formats": [
+        "pdf"
+      ],
+      "locale": "example"
+    }
+  }
+}
+```
+
+</ResponseExample>

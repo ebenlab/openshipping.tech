@@ -1,0 +1,49 @@
+---
+title: "conveyanceManifest"
+description: "Conveyance manifest"
+---
+
+`query` · Module: **Consolidation**
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+| `format` | `ConveyanceManifestFormat` | Filter by format. |
+
+## Returns
+
+`JSON!`
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query ConveyanceManifest($id: ID!) {
+  conveyanceManifest(id: $id)
+}
+```
+
+```json Variables
+{
+  "id": "obj_1a2B3c"
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "conveyanceManifest": {}
+  }
+}
+```
+
+</ResponseExample>

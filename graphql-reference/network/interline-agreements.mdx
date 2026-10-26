@@ -1,0 +1,164 @@
+---
+title: "interlineAgreements"
+description: "List interline agreements"
+---
+
+`query` · Module: **Network** · Requires `network:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `status` | `String` | Filter by status. |
+| `fromCarrier` | `String` | Filter by from carrier. |
+| `toCarrier` | `String` | Filter by to carrier. |
+| `createdGte` | `Int` | Filter by created gte. |
+| `createdLte` | `Int` | Filter by created lte. |
+| `limit` | `Int` | Page size, 1–100 (default 10). |
+| `startingAfter` | `ID` | Cursor: return objects after this ID. |
+| `endingBefore` | `ID` | Cursor: return objects before this ID. |
+
+## Returns
+
+`InterlineAgreementList!`
+
+| Field | Type |
+|---|---|
+| `data` | `[InterlineAgreement!]!` |
+| `has_more` | `Boolean` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query InterlineAgreements($limit: Int) {
+  interlineAgreements(limit: $limit) {
+    data {
+      id
+      object
+      status
+      livemode
+      created
+      updated
+      from_carrier
+      to_carrier
+      handoff_points {
+        facility
+        cutoff_local_time
+        days
+      }
+      services {
+        from
+        to
+      }
+      label
+      tracking_number
+      handoff_fee {
+        amount
+        currency
+        paid_by
+      }
+      pricing {
+        basis
+        rate_sheet
+        share
+        amount {
+          amount
+          currency
+        }
+      }
+      liability {
+        transfers_at
+        max_per_kg {
+          amount
+          currency
+        }
+      }
+      data_sharing {
+        policy
+      }
+    }
+    has_more
+  }
+}
+```
+
+```json Variables
+{
+  "limit": 10
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "interlineAgreements": {
+      "data": [
+        {
+          "id": "ila_1a2B3c",
+          "object": "interline_agreement",
+          "status": "proposed",
+          "livemode": true,
+          "created": 1791302400,
+          "updated": 1791302400,
+          "from_carrier": "example",
+          "to_carrier": "example",
+          "handoff_points": [
+            {
+              "facility": "fac_lon_hub",
+              "cutoff_local_time": "example",
+              "days": [
+                "mon"
+              ]
+            }
+          ],
+          "services": {
+            "from": [
+              "2026-10-07"
+            ],
+            "to": [
+              "2026-10-07"
+            ]
+          },
+          "label": "first_carrier",
+          "tracking_number": "first_carrier",
+          "handoff_fee": {
+            "amount": 1299,
+            "currency": "usd",
+            "paid_by": "example"
+          },
+          "pricing": {
+            "basis": "to_carrier_rate_sheet",
+            "rate_sheet": "example",
+            "share": 1.5,
+            "amount": {
+              "amount": 1299,
+              "currency": "usd"
+            }
+          },
+          "liability": {
+            "transfers_at": "receive_scan",
+            "max_per_kg": {
+              "amount": 1299,
+              "currency": "usd"
+            }
+          },
+          "data_sharing": {
+            "policy": "example"
+          }
+        }
+      ],
+      "has_more": true
+    }
+  }
+}
+```
+
+</ResponseExample>

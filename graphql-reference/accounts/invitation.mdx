@@ -1,0 +1,89 @@
+---
+title: "invitation"
+description: "Retrieve a Invitation"
+---
+
+`query` · Module: **Accounts** · Requires `accounts:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+
+## Returns
+
+`Invitation!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `InvitationObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `account` | `String` |
+| `email` | `String!` |
+| `role` | `String!` |
+| `status` | `InvitationStatus!` |
+| `expires_at` | `Int` |
+| `membership` | `String` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query Invitation($id: ID!) {
+  invitation(id: $id) {
+    id
+    object
+    status
+    livemode
+    created
+    updated
+    account
+    email
+    role
+    expires_at
+    membership
+  }
+}
+```
+
+```json Variables
+{
+  "id": "inv_1a2B3c"
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "invitation": {
+      "id": "inv_1a2B3c",
+      "object": "invitation",
+      "status": "pending",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "account": "acct_ada",
+      "email": "ops@example.com",
+      "role": "example",
+      "expires_at": 1791302400,
+      "membership": "example"
+    }
+  }
+}
+```
+
+</ResponseExample>

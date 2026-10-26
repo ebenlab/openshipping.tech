@@ -1,0 +1,2879 @@
+[
+ {
+  "tag": "Rates",
+  "kind": "mutation",
+  "field": "createRate",
+  "summary": "Get live rates",
+  "rest": "POST /v1/rates"
+ },
+ {
+  "tag": "Rates",
+  "kind": "query",
+  "field": "rateQuote",
+  "summary": "Retrieve a rate quote",
+  "rest": "GET /v1/rate_quotes/{id}"
+ },
+ {
+  "tag": "Shipments",
+  "kind": "query",
+  "field": "shipments",
+  "summary": "List shipments",
+  "rest": "GET /v1/shipments"
+ },
+ {
+  "tag": "Shipments",
+  "kind": "mutation",
+  "field": "createShipment",
+  "summary": "Create a shipment (draft, or purchase with `purchase: true`)",
+  "rest": "POST /v1/shipments"
+ },
+ {
+  "tag": "Shipments",
+  "kind": "query",
+  "field": "searchShipments",
+  "summary": "Search shipments",
+  "rest": "GET /v1/shipments/search"
+ },
+ {
+  "tag": "Shipments",
+  "kind": "query",
+  "field": "shipment",
+  "summary": "Retrieve a Shipment",
+  "rest": "GET /v1/shipments/{id}"
+ },
+ {
+  "tag": "Shipments",
+  "kind": "mutation",
+  "field": "updateShipment",
+  "summary": "Update a Shipment",
+  "rest": "POST /v1/shipments/{id}"
+ },
+ {
+  "tag": "Shipments",
+  "kind": "mutation",
+  "field": "deleteShipment",
+  "summary": "Delete a draft shipment",
+  "rest": "DELETE /v1/shipments/{id}"
+ },
+ {
+  "tag": "Pickups",
+  "kind": "query",
+  "field": "pickups",
+  "summary": "List pickups",
+  "rest": "GET /v1/pickups"
+ },
+ {
+  "tag": "Pickups",
+  "kind": "mutation",
+  "field": "createPickup",
+  "summary": "Book a pickup",
+  "rest": "POST /v1/pickups"
+ },
+ {
+  "tag": "Pickups",
+  "kind": "query",
+  "field": "searchPickups",
+  "summary": "Search pickups",
+  "rest": "GET /v1/pickups/search"
+ },
+ {
+  "tag": "Pickups",
+  "kind": "query",
+  "field": "pickup",
+  "summary": "Retrieve a Pickup",
+  "rest": "GET /v1/pickups/{id}"
+ },
+ {
+  "tag": "Pickups",
+  "kind": "mutation",
+  "field": "updatePickup",
+  "summary": "Update a Pickup",
+  "rest": "POST /v1/pickups/{id}"
+ },
+ {
+  "tag": "Manifests",
+  "kind": "query",
+  "field": "manifests",
+  "summary": "List manifests",
+  "rest": "GET /v1/manifests"
+ },
+ {
+  "tag": "Manifests",
+  "kind": "mutation",
+  "field": "createManifest",
+  "summary": "Create (close out) one or more manifests",
+  "rest": "POST /v1/manifests"
+ },
+ {
+  "tag": "Manifests",
+  "kind": "query",
+  "field": "manifest",
+  "summary": "Retrieve a Manifest",
+  "rest": "GET /v1/manifests/{id}"
+ },
+ {
+  "tag": "Manifests",
+  "kind": "mutation",
+  "field": "updateManifest",
+  "summary": "Update a Manifest",
+  "rest": "POST /v1/manifests/{id}"
+ },
+ {
+  "tag": "Files",
+  "kind": "query",
+  "field": "files",
+  "summary": "List files",
+  "rest": "GET /v1/files"
+ },
+ {
+  "tag": "Files",
+  "kind": "mutation",
+  "field": "createFile",
+  "summary": "Upload a file",
+  "rest": "POST /v1/files"
+ },
+ {
+  "tag": "Files",
+  "kind": "query",
+  "field": "file",
+  "summary": "Retrieve a File",
+  "rest": "GET /v1/files/{id}"
+ },
+ {
+  "tag": "Files",
+  "kind": "mutation",
+  "field": "deleteFile",
+  "summary": "Delete a File",
+  "rest": "DELETE /v1/files/{id}"
+ },
+ {
+  "tag": "Document Uploads",
+  "kind": "query",
+  "field": "documentUploads",
+  "summary": "List document uploads",
+  "rest": "GET /v1/document_uploads"
+ },
+ {
+  "tag": "Document Uploads",
+  "kind": "mutation",
+  "field": "createDocumentUpload",
+  "summary": "Submit customs documents to a carrier",
+  "rest": "POST /v1/document_uploads"
+ },
+ {
+  "tag": "Document Uploads",
+  "kind": "query",
+  "field": "documentUpload",
+  "summary": "Retrieve a DocumentUpload",
+  "rest": "GET /v1/document_uploads/{id}"
+ },
+ {
+  "tag": "Document Uploads",
+  "kind": "mutation",
+  "field": "updateDocumentUpload",
+  "summary": "Update a DocumentUpload",
+  "rest": "POST /v1/document_uploads/{id}"
+ },
+ {
+  "tag": "Tracking",
+  "kind": "query",
+  "field": "trackers",
+  "summary": "List trackers",
+  "rest": "GET /v1/trackers"
+ },
+ {
+  "tag": "Tracking",
+  "kind": "mutation",
+  "field": "createTracker",
+  "summary": "Create a tracker",
+  "rest": "POST /v1/trackers"
+ },
+ {
+  "tag": "Tracking",
+  "kind": "query",
+  "field": "searchTrackers",
+  "summary": "Search trackers",
+  "rest": "GET /v1/trackers/search"
+ },
+ {
+  "tag": "Tracking",
+  "kind": "query",
+  "field": "tracker",
+  "summary": "Retrieve a Tracker",
+  "rest": "GET /v1/trackers/{id}"
+ },
+ {
+  "tag": "Tracking",
+  "kind": "mutation",
+  "field": "updateTracker",
+  "summary": "Update a Tracker",
+  "rest": "POST /v1/trackers/{id}"
+ },
+ {
+  "tag": "Tracking",
+  "kind": "mutation",
+  "field": "deleteTracker",
+  "summary": "Discard a tracker",
+  "rest": "DELETE /v1/trackers/{id}"
+ },
+ {
+  "tag": "Webhooks",
+  "kind": "query",
+  "field": "webhookEndpoints",
+  "summary": "List webhook endpoints",
+  "rest": "GET /v1/webhook_endpoints"
+ },
+ {
+  "tag": "Webhooks",
+  "kind": "mutation",
+  "field": "createWebhookEndpoint",
+  "summary": "Create a webhook endpoint",
+  "rest": "POST /v1/webhook_endpoints"
+ },
+ {
+  "tag": "Webhooks",
+  "kind": "query",
+  "field": "webhookEndpoint",
+  "summary": "Retrieve a WebhookEndpoint",
+  "rest": "GET /v1/webhook_endpoints/{id}"
+ },
+ {
+  "tag": "Webhooks",
+  "kind": "mutation",
+  "field": "updateWebhookEndpoint",
+  "summary": "Update a WebhookEndpoint",
+  "rest": "POST /v1/webhook_endpoints/{id}"
+ },
+ {
+  "tag": "Webhooks",
+  "kind": "mutation",
+  "field": "deleteWebhookEndpoint",
+  "summary": "Delete a WebhookEndpoint",
+  "rest": "DELETE /v1/webhook_endpoints/{id}"
+ },
+ {
+  "tag": "Events",
+  "kind": "query",
+  "field": "events",
+  "summary": "List events",
+  "rest": "GET /v1/events"
+ },
+ {
+  "tag": "Events",
+  "kind": "query",
+  "field": "event",
+  "summary": "Retrieve an event",
+  "rest": "GET /v1/events/{id}"
+ },
+ {
+  "tag": "Inbound",
+  "kind": "query",
+  "field": "inboundEvents",
+  "summary": "List inbound events",
+  "rest": "GET /v1/inbound_events"
+ },
+ {
+  "tag": "Inbound",
+  "kind": "mutation",
+  "field": "createInboundEvent",
+  "summary": "Inject canonical events",
+  "rest": "POST /v1/inbound_events"
+ },
+ {
+  "tag": "Inbound",
+  "kind": "query",
+  "field": "inboundEvent",
+  "summary": "Retrieve a InboundEvent",
+  "rest": "GET /v1/inbound_events/{id}"
+ },
+ {
+  "tag": "Carriers",
+  "kind": "query",
+  "field": "carriers",
+  "summary": "List carriers",
+  "rest": "GET /v1/carriers"
+ },
+ {
+  "tag": "Carriers",
+  "kind": "query",
+  "field": "carrier",
+  "summary": "Retrieve a carrier",
+  "rest": "GET /v1/carriers/{id}"
+ },
+ {
+  "tag": "Connections",
+  "kind": "query",
+  "field": "connections",
+  "summary": "List connections",
+  "rest": "GET /v1/connections"
+ },
+ {
+  "tag": "Connections",
+  "kind": "mutation",
+  "field": "createConnection",
+  "summary": "Create a credentials-based connection",
+  "rest": "POST /v1/connections"
+ },
+ {
+  "tag": "Connections",
+  "kind": "query",
+  "field": "connection",
+  "summary": "Retrieve a Connection",
+  "rest": "GET /v1/connections/{id}"
+ },
+ {
+  "tag": "Connections",
+  "kind": "mutation",
+  "field": "updateConnection",
+  "summary": "Update a Connection",
+  "rest": "POST /v1/connections/{id}"
+ },
+ {
+  "tag": "Connections",
+  "kind": "mutation",
+  "field": "deleteConnection",
+  "summary": "Delete a Connection",
+  "rest": "DELETE /v1/connections/{id}"
+ },
+ {
+  "tag": "Connections",
+  "kind": "mutation",
+  "field": "createConnectSession",
+  "summary": "Start an OAuth/OIDC connect flow",
+  "rest": "POST /v1/connect_sessions"
+ },
+ {
+  "tag": "Connections",
+  "kind": "query",
+  "field": "connectSession",
+  "summary": "Retrieve a connect session",
+  "rest": "GET /v1/connect_sessions/{id}"
+ },
+ {
+  "tag": "Batches",
+  "kind": "mutation",
+  "field": "createBatche",
+  "summary": "Create a batch",
+  "rest": "POST /v1/batches"
+ },
+ {
+  "tag": "Batches",
+  "kind": "query",
+  "field": "batche",
+  "summary": "Retrieve a batch",
+  "rest": "GET /v1/batches/{id}"
+ },
+ {
+  "tag": "Pickup Schedules",
+  "kind": "query",
+  "field": "pickupSchedules",
+  "summary": "List pickup schedules",
+  "rest": "GET /v1/pickup_schedules"
+ },
+ {
+  "tag": "Pickup Schedules",
+  "kind": "mutation",
+  "field": "createPickupSchedule",
+  "summary": "Create a pickup schedule",
+  "rest": "POST /v1/pickup_schedules"
+ },
+ {
+  "tag": "Pickup Schedules",
+  "kind": "query",
+  "field": "pickupSchedule",
+  "summary": "Retrieve a PickupSchedule",
+  "rest": "GET /v1/pickup_schedules/{id}"
+ },
+ {
+  "tag": "Pickup Schedules",
+  "kind": "mutation",
+  "field": "updatePickupSchedule",
+  "summary": "Update a PickupSchedule",
+  "rest": "POST /v1/pickup_schedules/{id}"
+ },
+ {
+  "tag": "Trade",
+  "kind": "query",
+  "field": "classifications",
+  "summary": "List classifications",
+  "rest": "GET /v1/classifications"
+ },
+ {
+  "tag": "Trade",
+  "kind": "mutation",
+  "field": "createClassification",
+  "summary": "Classify items",
+  "rest": "POST /v1/classifications"
+ },
+ {
+  "tag": "Trade",
+  "kind": "query",
+  "field": "classification",
+  "summary": "Retrieve a Classification",
+  "rest": "GET /v1/classifications/{id}"
+ },
+ {
+  "tag": "Trade",
+  "kind": "query",
+  "field": "complianceScreenings",
+  "summary": "List compliance screenings",
+  "rest": "GET /v1/compliance_screenings"
+ },
+ {
+  "tag": "Trade",
+  "kind": "mutation",
+  "field": "createComplianceScreening",
+  "summary": "Screen parties and goods",
+  "rest": "POST /v1/compliance_screenings"
+ },
+ {
+  "tag": "Trade",
+  "kind": "query",
+  "field": "complianceScreening",
+  "summary": "Retrieve a ComplianceScreening",
+  "rest": "GET /v1/compliance_screenings/{id}"
+ },
+ {
+  "tag": "Trade",
+  "kind": "query",
+  "field": "landedCosts",
+  "summary": "List landed costs",
+  "rest": "GET /v1/landed_costs"
+ },
+ {
+  "tag": "Trade",
+  "kind": "mutation",
+  "field": "createLandedCost",
+  "summary": "Quote landed cost",
+  "rest": "POST /v1/landed_costs"
+ },
+ {
+  "tag": "Trade",
+  "kind": "query",
+  "field": "landedCost",
+  "summary": "Retrieve a LandedCost",
+  "rest": "GET /v1/landed_costs/{id}"
+ },
+ {
+  "tag": "Trade",
+  "kind": "query",
+  "field": "tariff",
+  "summary": "Look up a tariff line",
+  "rest": "GET /v1/tariffs/{country}/{hs_code}"
+ },
+ {
+  "tag": "Trade",
+  "kind": "query",
+  "field": "dutyCollections",
+  "summary": "List duty collections",
+  "rest": "GET /v1/duty_collections"
+ },
+ {
+  "tag": "Trade",
+  "kind": "query",
+  "field": "dutyCollection",
+  "summary": "Retrieve a DutyCollection",
+  "rest": "GET /v1/duty_collections/{id}"
+ },
+ {
+  "tag": "Catalog",
+  "kind": "mutation",
+  "field": "createServiceAvailability",
+  "summary": "Check serviceability",
+  "rest": "POST /v1/service_availability"
+ },
+ {
+  "tag": "Injection",
+  "kind": "query",
+  "field": "asns",
+  "summary": "List asns",
+  "rest": "GET /v1/asns"
+ },
+ {
+  "tag": "Injection",
+  "kind": "mutation",
+  "field": "createAsn",
+  "summary": "Create an advance shipping notice",
+  "rest": "POST /v1/asns"
+ },
+ {
+  "tag": "Injection",
+  "kind": "query",
+  "field": "asn",
+  "summary": "Retrieve a Asn",
+  "rest": "GET /v1/asns/{id}"
+ },
+ {
+  "tag": "Injection",
+  "kind": "mutation",
+  "field": "updateAsn",
+  "summary": "Update a Asn",
+  "rest": "POST /v1/asns/{id}"
+ },
+ {
+  "tag": "Accounts",
+  "kind": "query",
+  "field": "accounts",
+  "summary": "List accounts",
+  "rest": "GET /v1/accounts"
+ },
+ {
+  "tag": "Accounts",
+  "kind": "mutation",
+  "field": "createAccount",
+  "summary": "Create a child account",
+  "rest": "POST /v1/accounts"
+ },
+ {
+  "tag": "Accounts",
+  "kind": "query",
+  "field": "account",
+  "summary": "Retrieve a Account",
+  "rest": "GET /v1/accounts/{id}"
+ },
+ {
+  "tag": "Accounts",
+  "kind": "mutation",
+  "field": "updateAccount",
+  "summary": "Update a Account",
+  "rest": "POST /v1/accounts/{id}"
+ },
+ {
+  "tag": "Accounts",
+  "kind": "query",
+  "field": "accountGet",
+  "summary": "Retrieve the current account",
+  "rest": "GET /v1/account"
+ },
+ {
+  "tag": "Products",
+  "kind": "query",
+  "field": "products",
+  "summary": "List products",
+  "rest": "GET /v1/products"
+ },
+ {
+  "tag": "Products",
+  "kind": "mutation",
+  "field": "createProduct",
+  "summary": "Create a product",
+  "rest": "POST /v1/products"
+ },
+ {
+  "tag": "Products",
+  "kind": "query",
+  "field": "searchProducts",
+  "summary": "Search products",
+  "rest": "GET /v1/products/search"
+ },
+ {
+  "tag": "Products",
+  "kind": "query",
+  "field": "product",
+  "summary": "Retrieve a Product",
+  "rest": "GET /v1/products/{id}"
+ },
+ {
+  "tag": "Products",
+  "kind": "mutation",
+  "field": "updateProduct",
+  "summary": "Update a Product",
+  "rest": "POST /v1/products/{id}"
+ },
+ {
+  "tag": "Products",
+  "kind": "mutation",
+  "field": "deleteProduct",
+  "summary": "Delete an unreferenced product",
+  "rest": "DELETE /v1/products/{id}"
+ },
+ {
+  "tag": "IoT",
+  "kind": "query",
+  "field": "deviceEvents",
+  "summary": "List device events",
+  "rest": "GET /v1/device_events"
+ },
+ {
+  "tag": "IoT",
+  "kind": "mutation",
+  "field": "createDeviceEvent",
+  "summary": "Ingest device events",
+  "rest": "POST /v1/device_events"
+ },
+ {
+  "tag": "Data Network",
+  "kind": "query",
+  "field": "participants",
+  "summary": "List participants",
+  "rest": "GET /v1/participants"
+ },
+ {
+  "tag": "Data Network",
+  "kind": "mutation",
+  "field": "createParticipant",
+  "summary": "Register a participant (DID)",
+  "rest": "POST /v1/participants"
+ },
+ {
+  "tag": "Data Network",
+  "kind": "query",
+  "field": "participant",
+  "summary": "Retrieve a Participant",
+  "rest": "GET /v1/participants/{id}"
+ },
+ {
+  "tag": "Data Network",
+  "kind": "query",
+  "field": "records",
+  "summary": "List records",
+  "rest": "GET /v1/records"
+ },
+ {
+  "tag": "Data Network",
+  "kind": "mutation",
+  "field": "createRecord",
+  "summary": "Write a record",
+  "rest": "POST /v1/records"
+ },
+ {
+  "tag": "Data Network",
+  "kind": "query",
+  "field": "anchor",
+  "summary": "Retrieve an anchor",
+  "rest": "GET /v1/anchors/{id}"
+ },
+ {
+  "tag": "Data Network",
+  "kind": "query",
+  "field": "accessGrants",
+  "summary": "List access grants",
+  "rest": "GET /v1/access_grants"
+ },
+ {
+  "tag": "Data Network",
+  "kind": "mutation",
+  "field": "createAccessGrant",
+  "summary": "Grant access",
+  "rest": "POST /v1/access_grants"
+ },
+ {
+  "tag": "Data Network",
+  "kind": "query",
+  "field": "accessGrant",
+  "summary": "Retrieve a AccessGrant",
+  "rest": "GET /v1/access_grants/{id}"
+ },
+ {
+  "tag": "Data Network",
+  "kind": "query",
+  "field": "attestations",
+  "summary": "List attestations",
+  "rest": "GET /v1/attestations"
+ },
+ {
+  "tag": "Data Network",
+  "kind": "mutation",
+  "field": "createAttestation",
+  "summary": "Create an attestation",
+  "rest": "POST /v1/attestations"
+ },
+ {
+  "tag": "Data Network",
+  "kind": "query",
+  "field": "attestation",
+  "summary": "Retrieve a Attestation",
+  "rest": "GET /v1/attestations/{id}"
+ },
+ {
+  "tag": "Data Network",
+  "kind": "mutation",
+  "field": "createDataset",
+  "summary": "Create a dataset extract",
+  "rest": "POST /v1/datasets"
+ },
+ {
+  "tag": "Templates",
+  "kind": "query",
+  "field": "documents",
+  "summary": "List documents",
+  "rest": "GET /v1/documents"
+ },
+ {
+  "tag": "Templates",
+  "kind": "query",
+  "field": "document",
+  "summary": "Retrieve a Document",
+  "rest": "GET /v1/documents/{id}"
+ },
+ {
+  "tag": "Templates",
+  "kind": "mutation",
+  "field": "deleteDocument",
+  "summary": "Delete a standalone document",
+  "rest": "DELETE /v1/documents/{id}"
+ },
+ {
+  "tag": "Templates",
+  "kind": "query",
+  "field": "documentJobs",
+  "summary": "List document jobs",
+  "rest": "GET /v1/document_jobs"
+ },
+ {
+  "tag": "Templates",
+  "kind": "mutation",
+  "field": "createDocumentJob",
+  "summary": "Create a document job",
+  "rest": "POST /v1/document_jobs"
+ },
+ {
+  "tag": "Templates",
+  "kind": "query",
+  "field": "documentJob",
+  "summary": "Retrieve a DocumentJob",
+  "rest": "GET /v1/document_jobs/{id}"
+ },
+ {
+  "tag": "Integrations",
+  "kind": "query",
+  "field": "integrations",
+  "summary": "List integrations",
+  "rest": "GET /v1/integrations"
+ },
+ {
+  "tag": "Integrations",
+  "kind": "query",
+  "field": "integration",
+  "summary": "Retrieve an integration",
+  "rest": "GET /v1/integrations/{id}"
+ },
+ {
+  "tag": "Integrations",
+  "kind": "mutation",
+  "field": "createAddressValidation",
+  "summary": "Validate an address",
+  "rest": "POST /v1/address_validations"
+ },
+ {
+  "tag": "Integrations",
+  "kind": "query",
+  "field": "addressValidation",
+  "summary": "Retrieve an address validation",
+  "rest": "GET /v1/address_validations/{id}"
+ },
+ {
+  "tag": "Integrations",
+  "kind": "mutation",
+  "field": "createInsuranceQuote",
+  "summary": "Quote insurance",
+  "rest": "POST /v1/insurance_quotes"
+ },
+ {
+  "tag": "Integrations",
+  "kind": "query",
+  "field": "coverages",
+  "summary": "List coverages",
+  "rest": "GET /v1/coverages"
+ },
+ {
+  "tag": "Integrations",
+  "kind": "mutation",
+  "field": "createCoverage",
+  "summary": "Buy coverage",
+  "rest": "POST /v1/coverages"
+ },
+ {
+  "tag": "Integrations",
+  "kind": "query",
+  "field": "coverage",
+  "summary": "Retrieve a Coverage",
+  "rest": "GET /v1/coverages/{id}"
+ },
+ {
+  "tag": "Integrations",
+  "kind": "query",
+  "field": "claims",
+  "summary": "List claims",
+  "rest": "GET /v1/claims"
+ },
+ {
+  "tag": "Integrations",
+  "kind": "mutation",
+  "field": "createClaim",
+  "summary": "Submit a claim",
+  "rest": "POST /v1/claims"
+ },
+ {
+  "tag": "Integrations",
+  "kind": "query",
+  "field": "claim",
+  "summary": "Retrieve a Claim",
+  "rest": "GET /v1/claims/{id}"
+ },
+ {
+  "tag": "Integrations",
+  "kind": "mutation",
+  "field": "updateClaim",
+  "summary": "Update a Claim",
+  "rest": "POST /v1/claims/{id}"
+ },
+ {
+  "tag": "Jobs",
+  "kind": "query",
+  "field": "jobs",
+  "summary": "List jobs",
+  "rest": "GET /v1/jobs"
+ },
+ {
+  "tag": "Jobs",
+  "kind": "mutation",
+  "field": "createJob",
+  "summary": "Start a job",
+  "rest": "POST /v1/jobs"
+ },
+ {
+  "tag": "Jobs",
+  "kind": "query",
+  "field": "job",
+  "summary": "Retrieve a Job",
+  "rest": "GET /v1/jobs/{id}"
+ },
+ {
+  "tag": "Billing",
+  "kind": "query",
+  "field": "invoices",
+  "summary": "List invoices",
+  "rest": "GET /v1/invoices"
+ },
+ {
+  "tag": "Billing",
+  "kind": "query",
+  "field": "invoice",
+  "summary": "Retrieve a Invoice",
+  "rest": "GET /v1/invoices/{id}"
+ },
+ {
+  "tag": "Billing",
+  "kind": "query",
+  "field": "usageRecords",
+  "summary": "List usage records",
+  "rest": "GET /v1/usage_records"
+ },
+ {
+  "tag": "Billing",
+  "kind": "mutation",
+  "field": "createUsageRecord",
+  "summary": "Report usage",
+  "rest": "POST /v1/usage_records"
+ },
+ {
+  "tag": "Billing",
+  "kind": "query",
+  "field": "usageRecord",
+  "summary": "Retrieve a UsageRecord",
+  "rest": "GET /v1/usage_records/{id}"
+ },
+ {
+  "tag": "Billing",
+  "kind": "query",
+  "field": "usageSummaries",
+  "summary": "Usage summary per meter",
+  "rest": "GET /v1/usage_summaries"
+ },
+ {
+  "tag": "Billing",
+  "kind": "query",
+  "field": "balance",
+  "summary": "Retrieve the prepaid balance",
+  "rest": "GET /v1/balance"
+ },
+ {
+  "tag": "Billing",
+  "kind": "query",
+  "field": "balanceTransactions",
+  "summary": "List balance transactions",
+  "rest": "GET /v1/balance_transactions"
+ },
+ {
+  "tag": "Billing",
+  "kind": "query",
+  "field": "paymentMethods",
+  "summary": "List payment methods",
+  "rest": "GET /v1/payment_methods"
+ },
+ {
+  "tag": "Billing",
+  "kind": "query",
+  "field": "paymentMethod",
+  "summary": "Retrieve a PaymentMethod",
+  "rest": "GET /v1/payment_methods/{id}"
+ },
+ {
+  "tag": "Billing",
+  "kind": "mutation",
+  "field": "deletePaymentMethod",
+  "summary": "Delete a PaymentMethod",
+  "rest": "DELETE /v1/payment_methods/{id}"
+ },
+ {
+  "tag": "Billing",
+  "kind": "query",
+  "field": "payments",
+  "summary": "List payments",
+  "rest": "GET /v1/payments"
+ },
+ {
+  "tag": "Billing",
+  "kind": "query",
+  "field": "payment",
+  "summary": "Retrieve a Payment",
+  "rest": "GET /v1/payments/{id}"
+ },
+ {
+  "tag": "Inventory",
+  "kind": "query",
+  "field": "fulfillmentOrders",
+  "summary": "List fulfillment orders",
+  "rest": "GET /v1/fulfillment_orders"
+ },
+ {
+  "tag": "Inventory",
+  "kind": "mutation",
+  "field": "createFulfillmentOrder",
+  "summary": "Create a fulfillment order",
+  "rest": "POST /v1/fulfillment_orders"
+ },
+ {
+  "tag": "Inventory",
+  "kind": "query",
+  "field": "searchFulfillmentOrders",
+  "summary": "Search fulfillment orders",
+  "rest": "GET /v1/fulfillment_orders/search"
+ },
+ {
+  "tag": "Inventory",
+  "kind": "query",
+  "field": "fulfillmentOrder",
+  "summary": "Retrieve a FulfillmentOrder",
+  "rest": "GET /v1/fulfillment_orders/{id}"
+ },
+ {
+  "tag": "Inventory",
+  "kind": "mutation",
+  "field": "updateFulfillmentOrder",
+  "summary": "Update a FulfillmentOrder",
+  "rest": "POST /v1/fulfillment_orders/{id}"
+ },
+ {
+  "tag": "Templates",
+  "kind": "query",
+  "field": "labelSpecs",
+  "summary": "List label specs",
+  "rest": "GET /v1/label_specs"
+ },
+ {
+  "tag": "Templates",
+  "kind": "query",
+  "field": "labelSpec",
+  "summary": "Retrieve a LabelSpec",
+  "rest": "GET /v1/label_specs/{id}"
+ },
+ {
+  "tag": "Templates",
+  "kind": "query",
+  "field": "documentIngestions",
+  "summary": "List document ingestions",
+  "rest": "GET /v1/document_ingestions"
+ },
+ {
+  "tag": "Templates",
+  "kind": "query",
+  "field": "documentIngestion",
+  "summary": "Retrieve a DocumentIngestion",
+  "rest": "GET /v1/document_ingestions/{id}"
+ },
+ {
+  "tag": "Data Network",
+  "kind": "query",
+  "field": "timeline",
+  "summary": "End-to-end timeline",
+  "rest": "GET /v1/timelines/{shipment_id}"
+ },
+ {
+  "tag": "Data Network",
+  "kind": "mutation",
+  "field": "createIdentifierLink",
+  "summary": "Link identifiers",
+  "rest": "POST /v1/identifier_links"
+ },
+ {
+  "tag": "Data Network",
+  "kind": "query",
+  "field": "milestoneDefinition",
+  "summary": "Milestone definition set",
+  "rest": "GET /v1/milestone_definitions"
+ },
+ {
+  "tag": "Apps",
+  "kind": "query",
+  "field": "apps",
+  "summary": "List apps",
+  "rest": "GET /v1/apps"
+ },
+ {
+  "tag": "Apps",
+  "kind": "mutation",
+  "field": "createApp",
+  "summary": "Register a carrier OAuth app",
+  "rest": "POST /v1/apps"
+ },
+ {
+  "tag": "Apps",
+  "kind": "query",
+  "field": "app",
+  "summary": "Retrieve a App",
+  "rest": "GET /v1/apps/{id}"
+ },
+ {
+  "tag": "Apps",
+  "kind": "mutation",
+  "field": "updateApp",
+  "summary": "Update a App",
+  "rest": "POST /v1/apps/{id}"
+ },
+ {
+  "tag": "Apps",
+  "kind": "mutation",
+  "field": "deleteApp",
+  "summary": "Delete a App",
+  "rest": "DELETE /v1/apps/{id}"
+ },
+ {
+  "tag": "Apps",
+  "kind": "mutation",
+  "field": "rotateSecretApp",
+  "summary": "Rotate a dynamic app's client secret",
+  "rest": "POST /v1/apps/{id}/rotate_secret"
+ },
+ {
+  "tag": "Catalog",
+  "kind": "query",
+  "field": "services",
+  "summary": "List services",
+  "rest": "GET /v1/services"
+ },
+ {
+  "tag": "Catalog",
+  "kind": "mutation",
+  "field": "createService",
+  "summary": "Create a service",
+  "rest": "POST /v1/services"
+ },
+ {
+  "tag": "Catalog",
+  "kind": "query",
+  "field": "service",
+  "summary": "Retrieve a CatalogService",
+  "rest": "GET /v1/services/{id}"
+ },
+ {
+  "tag": "Catalog",
+  "kind": "mutation",
+  "field": "updateService",
+  "summary": "Update a CatalogService",
+  "rest": "POST /v1/services/{id}"
+ },
+ {
+  "tag": "Catalog",
+  "kind": "mutation",
+  "field": "deleteService",
+  "summary": "Delete a draft service",
+  "rest": "DELETE /v1/services/{id}"
+ },
+ {
+  "tag": "Catalog",
+  "kind": "mutation",
+  "field": "publishService",
+  "summary": "Publish a service",
+  "rest": "POST /v1/services/{id}/publish"
+ },
+ {
+  "tag": "Catalog",
+  "kind": "query",
+  "field": "serviceVersions",
+  "summary": "List service versions",
+  "rest": "GET /v1/services/{id}/versions"
+ },
+ {
+  "tag": "Catalog",
+  "kind": "query",
+  "field": "options",
+  "summary": "List options",
+  "rest": "GET /v1/options"
+ },
+ {
+  "tag": "Catalog",
+  "kind": "mutation",
+  "field": "createOption",
+  "summary": "Create a option",
+  "rest": "POST /v1/options"
+ },
+ {
+  "tag": "Catalog",
+  "kind": "query",
+  "field": "option",
+  "summary": "Retrieve a CatalogOption",
+  "rest": "GET /v1/options/{id}"
+ },
+ {
+  "tag": "Catalog",
+  "kind": "mutation",
+  "field": "updateOption",
+  "summary": "Update a CatalogOption",
+  "rest": "POST /v1/options/{id}"
+ },
+ {
+  "tag": "Catalog",
+  "kind": "mutation",
+  "field": "deleteOption",
+  "summary": "Delete a draft option",
+  "rest": "DELETE /v1/options/{id}"
+ },
+ {
+  "tag": "Catalog",
+  "kind": "mutation",
+  "field": "publishOption",
+  "summary": "Publish a option",
+  "rest": "POST /v1/options/{id}/publish"
+ },
+ {
+  "tag": "Catalog",
+  "kind": "query",
+  "field": "optionVersions",
+  "summary": "List option versions",
+  "rest": "GET /v1/options/{id}/versions"
+ },
+ {
+  "tag": "Catalog",
+  "kind": "query",
+  "field": "packagings",
+  "summary": "List packagings",
+  "rest": "GET /v1/packagings"
+ },
+ {
+  "tag": "Catalog",
+  "kind": "mutation",
+  "field": "createPackaging",
+  "summary": "Create a packaging",
+  "rest": "POST /v1/packagings"
+ },
+ {
+  "tag": "Catalog",
+  "kind": "query",
+  "field": "packaging",
+  "summary": "Retrieve a Packaging",
+  "rest": "GET /v1/packagings/{id}"
+ },
+ {
+  "tag": "Catalog",
+  "kind": "mutation",
+  "field": "updatePackaging",
+  "summary": "Update a Packaging",
+  "rest": "POST /v1/packagings/{id}"
+ },
+ {
+  "tag": "Catalog",
+  "kind": "mutation",
+  "field": "deletePackaging",
+  "summary": "Delete a draft packaging",
+  "rest": "DELETE /v1/packagings/{id}"
+ },
+ {
+  "tag": "Catalog",
+  "kind": "mutation",
+  "field": "publishPackaging",
+  "summary": "Publish a packaging",
+  "rest": "POST /v1/packagings/{id}/publish"
+ },
+ {
+  "tag": "Catalog",
+  "kind": "query",
+  "field": "packagingVersions",
+  "summary": "List packaging versions",
+  "rest": "GET /v1/packagings/{id}/versions"
+ },
+ {
+  "tag": "Catalog",
+  "kind": "query",
+  "field": "zones",
+  "summary": "List zones",
+  "rest": "GET /v1/zones"
+ },
+ {
+  "tag": "Catalog",
+  "kind": "mutation",
+  "field": "createZone",
+  "summary": "Create a zone",
+  "rest": "POST /v1/zones"
+ },
+ {
+  "tag": "Catalog",
+  "kind": "query",
+  "field": "zone",
+  "summary": "Retrieve a Zone",
+  "rest": "GET /v1/zones/{id}"
+ },
+ {
+  "tag": "Catalog",
+  "kind": "mutation",
+  "field": "updateZone",
+  "summary": "Update a Zone",
+  "rest": "POST /v1/zones/{id}"
+ },
+ {
+  "tag": "Catalog",
+  "kind": "mutation",
+  "field": "deleteZone",
+  "summary": "Delete a draft zone",
+  "rest": "DELETE /v1/zones/{id}"
+ },
+ {
+  "tag": "Catalog",
+  "kind": "mutation",
+  "field": "publishZone",
+  "summary": "Publish a zone",
+  "rest": "POST /v1/zones/{id}/publish"
+ },
+ {
+  "tag": "Catalog",
+  "kind": "query",
+  "field": "zoneVersions",
+  "summary": "List zone versions",
+  "rest": "GET /v1/zones/{id}/versions"
+ },
+ {
+  "tag": "Catalog",
+  "kind": "mutation",
+  "field": "matchZone",
+  "summary": "Match an address to zones",
+  "rest": "POST /v1/zones/match"
+ },
+ {
+  "tag": "Pricing",
+  "kind": "query",
+  "field": "rateSheets",
+  "summary": "List rate sheets",
+  "rest": "GET /v1/rate_sheets"
+ },
+ {
+  "tag": "Pricing",
+  "kind": "mutation",
+  "field": "createRateSheet",
+  "summary": "Create a rate sheet",
+  "rest": "POST /v1/rate_sheets"
+ },
+ {
+  "tag": "Pricing",
+  "kind": "query",
+  "field": "rateSheet",
+  "summary": "Retrieve a RateSheet",
+  "rest": "GET /v1/rate_sheets/{id}"
+ },
+ {
+  "tag": "Pricing",
+  "kind": "mutation",
+  "field": "updateRateSheet",
+  "summary": "Update a RateSheet",
+  "rest": "POST /v1/rate_sheets/{id}"
+ },
+ {
+  "tag": "Pricing",
+  "kind": "mutation",
+  "field": "deleteRateSheet",
+  "summary": "Delete a draft rate sheet",
+  "rest": "DELETE /v1/rate_sheets/{id}"
+ },
+ {
+  "tag": "Pricing",
+  "kind": "mutation",
+  "field": "publishRateSheet",
+  "summary": "Publish a rate sheet",
+  "rest": "POST /v1/rate_sheets/{id}/publish"
+ },
+ {
+  "tag": "Pricing",
+  "kind": "mutation",
+  "field": "simulateRateSheet",
+  "summary": "Simulate prices",
+  "rest": "POST /v1/rate_sheets/{id}/simulate"
+ },
+ {
+  "tag": "Pricing",
+  "kind": "query",
+  "field": "rateSheetVersions",
+  "summary": "List rate sheet versions",
+  "rest": "GET /v1/rate_sheets/{id}/versions"
+ },
+ {
+  "tag": "Pricing",
+  "kind": "mutation",
+  "field": "importRateSheet",
+  "summary": "Import a rate sheet",
+  "rest": "POST /v1/rate_sheets/import"
+ },
+ {
+  "tag": "Pricing",
+  "kind": "query",
+  "field": "rateSheetExport",
+  "summary": "Export a rate sheet",
+  "rest": "GET /v1/rate_sheets/{id}/export"
+ },
+ {
+  "tag": "Pricing",
+  "kind": "query",
+  "field": "surcharges",
+  "summary": "List surcharges",
+  "rest": "GET /v1/surcharges"
+ },
+ {
+  "tag": "Pricing",
+  "kind": "mutation",
+  "field": "createSurcharge",
+  "summary": "Create a surcharge",
+  "rest": "POST /v1/surcharges"
+ },
+ {
+  "tag": "Pricing",
+  "kind": "query",
+  "field": "surcharge",
+  "summary": "Retrieve a Surcharge",
+  "rest": "GET /v1/surcharges/{id}"
+ },
+ {
+  "tag": "Pricing",
+  "kind": "mutation",
+  "field": "updateSurcharge",
+  "summary": "Update a Surcharge",
+  "rest": "POST /v1/surcharges/{id}"
+ },
+ {
+  "tag": "Pricing",
+  "kind": "mutation",
+  "field": "deleteSurcharge",
+  "summary": "Delete a Surcharge",
+  "rest": "DELETE /v1/surcharges/{id}"
+ },
+ {
+  "tag": "Pricing",
+  "kind": "mutation",
+  "field": "scheduleSurcharge",
+  "summary": "Add a schedule entry",
+  "rest": "POST /v1/surcharges/{id}/schedule"
+ },
+ {
+  "tag": "Pricing",
+  "kind": "query",
+  "field": "pricingRules",
+  "summary": "List pricing rules",
+  "rest": "GET /v1/pricing_rules"
+ },
+ {
+  "tag": "Pricing",
+  "kind": "mutation",
+  "field": "createPricingRule",
+  "summary": "Create a pricing rule",
+  "rest": "POST /v1/pricing_rules"
+ },
+ {
+  "tag": "Pricing",
+  "kind": "query",
+  "field": "pricingRule",
+  "summary": "Retrieve a PricingRule",
+  "rest": "GET /v1/pricing_rules/{id}"
+ },
+ {
+  "tag": "Pricing",
+  "kind": "mutation",
+  "field": "updatePricingRule",
+  "summary": "Update a PricingRule",
+  "rest": "POST /v1/pricing_rules/{id}"
+ },
+ {
+  "tag": "Pricing",
+  "kind": "mutation",
+  "field": "deletePricingRule",
+  "summary": "Delete a PricingRule",
+  "rest": "DELETE /v1/pricing_rules/{id}"
+ },
+ {
+  "tag": "Routes",
+  "kind": "query",
+  "field": "facilities",
+  "summary": "List facilities",
+  "rest": "GET /v1/facilities"
+ },
+ {
+  "tag": "Routes",
+  "kind": "mutation",
+  "field": "createFacility",
+  "summary": "Create a facility",
+  "rest": "POST /v1/facilities"
+ },
+ {
+  "tag": "Routes",
+  "kind": "query",
+  "field": "facility",
+  "summary": "Retrieve a Facility",
+  "rest": "GET /v1/facilities/{id}"
+ },
+ {
+  "tag": "Routes",
+  "kind": "mutation",
+  "field": "updateFacility",
+  "summary": "Update a Facility",
+  "rest": "POST /v1/facilities/{id}"
+ },
+ {
+  "tag": "Routes",
+  "kind": "mutation",
+  "field": "deleteFacility",
+  "summary": "Delete a Facility",
+  "rest": "DELETE /v1/facilities/{id}"
+ },
+ {
+  "tag": "Routes",
+  "kind": "query",
+  "field": "routes",
+  "summary": "List routes",
+  "rest": "GET /v1/routes"
+ },
+ {
+  "tag": "Routes",
+  "kind": "mutation",
+  "field": "createRoute",
+  "summary": "Create a route",
+  "rest": "POST /v1/routes"
+ },
+ {
+  "tag": "Routes",
+  "kind": "query",
+  "field": "route",
+  "summary": "Retrieve a Route",
+  "rest": "GET /v1/routes/{id}"
+ },
+ {
+  "tag": "Routes",
+  "kind": "mutation",
+  "field": "updateRoute",
+  "summary": "Update a Route",
+  "rest": "POST /v1/routes/{id}"
+ },
+ {
+  "tag": "Routes",
+  "kind": "mutation",
+  "field": "deleteRoute",
+  "summary": "Delete a Route",
+  "rest": "DELETE /v1/routes/{id}"
+ },
+ {
+  "tag": "Routes",
+  "kind": "mutation",
+  "field": "activateRoute",
+  "summary": "Activate a route",
+  "rest": "POST /v1/routes/{id}/activate"
+ },
+ {
+  "tag": "Routes",
+  "kind": "mutation",
+  "field": "deactivateRoute",
+  "summary": "Deactivate a route",
+  "rest": "POST /v1/routes/{id}/deactivate"
+ },
+ {
+  "tag": "Routes",
+  "kind": "mutation",
+  "field": "createRouteStop",
+  "summary": "Insert a stop",
+  "rest": "POST /v1/routes/{id}/stops"
+ },
+ {
+  "tag": "Routes",
+  "kind": "mutation",
+  "field": "updateRouteStop",
+  "summary": "Update a stop",
+  "rest": "POST /v1/routes/{id}/stops/{stop_id}"
+ },
+ {
+  "tag": "Routes",
+  "kind": "mutation",
+  "field": "deleteRouteStop",
+  "summary": "Remove a stop",
+  "rest": "DELETE /v1/routes/{id}/stops/{stop_id}"
+ },
+ {
+  "tag": "Routes",
+  "kind": "mutation",
+  "field": "reorderRouteStop",
+  "summary": "Reorder stops",
+  "rest": "POST /v1/routes/{id}/stops/reorder"
+ },
+ {
+  "tag": "Routes",
+  "kind": "query",
+  "field": "routeLegs",
+  "summary": "List legs",
+  "rest": "GET /v1/routes/{id}/legs"
+ },
+ {
+  "tag": "Routes",
+  "kind": "mutation",
+  "field": "updateRouteLeg",
+  "summary": "Update a leg",
+  "rest": "POST /v1/routes/{id}/legs/{leg_id}"
+ },
+ {
+  "tag": "Routes",
+  "kind": "query",
+  "field": "routeRuns",
+  "summary": "List route runs",
+  "rest": "GET /v1/route_runs"
+ },
+ {
+  "tag": "Routes",
+  "kind": "mutation",
+  "field": "createRouteRun",
+  "summary": "Create a route run",
+  "rest": "POST /v1/route_runs"
+ },
+ {
+  "tag": "Routes",
+  "kind": "query",
+  "field": "routeRun",
+  "summary": "Retrieve a RouteRun",
+  "rest": "GET /v1/route_runs/{id}"
+ },
+ {
+  "tag": "Routes",
+  "kind": "mutation",
+  "field": "updateRouteRun",
+  "summary": "Update a RouteRun",
+  "rest": "POST /v1/route_runs/{id}"
+ },
+ {
+  "tag": "Routes",
+  "kind": "mutation",
+  "field": "dispatchRouteRun",
+  "summary": "Dispatch a route run",
+  "rest": "POST /v1/route_runs/{id}/dispatch"
+ },
+ {
+  "tag": "Routes",
+  "kind": "mutation",
+  "field": "startRouteRun",
+  "summary": "Start a route run",
+  "rest": "POST /v1/route_runs/{id}/start"
+ },
+ {
+  "tag": "Routes",
+  "kind": "mutation",
+  "field": "completeRouteRun",
+  "summary": "Complete a route run",
+  "rest": "POST /v1/route_runs/{id}/complete"
+ },
+ {
+  "tag": "Routes",
+  "kind": "mutation",
+  "field": "cancelRouteRun",
+  "summary": "Cancel a route run",
+  "rest": "POST /v1/route_runs/{id}/cancel"
+ },
+ {
+  "tag": "Routes",
+  "kind": "mutation",
+  "field": "assignRouteRun",
+  "summary": "Assign a route run",
+  "rest": "POST /v1/route_runs/{id}/assign"
+ },
+ {
+  "tag": "Routes",
+  "kind": "mutation",
+  "field": "unassignRouteRun",
+  "summary": "Unassign a route run",
+  "rest": "POST /v1/route_runs/{id}/unassign"
+ },
+ {
+  "tag": "Routes",
+  "kind": "mutation",
+  "field": "optimizeRouteRun",
+  "summary": "Optimize a route run",
+  "rest": "POST /v1/route_runs/{id}/optimize"
+ },
+ {
+  "tag": "Routes",
+  "kind": "mutation",
+  "field": "arriveRouteRunStop",
+  "summary": "Stop: arrive",
+  "rest": "POST /v1/route_runs/{id}/stops/{stop_id}/arrive"
+ },
+ {
+  "tag": "Routes",
+  "kind": "mutation",
+  "field": "completeRouteRunStop",
+  "summary": "Stop: complete",
+  "rest": "POST /v1/route_runs/{id}/stops/{stop_id}/complete"
+ },
+ {
+  "tag": "Routes",
+  "kind": "mutation",
+  "field": "failRouteRunStop",
+  "summary": "Stop: fail",
+  "rest": "POST /v1/route_runs/{id}/stops/{stop_id}/fail"
+ },
+ {
+  "tag": "Routes",
+  "kind": "mutation",
+  "field": "skipRouteRunStop",
+  "summary": "Stop: skip",
+  "rest": "POST /v1/route_runs/{id}/stops/{stop_id}/skip"
+ },
+ {
+  "tag": "Routes",
+  "kind": "mutation",
+  "field": "departRouteRunLeg",
+  "summary": "Leg: depart",
+  "rest": "POST /v1/route_runs/{id}/legs/{leg_id}/depart"
+ },
+ {
+  "tag": "Routes",
+  "kind": "mutation",
+  "field": "arriveRouteRunLeg",
+  "summary": "Leg: arrive",
+  "rest": "POST /v1/route_runs/{id}/legs/{leg_id}/arrive"
+ },
+ {
+  "tag": "Fleet",
+  "kind": "query",
+  "field": "routeRunPositions",
+  "summary": "List positions",
+  "rest": "GET /v1/route_runs/{id}/positions"
+ },
+ {
+  "tag": "Fleet",
+  "kind": "mutation",
+  "field": "createRouteRunPosition",
+  "summary": "Report positions",
+  "rest": "POST /v1/route_runs/{id}/positions"
+ },
+ {
+  "tag": "Routes",
+  "kind": "mutation",
+  "field": "replanShipmentJourney",
+  "summary": "Replan a journey",
+  "rest": "POST /v1/shipments/{id}/journey/replan"
+ },
+ {
+  "tag": "Fleet",
+  "kind": "query",
+  "field": "vehicles",
+  "summary": "List vehicles",
+  "rest": "GET /v1/vehicles"
+ },
+ {
+  "tag": "Fleet",
+  "kind": "mutation",
+  "field": "createVehicle",
+  "summary": "Create a vehicle",
+  "rest": "POST /v1/vehicles"
+ },
+ {
+  "tag": "Fleet",
+  "kind": "query",
+  "field": "vehicle",
+  "summary": "Retrieve a Vehicle",
+  "rest": "GET /v1/vehicles/{id}"
+ },
+ {
+  "tag": "Fleet",
+  "kind": "mutation",
+  "field": "updateVehicle",
+  "summary": "Update a Vehicle",
+  "rest": "POST /v1/vehicles/{id}"
+ },
+ {
+  "tag": "Fleet",
+  "kind": "mutation",
+  "field": "deleteVehicle",
+  "summary": "Delete a Vehicle",
+  "rest": "DELETE /v1/vehicles/{id}"
+ },
+ {
+  "tag": "Fleet",
+  "kind": "query",
+  "field": "vehiclePosition",
+  "summary": "Latest vehicle position",
+  "rest": "GET /v1/vehicles/{id}/position"
+ },
+ {
+  "tag": "Fleet",
+  "kind": "query",
+  "field": "drivers",
+  "summary": "List drivers",
+  "rest": "GET /v1/drivers"
+ },
+ {
+  "tag": "Fleet",
+  "kind": "mutation",
+  "field": "createDriver",
+  "summary": "Create a driver",
+  "rest": "POST /v1/drivers"
+ },
+ {
+  "tag": "Fleet",
+  "kind": "query",
+  "field": "driver",
+  "summary": "Retrieve a Driver",
+  "rest": "GET /v1/drivers/{id}"
+ },
+ {
+  "tag": "Fleet",
+  "kind": "mutation",
+  "field": "updateDriver",
+  "summary": "Update a Driver",
+  "rest": "POST /v1/drivers/{id}"
+ },
+ {
+  "tag": "Fleet",
+  "kind": "mutation",
+  "field": "deleteDriver",
+  "summary": "Delete a Driver",
+  "rest": "DELETE /v1/drivers/{id}"
+ },
+ {
+  "tag": "Fleet",
+  "kind": "query",
+  "field": "optimizations",
+  "summary": "List optimizations",
+  "rest": "GET /v1/optimizations"
+ },
+ {
+  "tag": "Fleet",
+  "kind": "mutation",
+  "field": "createOptimization",
+  "summary": "Optimize runs",
+  "rest": "POST /v1/optimizations"
+ },
+ {
+  "tag": "Fleet",
+  "kind": "query",
+  "field": "optimization",
+  "summary": "Retrieve a Optimization",
+  "rest": "GET /v1/optimizations/{id}"
+ },
+ {
+  "tag": "Fleet",
+  "kind": "mutation",
+  "field": "commitOptimization",
+  "summary": "Commit proposed runs",
+  "rest": "POST /v1/optimizations/{id}/commit"
+ },
+ {
+  "tag": "Accounts",
+  "kind": "mutation",
+  "field": "suspendAccount",
+  "summary": "Suspend an account",
+  "rest": "POST /v1/accounts/{id}/suspend"
+ },
+ {
+  "tag": "Accounts",
+  "kind": "mutation",
+  "field": "reactivateAccount",
+  "summary": "Reactivate an account",
+  "rest": "POST /v1/accounts/{id}/reactivate"
+ },
+ {
+  "tag": "Accounts",
+  "kind": "mutation",
+  "field": "closeAccount",
+  "summary": "Close an account",
+  "rest": "POST /v1/accounts/{id}/close"
+ },
+ {
+  "tag": "Accounts",
+  "kind": "query",
+  "field": "identityProviders",
+  "summary": "List identity providers",
+  "rest": "GET /v1/identity_providers"
+ },
+ {
+  "tag": "Accounts",
+  "kind": "mutation",
+  "field": "createIdentityProvider",
+  "summary": "Register an identity provider",
+  "rest": "POST /v1/identity_providers"
+ },
+ {
+  "tag": "Accounts",
+  "kind": "query",
+  "field": "identityProvider",
+  "summary": "Retrieve a IdentityProvider",
+  "rest": "GET /v1/identity_providers/{id}"
+ },
+ {
+  "tag": "Accounts",
+  "kind": "mutation",
+  "field": "updateIdentityProvider",
+  "summary": "Update a IdentityProvider",
+  "rest": "POST /v1/identity_providers/{id}"
+ },
+ {
+  "tag": "Accounts",
+  "kind": "mutation",
+  "field": "deleteIdentityProvider",
+  "summary": "Delete a IdentityProvider",
+  "rest": "DELETE /v1/identity_providers/{id}"
+ },
+ {
+  "tag": "Accounts",
+  "kind": "mutation",
+  "field": "verifyDomainIdentityProvider",
+  "summary": "Verify a domain",
+  "rest": "POST /v1/identity_providers/{id}/verify_domain"
+ },
+ {
+  "tag": "Accounts",
+  "kind": "mutation",
+  "field": "testIdentityProvider",
+  "summary": "Test sign-in",
+  "rest": "POST /v1/identity_providers/{id}/test"
+ },
+ {
+  "tag": "Accounts",
+  "kind": "query",
+  "field": "memberships",
+  "summary": "List memberships",
+  "rest": "GET /v1/memberships"
+ },
+ {
+  "tag": "Accounts",
+  "kind": "query",
+  "field": "membership",
+  "summary": "Retrieve a Membership",
+  "rest": "GET /v1/memberships/{id}"
+ },
+ {
+  "tag": "Accounts",
+  "kind": "mutation",
+  "field": "updateMembership",
+  "summary": "Update a Membership",
+  "rest": "POST /v1/memberships/{id}"
+ },
+ {
+  "tag": "Accounts",
+  "kind": "mutation",
+  "field": "deleteMembership",
+  "summary": "Delete a Membership",
+  "rest": "DELETE /v1/memberships/{id}"
+ },
+ {
+  "tag": "Accounts",
+  "kind": "query",
+  "field": "invitations",
+  "summary": "List invitations",
+  "rest": "GET /v1/invitations"
+ },
+ {
+  "tag": "Accounts",
+  "kind": "mutation",
+  "field": "createInvitation",
+  "summary": "Invite a member",
+  "rest": "POST /v1/invitations"
+ },
+ {
+  "tag": "Accounts",
+  "kind": "query",
+  "field": "invitation",
+  "summary": "Retrieve a Invitation",
+  "rest": "GET /v1/invitations/{id}"
+ },
+ {
+  "tag": "Accounts",
+  "kind": "mutation",
+  "field": "revokeInvitation",
+  "summary": "Revoke an invitation",
+  "rest": "POST /v1/invitations/{id}/revoke"
+ },
+ {
+  "tag": "Accounts",
+  "kind": "query",
+  "field": "roles",
+  "summary": "List roles",
+  "rest": "GET /v1/roles"
+ },
+ {
+  "tag": "Accounts",
+  "kind": "mutation",
+  "field": "createRole",
+  "summary": "Create a custom role",
+  "rest": "POST /v1/roles"
+ },
+ {
+  "tag": "Accounts",
+  "kind": "query",
+  "field": "role",
+  "summary": "Retrieve a Role",
+  "rest": "GET /v1/roles/{id}"
+ },
+ {
+  "tag": "Accounts",
+  "kind": "mutation",
+  "field": "updateRole",
+  "summary": "Update a Role",
+  "rest": "POST /v1/roles/{id}"
+ },
+ {
+  "tag": "Accounts",
+  "kind": "mutation",
+  "field": "deleteRole",
+  "summary": "Delete a Role",
+  "rest": "DELETE /v1/roles/{id}"
+ },
+ {
+  "tag": "Accounts",
+  "kind": "query",
+  "field": "apiKeys",
+  "summary": "List api keys",
+  "rest": "GET /v1/api_keys"
+ },
+ {
+  "tag": "Accounts",
+  "kind": "mutation",
+  "field": "createApiKey",
+  "summary": "Create an API key",
+  "rest": "POST /v1/api_keys"
+ },
+ {
+  "tag": "Accounts",
+  "kind": "query",
+  "field": "apiKey",
+  "summary": "Retrieve a ApiKey",
+  "rest": "GET /v1/api_keys/{id}"
+ },
+ {
+  "tag": "Accounts",
+  "kind": "mutation",
+  "field": "updateApiKey",
+  "summary": "Update a ApiKey",
+  "rest": "POST /v1/api_keys/{id}"
+ },
+ {
+  "tag": "Accounts",
+  "kind": "mutation",
+  "field": "deleteApiKey",
+  "summary": "Delete a ApiKey",
+  "rest": "DELETE /v1/api_keys/{id}"
+ },
+ {
+  "tag": "Accounts",
+  "kind": "mutation",
+  "field": "rollApiKey",
+  "summary": "Roll an API key",
+  "rest": "POST /v1/api_keys/{id}/roll"
+ },
+ {
+  "tag": "Network",
+  "kind": "mutation",
+  "field": "networkMembers",
+  "summary": "List a carrier member",
+  "rest": "POST /v1/accounts/{id}/list"
+ },
+ {
+  "tag": "Network",
+  "kind": "mutation",
+  "field": "pauseMember",
+  "summary": "Pause a carrier member",
+  "rest": "POST /v1/accounts/{id}/pause"
+ },
+ {
+  "tag": "Network",
+  "kind": "mutation",
+  "field": "delistMember",
+  "summary": "Delist a carrier member",
+  "rest": "POST /v1/accounts/{id}/delist"
+ },
+ {
+  "tag": "Network",
+  "kind": "query",
+  "field": "interlineAgreements",
+  "summary": "List interline agreements",
+  "rest": "GET /v1/interline_agreements"
+ },
+ {
+  "tag": "Network",
+  "kind": "mutation",
+  "field": "createInterlineAgreement",
+  "summary": "Propose an interline agreement",
+  "rest": "POST /v1/interline_agreements"
+ },
+ {
+  "tag": "Network",
+  "kind": "query",
+  "field": "interlineAgreement",
+  "summary": "Retrieve a InterlineAgreement",
+  "rest": "GET /v1/interline_agreements/{id}"
+ },
+ {
+  "tag": "Network",
+  "kind": "mutation",
+  "field": "updateInterlineAgreement",
+  "summary": "Update a InterlineAgreement",
+  "rest": "POST /v1/interline_agreements/{id}"
+ },
+ {
+  "tag": "Network",
+  "kind": "mutation",
+  "field": "signInterlineAgreement",
+  "summary": "Sign an interline agreement",
+  "rest": "POST /v1/interline_agreements/{id}/sign"
+ },
+ {
+  "tag": "Network",
+  "kind": "mutation",
+  "field": "suspendInterlineAgreement",
+  "summary": "Suspend an interline agreement",
+  "rest": "POST /v1/interline_agreements/{id}/suspend"
+ },
+ {
+  "tag": "Network",
+  "kind": "mutation",
+  "field": "terminateInterlineAgreement",
+  "summary": "Terminate an interline agreement",
+  "rest": "POST /v1/interline_agreements/{id}/terminate"
+ },
+ {
+  "tag": "Network",
+  "kind": "query",
+  "field": "ledgerEntries",
+  "summary": "List ledger entries",
+  "rest": "GET /v1/ledger_entries"
+ },
+ {
+  "tag": "Network",
+  "kind": "query",
+  "field": "ledgerEntry",
+  "summary": "Retrieve a LedgerEntry",
+  "rest": "GET /v1/ledger_entries/{id}"
+ },
+ {
+  "tag": "Network",
+  "kind": "query",
+  "field": "settlements",
+  "summary": "List settlements",
+  "rest": "GET /v1/settlements"
+ },
+ {
+  "tag": "Network",
+  "kind": "query",
+  "field": "settlement",
+  "summary": "Retrieve a Settlement",
+  "rest": "GET /v1/settlements/{id}"
+ },
+ {
+  "tag": "Network",
+  "kind": "mutation",
+  "field": "closeSettlement",
+  "summary": "Close a settlement",
+  "rest": "POST /v1/settlements/{id}/close"
+ },
+ {
+  "tag": "Network",
+  "kind": "mutation",
+  "field": "disputeSettlement",
+  "summary": "Dispute settlement entries",
+  "rest": "POST /v1/settlements/{id}/dispute"
+ },
+ {
+  "tag": "Network",
+  "kind": "query",
+  "field": "serviceLevels",
+  "summary": "List service levels",
+  "rest": "GET /v1/service_levels"
+ },
+ {
+  "tag": "Network",
+  "kind": "mutation",
+  "field": "createServiceLevel",
+  "summary": "Define a service level",
+  "rest": "POST /v1/service_levels"
+ },
+ {
+  "tag": "Network",
+  "kind": "query",
+  "field": "serviceLevel",
+  "summary": "Retrieve a NetworkServiceLevel",
+  "rest": "GET /v1/service_levels/{id}"
+ },
+ {
+  "tag": "Network",
+  "kind": "mutation",
+  "field": "updateServiceLevel",
+  "summary": "Update a NetworkServiceLevel",
+  "rest": "POST /v1/service_levels/{id}"
+ },
+ {
+  "tag": "Network",
+  "kind": "mutation",
+  "field": "deleteServiceLevel",
+  "summary": "Delete a NetworkServiceLevel",
+  "rest": "DELETE /v1/service_levels/{id}"
+ },
+ {
+  "tag": "IoT",
+  "kind": "query",
+  "field": "devices",
+  "summary": "List devices",
+  "rest": "GET /v1/devices"
+ },
+ {
+  "tag": "IoT",
+  "kind": "mutation",
+  "field": "createDevice",
+  "summary": "Register a device",
+  "rest": "POST /v1/devices"
+ },
+ {
+  "tag": "IoT",
+  "kind": "query",
+  "field": "device",
+  "summary": "Retrieve a Device",
+  "rest": "GET /v1/devices/{id}"
+ },
+ {
+  "tag": "IoT",
+  "kind": "mutation",
+  "field": "updateDevice",
+  "summary": "Update a Device",
+  "rest": "POST /v1/devices/{id}"
+ },
+ {
+  "tag": "IoT",
+  "kind": "mutation",
+  "field": "deleteDevice",
+  "summary": "Delete a Device",
+  "rest": "DELETE /v1/devices/{id}"
+ },
+ {
+  "tag": "IoT",
+  "kind": "mutation",
+  "field": "certificateDevice",
+  "summary": "Issue a device certificate",
+  "rest": "POST /v1/devices/{id}/certificate"
+ },
+ {
+  "tag": "IoT",
+  "kind": "mutation",
+  "field": "tokenDevice",
+  "summary": "Issue a device token",
+  "rest": "POST /v1/devices/{id}/token"
+ },
+ {
+  "tag": "IoT",
+  "kind": "mutation",
+  "field": "attachDevice",
+  "summary": "Attach a device",
+  "rest": "POST /v1/devices/{id}/attach"
+ },
+ {
+  "tag": "IoT",
+  "kind": "mutation",
+  "field": "detachDevice",
+  "summary": "Detach a device",
+  "rest": "POST /v1/devices/{id}/detach"
+ },
+ {
+  "tag": "IoT",
+  "kind": "mutation",
+  "field": "deactivateDevice",
+  "summary": "Deactivate a device",
+  "rest": "POST /v1/devices/{id}/deactivate"
+ },
+ {
+  "tag": "Data Network",
+  "kind": "query",
+  "field": "accessPolicies",
+  "summary": "List access policies",
+  "rest": "GET /v1/access_policies"
+ },
+ {
+  "tag": "Data Network",
+  "kind": "mutation",
+  "field": "createAccessPolicy",
+  "summary": "Create an access policy",
+  "rest": "POST /v1/access_policies"
+ },
+ {
+  "tag": "Data Network",
+  "kind": "query",
+  "field": "accessPolicy",
+  "summary": "Retrieve a AccessPolicy",
+  "rest": "GET /v1/access_policies/{id}"
+ },
+ {
+  "tag": "Data Network",
+  "kind": "mutation",
+  "field": "updateAccessPolicy",
+  "summary": "Update a AccessPolicy",
+  "rest": "POST /v1/access_policies/{id}"
+ },
+ {
+  "tag": "Consolidation",
+  "kind": "query",
+  "field": "consolidations",
+  "summary": "List consolidations",
+  "rest": "GET /v1/consolidations"
+ },
+ {
+  "tag": "Consolidation",
+  "kind": "mutation",
+  "field": "createConsolidation",
+  "summary": "Create a consolidation",
+  "rest": "POST /v1/consolidations"
+ },
+ {
+  "tag": "Consolidation",
+  "kind": "query",
+  "field": "consolidation",
+  "summary": "Retrieve a Consolidation",
+  "rest": "GET /v1/consolidations/{id}"
+ },
+ {
+  "tag": "Consolidation",
+  "kind": "mutation",
+  "field": "updateConsolidation",
+  "summary": "Update a Consolidation",
+  "rest": "POST /v1/consolidations/{id}"
+ },
+ {
+  "tag": "Consolidation",
+  "kind": "mutation",
+  "field": "addConsolidation",
+  "summary": "Consolidation: add",
+  "rest": "POST /v1/consolidations/{id}/add"
+ },
+ {
+  "tag": "Consolidation",
+  "kind": "mutation",
+  "field": "removeConsolidation",
+  "summary": "Consolidation: remove",
+  "rest": "POST /v1/consolidations/{id}/remove"
+ },
+ {
+  "tag": "Consolidation",
+  "kind": "mutation",
+  "field": "closeConsolidation",
+  "summary": "Consolidation: close",
+  "rest": "POST /v1/consolidations/{id}/close"
+ },
+ {
+  "tag": "Consolidation",
+  "kind": "mutation",
+  "field": "sealConsolidation",
+  "summary": "Consolidation: seal",
+  "rest": "POST /v1/consolidations/{id}/seal"
+ },
+ {
+  "tag": "Consolidation",
+  "kind": "mutation",
+  "field": "breakSealConsolidation",
+  "summary": "Consolidation: break_seal",
+  "rest": "POST /v1/consolidations/{id}/break_seal"
+ },
+ {
+  "tag": "Consolidation",
+  "kind": "mutation",
+  "field": "loadConsolidation",
+  "summary": "Consolidation: load",
+  "rest": "POST /v1/consolidations/{id}/load"
+ },
+ {
+  "tag": "Consolidation",
+  "kind": "mutation",
+  "field": "unloadConsolidation",
+  "summary": "Consolidation: unload",
+  "rest": "POST /v1/consolidations/{id}/unload"
+ },
+ {
+  "tag": "Consolidation",
+  "kind": "mutation",
+  "field": "deconsolidateConsolidation",
+  "summary": "Consolidation: deconsolidate",
+  "rest": "POST /v1/consolidations/{id}/deconsolidate"
+ },
+ {
+  "tag": "Consolidation",
+  "kind": "mutation",
+  "field": "labelConsolidation",
+  "summary": "Generate a consolidation label",
+  "rest": "POST /v1/consolidations/{id}/label"
+ },
+ {
+  "tag": "Consolidation",
+  "kind": "query",
+  "field": "consolidationContents",
+  "summary": "List contents",
+  "rest": "GET /v1/consolidations/{id}/contents"
+ },
+ {
+  "tag": "Consolidation",
+  "kind": "query",
+  "field": "conveyances",
+  "summary": "List conveyances",
+  "rest": "GET /v1/conveyances"
+ },
+ {
+  "tag": "Consolidation",
+  "kind": "mutation",
+  "field": "createConveyance",
+  "summary": "Create a conveyance",
+  "rest": "POST /v1/conveyances"
+ },
+ {
+  "tag": "Consolidation",
+  "kind": "query",
+  "field": "conveyance",
+  "summary": "Retrieve a Conveyance",
+  "rest": "GET /v1/conveyances/{id}"
+ },
+ {
+  "tag": "Consolidation",
+  "kind": "mutation",
+  "field": "updateConveyance",
+  "summary": "Update a Conveyance",
+  "rest": "POST /v1/conveyances/{id}"
+ },
+ {
+  "tag": "Consolidation",
+  "kind": "mutation",
+  "field": "closeConveyance",
+  "summary": "Conveyance: close",
+  "rest": "POST /v1/conveyances/{id}/close"
+ },
+ {
+  "tag": "Consolidation",
+  "kind": "mutation",
+  "field": "departConveyance",
+  "summary": "Conveyance: depart",
+  "rest": "POST /v1/conveyances/{id}/depart"
+ },
+ {
+  "tag": "Consolidation",
+  "kind": "mutation",
+  "field": "arriveConveyance",
+  "summary": "Conveyance: arrive",
+  "rest": "POST /v1/conveyances/{id}/arrive"
+ },
+ {
+  "tag": "Consolidation",
+  "kind": "mutation",
+  "field": "cancelConveyance",
+  "summary": "Conveyance: cancel",
+  "rest": "POST /v1/conveyances/{id}/cancel"
+ },
+ {
+  "tag": "Consolidation",
+  "kind": "query",
+  "field": "conveyanceManifest",
+  "summary": "Conveyance manifest",
+  "rest": "GET /v1/conveyances/{id}/manifest"
+ },
+ {
+  "tag": "Templates",
+  "kind": "query",
+  "field": "documentTemplates",
+  "summary": "List document templates",
+  "rest": "GET /v1/document_templates"
+ },
+ {
+  "tag": "Templates",
+  "kind": "mutation",
+  "field": "createDocumentTemplate",
+  "summary": "Create a document template",
+  "rest": "POST /v1/document_templates"
+ },
+ {
+  "tag": "Templates",
+  "kind": "query",
+  "field": "documentTemplate",
+  "summary": "Retrieve a DocumentTemplate",
+  "rest": "GET /v1/document_templates/{id}"
+ },
+ {
+  "tag": "Templates",
+  "kind": "mutation",
+  "field": "updateDocumentTemplate",
+  "summary": "Update a DocumentTemplate",
+  "rest": "POST /v1/document_templates/{id}"
+ },
+ {
+  "tag": "Templates",
+  "kind": "mutation",
+  "field": "deleteDocumentTemplate",
+  "summary": "Delete a draft template",
+  "rest": "DELETE /v1/document_templates/{id}"
+ },
+ {
+  "tag": "Templates",
+  "kind": "mutation",
+  "field": "publishDocumentTemplate",
+  "summary": "Publish a template",
+  "rest": "POST /v1/document_templates/{id}/publish"
+ },
+ {
+  "tag": "Templates",
+  "kind": "mutation",
+  "field": "previewDocumentTemplate",
+  "summary": "Preview a template",
+  "rest": "POST /v1/document_templates/{id}/preview"
+ },
+ {
+  "tag": "Templates",
+  "kind": "mutation",
+  "field": "validateDocumentTemplate",
+  "summary": "Validate a template",
+  "rest": "POST /v1/document_templates/{id}/validate"
+ },
+ {
+  "tag": "Templates",
+  "kind": "query",
+  "field": "documentTemplateVersions",
+  "summary": "List template versions",
+  "rest": "GET /v1/document_templates/{id}/versions"
+ },
+ {
+  "tag": "Integrations",
+  "kind": "mutation",
+  "field": "createIntegration",
+  "summary": "Onboard a federated provider",
+  "rest": "POST /v1/integrations"
+ },
+ {
+  "tag": "Jobs",
+  "kind": "query",
+  "field": "jobSchedules",
+  "summary": "List job schedules",
+  "rest": "GET /v1/job_schedules"
+ },
+ {
+  "tag": "Jobs",
+  "kind": "mutation",
+  "field": "createJobSchedule",
+  "summary": "Create a job schedule",
+  "rest": "POST /v1/job_schedules"
+ },
+ {
+  "tag": "Jobs",
+  "kind": "query",
+  "field": "jobSchedule",
+  "summary": "Retrieve a JobSchedule",
+  "rest": "GET /v1/job_schedules/{id}"
+ },
+ {
+  "tag": "Jobs",
+  "kind": "mutation",
+  "field": "updateJobSchedule",
+  "summary": "Update a JobSchedule",
+  "rest": "POST /v1/job_schedules/{id}"
+ },
+ {
+  "tag": "Jobs",
+  "kind": "mutation",
+  "field": "deleteJobSchedule",
+  "summary": "Delete a JobSchedule",
+  "rest": "DELETE /v1/job_schedules/{id}"
+ },
+ {
+  "tag": "Jobs",
+  "kind": "mutation",
+  "field": "pauseJobSchedule",
+  "summary": "Job schedule: pause",
+  "rest": "POST /v1/job_schedules/{id}/pause"
+ },
+ {
+  "tag": "Jobs",
+  "kind": "mutation",
+  "field": "resumeJobSchedule",
+  "summary": "Job schedule: resume",
+  "rest": "POST /v1/job_schedules/{id}/resume"
+ },
+ {
+  "tag": "Jobs",
+  "kind": "mutation",
+  "field": "runNowJobSchedule",
+  "summary": "Job schedule: run_now",
+  "rest": "POST /v1/job_schedules/{id}/run_now"
+ },
+ {
+  "tag": "Billing",
+  "kind": "mutation",
+  "field": "createInvoice",
+  "summary": "Create a draft invoice",
+  "rest": "POST /v1/invoices"
+ },
+ {
+  "tag": "Billing",
+  "kind": "mutation",
+  "field": "updateInvoice",
+  "summary": "Update a Invoice",
+  "rest": "POST /v1/invoices/{id}"
+ },
+ {
+  "tag": "Billing",
+  "kind": "mutation",
+  "field": "finalizeInvoice",
+  "summary": "Invoice: finalize",
+  "rest": "POST /v1/invoices/{id}/finalize"
+ },
+ {
+  "tag": "Billing",
+  "kind": "mutation",
+  "field": "sendInvoice",
+  "summary": "Invoice: send",
+  "rest": "POST /v1/invoices/{id}/send"
+ },
+ {
+  "tag": "Billing",
+  "kind": "mutation",
+  "field": "voidInvoice",
+  "summary": "Invoice: void",
+  "rest": "POST /v1/invoices/{id}/void"
+ },
+ {
+  "tag": "Billing",
+  "kind": "mutation",
+  "field": "markUncollectibleInvoice",
+  "summary": "Invoice: mark_uncollectible",
+  "rest": "POST /v1/invoices/{id}/mark_uncollectible"
+ },
+ {
+  "tag": "Billing",
+  "kind": "mutation",
+  "field": "importInvoice",
+  "summary": "Import invoices from a file",
+  "rest": "POST /v1/invoices/import"
+ },
+ {
+  "tag": "Billing",
+  "kind": "query",
+  "field": "reconciliations",
+  "summary": "List reconciliations",
+  "rest": "GET /v1/reconciliations"
+ },
+ {
+  "tag": "Billing",
+  "kind": "mutation",
+  "field": "createReconciliation",
+  "summary": "Reconcile an invoice",
+  "rest": "POST /v1/reconciliations"
+ },
+ {
+  "tag": "Billing",
+  "kind": "query",
+  "field": "reconciliation",
+  "summary": "Retrieve a Reconciliation",
+  "rest": "GET /v1/reconciliations/{id}"
+ },
+ {
+  "tag": "Billing",
+  "kind": "mutation",
+  "field": "resolveReconciliation",
+  "summary": "Resolve a reconciliation line",
+  "rest": "POST /v1/reconciliations/{id}/lines/{line_id}/resolve"
+ },
+ {
+  "tag": "Billing",
+  "kind": "query",
+  "field": "meters",
+  "summary": "List meters",
+  "rest": "GET /v1/meters"
+ },
+ {
+  "tag": "Billing",
+  "kind": "mutation",
+  "field": "createMeter",
+  "summary": "Create a meter",
+  "rest": "POST /v1/meters"
+ },
+ {
+  "tag": "Billing",
+  "kind": "query",
+  "field": "meter",
+  "summary": "Retrieve a Meter",
+  "rest": "GET /v1/meters/{id}"
+ },
+ {
+  "tag": "Billing",
+  "kind": "mutation",
+  "field": "updateMeter",
+  "summary": "Update a Meter",
+  "rest": "POST /v1/meters/{id}"
+ },
+ {
+  "tag": "Billing",
+  "kind": "query",
+  "field": "pricePlans",
+  "summary": "List price plans",
+  "rest": "GET /v1/price_plans"
+ },
+ {
+  "tag": "Billing",
+  "kind": "mutation",
+  "field": "createPricePlan",
+  "summary": "Create a price plan",
+  "rest": "POST /v1/price_plans"
+ },
+ {
+  "tag": "Billing",
+  "kind": "query",
+  "field": "pricePlan",
+  "summary": "Retrieve a PricePlan",
+  "rest": "GET /v1/price_plans/{id}"
+ },
+ {
+  "tag": "Billing",
+  "kind": "mutation",
+  "field": "updatePricePlan",
+  "summary": "Update a PricePlan",
+  "rest": "POST /v1/price_plans/{id}"
+ },
+ {
+  "tag": "Billing",
+  "kind": "query",
+  "field": "billingProfile",
+  "summary": "Retrieve the billing profile",
+  "rest": "GET /v1/billing_profile"
+ },
+ {
+  "tag": "Billing",
+  "kind": "mutation",
+  "field": "updateBillingProfile",
+  "summary": "Update the billing profile",
+  "rest": "POST /v1/billing_profile"
+ },
+ {
+  "tag": "Billing",
+  "kind": "mutation",
+  "field": "refundPayment",
+  "summary": "Refund a payment",
+  "rest": "POST /v1/payments/{id}/refund"
+ },
+ {
+  "tag": "Billing",
+  "kind": "mutation",
+  "field": "reconcileStatementPayment",
+  "summary": "Reconcile an ISO 20022 camt.053 statement",
+  "rest": "POST /v1/payments/reconcile_statement"
+ },
+ {
+  "tag": "Billing",
+  "kind": "query",
+  "field": "payouts",
+  "summary": "List payouts",
+  "rest": "GET /v1/payouts"
+ },
+ {
+  "tag": "Billing",
+  "kind": "query",
+  "field": "payout",
+  "summary": "Retrieve a Payout",
+  "rest": "GET /v1/payouts/{id}"
+ },
+ {
+  "tag": "Inventory",
+  "kind": "query",
+  "field": "storageLocations",
+  "summary": "List storage locations",
+  "rest": "GET /v1/storage_locations"
+ },
+ {
+  "tag": "Inventory",
+  "kind": "mutation",
+  "field": "createStorageLocation",
+  "summary": "Create a storage location",
+  "rest": "POST /v1/storage_locations"
+ },
+ {
+  "tag": "Inventory",
+  "kind": "query",
+  "field": "storageLocation",
+  "summary": "Retrieve a StorageLocation",
+  "rest": "GET /v1/storage_locations/{id}"
+ },
+ {
+  "tag": "Inventory",
+  "kind": "mutation",
+  "field": "updateStorageLocation",
+  "summary": "Update a StorageLocation",
+  "rest": "POST /v1/storage_locations/{id}"
+ },
+ {
+  "tag": "Inventory",
+  "kind": "mutation",
+  "field": "deleteStorageLocation",
+  "summary": "Delete a StorageLocation",
+  "rest": "DELETE /v1/storage_locations/{id}"
+ },
+ {
+  "tag": "Inventory",
+  "kind": "mutation",
+  "field": "importStorageLocation",
+  "summary": "Import a facility layout",
+  "rest": "POST /v1/storage_locations/import"
+ },
+ {
+  "tag": "Inventory",
+  "kind": "mutation",
+  "field": "thresholdsInventory",
+  "summary": "Set low-stock thresholds",
+  "rest": "POST /v1/inventory/thresholds"
+ },
+ {
+  "tag": "Inventory",
+  "kind": "query",
+  "field": "stock",
+  "summary": "List stock",
+  "rest": "GET /v1/stock"
+ },
+ {
+  "tag": "Inventory",
+  "kind": "query",
+  "field": "stockGet",
+  "summary": "Retrieve a Stock",
+  "rest": "GET /v1/stock/{id}"
+ },
+ {
+  "tag": "Inventory",
+  "kind": "query",
+  "field": "stockMovements",
+  "summary": "List stock movements",
+  "rest": "GET /v1/stock_movements"
+ },
+ {
+  "tag": "Inventory",
+  "kind": "mutation",
+  "field": "createStockMovement",
+  "summary": "Record a stock movement",
+  "rest": "POST /v1/stock_movements"
+ },
+ {
+  "tag": "Inventory",
+  "kind": "query",
+  "field": "stockMovement",
+  "summary": "Retrieve a StockMovement",
+  "rest": "GET /v1/stock_movements/{id}"
+ },
+ {
+  "tag": "Inventory",
+  "kind": "mutation",
+  "field": "allocateFulfillmentOrder",
+  "summary": "Fulfillment order: allocate",
+  "rest": "POST /v1/fulfillment_orders/{id}/allocate"
+ },
+ {
+  "tag": "Inventory",
+  "kind": "mutation",
+  "field": "releaseToPickFulfillmentOrder",
+  "summary": "Fulfillment order: release_to_pick",
+  "rest": "POST /v1/fulfillment_orders/{id}/release_to_pick"
+ },
+ {
+  "tag": "Inventory",
+  "kind": "mutation",
+  "field": "packFulfillmentOrder",
+  "summary": "Fulfillment order: pack",
+  "rest": "POST /v1/fulfillment_orders/{id}/pack"
+ },
+ {
+  "tag": "Inventory",
+  "kind": "mutation",
+  "field": "shipFulfillmentOrder",
+  "summary": "Ship a fulfillment order",
+  "rest": "POST /v1/fulfillment_orders/{id}/ship"
+ },
+ {
+  "tag": "Inventory",
+  "kind": "query",
+  "field": "waves",
+  "summary": "List waves",
+  "rest": "GET /v1/waves"
+ },
+ {
+  "tag": "Inventory",
+  "kind": "mutation",
+  "field": "createWave",
+  "summary": "Release a wave",
+  "rest": "POST /v1/waves"
+ },
+ {
+  "tag": "Inventory",
+  "kind": "query",
+  "field": "wave",
+  "summary": "Retrieve a Wave",
+  "rest": "GET /v1/waves/{id}"
+ },
+ {
+  "tag": "Inventory",
+  "kind": "query",
+  "field": "inventoryCounts",
+  "summary": "List inventory counts",
+  "rest": "GET /v1/inventory_counts"
+ },
+ {
+  "tag": "Inventory",
+  "kind": "mutation",
+  "field": "createInventoryCount",
+  "summary": "Start a count",
+  "rest": "POST /v1/inventory_counts"
+ },
+ {
+  "tag": "Inventory",
+  "kind": "query",
+  "field": "inventoryCount",
+  "summary": "Retrieve a InventoryCount",
+  "rest": "GET /v1/inventory_counts/{id}"
+ },
+ {
+  "tag": "Inventory",
+  "kind": "mutation",
+  "field": "linesInventoryCount",
+  "summary": "Add count lines",
+  "rest": "POST /v1/inventory_counts/{id}/lines"
+ },
+ {
+  "tag": "Inventory",
+  "kind": "mutation",
+  "field": "completeInventoryCount",
+  "summary": "Complete a count",
+  "rest": "POST /v1/inventory_counts/{id}/complete"
+ },
+ {
+  "tag": "Templates",
+  "kind": "mutation",
+  "field": "createLabelSpec",
+  "summary": "Create a label spec",
+  "rest": "POST /v1/label_specs"
+ },
+ {
+  "tag": "Templates",
+  "kind": "mutation",
+  "field": "updateLabelSpec",
+  "summary": "Update a LabelSpec",
+  "rest": "POST /v1/label_specs/{id}"
+ },
+ {
+  "tag": "Templates",
+  "kind": "mutation",
+  "field": "publishLabelSpec",
+  "summary": "Publish a label spec",
+  "rest": "POST /v1/label_specs/{id}/publish"
+ }
+]

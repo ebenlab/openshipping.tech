@@ -1,0 +1,115 @@
+---
+title: "claims"
+description: "List claims"
+---
+
+`query` · Module: **Integrations** · Requires `integrations:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `coverage` | `String` | Filter by coverage. |
+| `status` | `String` | Filter by status. |
+| `createdGte` | `Int` | Filter by created gte. |
+| `createdLte` | `Int` | Filter by created lte. |
+| `limit` | `Int` | Page size, 1–100 (default 10). |
+| `startingAfter` | `ID` | Cursor: return objects after this ID. |
+| `endingBefore` | `ID` | Cursor: return objects before this ID. |
+
+## Returns
+
+`ClaimList!`
+
+| Field | Type |
+|---|---|
+| `data` | `[Claim!]!` |
+| `has_more` | `Boolean` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query Claims($limit: Int) {
+  claims(limit: $limit) {
+    data {
+      id
+      object
+      type
+      status
+      livemode
+      created
+      updated
+      coverage
+      amount {
+        amount
+        currency
+      }
+      description
+      evidence
+      resolution {
+        amount {
+          amount
+          currency
+        }
+        paid_at
+        reason
+      }
+    }
+    has_more
+  }
+}
+```
+
+```json Variables
+{
+  "limit": 10
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "claims": {
+      "data": [
+        {
+          "id": "clm_1a2B3c",
+          "object": "claim",
+          "type": "loss",
+          "status": "submitted",
+          "livemode": true,
+          "created": 1791302400,
+          "updated": 1791302400,
+          "coverage": "example",
+          "amount": {
+            "amount": 1299,
+            "currency": "usd"
+          },
+          "description": "Example description",
+          "evidence": [
+            "example"
+          ],
+          "resolution": {
+            "amount": {
+              "amount": 1299,
+              "currency": "usd"
+            },
+            "paid_at": 1791302400,
+            "reason": "example"
+          }
+        }
+      ],
+      "has_more": true
+    }
+  }
+}
+```
+
+</ResponseExample>

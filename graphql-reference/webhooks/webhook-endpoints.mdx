@@ -1,0 +1,118 @@
+---
+title: "webhookEndpoints"
+description: "List webhook endpoints"
+---
+
+`query` · Module: **Webhooks** · Requires `webhooks:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `status` | `String` | Filter by status. |
+| `createdGte` | `Int` | Filter by created gte. |
+| `createdLte` | `Int` | Filter by created lte. |
+| `limit` | `Int` | Page size, 1–100 (default 10). |
+| `startingAfter` | `ID` | Cursor: return objects after this ID. |
+| `endingBefore` | `ID` | Cursor: return objects before this ID. |
+
+## Returns
+
+`WebhookEndpointList!`
+
+| Field | Type |
+|---|---|
+| `data` | `[WebhookEndpoint!]!` |
+| `has_more` | `Boolean` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query WebhookEndpoints($limit: Int) {
+  webhookEndpoints(limit: $limit) {
+    data {
+      id
+      object
+      status
+      livemode
+      created
+      updated
+      url
+      description
+      enabled_events
+      api_version
+      filters {
+        carriers
+        connections
+      }
+      secret
+      secret_preview
+      disabled_reason
+      delivery {
+        last_success_at
+        last_failure_at
+        failure_streak
+      }
+    }
+    has_more
+  }
+}
+```
+
+```json Variables
+{
+  "limit": 10
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "webhookEndpoints": {
+      "data": [
+        {
+          "id": "we_1a2B3c",
+          "object": "webhook_endpoint",
+          "status": "enabled",
+          "livemode": true,
+          "created": 1791302400,
+          "updated": 1791302400,
+          "url": "https://example.com/resource",
+          "description": "Example description",
+          "enabled_events": [
+            "example"
+          ],
+          "api_version": "example",
+          "filters": {
+            "carriers": [
+              "example"
+            ],
+            "connections": [
+              "example"
+            ]
+          },
+          "secret": "example",
+          "secret_preview": "example",
+          "disabled_reason": "example",
+          "delivery": {
+            "last_success_at": 1791302400,
+            "last_failure_at": 1791302400,
+            "failure_streak": 2
+          }
+        }
+      ],
+      "has_more": true
+    }
+  }
+}
+```
+
+</ResponseExample>

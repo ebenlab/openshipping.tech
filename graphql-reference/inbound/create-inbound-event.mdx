@@ -1,0 +1,147 @@
+---
+title: "createInboundEvent"
+description: "Inject canonical events"
+---
+
+`mutation` · Module: **Inbound** · Requires `inbound:write`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `input` | `InboundEventCreate` | The fields for this operation. |
+
+### `InboundEventCreate` fields
+
+| Field | Type |
+|---|---|
+| `type` | `InboundEventCreateType` |
+| `tracker` | `String` |
+| `carrier` | `String` |
+| `tracking_number` | `String` |
+| `create_tracker` | `Boolean` |
+| `events` | `[InboundTrackingEventInput!]` |
+| `shipment` | `String` |
+| `charges` | `[InboundEventCreateChargesItemInput!]` |
+
+## Returns
+
+`InboundEvent!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `InboundEventObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `type` | `InboundEventType!` |
+| `source` | `InboundEventSource` |
+| `status` | `InboundEventStatus!` |
+| `connection` | `String` |
+| `tracker` | `String` |
+| `shipment` | `String` |
+| `accepted` | `Int` |
+| `rejected` | `Int` |
+| `errors` | `[InboundEventErrorsItem!]` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+mutation CreateInboundEvent($input: InboundEventCreate!) {
+  createInboundEvent(input: $input) {
+    id
+    object
+    type
+    status
+    livemode
+    created
+    updated
+    source
+    connection
+    tracker
+    shipment
+    accepted
+    rejected
+    errors {
+      code
+      index
+      message
+    }
+  }
+}
+```
+
+```json Variables
+{
+  "input": {
+    "type": "tracking",
+    "tracker": "example",
+    "carrier": "dhl_express",
+    "tracking_number": "1Z999AA10123456784",
+    "create_tracker": true,
+    "events": [
+      {
+        "occurred_at": "2026-10-07T09:00:00Z",
+        "status": "pre_transit",
+        "status_detail": "example",
+        "description": "Example description"
+      }
+    ],
+    "shipment": "shp_1Q2w3E4r5T6y",
+    "charges": [
+      {
+        "kind": "example",
+        "amount": {
+          "amount": 1299,
+          "currency": "usd"
+        },
+        "carrier_code": "EXPRESS_WORLDWIDE",
+        "reason": "example"
+      }
+    ]
+  }
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "createInboundEvent": {
+      "id": "ibe_1a2B3c",
+      "object": "inbound_event",
+      "type": "tracking",
+      "status": "processed",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "source": "api",
+      "connection": "conn_9f8e",
+      "tracker": "example",
+      "shipment": "shp_1Q2w3E4r5T6y",
+      "accepted": 2,
+      "rejected": 2,
+      "errors": [
+        {
+          "code": "dhl_express_worldwide",
+          "index": 2,
+          "message": "example"
+        }
+      ]
+    }
+  }
+}
+```
+
+</ResponseExample>

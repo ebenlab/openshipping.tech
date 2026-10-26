@@ -1,0 +1,140 @@
+---
+title: "updateManifest"
+description: "Update a Manifest"
+---
+
+`mutation` · Module: **Manifests** · Requires `manifests:write`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+| `input` | `MetadataUpdate` | The fields for this operation. |
+
+### `MetadataUpdate` fields
+
+| Field | Type |
+|---|---|
+| `user_metadata` | `UserMetadataInput` |
+| `reference` | `String` |
+
+## Returns
+
+`Manifest!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `ManifestObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `status` | `ManifestStatus!` |
+| `mode` | `ManifestMode!` |
+| `trigger` | `ManifestTrigger!` |
+| `connection` | `String!` |
+| `carrier` | `String` |
+| `ship_date` | `String` |
+| `timezone` | `String` |
+| `address` | `Address` |
+| `group` | `String` |
+| `shipments` | `[String!]` |
+| `shipment_count` | `Int` |
+| `handling_unit_count` | `Int` |
+| `total_weight` | `Weight` |
+| `carrier_manifests` | `[ManifestCarrierManifestsItem!]` |
+| `documents` | `[Document!]` |
+| `pickup` | `Pickup` |
+| `errors` | `[ManifestErrorsItem!]` |
+| `reference` | `String` |
+| `submitted_at` | `Int` |
+| `messages` | `[Message!]` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+mutation UpdateManifest($id: ID!, $input: MetadataUpdate!) {
+  updateManifest(id: $id, input: $input) {
+    id
+    object
+    status
+    livemode
+    created
+    updated
+    mode
+    trigger
+    connection
+    carrier
+    ship_date
+    timezone
+    address {
+      line1
+      street_number
+      line2
+      city
+      state
+      postal_code
+    }
+    group
+    shipments
+    shipment_count
+  }
+}
+```
+
+```json Variables
+{
+  "id": "mfst_1a2B3c",
+  "input": {
+    "reference": "ORDER-1001"
+  }
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "updateManifest": {
+      "id": "mfst_1a2B3c",
+      "object": "manifest",
+      "status": "pending",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "mode": "explicit",
+      "trigger": "api",
+      "connection": "conn_9f8e",
+      "carrier": "dhl_express",
+      "ship_date": "2026-10-07",
+      "timezone": "Europe/London",
+      "address": {
+        "line1": "Downing St",
+        "street_number": "10",
+        "line2": "example",
+        "city": "London",
+        "state": "example",
+        "postal_code": "SW1A 2AA"
+      },
+      "group": "dock-a",
+      "shipments": [
+        "example"
+      ],
+      "shipment_count": 2
+    }
+  }
+}
+```
+
+</ResponseExample>

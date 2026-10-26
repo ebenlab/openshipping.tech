@@ -1,0 +1,123 @@
+---
+title: "coverages"
+description: "List coverages"
+---
+
+`query` · Module: **Integrations** · Requires `integrations:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `shipment` | `String` | Filter by shipment. |
+| `status` | `String` | Filter by status. |
+| `createdGte` | `Int` | Filter by created gte. |
+| `createdLte` | `Int` | Filter by created lte. |
+| `limit` | `Int` | Page size, 1–100 (default 10). |
+| `startingAfter` | `ID` | Cursor: return objects after this ID. |
+| `endingBefore` | `ID` | Cursor: return objects before this ID. |
+
+## Returns
+
+`CoverageList!`
+
+| Field | Type |
+|---|---|
+| `data` | `[Coverage!]!` |
+| `has_more` | `Boolean` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query Coverages($limit: Int) {
+  coverages(limit: $limit) {
+    data {
+      id
+      object
+      status
+      livemode
+      created
+      updated
+      shipment
+      connection
+      policy_number
+      insured_value {
+        amount
+        currency
+      }
+      premium {
+        amount
+        currency
+      }
+      coverage_types
+      period {
+        starts
+        ends
+        days
+      }
+      certificate
+      claims
+    }
+    has_more
+  }
+}
+```
+
+```json Variables
+{
+  "limit": 10
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "coverages": {
+      "data": [
+        {
+          "id": "cov_1a2B3c",
+          "object": "coverage",
+          "status": "pending",
+          "livemode": true,
+          "created": 1791302400,
+          "updated": 1791302400,
+          "shipment": "shp_1Q2w3E4r5T6y",
+          "connection": "conn_9f8e",
+          "policy_number": "example",
+          "insured_value": {
+            "amount": 1299,
+            "currency": "usd"
+          },
+          "premium": {
+            "amount": 1299,
+            "currency": "usd"
+          },
+          "coverage_types": [
+            "example"
+          ],
+          "period": {
+            "starts": "example",
+            "ends": "example",
+            "days": 2
+          },
+          "certificate": "example",
+          "claims": [
+            "example"
+          ]
+        }
+      ],
+      "has_more": true
+    }
+  }
+}
+```
+
+</ResponseExample>

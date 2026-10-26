@@ -1,0 +1,102 @@
+---
+title: "options"
+description: "List options"
+---
+
+`query` · Module: **Catalog** · Requires `catalog:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `status` | `String` | Filter by status. |
+| `createdGte` | `Int` | Filter by created gte. |
+| `createdLte` | `Int` | Filter by created lte. |
+| `limit` | `Int` | Page size, 1–100 (default 10). |
+| `startingAfter` | `ID` | Cursor: return objects after this ID. |
+| `endingBefore` | `ID` | Cursor: return objects before this ID. |
+
+## Returns
+
+`CatalogOptionList!`
+
+| Field | Type |
+|---|---|
+| `data` | `[CatalogOption!]!` |
+| `has_more` | `Boolean` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query Options($limit: Int) {
+  options(limit: $limit) {
+    data {
+      id
+      object
+      name
+      status
+      livemode
+      created
+      updated
+      key
+      standardized
+      carrier_code
+      description
+      conflicts_with
+      requires
+      surcharge
+      version
+    }
+    has_more
+  }
+}
+```
+
+```json Variables
+{
+  "limit": 10
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "options": {
+      "data": [
+        {
+          "id": "opt_1a2B3c",
+          "object": "option",
+          "name": "Example",
+          "status": "draft",
+          "livemode": true,
+          "created": 1791302400,
+          "updated": 1791302400,
+          "key": "signature",
+          "standardized": true,
+          "carrier_code": "EXPRESS_WORLDWIDE",
+          "description": "Example description",
+          "conflicts_with": [
+            "example"
+          ],
+          "requires": [
+            "example"
+          ],
+          "surcharge": "example",
+          "version": 3
+        }
+      ],
+      "has_more": true
+    }
+  }
+}
+```
+
+</ResponseExample>

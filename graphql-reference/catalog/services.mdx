@@ -1,0 +1,126 @@
+---
+title: "services"
+description: "List services"
+---
+
+`query` · Module: **Catalog** · Requires `catalog:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `status` | `String` | Filter by status. |
+| `createdGte` | `Int` | Filter by created gte. |
+| `createdLte` | `Int` | Filter by created lte. |
+| `limit` | `Int` | Page size, 1–100 (default 10). |
+| `startingAfter` | `ID` | Cursor: return objects after this ID. |
+| `endingBefore` | `ID` | Cursor: return objects before this ID. |
+
+## Returns
+
+`CatalogServiceList!`
+
+| Field | Type |
+|---|---|
+| `data` | `[CatalogService!]!` |
+| `has_more` | `Boolean` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query Services($limit: Int) {
+  services(limit: $limit) {
+    data {
+      id
+      object
+      code
+      name
+      status
+      livemode
+      created
+      updated
+      description
+      level
+      carrier_code
+      domestic
+      international
+      coverage {
+        origin_zone
+        destination_zone
+        transit {
+          min_days
+          max_days
+          business_days
+        }
+      }
+      cutoff {
+        local_time
+        facility
+      }
+      handover
+    }
+    has_more
+  }
+}
+```
+
+```json Variables
+{
+  "limit": 10
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "services": {
+      "data": [
+        {
+          "id": "svc_1a2B3c",
+          "object": "service",
+          "code": "dhl_express_worldwide",
+          "name": "Example",
+          "status": "draft",
+          "livemode": true,
+          "created": 1791302400,
+          "updated": 1791302400,
+          "description": "Example description",
+          "level": "same_day",
+          "carrier_code": "EXPRESS_WORLDWIDE",
+          "domestic": true,
+          "international": true,
+          "coverage": [
+            {
+              "origin_zone": "zone_gb_mainland",
+              "destination_zone": "zone_gb_mainland",
+              "transit": {
+                "min_days": 2,
+                "max_days": 2,
+                "business_days": true
+              }
+            }
+          ],
+          "cutoff": {
+            "local_time": "15:00",
+            "facility": "fac_lon_hub"
+          },
+          "handover": [
+            "drop_off"
+          ]
+        }
+      ],
+      "has_more": true
+    }
+  }
+}
+```
+
+</ResponseExample>

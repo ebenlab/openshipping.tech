@@ -1,0 +1,110 @@
+---
+title: "integrations"
+description: "List integrations"
+---
+
+`query` · Module: **Integrations**
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `interface` | `String` | Filter by interface. |
+| `kind` | `String` | Filter by kind. |
+| `country` | `String` | Filter by country. |
+| `limit` | `Int` | Page size, 1–100 (default 10). |
+| `startingAfter` | `ID` | Cursor: return objects after this ID. |
+| `endingBefore` | `ID` | Cursor: return objects before this ID. |
+
+## Returns
+
+`IntegrationList!`
+
+| Field | Type |
+|---|---|
+| `data` | `[Integration!]!` |
+| `has_more` | `Boolean` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query Integrations($limit: Int) {
+  integrations(limit: $limit) {
+    data {
+      id
+      object
+      name
+      status
+      kind
+      connection_methods {
+        type
+        label
+        issuer
+        authorization_endpoint
+        token_endpoint
+        openid
+      }
+      federated {
+        configuration
+      }
+      pricing {
+        model
+        documentation
+      }
+    }
+    has_more
+  }
+}
+```
+
+```json Variables
+{
+  "limit": 10
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "integrations": {
+      "data": [
+        {
+          "id": "obj_1a2B3c",
+          "object": "integration",
+          "name": "Example",
+          "status": "available",
+          "kind": "carrier",
+          "connection_methods": [
+            {
+              "type": "credentials",
+              "label": "Example",
+              "issuer": "https://ada.okta.com/oauth2/default",
+              "authorization_endpoint": "example",
+              "token_endpoint": "example",
+              "openid": true
+            }
+          ],
+          "federated": {
+            "configuration": "example"
+          },
+          "pricing": {
+            "model": "example",
+            "documentation": "example"
+          }
+        }
+      ],
+      "has_more": true
+    }
+  }
+}
+```
+
+</ResponseExample>

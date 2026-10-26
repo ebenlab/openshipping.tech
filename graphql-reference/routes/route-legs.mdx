@@ -1,0 +1,157 @@
+---
+title: "routeLegs"
+description: "List legs"
+---
+
+`query` · Module: **Routes**
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+| `limit` | `Int` | Page size, 1–100 (default 10). |
+| `startingAfter` | `ID` | Cursor: return objects after this ID. |
+| `endingBefore` | `ID` | Cursor: return objects before this ID. |
+
+## Returns
+
+`LegList!`
+
+| Field | Type |
+|---|---|
+| `data` | `[Leg!]!` |
+| `has_more` | `Boolean` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query RouteLegs($id: ID!, $limit: Int) {
+  routeLegs(id: $id, limit: $limit) {
+    data {
+      id
+      from_stop
+      to_stop
+      mode
+      operator {
+        type
+        name
+        connection
+        service
+        reference
+      }
+      vehicle_type
+      air {
+        flight_number
+        awb_prefix
+        uld_assignments {
+          uld_id
+          uld_type
+          position
+          handling_units
+        }
+      }
+      duration_minutes
+      distance {
+        value
+        unit
+      }
+      capacity {
+        weight {
+          value
+          unit
+        }
+        volume {
+          value
+          unit
+        }
+        handling_units
+        pallets
+      }
+      cost {
+        amount
+        currency
+      }
+    }
+    has_more
+  }
+}
+```
+
+```json Variables
+{
+  "id": "obj_1a2B3c",
+  "limit": 10
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "routeLegs": {
+      "data": [
+        {
+          "id": "obj_1a2B3c",
+          "from_stop": "example",
+          "to_stop": "example",
+          "mode": "road",
+          "operator": {
+            "type": "self",
+            "name": "Example",
+            "connection": "conn_9f8e",
+            "service": "dhl_express_worldwide",
+            "reference": "ORDER-1001"
+          },
+          "vehicle_type": "example",
+          "air": {
+            "flight_number": "SW123",
+            "awb_prefix": "example",
+            "uld_assignments": [
+              {
+                "uld_id": "example",
+                "uld_type": "example",
+                "position": "example",
+                "handling_units": [
+                  "example"
+                ]
+              }
+            ]
+          },
+          "duration_minutes": 2,
+          "distance": {
+            "value": 1.5,
+            "unit": "kg"
+          },
+          "capacity": {
+            "weight": {
+              "value": 1.5,
+              "unit": "g"
+            },
+            "volume": {
+              "value": 1.5,
+              "unit": "kg"
+            },
+            "handling_units": 2,
+            "pallets": 2
+          },
+          "cost": {
+            "amount": 1299,
+            "currency": "usd"
+          }
+        }
+      ],
+      "has_more": true
+    }
+  }
+}
+```
+
+</ResponseExample>

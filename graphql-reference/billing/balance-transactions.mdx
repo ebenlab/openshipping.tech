@@ -1,0 +1,98 @@
+---
+title: "balanceTransactions"
+description: "List balance transactions"
+---
+
+`query` · Module: **Billing**
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `type` | `String` | Filter by type. |
+| `limit` | `Int` | Page size, 1–100 (default 10). |
+| `startingAfter` | `ID` | Cursor: return objects after this ID. |
+| `endingBefore` | `ID` | Cursor: return objects before this ID. |
+
+## Returns
+
+`BalanceTransactionList!`
+
+| Field | Type |
+|---|---|
+| `data` | `[BalanceTransaction!]!` |
+| `has_more` | `Boolean` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query BalanceTransactions($limit: Int) {
+  balanceTransactions(limit: $limit) {
+    data {
+      id
+      object
+      type
+      amount {
+        amount
+        currency
+      }
+      balance_after {
+        amount
+        currency
+      }
+      source {
+        type
+        id
+      }
+      created
+    }
+    has_more
+  }
+}
+```
+
+```json Variables
+{
+  "limit": 10
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "balanceTransactions": {
+      "data": [
+        {
+          "id": "obj_1a2B3c",
+          "object": "balance_transaction",
+          "type": "top_up",
+          "amount": {
+            "amount": 1299,
+            "currency": "usd"
+          },
+          "balance_after": {
+            "amount": 1299,
+            "currency": "usd"
+          },
+          "source": {
+            "type": "example",
+            "id": "obj_1a2B3c"
+          },
+          "created": 1791302400
+        }
+      ],
+      "has_more": true
+    }
+  }
+}
+```
+
+</ResponseExample>

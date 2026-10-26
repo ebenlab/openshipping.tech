@@ -1,0 +1,125 @@
+---
+title: "createServiceAvailability"
+description: "Check serviceability"
+---
+
+`mutation` · Module: **Catalog**
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `input` | `ServiceAvailabilityRequest` | The fields for this operation. |
+
+### `ServiceAvailabilityRequest` fields
+
+| Field | Type |
+|---|---|
+| `ship_from` | `ContactInput` |
+| `ship_to` | `ContactInput` |
+| `handling_units` | `[HandlingUnitInput!]` |
+| `ship_date` | `String` |
+| `carrier_configs` | `CarrierConfigsInput` |
+
+## Returns
+
+`ServiceAvailability!`
+
+| Field | Type |
+|---|---|
+| `object` | `ServiceAvailabilityObject` |
+| `services` | `[ServiceAvailabilityServicesItem!]` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+mutation CreateServiceAvailability($input: ServiceAvailabilityRequest!) {
+  createServiceAvailability(input: $input) {
+    object
+    services {
+      code
+      service
+      carrier
+      available
+      delivery {
+        days
+        date
+        guaranteed
+        business_days
+      }
+      cutoff_at
+    }
+  }
+}
+```
+
+```json Variables
+{
+  "input": {
+    "ship_from": {
+      "name": "Example",
+      "company": "example",
+      "email": "ops@example.com",
+      "phone": "+447700900123"
+    },
+    "ship_to": {
+      "name": "Example",
+      "company": "example",
+      "email": "ops@example.com",
+      "phone": "+447700900123"
+    },
+    "handling_units": [
+      {
+        "type": "parcel",
+        "weight": {
+          "value": 1.5,
+          "unit": "g"
+        },
+        "dimensions": {
+          "length": 1.5,
+          "width": 1.5,
+          "height": 1.5,
+          "unit": "mm"
+        },
+        "packaging": "example"
+      }
+    ],
+    "ship_date": "2026-10-07"
+  }
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "createServiceAvailability": {
+      "object": "service_availability",
+      "services": [
+        {
+          "code": "dhl_express_worldwide",
+          "service": "dhl_express_worldwide",
+          "carrier": "dhl_express",
+          "available": true,
+          "delivery": {
+            "days": 2,
+            "date": "2026-10-07",
+            "guaranteed": true,
+            "business_days": true
+          },
+          "cutoff_at": 1791302400
+        }
+      ]
+    }
+  }
+}
+```
+
+</ResponseExample>

@@ -1,0 +1,79 @@
+---
+title: "usageSummaries"
+description: "Usage summary per meter"
+---
+
+`query` · Module: **Billing**
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `account` | `String` | Filter by account. |
+| `period` | `String` | Filter by period. |
+
+## Returns
+
+`UsageSummariesResult!`
+
+| Field | Type |
+|---|---|
+| `account` | `String` |
+| `period` | `String` |
+| `meters` | `[UsageSummariesResultMetersItem!]` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query UsageSummaries {
+  usageSummaries {
+    account
+    period
+    meters {
+      meter
+      quantity
+      amount {
+        amount
+        currency
+      }
+      included_used
+    }
+  }
+}
+```
+
+```json Variables
+{}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "usageSummaries": {
+      "account": "acct_ada",
+      "period": "example",
+      "meters": [
+        {
+          "meter": "example",
+          "quantity": 1.5,
+          "amount": {
+            "amount": 1299,
+            "currency": "usd"
+          },
+          "included_used": 1.5
+        }
+      ]
+    }
+  }
+}
+```
+
+</ResponseExample>

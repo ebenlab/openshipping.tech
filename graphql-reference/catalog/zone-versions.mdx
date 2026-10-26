@@ -1,0 +1,129 @@
+---
+title: "zoneVersions"
+description: "List zone versions"
+---
+
+`query` · Module: **Catalog**
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+
+## Returns
+
+`ZoneList!`
+
+| Field | Type |
+|---|---|
+| `data` | `[Zone!]!` |
+| `has_more` | `Boolean` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query ZoneVersions($id: ID!) {
+  zoneVersions(id: $id) {
+    data {
+      id
+      object
+      name
+      status
+      livemode
+      created
+      updated
+      purpose
+      area {
+        countries
+        subdivisions
+        postal_codes
+        cities {
+          name
+          country
+          state
+        }
+        exclude {
+          countries
+          subdivisions
+          postal_codes
+        }
+      }
+      priority
+      version
+    }
+    has_more
+  }
+}
+```
+
+```json Variables
+{
+  "id": "obj_1a2B3c"
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "zoneVersions": {
+      "data": [
+        {
+          "id": "zone_1a2B3c",
+          "object": "zone",
+          "name": "Example",
+          "status": "draft",
+          "livemode": true,
+          "created": 1791302400,
+          "updated": 1791302400,
+          "purpose": [
+            "coverage"
+          ],
+          "area": {
+            "countries": [
+              "example"
+            ],
+            "subdivisions": [
+              "example"
+            ],
+            "postal_codes": [
+              "example"
+            ],
+            "cities": [
+              {
+                "name": "Example",
+                "country": "GB",
+                "state": "example"
+              }
+            ],
+            "exclude": {
+              "countries": [
+                "example"
+              ],
+              "subdivisions": [
+                "example"
+              ],
+              "postal_codes": [
+                "example"
+              ]
+            }
+          },
+          "priority": 100,
+          "version": 3
+        }
+      ],
+      "has_more": true
+    }
+  }
+}
+```
+
+</ResponseExample>

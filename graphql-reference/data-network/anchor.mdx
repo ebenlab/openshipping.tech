@@ -1,0 +1,84 @@
+---
+title: "anchor"
+description: "Retrieve an anchor"
+---
+
+`query` · Module: **Data Network**
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+
+## Returns
+
+`Anchor!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `AnchorObject!` |
+| `ledger` | `AnchorLedger` |
+| `merkle_root` | `String!` |
+| `records` | `Int` |
+| `created` | `Int` |
+| `status` | `AnchorStatus!` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query Anchor($id: ID!) {
+  anchor(id: $id) {
+    id
+    object
+    status
+    ledger {
+      network
+      contract
+      tx
+      block
+    }
+    merkle_root
+    records
+    created
+  }
+}
+```
+
+```json Variables
+{
+  "id": "obj_1a2B3c"
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "anchor": {
+      "id": "obj_1a2B3c",
+      "object": "anchor",
+      "status": "pending",
+      "ledger": {
+        "network": "example",
+        "contract": "example",
+        "tx": "example",
+        "block": 2
+      },
+      "merkle_root": "example",
+      "records": 2,
+      "created": 1791302400
+    }
+  }
+}
+```
+
+</ResponseExample>

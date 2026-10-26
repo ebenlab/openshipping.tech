@@ -1,0 +1,124 @@
+---
+title: "documentIngestions"
+description: "List document ingestions"
+---
+
+`query` · Module: **Templates** · Requires `templates:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `status` | `String` | Filter by status. |
+| `type` | `String` | Filter by type. |
+| `attachToId` | `String` | Filter by attach to.id. |
+| `createdGte` | `Int` | Filter by created gte. |
+| `createdLte` | `Int` | Filter by created lte. |
+| `limit` | `Int` | Page size, 1–100 (default 10). |
+| `startingAfter` | `ID` | Cursor: return objects after this ID. |
+| `endingBefore` | `ID` | Cursor: return objects before this ID. |
+
+## Returns
+
+`DocumentIngestionList!`
+
+| Field | Type |
+|---|---|
+| `data` | `[DocumentIngestion!]!` |
+| `has_more` | `Boolean` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query DocumentIngestions($limit: Int) {
+  documentIngestions(limit: $limit) {
+    data {
+      id
+      object
+      status
+      type
+      detected_type
+      format
+      file
+      extraction {
+        mapped {
+          target
+        }
+      }
+      attach_to {
+        type
+        id
+      }
+      document
+      job
+      messages {
+        code
+        level
+        message
+        param
+        carrier
+      }
+    }
+    has_more
+  }
+}
+```
+
+```json Variables
+{
+  "limit": 10
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "documentIngestions": {
+      "data": [
+        {
+          "id": "obj_1a2B3c",
+          "object": "document_ingestion",
+          "status": "processing",
+          "type": "example",
+          "detected_type": "example",
+          "format": "pdf_text",
+          "file": "file_6Yu8",
+          "extraction": {
+            "mapped": [
+              {
+                "target": "example"
+              }
+            ]
+          },
+          "attach_to": {
+            "type": "example",
+            "id": "obj_1a2B3c"
+          },
+          "document": "example",
+          "job": "example",
+          "messages": [
+            {
+              "code": "dhl_express_worldwide",
+              "level": "info",
+              "message": "example",
+              "param": "example",
+              "carrier": "dhl_express"
+            }
+          ]
+        }
+      ],
+      "has_more": true
+    }
+  }
+}
+```
+
+</ResponseExample>

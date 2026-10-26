@@ -1,0 +1,120 @@
+---
+title: "createIdentifierLink"
+description: "Link identifiers"
+---
+
+`mutation` · Module: **Data Network** · Requires `data:write`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `input` | `IdentifierLinkInput` | The fields for this operation. |
+
+### `IdentifierLinkInput` fields
+
+| Field | Type |
+|---|---|
+| `relation` | `IdentifierLinkInputRelation` |
+| `parent` | `IdentifierLinkInputParentInput` |
+| `child` | `IdentifierLinkInputChildInput` |
+| `valid_from` | `String` |
+| `valid_to` | `String` |
+
+## Returns
+
+`IdentifierLink!`
+
+| Field | Type |
+|---|---|
+| `id` | `String` |
+| `object` | `IdentifierLinkObject!` |
+| `relation` | `IdentifierLinkRelation!` |
+| `parent` | `IdentifierLinkParent!` |
+| `child` | `IdentifierLinkChild!` |
+| `valid_from` | `String` |
+| `valid_to` | `String` |
+| `producer` | `String` |
+| `record` | `String` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+mutation CreateIdentifierLink($input: IdentifierLinkInput!) {
+  createIdentifierLink(input: $input) {
+    id
+    object
+    relation
+    parent {
+      scheme
+      value
+      carrier
+    }
+    child {
+      scheme
+      value
+      carrier
+    }
+    valid_from
+    valid_to
+    producer
+    record
+  }
+}
+```
+
+```json Variables
+{
+  "input": {
+    "relation": "same_as",
+    "parent": {
+      "scheme": "tracking_number",
+      "value": "example",
+      "carrier": "dhl_express"
+    },
+    "child": {
+      "scheme": "tracking_number",
+      "value": "example",
+      "carrier": "dhl_express"
+    },
+    "valid_from": "example",
+    "valid_to": "example"
+  }
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "createIdentifierLink": {
+      "id": "obj_1a2B3c",
+      "object": "identifier_link",
+      "relation": "same_as",
+      "parent": {
+        "scheme": "tracking_number",
+        "value": "example",
+        "carrier": "dhl_express"
+      },
+      "child": {
+        "scheme": "tracking_number",
+        "value": "example",
+        "carrier": "dhl_express"
+      },
+      "valid_from": "example",
+      "valid_to": "example",
+      "producer": "example",
+      "record": "example"
+    }
+  }
+}
+```
+
+</ResponseExample>

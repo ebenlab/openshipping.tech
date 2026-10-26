@@ -1,0 +1,115 @@
+---
+title: "reconciliation"
+description: "Retrieve a Reconciliation"
+---
+
+`query` · Module: **Billing** · Requires `billing:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+
+## Returns
+
+`Reconciliation!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `ReconciliationObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `type` | `ReconciliationType!` |
+| `invoice` | `String!` |
+| `rules` | `String` |
+| `status` | `ReconciliationStatus!` |
+| `summary` | `JSON` |
+| `lines` | `[ReconciliationLine!]` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query Reconciliation($id: ID!) {
+  reconciliation(id: $id) {
+    id
+    object
+    type
+    status
+    livemode
+    created
+    updated
+    invoice
+    rules
+    lines {
+      invoice_line
+      shipment
+      result
+      expected {
+        amount
+        currency
+      }
+      billed {
+        amount
+        currency
+      }
+      cause
+    }
+  }
+}
+```
+
+```json Variables
+{
+  "id": "rcn_1a2B3c"
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "reconciliation": {
+      "id": "rcn_1a2B3c",
+      "object": "reconciliation",
+      "type": "invoice_vs_shipments",
+      "status": "running",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "invoice": "invc_7Ff2",
+      "rules": "example",
+      "lines": [
+        {
+          "invoice_line": "example",
+          "shipment": "shp_1Q2w3E4r5T6y",
+          "result": "matched",
+          "expected": {
+            "amount": 1299,
+            "currency": "usd"
+          },
+          "billed": {
+            "amount": 1299,
+            "currency": "usd"
+          },
+          "cause": "example"
+        }
+      ]
+    }
+  }
+}
+```
+
+</ResponseExample>

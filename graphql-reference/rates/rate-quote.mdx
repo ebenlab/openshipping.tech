@@ -1,0 +1,239 @@
+---
+title: "rateQuote"
+description: "Retrieve a rate quote"
+---
+
+`query` · Module: **Rates** · Requires `rates:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+
+## Returns
+
+`RateQuote!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `RateQuoteObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `expires_at` | `Int!` |
+| `shipment` | `String` |
+| `request` | `RateQuoteRequest` |
+| `rates` | `[Rate!]!` |
+| `errors` | `[ConnectionError!]!` |
+| `messages` | `[Message!]` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query RateQuote($id: ID!) {
+  rateQuote(id: $id) {
+    id
+    object
+    livemode
+    created
+    updated
+    expires_at
+    shipment
+    request {
+      ship_from {
+        name
+        company
+        email
+        phone
+      }
+      ship_to {
+        name
+        company
+        email
+        phone
+      }
+      return_to {
+        name
+        company
+        email
+        phone
+      }
+      bill_to {
+        name
+        company
+        email
+        phone
+      }
+      billing {
+        paid_by
+        account_number
+      }
+      handling_units {
+        id
+        type
+        packaging
+        reference
+      }
+    }
+    rates {
+      id
+      object
+      service {
+        code
+        name
+        carrier
+        connection
+      }
+      total {
+        amount
+        currency
+      }
+      total_in_account_currency {
+        amount
+        currency
+      }
+      charges {
+        name
+        kind
+        option
+        carrier_code
+      }
+    }
+    errors {
+      type
+      code
+      connection
+      carrier
+      message
+    }
+    messages {
+      code
+      level
+      message
+      param
+      carrier
+    }
+  }
+}
+```
+
+```json Variables
+{
+  "id": "rq_1a2B3c"
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "rateQuote": {
+      "id": "rq_1a2B3c",
+      "object": "rate_quote",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "expires_at": 1791302400,
+      "shipment": "shp_1Q2w3E4r5T6y",
+      "request": {
+        "ship_from": {
+          "name": "Example",
+          "company": "example",
+          "email": "ops@example.com",
+          "phone": "+447700900123"
+        },
+        "ship_to": {
+          "name": "Example",
+          "company": "example",
+          "email": "ops@example.com",
+          "phone": "+447700900123"
+        },
+        "return_to": {
+          "name": "Example",
+          "company": "example",
+          "email": "ops@example.com",
+          "phone": "+447700900123"
+        },
+        "bill_to": {
+          "name": "Example",
+          "company": "example",
+          "email": "ops@example.com",
+          "phone": "+447700900123"
+        },
+        "billing": {
+          "paid_by": "sender",
+          "account_number": "example"
+        },
+        "handling_units": [
+          {
+            "id": "obj_1a2B3c",
+            "type": "parcel",
+            "packaging": "example",
+            "reference": "ORDER-1001"
+          }
+        ]
+      },
+      "rates": [
+        {
+          "id": "obj_1a2B3c",
+          "object": "rate",
+          "service": {
+            "code": "dhl_express_worldwide",
+            "name": "Example",
+            "carrier": "dhl_express",
+            "connection": "conn_9f8e"
+          },
+          "total": {
+            "amount": 1299,
+            "currency": "usd"
+          },
+          "total_in_account_currency": {
+            "amount": 1299,
+            "currency": "usd"
+          },
+          "charges": [
+            {
+              "name": "Example",
+              "kind": "base",
+              "option": "example",
+              "carrier_code": "EXPRESS_WORLDWIDE"
+            }
+          ]
+        }
+      ],
+      "errors": [
+        {
+          "type": "example",
+          "code": "dhl_express_worldwide",
+          "connection": "conn_9f8e",
+          "carrier": "dhl_express",
+          "message": "example"
+        }
+      ],
+      "messages": [
+        {
+          "code": "dhl_express_worldwide",
+          "level": "info",
+          "message": "example",
+          "param": "example",
+          "carrier": "dhl_express"
+        }
+      ]
+    }
+  }
+}
+```
+
+</ResponseExample>

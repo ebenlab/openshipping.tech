@@ -1,0 +1,166 @@
+---
+title: "updateRateSheet"
+description: "Update a RateSheet"
+---
+
+`mutation` · Module: **Pricing** · Requires `pricing:write`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+| `input` | `RateSheetInput` | The fields for this operation. |
+
+### `RateSheetInput` fields
+
+| Field | Type |
+|---|---|
+| `name` | `String` |
+| `status` | `RateSheetInputStatus` |
+| `version` | `Int` |
+| `currency` | `String` |
+| `effective_from` | `String` |
+| `effective_until` | `String` |
+| `services` | `[String!]` |
+| `origin_zones` | `[String!]` |
+| `weight_rounding` | `RateSheetInputWeightRoundingInput` |
+| `dimensional_weight` | `RateSheetInputDimensionalWeightInput` |
+| `aggregate` | `RateSheetInputAggregate` |
+| `rates` | `[RateSheetInputRatesItemInput!]` |
+| `surcharges` | `[String!]` |
+| `assignments` | `RateSheetInputAssignmentsInput` |
+| `user_metadata` | `UserMetadataInput` |
+
+## Returns
+
+`RateSheet!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `RateSheetObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `name` | `String!` |
+| `status` | `RateSheetStatus!` |
+| `version` | `Int` |
+| `currency` | `String!` |
+| `effective_from` | `String` |
+| `effective_until` | `String` |
+| `services` | `[String!]` |
+| `origin_zones` | `[String!]` |
+| `weight_rounding` | `RateSheetWeightRounding` |
+| `dimensional_weight` | `RateSheetDimensionalWeight` |
+| `aggregate` | `RateSheetAggregate` |
+| `rates` | `[RateSheetRatesItem!]!` |
+| `surcharges` | `[String!]` |
+| `assignments` | `RateSheetAssignments` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+mutation UpdateRateSheet($id: ID!, $input: RateSheetInput!) {
+  updateRateSheet(id: $id, input: $input) {
+    id
+    object
+    name
+    status
+    livemode
+    created
+    updated
+    version
+    currency
+    effective_from
+    effective_until
+    services
+    origin_zones
+    weight_rounding {
+      increment {
+        value
+        unit
+      }
+      mode
+    }
+    dimensional_weight {
+      divisor
+      unit
+      applies
+    }
+    aggregate
+  }
+}
+```
+
+```json Variables
+{
+  "id": "rs_1a2B3c",
+  "input": {
+    "name": "Example",
+    "status": "draft",
+    "version": 3,
+    "currency": "usd",
+    "effective_from": "2026-10-07",
+    "effective_until": "2026-10-07",
+    "services": [
+      "example"
+    ],
+    "origin_zones": [
+      "example"
+    ]
+  }
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "updateRateSheet": {
+      "id": "rs_1a2B3c",
+      "object": "rate_sheet",
+      "name": "Example",
+      "status": "draft",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "version": 3,
+      "currency": "usd",
+      "effective_from": "2026-10-07",
+      "effective_until": "2026-10-07",
+      "services": [
+        "example"
+      ],
+      "origin_zones": [
+        "example"
+      ],
+      "weight_rounding": {
+        "increment": {
+          "value": 1.5,
+          "unit": "g"
+        },
+        "mode": "up"
+      },
+      "dimensional_weight": {
+        "divisor": 1.5,
+        "unit": "kg",
+        "applies": "example"
+      },
+      "aggregate": "handling_unit"
+    }
+  }
+}
+```
+
+</ResponseExample>

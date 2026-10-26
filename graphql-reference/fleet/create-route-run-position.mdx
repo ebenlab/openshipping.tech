@@ -1,0 +1,73 @@
+---
+title: "createRouteRunPosition"
+description: "Report positions"
+---
+
+`mutation` · Module: **Fleet**
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+| `input` | `CreateRouteRunPositionInput` | The fields for this operation. |
+
+### `CreateRouteRunPositionInput` fields
+
+| Field | Type |
+|---|---|
+| `positions` | `[PositionInput!]` |
+
+## Returns
+
+`CreateRouteRunPositionResult!`
+
+| Field | Type |
+|---|---|
+| `accepted` | `Int` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+mutation CreateRouteRunPosition($id: ID!, $input: CreateRouteRunPositionInput!) {
+  createRouteRunPosition(id: $id, input: $input) {
+    accepted
+  }
+}
+```
+
+```json Variables
+{
+  "id": "obj_1a2B3c",
+  "input": {
+    "positions": [
+      {
+        "at": "example",
+        "latitude": 51.5074,
+        "longitude": -0.1278,
+        "heading": 1.5
+      }
+    ]
+  }
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "createRouteRunPosition": {
+      "accepted": 2
+    }
+  }
+}
+```
+
+</ResponseExample>

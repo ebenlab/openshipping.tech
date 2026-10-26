@@ -1,0 +1,77 @@
+---
+title: "searchFulfillmentOrders"
+description: "Search fulfillment orders"
+---
+
+`query` · Module: **Inventory** · Requires `inventory:read`
+
+## Arguments
+
+None.
+
+## Returns
+
+`SearchFulfillmentOrdersResult!`
+
+| Field | Type |
+|---|---|
+| `object` | `SearchFulfillmentOrdersResultObject!` |
+| `has_more` | `Boolean!` |
+| `next_page` | `String` |
+| `data` | `[FulfillmentOrder!]!` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query SearchFulfillmentOrders {
+  searchFulfillmentOrders {
+    object
+    has_more
+    next_page
+    data {
+      id
+      object
+      status
+      livemode
+      created
+      updated
+    }
+  }
+}
+```
+
+```json Variables
+{}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "searchFulfillmentOrders": {
+      "object": "search_fulfillment_orders_result",
+      "has_more": true,
+      "next_page": "example",
+      "data": [
+        {
+          "id": "fo_1a2B3c",
+          "object": "fulfillment_order",
+          "status": "received",
+          "livemode": true,
+          "created": 1791302400,
+          "updated": 1791302400
+        }
+      ]
+    }
+  }
+}
+```
+
+</ResponseExample>

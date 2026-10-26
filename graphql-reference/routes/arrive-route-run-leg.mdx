@@ -1,0 +1,190 @@
+---
+title: "arriveRouteRunLeg"
+description: "Leg: arrive"
+---
+
+`mutation` · Module: **Routes**
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+| `legId` | `ID!` | The leg id. |
+| `input` | `ArriveRouteRunLegInput` | The fields for this operation. |
+
+### `ArriveRouteRunLegInput` fields
+
+| Field | Type |
+|---|---|
+| `at` | `String` |
+
+## Returns
+
+`RouteRun!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `RouteRunObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `route` | `String` |
+| `date` | `String!` |
+| `status` | `RouteRunStatus!` |
+| `scheduled_start` | `String` |
+| `started_at` | `Int` |
+| `completed_at` | `Int` |
+| `vehicle` | `Vehicle` |
+| `driver` | `Driver` |
+| `stops` | `[RouteRunStopsItem!]!` |
+| `legs` | `[RouteRunLegsItem!]` |
+| `shipment_count` | `Int` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+mutation ArriveRouteRunLeg($id: ID!, $legId: ID!, $input: ArriveRouteRunLegInput!) {
+  arriveRouteRunLeg(id: $id, legId: $legId, input: $input) {
+    id
+    object
+    status
+    livemode
+    created
+    updated
+    route
+    date
+    scheduled_start
+    started_at
+    completed_at
+    vehicle {
+      id
+      object
+      name
+      type
+      status
+      livemode
+    }
+    driver {
+      id
+      object
+      status
+      livemode
+      created
+      updated
+    }
+    stops {
+      id
+      status
+      facility
+      contact {
+        name
+        company
+        email
+        phone
+      }
+      reason
+      scheduled_arrival
+    }
+    legs {
+      id
+      status
+      departed_at
+      arrived_at
+      delay_minutes
+      load {
+        handling_units
+      }
+    }
+    shipment_count
+  }
+}
+```
+
+```json Variables
+{
+  "id": "run_1a2B3c",
+  "legId": "example_id",
+  "input": {
+    "at": "example"
+  }
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "arriveRouteRunLeg": {
+      "id": "run_1a2B3c",
+      "object": "route_run",
+      "status": "planned",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "route": "rte_lax_lhr_daily",
+      "date": "2026-10-07",
+      "scheduled_start": "example",
+      "started_at": 1791302400,
+      "completed_at": 1791302400,
+      "vehicle": {
+        "id": "veh_1a2B3c",
+        "object": "vehicle",
+        "name": "Example",
+        "type": "car",
+        "status": "active",
+        "livemode": true
+      },
+      "driver": {
+        "id": "drv_1a2B3c",
+        "object": "driver",
+        "status": "active",
+        "livemode": true,
+        "created": 1791302400,
+        "updated": 1791302400
+      },
+      "stops": [
+        {
+          "id": "obj_1a2B3c",
+          "status": "pending",
+          "facility": "fac_lon_hub",
+          "contact": {
+            "name": "Example",
+            "company": "example",
+            "email": "ops@example.com",
+            "phone": "+447700900123"
+          },
+          "reason": "example",
+          "scheduled_arrival": "example"
+        }
+      ],
+      "legs": [
+        {
+          "id": "obj_1a2B3c",
+          "status": "pending",
+          "departed_at": 1791302400,
+          "arrived_at": 1791302400,
+          "delay_minutes": 2,
+          "load": {
+            "handling_units": 2
+          }
+        }
+      ],
+      "shipment_count": 2
+    }
+  }
+}
+```
+
+</ResponseExample>

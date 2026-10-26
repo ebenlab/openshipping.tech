@@ -1,0 +1,129 @@
+---
+title: "pricePlan"
+description: "Retrieve a PricePlan"
+---
+
+`query` · Module: **Billing** · Requires `billing:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+
+## Returns
+
+`PricePlan!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `PricePlanObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `name` | `String!` |
+| `currency` | `String!` |
+| `base_fee` | `PricePlanBaseFee` |
+| `prices` | `[PricePlanPricesItem!]!` |
+| `minimum` | `PricePlanMinimum` |
+| `status` | `PricePlanStatus` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query PricePlan($id: ID!) {
+  pricePlan(id: $id) {
+    id
+    object
+    name
+    status
+    livemode
+    created
+    updated
+    currency
+    base_fee {
+      amount
+      currency
+      interval
+    }
+    prices {
+      meter
+      model
+      unit_amount
+      included
+      rate
+      tiers {
+        up_to
+        unit_amount
+      }
+    }
+    minimum {
+      amount
+      currency
+      interval
+    }
+  }
+}
+```
+
+```json Variables
+{
+  "id": "plan_1a2B3c"
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "pricePlan": {
+      "id": "plan_1a2B3c",
+      "object": "price_plan",
+      "name": "Example",
+      "status": "active",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "currency": "usd",
+      "base_fee": {
+        "amount": 1299,
+        "currency": "usd",
+        "interval": "example"
+      },
+      "prices": [
+        {
+          "meter": "example",
+          "model": "per_unit",
+          "unit_amount": 1.5,
+          "included": 2,
+          "rate": 0.145,
+          "tiers": [
+            {
+              "up_to": 2,
+              "unit_amount": 1.5
+            }
+          ]
+        }
+      ],
+      "minimum": {
+        "amount": 1299,
+        "currency": "usd",
+        "interval": "example"
+      }
+    }
+  }
+}
+```
+
+</ResponseExample>

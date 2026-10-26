@@ -1,0 +1,266 @@
+---
+title: "createFulfillmentOrder"
+description: "Create a fulfillment order"
+---
+
+`mutation` · Module: **Inventory** · Requires `inventory:write` · `Idempotency-Key` header required
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `input` | `FulfillmentOrderInput` | The fields for this operation. |
+
+### `FulfillmentOrderInput` fields
+
+| Field | Type |
+|---|---|
+| `channel` | `JSON` |
+| `order` | `OrderInput` |
+| `ship_to` | `ContactInput` |
+| `lines` | `[FulfillmentOrderInputLinesItemInput!]` |
+| `facility` | `String` |
+| `allocation` | `FulfillmentOrderInputAllocationInput` |
+| `shipping` | `JSON` |
+| `packing` | `JSON` |
+| `cancel_unfulfillable` | `Boolean` |
+| `user_metadata` | `UserMetadataInput` |
+
+## Returns
+
+`FulfillmentOrder!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `FulfillmentOrderObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `owner` | `String!` |
+| `status` | `FulfillmentOrderStatus!` |
+| `channel` | `FulfillmentOrderChannel` |
+| `order` | `Order` |
+| `ship_to` | `Contact!` |
+| `lines` | `[FulfillmentOrderLinesItem!]!` |
+| `facility` | `String` |
+| `allocation` | `FulfillmentOrderAllocation` |
+| `shipping` | `FulfillmentOrderShipping` |
+| `packing` | `FulfillmentOrderPacking` |
+| `tasks` | `[FulfillmentOrderTasksItem!]` |
+| `shipments` | `[String!]` |
+| `documents` | `[Document!]` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+mutation CreateFulfillmentOrder($input: FulfillmentOrderInput!) {
+  createFulfillmentOrder(input: $input) {
+    id
+    object
+    status
+    livemode
+    created
+    updated
+    owner
+    channel {
+      source
+      order_id
+      upstream_reference
+    }
+    order {
+      id
+      reference
+      channel
+      ordered_at
+      currency
+      subtotal {
+        amount
+        currency
+      }
+    }
+    ship_to {
+      name
+      company
+      email
+      phone
+      tax_ids {
+        type
+        value
+        country
+      }
+      address {
+        line1
+        street_number
+        line2
+        city
+      }
+    }
+    lines {
+      product
+      quantity
+      allocated
+      picked
+      packed
+      lot_policy
+    }
+    facility
+    allocation {
+      strategy
+      split_allowed
+      decided_at
+    }
+    shipping {
+      promise {
+        deliver_by
+      }
+    }
+    packing {
+      packaging
+      inserts
+      gift_message
+    }
+    tasks {
+      type
+      status
+      location
+      product
+      quantity
+      wave
+    }
+  }
+}
+```
+
+```json Variables
+{
+  "input": {
+    "channel": {},
+    "order": {
+      "reference": "ORDER-1001",
+      "channel": "example",
+      "ordered_at": "2026-10-07T09:00:00Z",
+      "currency": "usd"
+    },
+    "ship_to": {
+      "name": "Example",
+      "company": "example",
+      "email": "ops@example.com",
+      "phone": "+447700900123"
+    },
+    "lines": [
+      {
+        "product": "prod_ts_red_m",
+        "quantity": 2,
+        "lot_policy": "example"
+      }
+    ],
+    "facility": "fac_lon_hub",
+    "shipping": {},
+    "packing": {},
+    "cancel_unfulfillable": true
+  }
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "createFulfillmentOrder": {
+      "id": "fo_1a2B3c",
+      "object": "fulfillment_order",
+      "status": "received",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "owner": "acct_ada",
+      "channel": {
+        "source": "api",
+        "order_id": "example",
+        "upstream_reference": "example"
+      },
+      "order": {
+        "id": "obj_1a2B3c",
+        "reference": "ORDER-1001",
+        "channel": "example",
+        "ordered_at": "2026-10-07T09:00:00Z",
+        "currency": "usd",
+        "subtotal": {
+          "amount": 1299,
+          "currency": "usd"
+        }
+      },
+      "ship_to": {
+        "name": "Example",
+        "company": "example",
+        "email": "ops@example.com",
+        "phone": "+447700900123",
+        "tax_ids": [
+          {
+            "type": "eori",
+            "value": "example",
+            "country": "GB"
+          }
+        ],
+        "address": {
+          "line1": "Downing St",
+          "street_number": "10",
+          "line2": "example",
+          "city": "London"
+        }
+      },
+      "lines": [
+        {
+          "product": "prod_ts_red_m",
+          "quantity": 2,
+          "allocated": 2,
+          "picked": 2,
+          "packed": 2,
+          "lot_policy": "fefo"
+        }
+      ],
+      "facility": "fac_lon_hub",
+      "allocation": {
+        "strategy": "example",
+        "split_allowed": true,
+        "decided_at": 1791302400
+      },
+      "shipping": {
+        "promise": {
+          "deliver_by": "example"
+        }
+      },
+      "packing": {
+        "packaging": "example",
+        "inserts": [
+          "example"
+        ],
+        "gift_message": "example"
+      },
+      "tasks": [
+        {
+          "type": "example",
+          "status": "example",
+          "location": "loc_lon_a12_03_b",
+          "product": "prod_ts_red_m",
+          "quantity": 2,
+          "wave": "example"
+        }
+      ]
+    }
+  }
+}
+```
+
+</ResponseExample>

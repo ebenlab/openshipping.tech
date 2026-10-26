@@ -1,0 +1,104 @@
+---
+title: "createBatche"
+description: "Create a batch"
+---
+
+`mutation` · Module: **Batches** · `Idempotency-Key` header required
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `input` | `BatchCreate` | The fields for this operation. |
+
+### `BatchCreate` fields
+
+| Field | Type |
+|---|---|
+| `operation` | `BatchCreateOperation` |
+| `items` | `[JSON!]` |
+| `webhook_endpoint` | `String` |
+| `user_metadata` | `UserMetadataInput` |
+
+## Returns
+
+`Batch!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `BatchObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `operation` | `BatchOperation!` |
+| `status` | `BatchStatus!` |
+| `counts` | `BatchCounts` |
+| `results_file` | `String` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+mutation CreateBatche($input: BatchCreate!) {
+  createBatche(input: $input) {
+    id
+    object
+    status
+    livemode
+    created
+    updated
+    operation
+    counts {
+      total
+      succeeded
+      failed
+    }
+    results_file
+  }
+}
+```
+
+```json Variables
+{
+  "input": {
+    "operation": "shipments_create",
+    "items": {},
+    "webhook_endpoint": "example"
+  }
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "createBatche": {
+      "id": "bat_1a2B3c",
+      "object": "batch",
+      "status": "processing",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "operation": "shipments_create",
+      "counts": {
+        "total": 1299,
+        "succeeded": 2,
+        "failed": 2
+      },
+      "results_file": "example"
+    }
+  }
+}
+```
+
+</ResponseExample>

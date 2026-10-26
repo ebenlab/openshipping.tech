@@ -1,0 +1,114 @@
+---
+title: "claim"
+description: "Retrieve a Claim"
+---
+
+`query` · Module: **Integrations** · Requires `integrations:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+
+## Returns
+
+`Claim!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `ClaimObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `coverage` | `String!` |
+| `type` | `ClaimType!` |
+| `amount` | `Money!` |
+| `description` | `String` |
+| `evidence` | `[String!]` |
+| `status` | `ClaimStatus!` |
+| `resolution` | `ClaimResolution` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query Claim($id: ID!) {
+  claim(id: $id) {
+    id
+    object
+    type
+    status
+    livemode
+    created
+    updated
+    coverage
+    amount {
+      amount
+      currency
+    }
+    description
+    evidence
+    resolution {
+      amount {
+        amount
+        currency
+      }
+      paid_at
+      reason
+    }
+  }
+}
+```
+
+```json Variables
+{
+  "id": "clm_1a2B3c"
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "claim": {
+      "id": "clm_1a2B3c",
+      "object": "claim",
+      "type": "loss",
+      "status": "submitted",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "coverage": "example",
+      "amount": {
+        "amount": 1299,
+        "currency": "usd"
+      },
+      "description": "Example description",
+      "evidence": [
+        "example"
+      ],
+      "resolution": {
+        "amount": {
+          "amount": 1299,
+          "currency": "usd"
+        },
+        "paid_at": 1791302400,
+        "reason": "example"
+      }
+    }
+  }
+}
+```
+
+</ResponseExample>

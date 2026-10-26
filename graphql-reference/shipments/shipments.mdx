@@ -1,0 +1,347 @@
+---
+title: "shipments"
+description: "List shipments"
+---
+
+`query` · Module: **Shipments** · Requires `shipments:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `status` | `ShipmentStatusEnum` | Filter by status. |
+| `trackingStatus` | `TrackingStatusEnum` | Filter by tracking.status. |
+| `carrier` | `String` | Filter by carrier. |
+| `connection` | `String` | Filter by connection. |
+| `purchaseServiceCode` | `String` | Filter by purchase.service.code. |
+| `trackingNumber` | `String` | Filter by tracking.number. |
+| `reference` | `String` | Filter by reference. |
+| `orderId` | `String` | Filter by order.id. |
+| `returnsIsReturn` | `Boolean` | Filter by returns.is return. |
+| `handoverManifest` | `String` | ID or `none` |
+| `handoverPickup` | `String` | ID or `none` |
+| `handoverCloseGroup` | `String` | Filter by handover.close group. |
+| `shipDateGte` | `String` | Filter by ship date gte. |
+| `shipDateLte` | `String` | Filter by ship date lte. |
+| `createdGte` | `Int` | Filter by created gte. |
+| `createdLte` | `Int` | Filter by created lte. |
+| `limit` | `Int` | Page size, 1–100 (default 10). |
+| `startingAfter` | `ID` | Cursor: return objects after this ID. |
+| `endingBefore` | `ID` | Cursor: return objects before this ID. |
+
+## Returns
+
+`ShipmentList!`
+
+| Field | Type |
+|---|---|
+| `data` | `[Shipment!]!` |
+| `has_more` | `Boolean` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query Shipments($limit: Int) {
+  shipments(limit: $limit) {
+    data {
+      id
+      object
+      status
+      livemode
+      created
+      updated
+      reference
+      ship_date
+      ship_from {
+        name
+        company
+        email
+        phone
+        tax_ids {
+          type
+          value
+          country
+        }
+        address {
+          line1
+          street_number
+          line2
+          city
+        }
+      }
+      ship_to {
+        name
+        company
+        email
+        phone
+        tax_ids {
+          type
+          value
+          country
+        }
+        address {
+          line1
+          street_number
+          line2
+          city
+        }
+      }
+      return_to {
+        name
+        company
+        email
+        phone
+        tax_ids {
+          type
+          value
+          country
+        }
+        address {
+          line1
+          street_number
+          line2
+          city
+        }
+      }
+      bill_to {
+        name
+        company
+        email
+        phone
+        tax_ids {
+          type
+          value
+          country
+        }
+        address {
+          line1
+          street_number
+          line2
+          city
+        }
+      }
+      billing {
+        paid_by
+        account_number
+      }
+      handling_units {
+        id
+        type
+        weight {
+          value
+          unit
+        }
+        dimensions {
+          length
+          width
+          height
+          unit
+        }
+        packaging
+        freight {
+          pallet_standard
+          stackable
+          piece_count
+          freight_class
+        }
+      }
+      order {
+        id
+        reference
+        channel
+        ordered_at
+        currency
+        subtotal {
+          amount
+          currency
+        }
+      }
+      customs_declaration {
+        contents_type
+        contents_explanation
+        incoterm
+        duties {
+          paid_by
+          account_number
+        }
+        landed_cost
+        import_broker {
+          name
+          company
+          email
+          phone
+        }
+      }
+    }
+    has_more
+  }
+}
+```
+
+```json Variables
+{
+  "limit": 10
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "shipments": {
+      "data": [
+        {
+          "id": "shp_1a2B3c",
+          "object": "shipment",
+          "status": "draft",
+          "livemode": true,
+          "created": 1791302400,
+          "updated": 1791302400,
+          "reference": "ORDER-1001",
+          "ship_date": "2026-10-07",
+          "ship_from": {
+            "name": "Example",
+            "company": "example",
+            "email": "ops@example.com",
+            "phone": "+447700900123",
+            "tax_ids": [
+              {
+                "type": "eori",
+                "value": "example",
+                "country": "GB"
+              }
+            ],
+            "address": {
+              "line1": "Downing St",
+              "street_number": "10",
+              "line2": "example",
+              "city": "London"
+            }
+          },
+          "ship_to": {
+            "name": "Example",
+            "company": "example",
+            "email": "ops@example.com",
+            "phone": "+447700900123",
+            "tax_ids": [
+              {
+                "type": "eori",
+                "value": "example",
+                "country": "GB"
+              }
+            ],
+            "address": {
+              "line1": "Downing St",
+              "street_number": "10",
+              "line2": "example",
+              "city": "London"
+            }
+          },
+          "return_to": {
+            "name": "Example",
+            "company": "example",
+            "email": "ops@example.com",
+            "phone": "+447700900123",
+            "tax_ids": [
+              {
+                "type": "eori",
+                "value": "example",
+                "country": "GB"
+              }
+            ],
+            "address": {
+              "line1": "Downing St",
+              "street_number": "10",
+              "line2": "example",
+              "city": "London"
+            }
+          },
+          "bill_to": {
+            "name": "Example",
+            "company": "example",
+            "email": "ops@example.com",
+            "phone": "+447700900123",
+            "tax_ids": [
+              {
+                "type": "eori",
+                "value": "example",
+                "country": "GB"
+              }
+            ],
+            "address": {
+              "line1": "Downing St",
+              "street_number": "10",
+              "line2": "example",
+              "city": "London"
+            }
+          },
+          "billing": {
+            "paid_by": "sender",
+            "account_number": "example"
+          },
+          "handling_units": [
+            {
+              "id": "obj_1a2B3c",
+              "type": "parcel",
+              "weight": {
+                "value": 1.5,
+                "unit": "g"
+              },
+              "dimensions": {
+                "length": 1.5,
+                "width": 1.5,
+                "height": 1.5,
+                "unit": "mm"
+              },
+              "packaging": "example",
+              "freight": {
+                "pallet_standard": "eur1",
+                "stackable": true,
+                "piece_count": 2,
+                "freight_class": "example"
+              }
+            }
+          ],
+          "order": {
+            "id": "obj_1a2B3c",
+            "reference": "ORDER-1001",
+            "channel": "example",
+            "ordered_at": "2026-10-07T09:00:00Z",
+            "currency": "usd",
+            "subtotal": {
+              "amount": 1299,
+              "currency": "usd"
+            }
+          },
+          "customs_declaration": {
+            "contents_type": "merchandise",
+            "contents_explanation": "example",
+            "incoterm": "DAP",
+            "duties": {
+              "paid_by": "sender",
+              "account_number": "example"
+            },
+            "landed_cost": "example",
+            "import_broker": {
+              "name": "Example",
+              "company": "example",
+              "email": "ops@example.com",
+              "phone": "+447700900123"
+            }
+          }
+        }
+      ],
+      "has_more": true
+    }
+  }
+}
+```
+
+</ResponseExample>

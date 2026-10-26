@@ -1,0 +1,117 @@
+---
+title: "rollApiKey"
+description: "Roll an API key"
+---
+
+`mutation` · Module: **Accounts** · Requires `accounts:write`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+| `input` | `RollApiKeyInput` | The fields for this operation. |
+
+### `RollApiKeyInput` fields
+
+| Field | Type |
+|---|---|
+| `expire_previous_in` | `Int` |
+
+## Returns
+
+`ApiKey!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `ApiKeyObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `account` | `String` |
+| `name` | `String!` |
+| `mode` | `ApiKeyMode!` |
+| `type` | `ApiKeyType!` |
+| `scopes` | `[String!]` |
+| `prefix` | `String` |
+| `last4` | `String` |
+| `secret` | `String` |
+| `created_by` | `String` |
+| `last_used_at` | `Int` |
+| `expires_at` | `Int` |
+| `allowed_ips` | `[String!]` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+mutation RollApiKey($id: ID!, $input: RollApiKeyInput!) {
+  rollApiKey(id: $id, input: $input) {
+    id
+    object
+    name
+    type
+    livemode
+    created
+    updated
+    account
+    mode
+    scopes
+    prefix
+    last4
+    secret
+    created_by
+    last_used_at
+    expires_at
+  }
+}
+```
+
+```json Variables
+{
+  "id": "key_1a2B3c",
+  "input": {
+    "expire_previous_in": 2
+  }
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "rollApiKey": {
+      "id": "key_1a2B3c",
+      "object": "api_key",
+      "name": "Example",
+      "type": "secret",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "account": "acct_ada",
+      "mode": "test",
+      "scopes": [
+        "example"
+      ],
+      "prefix": "example",
+      "last4": "example",
+      "secret": "example",
+      "created_by": "example",
+      "last_used_at": 1791302400,
+      "expires_at": 1791302400
+    }
+  }
+}
+```
+
+</ResponseExample>

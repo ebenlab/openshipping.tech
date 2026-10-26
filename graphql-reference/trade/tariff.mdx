@@ -1,0 +1,119 @@
+---
+title: "tariff"
+description: "Look up a tariff line"
+---
+
+`query` · Module: **Trade**
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `country` | `ID!` | The country. |
+| `hsCode` | `ID!` | The hs code. |
+| `originCountry` | `String` | Filter by origin country. |
+| `date` | `String` | Filter by date. |
+
+## Returns
+
+`Tariff!`
+
+| Field | Type |
+|---|---|
+| `object` | `TariffObject` |
+| `country` | `String` |
+| `hs_code` | `String` |
+| `description` | `String` |
+| `duty` | `[TariffDutyItem!]` |
+| `taxes` | `[TariffTaxesItem!]` |
+| `restrictions` | `[TariffRestrictionsItem!]` |
+| `valid_on` | `String` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query Tariff($country: ID!, $hsCode: ID!) {
+  tariff(country: $country, hsCode: $hsCode) {
+    object
+    country
+    hs_code
+    description
+    duty {
+      measure
+      rate
+      agreement
+      origin_country
+    }
+    taxes {
+      name
+      rate
+    }
+    restrictions {
+      code
+      country
+      level
+      agency
+      message
+      license_types
+    }
+    valid_on
+  }
+}
+```
+
+```json Variables
+{
+  "country": "GB",
+  "hsCode": "example_id"
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "tariff": {
+      "object": "tariff",
+      "country": "GB",
+      "hs_code": "6109100010",
+      "description": "Example description",
+      "duty": [
+        {
+          "measure": "example",
+          "rate": 0.145,
+          "agreement": "example",
+          "origin_country": "PT"
+        }
+      ],
+      "taxes": [
+        {
+          "name": "Example",
+          "rate": 0.145
+        }
+      ],
+      "restrictions": [
+        {
+          "code": "dhl_express_worldwide",
+          "country": "GB",
+          "level": "prohibited",
+          "agency": "example",
+          "message": "example",
+          "license_types": [
+            "example"
+          ]
+        }
+      ],
+      "valid_on": "2026-10-07"
+    }
+  }
+}
+```
+
+</ResponseExample>

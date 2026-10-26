@@ -1,0 +1,89 @@
+---
+title: "attestations"
+description: "List attestations"
+---
+
+`query` · Module: **Data Network** · Requires `data:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `about` | `String` | Filter by about. |
+| `attester` | `String` | Filter by attester. |
+| `createdGte` | `Int` | Filter by created gte. |
+| `createdLte` | `Int` | Filter by created lte. |
+| `limit` | `Int` | Page size, 1–100 (default 10). |
+| `startingAfter` | `ID` | Cursor: return objects after this ID. |
+| `endingBefore` | `ID` | Cursor: return objects before this ID. |
+
+## Returns
+
+`AttestationList!`
+
+| Field | Type |
+|---|---|
+| `data` | `[Attestation!]!` |
+| `has_more` | `Boolean` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query Attestations($limit: Int) {
+  attestations(limit: $limit) {
+    data {
+      id
+      object
+      livemode
+      created
+      updated
+      attester
+      about
+      statement
+      evidence
+    }
+    has_more
+  }
+}
+```
+
+```json Variables
+{
+  "limit": 10
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "attestations": {
+      "data": [
+        {
+          "id": "att_1a2B3c",
+          "object": "attestation",
+          "livemode": true,
+          "created": 1791302400,
+          "updated": 1791302400,
+          "attester": "example",
+          "about": "example",
+          "statement": "example",
+          "evidence": [
+            "example"
+          ]
+        }
+      ],
+      "has_more": true
+    }
+  }
+}
+```
+
+</ResponseExample>

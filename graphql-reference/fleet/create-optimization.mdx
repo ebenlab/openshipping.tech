@@ -1,0 +1,174 @@
+---
+title: "createOptimization"
+description: "Optimize runs"
+---
+
+`mutation` · Module: **Fleet** · Requires `fleet:write`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `input` | `OptimizationCreate` | The fields for this operation. |
+
+### `OptimizationCreate` fields
+
+| Field | Type |
+|---|---|
+| `date` | `String` |
+| `depot` | `String` |
+| `jobs` | `OptimizationCreateJobsInput` |
+| `vehicles` | `[String!]` |
+| `drivers` | `[String!]` |
+| `service_area` | `String` |
+| `objective` | `OptimizationCreateObjective` |
+| `constraints` | `JSON` |
+| `commit` | `Boolean` |
+
+## Returns
+
+`Optimization!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `OptimizationObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `status` | `OptimizationStatus!` |
+| `date` | `String` |
+| `depot` | `String` |
+| `proposed_runs` | `[OptimizationProposedRunsItem!]` |
+| `unassigned` | `[OptimizationUnassignedItem!]` |
+| `summary` | `JSON` |
+| `runs` | `[String!]` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+mutation CreateOptimization($input: OptimizationCreate!) {
+  createOptimization(input: $input) {
+    id
+    object
+    status
+    livemode
+    created
+    updated
+    date
+    depot
+    proposed_runs {
+      vehicle
+      driver
+      stops {
+        sequence
+        facility
+        activities
+        arrive_offset
+      }
+      distance {
+        value
+        unit
+      }
+      duration_minutes
+      load {
+        handling_units
+      }
+    }
+    unassigned {
+      shipment
+      reason
+    }
+    runs
+  }
+}
+```
+
+```json Variables
+{
+  "input": {
+    "date": "2026-10-07",
+    "depot": "fac_lon_hub",
+    "jobs": {
+      "shipments": [
+        "example"
+      ],
+      "pickups": [
+        "example"
+      ]
+    },
+    "vehicles": [
+      "example"
+    ],
+    "drivers": [
+      "example"
+    ],
+    "service_area": "example",
+    "objective": "minimize_duration",
+    "constraints": {}
+  }
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "createOptimization": {
+      "id": "optj_1a2B3c",
+      "object": "optimization",
+      "status": "pending",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "date": "2026-10-07",
+      "depot": "fac_lon_hub",
+      "proposed_runs": [
+        {
+          "vehicle": "veh_van07",
+          "driver": "drv_ama",
+          "stops": [
+            {
+              "sequence": 2,
+              "facility": "fac_lon_hub",
+              "activities": [
+                "load"
+              ],
+              "arrive_offset": "example"
+            }
+          ],
+          "distance": {
+            "value": 1.5,
+            "unit": "kg"
+          },
+          "duration_minutes": 2,
+          "load": {
+            "handling_units": 2
+          }
+        }
+      ],
+      "unassigned": [
+        {
+          "shipment": "shp_1Q2w3E4r5T6y",
+          "reason": "example"
+        }
+      ],
+      "runs": [
+        "example"
+      ]
+    }
+  }
+}
+```
+
+</ResponseExample>

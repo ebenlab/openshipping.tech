@@ -1,0 +1,135 @@
+---
+title: "disputeSettlement"
+description: "Dispute settlement entries"
+---
+
+`mutation` · Module: **Network** · Requires `network:write`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+| `input` | `DisputeSettlementInput` | The fields for this operation. |
+
+### `DisputeSettlementInput` fields
+
+| Field | Type |
+|---|---|
+| `entries` | `[String!]` |
+| `reason` | `String` |
+
+## Returns
+
+`Settlement!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `SettlementObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `account` | `String!` |
+| `period` | `SettlementPeriod!` |
+| `currency` | `String` |
+| `totals` | `SettlementTotals` |
+| `status` | `SettlementStatus!` |
+| `statement` | `String` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+mutation DisputeSettlement($id: ID!, $input: DisputeSettlementInput!) {
+  disputeSettlement(id: $id, input: $input) {
+    id
+    object
+    status
+    livemode
+    created
+    updated
+    account
+    period {
+      from
+      to
+    }
+    currency
+    totals {
+      debits {
+        amount
+        currency
+      }
+      credits {
+        amount
+        currency
+      }
+      net {
+        amount
+        currency
+      }
+    }
+    statement
+  }
+}
+```
+
+```json Variables
+{
+  "id": "stl_1a2B3c",
+  "input": {
+    "entries": [
+      "example"
+    ],
+    "reason": "example"
+  }
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "disputeSettlement": {
+      "id": "stl_1a2B3c",
+      "object": "settlement",
+      "status": "open",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "account": "acct_ada",
+      "period": {
+        "from": "2026-10-07",
+        "to": "2026-10-07"
+      },
+      "currency": "usd",
+      "totals": {
+        "debits": {
+          "amount": 1299,
+          "currency": "usd"
+        },
+        "credits": {
+          "amount": 1299,
+          "currency": "usd"
+        },
+        "net": {
+          "amount": 1299,
+          "currency": "usd"
+        }
+      },
+      "statement": "example"
+    }
+  }
+}
+```
+
+</ResponseExample>

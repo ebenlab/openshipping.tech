@@ -1,0 +1,153 @@
+---
+title: "pricingRule"
+description: "Retrieve a PricingRule"
+---
+
+`query` · Module: **Pricing** · Requires `pricing:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+
+## Returns
+
+`PricingRule!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `PricingRuleObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `name` | `String!` |
+| `type` | `PricingRuleType!` |
+| `adjustment` | `PricingRuleAdjustment!` |
+| `conditions` | `PricingRuleConditions` |
+| `floor` | `PricingRuleFloor` |
+| `priority` | `Int` |
+| `visible` | `Boolean` |
+| `effective_from` | `String` |
+| `effective_until` | `String` |
+| `status` | `PricingRuleStatus` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query PricingRule($id: ID!) {
+  pricingRule(id: $id) {
+    id
+    object
+    name
+    type
+    status
+    livemode
+    created
+    updated
+    adjustment {
+      type
+      rate
+      amount {
+        amount
+        currency
+      }
+      basis
+    }
+    conditions {
+      accounts
+      levels
+      carriers
+      services
+      connections
+      destination_zones
+    }
+    floor {
+      margin {
+        type
+        rate
+      }
+    }
+    priority
+    visible
+    effective_from
+    effective_until
+  }
+}
+```
+
+```json Variables
+{
+  "id": "prule_1a2B3c"
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "pricingRule": {
+      "id": "prule_1a2B3c",
+      "object": "pricing_rule",
+      "name": "Example",
+      "type": "markup",
+      "status": "active",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "adjustment": {
+        "type": "percentage",
+        "rate": 0.145,
+        "amount": {
+          "amount": 1299,
+          "currency": "usd"
+        },
+        "basis": "example"
+      },
+      "conditions": {
+        "accounts": [
+          "example"
+        ],
+        "levels": [
+          "example"
+        ],
+        "carriers": [
+          "example"
+        ],
+        "services": [
+          "example"
+        ],
+        "connections": [
+          "example"
+        ],
+        "destination_zones": [
+          "example"
+        ]
+      },
+      "floor": {
+        "margin": {
+          "type": "example",
+          "rate": 0.145
+        }
+      },
+      "priority": 100,
+      "visible": true,
+      "effective_from": "2026-10-07",
+      "effective_until": "2026-10-07"
+    }
+  }
+}
+```
+
+</ResponseExample>

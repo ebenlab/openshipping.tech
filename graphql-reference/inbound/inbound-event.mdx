@@ -1,0 +1,108 @@
+---
+title: "inboundEvent"
+description: "Retrieve a InboundEvent"
+---
+
+`query` · Module: **Inbound** · Requires `inbound:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+
+## Returns
+
+`InboundEvent!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `InboundEventObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `type` | `InboundEventType!` |
+| `source` | `InboundEventSource` |
+| `status` | `InboundEventStatus!` |
+| `connection` | `String` |
+| `tracker` | `String` |
+| `shipment` | `String` |
+| `accepted` | `Int` |
+| `rejected` | `Int` |
+| `errors` | `[InboundEventErrorsItem!]` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query InboundEvent($id: ID!) {
+  inboundEvent(id: $id) {
+    id
+    object
+    type
+    status
+    livemode
+    created
+    updated
+    source
+    connection
+    tracker
+    shipment
+    accepted
+    rejected
+    errors {
+      code
+      index
+      message
+    }
+  }
+}
+```
+
+```json Variables
+{
+  "id": "ibe_1a2B3c"
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "inboundEvent": {
+      "id": "ibe_1a2B3c",
+      "object": "inbound_event",
+      "type": "tracking",
+      "status": "processed",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "source": "api",
+      "connection": "conn_9f8e",
+      "tracker": "example",
+      "shipment": "shp_1Q2w3E4r5T6y",
+      "accepted": 2,
+      "rejected": 2,
+      "errors": [
+        {
+          "code": "dhl_express_worldwide",
+          "index": 2,
+          "message": "example"
+        }
+      ]
+    }
+  }
+}
+```
+
+</ResponseExample>

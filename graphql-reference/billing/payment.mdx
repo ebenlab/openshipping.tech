@@ -1,0 +1,113 @@
+---
+title: "payment"
+description: "Retrieve a Payment"
+---
+
+`query` · Module: **Billing** · Requires `billing:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+
+## Returns
+
+`Payment!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `PaymentObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `amount` | `Money!` |
+| `status` | `PaymentStatus!` |
+| `invoice` | `String` |
+| `purpose` | `PaymentPurpose` |
+| `payment_method` | `String!` |
+| `connection` | `String` |
+| `failure` | `PaymentFailure` |
+| `refunded` | `Money` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query Payment($id: ID!) {
+  payment(id: $id) {
+    id
+    object
+    status
+    livemode
+    created
+    updated
+    amount {
+      amount
+      currency
+    }
+    invoice
+    purpose
+    payment_method
+    connection
+    failure {
+      code
+      message
+    }
+    refunded {
+      amount
+      currency
+    }
+  }
+}
+```
+
+```json Variables
+{
+  "id": "pay_1a2B3c"
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "payment": {
+      "id": "pay_1a2B3c",
+      "object": "payment",
+      "status": "requires_action",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "amount": {
+        "amount": 1299,
+        "currency": "usd"
+      },
+      "invoice": "invc_7Ff2",
+      "purpose": "invoice",
+      "payment_method": "example",
+      "connection": "conn_9f8e",
+      "failure": {
+        "code": "dhl_express_worldwide",
+        "message": "example"
+      },
+      "refunded": {
+        "amount": 1299,
+        "currency": "usd"
+      }
+    }
+  }
+}
+```
+
+</ResponseExample>

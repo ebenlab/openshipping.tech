@@ -1,0 +1,749 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "mint",
+  "name": "Open Logistics Specification",
+  "description": "An open, carrier-agnostic shipping API specification for agents and developers.",
+  "colors": {
+    "primary": "#2f7d5f",
+    "light": "#6fb89a",
+    "dark": "#2f7d5f"
+  },
+  "favicon": "/logo/mark.svg",
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Specification",
+        "groups": [
+          {
+            "group": "Start here",
+            "pages": [
+              "index",
+              "spec/architecture",
+              "shipping"
+            ]
+          },
+          {
+            "group": "Modes",
+            "pages": [
+              "spec/12-modes"
+            ]
+          },
+          {
+            "group": "Core objects",
+            "pages": [
+              "spec/01-core-objects"
+            ]
+          },
+          {
+            "group": "Shipping APIs",
+            "pages": [
+              "spec/02-rates",
+              "spec/03-shipments",
+              "spec/04-pickups",
+              "spec/05-manifests",
+              "spec/06-documents",
+              "spec/07-tracking"
+            ]
+          },
+          {
+            "group": "Carriers & connections",
+            "pages": [
+              "spec/09-connections"
+            ]
+          },
+          {
+            "group": "Network & Operations",
+            "pages": [
+              "spec/13-trade",
+              "spec/14-catalog",
+              "spec/15-pricing",
+              "spec/16-routes",
+              "spec/17-fleet",
+              "spec/18-injection",
+              "spec/20-products",
+              "spec/29-inventory"
+            ]
+          },
+          {
+            "group": "Networks, Devices & Data",
+            "pages": [
+              "spec/21-network",
+              "spec/22-iot",
+              "spec/24-consolidation",
+              "spec/23-data-network"
+            ]
+          },
+          {
+            "group": "Appendix",
+            "pages": [
+              "spec/A-rationale",
+              "spec/B-standards",
+              "spec/C-glossary"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Industry Map",
+        "groups": [
+          {
+            "group": "Explore",
+            "pages": [
+              "map"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "REST Interface",
+        "openapi": "openapi.yaml"
+      },
+      {
+        "tab": "GraphQL Interface",
+        "groups": [
+          {
+            "group": "Overview",
+            "pages": [
+              "spec/graphql"
+            ]
+          },
+          {
+            "group": "Accounts",
+            "pages": [
+              "graphql-reference/accounts/account",
+              "graphql-reference/accounts/account-get",
+              "graphql-reference/accounts/accounts",
+              "graphql-reference/accounts/api-key",
+              "graphql-reference/accounts/api-keys",
+              "graphql-reference/accounts/close-account",
+              "graphql-reference/accounts/create-account",
+              "graphql-reference/accounts/create-api-key",
+              "graphql-reference/accounts/create-identity-provider",
+              "graphql-reference/accounts/create-invitation",
+              "graphql-reference/accounts/create-role",
+              "graphql-reference/accounts/delete-api-key",
+              "graphql-reference/accounts/delete-identity-provider",
+              "graphql-reference/accounts/delete-membership",
+              "graphql-reference/accounts/delete-role",
+              "graphql-reference/accounts/identity-provider",
+              "graphql-reference/accounts/identity-providers",
+              "graphql-reference/accounts/invitation",
+              "graphql-reference/accounts/invitations",
+              "graphql-reference/accounts/membership",
+              "graphql-reference/accounts/memberships",
+              "graphql-reference/accounts/reactivate-account",
+              "graphql-reference/accounts/revoke-invitation",
+              "graphql-reference/accounts/role",
+              "graphql-reference/accounts/roles",
+              "graphql-reference/accounts/roll-api-key",
+              "graphql-reference/accounts/suspend-account",
+              "graphql-reference/accounts/test-identity-provider",
+              "graphql-reference/accounts/update-account",
+              "graphql-reference/accounts/update-api-key",
+              "graphql-reference/accounts/update-identity-provider",
+              "graphql-reference/accounts/update-membership",
+              "graphql-reference/accounts/update-role",
+              "graphql-reference/accounts/verify-domain-identity-provider"
+            ]
+          },
+          {
+            "group": "Apps",
+            "pages": [
+              "graphql-reference/apps/app",
+              "graphql-reference/apps/apps",
+              "graphql-reference/apps/create-app",
+              "graphql-reference/apps/delete-app",
+              "graphql-reference/apps/rotate-secret-app",
+              "graphql-reference/apps/update-app"
+            ]
+          },
+          {
+            "group": "Batches",
+            "pages": [
+              "graphql-reference/batches/batche",
+              "graphql-reference/batches/create-batche"
+            ]
+          },
+          {
+            "group": "Billing",
+            "pages": [
+              "graphql-reference/billing/balance",
+              "graphql-reference/billing/balance-transactions",
+              "graphql-reference/billing/billing-profile",
+              "graphql-reference/billing/create-invoice",
+              "graphql-reference/billing/create-meter",
+              "graphql-reference/billing/create-price-plan",
+              "graphql-reference/billing/create-reconciliation",
+              "graphql-reference/billing/create-usage-record",
+              "graphql-reference/billing/delete-payment-method",
+              "graphql-reference/billing/finalize-invoice",
+              "graphql-reference/billing/import-invoice",
+              "graphql-reference/billing/invoice",
+              "graphql-reference/billing/invoices",
+              "graphql-reference/billing/mark-uncollectible-invoice",
+              "graphql-reference/billing/meter",
+              "graphql-reference/billing/meters",
+              "graphql-reference/billing/payment",
+              "graphql-reference/billing/payment-method",
+              "graphql-reference/billing/payment-methods",
+              "graphql-reference/billing/payments",
+              "graphql-reference/billing/payout",
+              "graphql-reference/billing/payouts",
+              "graphql-reference/billing/price-plan",
+              "graphql-reference/billing/price-plans",
+              "graphql-reference/billing/reconcile-statement-payment",
+              "graphql-reference/billing/reconciliation",
+              "graphql-reference/billing/reconciliations",
+              "graphql-reference/billing/refund-payment",
+              "graphql-reference/billing/resolve-reconciliation",
+              "graphql-reference/billing/send-invoice",
+              "graphql-reference/billing/update-billing-profile",
+              "graphql-reference/billing/update-invoice",
+              "graphql-reference/billing/update-meter",
+              "graphql-reference/billing/update-price-plan",
+              "graphql-reference/billing/usage-record",
+              "graphql-reference/billing/usage-records",
+              "graphql-reference/billing/usage-summaries",
+              "graphql-reference/billing/void-invoice"
+            ]
+          },
+          {
+            "group": "Carriers",
+            "pages": [
+              "graphql-reference/carriers/carrier",
+              "graphql-reference/carriers/carriers"
+            ]
+          },
+          {
+            "group": "Catalog",
+            "pages": [
+              "graphql-reference/catalog/create-option",
+              "graphql-reference/catalog/create-packaging",
+              "graphql-reference/catalog/create-service",
+              "graphql-reference/catalog/create-service-availability",
+              "graphql-reference/catalog/create-zone",
+              "graphql-reference/catalog/delete-option",
+              "graphql-reference/catalog/delete-packaging",
+              "graphql-reference/catalog/delete-service",
+              "graphql-reference/catalog/delete-zone",
+              "graphql-reference/catalog/match-zone",
+              "graphql-reference/catalog/option",
+              "graphql-reference/catalog/option-versions",
+              "graphql-reference/catalog/options",
+              "graphql-reference/catalog/packaging",
+              "graphql-reference/catalog/packaging-versions",
+              "graphql-reference/catalog/packagings",
+              "graphql-reference/catalog/publish-option",
+              "graphql-reference/catalog/publish-packaging",
+              "graphql-reference/catalog/publish-service",
+              "graphql-reference/catalog/publish-zone",
+              "graphql-reference/catalog/service",
+              "graphql-reference/catalog/service-versions",
+              "graphql-reference/catalog/services",
+              "graphql-reference/catalog/update-option",
+              "graphql-reference/catalog/update-packaging",
+              "graphql-reference/catalog/update-service",
+              "graphql-reference/catalog/update-zone",
+              "graphql-reference/catalog/zone",
+              "graphql-reference/catalog/zone-versions",
+              "graphql-reference/catalog/zones"
+            ]
+          },
+          {
+            "group": "Connections",
+            "pages": [
+              "graphql-reference/connections/connect-session",
+              "graphql-reference/connections/connection",
+              "graphql-reference/connections/connections",
+              "graphql-reference/connections/create-connect-session",
+              "graphql-reference/connections/create-connection",
+              "graphql-reference/connections/delete-connection",
+              "graphql-reference/connections/update-connection"
+            ]
+          },
+          {
+            "group": "Consolidation",
+            "pages": [
+              "graphql-reference/consolidation/add-consolidation",
+              "graphql-reference/consolidation/arrive-conveyance",
+              "graphql-reference/consolidation/break-seal-consolidation",
+              "graphql-reference/consolidation/cancel-conveyance",
+              "graphql-reference/consolidation/close-consolidation",
+              "graphql-reference/consolidation/close-conveyance",
+              "graphql-reference/consolidation/consolidation",
+              "graphql-reference/consolidation/consolidation-contents",
+              "graphql-reference/consolidation/consolidations",
+              "graphql-reference/consolidation/conveyance",
+              "graphql-reference/consolidation/conveyance-manifest",
+              "graphql-reference/consolidation/conveyances",
+              "graphql-reference/consolidation/create-consolidation",
+              "graphql-reference/consolidation/create-conveyance",
+              "graphql-reference/consolidation/deconsolidate-consolidation",
+              "graphql-reference/consolidation/depart-conveyance",
+              "graphql-reference/consolidation/label-consolidation",
+              "graphql-reference/consolidation/load-consolidation",
+              "graphql-reference/consolidation/remove-consolidation",
+              "graphql-reference/consolidation/seal-consolidation",
+              "graphql-reference/consolidation/unload-consolidation",
+              "graphql-reference/consolidation/update-consolidation",
+              "graphql-reference/consolidation/update-conveyance"
+            ]
+          },
+          {
+            "group": "Data Network",
+            "pages": [
+              "graphql-reference/data-network/access-grant",
+              "graphql-reference/data-network/access-grants",
+              "graphql-reference/data-network/access-policies",
+              "graphql-reference/data-network/access-policy",
+              "graphql-reference/data-network/anchor",
+              "graphql-reference/data-network/attestation",
+              "graphql-reference/data-network/attestations",
+              "graphql-reference/data-network/create-access-grant",
+              "graphql-reference/data-network/create-access-policy",
+              "graphql-reference/data-network/create-attestation",
+              "graphql-reference/data-network/create-dataset",
+              "graphql-reference/data-network/create-identifier-link",
+              "graphql-reference/data-network/create-participant",
+              "graphql-reference/data-network/create-record",
+              "graphql-reference/data-network/milestone-definition",
+              "graphql-reference/data-network/participant",
+              "graphql-reference/data-network/participants",
+              "graphql-reference/data-network/records",
+              "graphql-reference/data-network/timeline",
+              "graphql-reference/data-network/update-access-policy"
+            ]
+          },
+          {
+            "group": "Document Uploads",
+            "pages": [
+              "graphql-reference/document-uploads/create-document-upload",
+              "graphql-reference/document-uploads/document-upload",
+              "graphql-reference/document-uploads/document-uploads",
+              "graphql-reference/document-uploads/update-document-upload"
+            ]
+          },
+          {
+            "group": "Events",
+            "pages": [
+              "graphql-reference/events/event",
+              "graphql-reference/events/events"
+            ]
+          },
+          {
+            "group": "Files",
+            "pages": [
+              "graphql-reference/files/create-file",
+              "graphql-reference/files/delete-file",
+              "graphql-reference/files/file",
+              "graphql-reference/files/files"
+            ]
+          },
+          {
+            "group": "Fleet",
+            "pages": [
+              "graphql-reference/fleet/commit-optimization",
+              "graphql-reference/fleet/create-driver",
+              "graphql-reference/fleet/create-optimization",
+              "graphql-reference/fleet/create-route-run-position",
+              "graphql-reference/fleet/create-vehicle",
+              "graphql-reference/fleet/delete-driver",
+              "graphql-reference/fleet/delete-vehicle",
+              "graphql-reference/fleet/driver",
+              "graphql-reference/fleet/drivers",
+              "graphql-reference/fleet/optimization",
+              "graphql-reference/fleet/optimizations",
+              "graphql-reference/fleet/route-run-positions",
+              "graphql-reference/fleet/update-driver",
+              "graphql-reference/fleet/update-vehicle",
+              "graphql-reference/fleet/vehicle",
+              "graphql-reference/fleet/vehicle-position",
+              "graphql-reference/fleet/vehicles"
+            ]
+          },
+          {
+            "group": "Inbound",
+            "pages": [
+              "graphql-reference/inbound/create-inbound-event",
+              "graphql-reference/inbound/inbound-event",
+              "graphql-reference/inbound/inbound-events"
+            ]
+          },
+          {
+            "group": "Injection",
+            "pages": [
+              "graphql-reference/injection/asn",
+              "graphql-reference/injection/asns",
+              "graphql-reference/injection/create-asn",
+              "graphql-reference/injection/update-asn"
+            ]
+          },
+          {
+            "group": "Integrations",
+            "pages": [
+              "graphql-reference/integrations/address-validation",
+              "graphql-reference/integrations/claim",
+              "graphql-reference/integrations/claims",
+              "graphql-reference/integrations/coverage",
+              "graphql-reference/integrations/coverages",
+              "graphql-reference/integrations/create-address-validation",
+              "graphql-reference/integrations/create-claim",
+              "graphql-reference/integrations/create-coverage",
+              "graphql-reference/integrations/create-insurance-quote",
+              "graphql-reference/integrations/create-integration",
+              "graphql-reference/integrations/integration",
+              "graphql-reference/integrations/integrations",
+              "graphql-reference/integrations/update-claim"
+            ]
+          },
+          {
+            "group": "Inventory",
+            "pages": [
+              "graphql-reference/inventory/allocate-fulfillment-order",
+              "graphql-reference/inventory/complete-inventory-count",
+              "graphql-reference/inventory/create-fulfillment-order",
+              "graphql-reference/inventory/create-inventory-count",
+              "graphql-reference/inventory/create-stock-movement",
+              "graphql-reference/inventory/create-storage-location",
+              "graphql-reference/inventory/create-wave",
+              "graphql-reference/inventory/delete-storage-location",
+              "graphql-reference/inventory/fulfillment-order",
+              "graphql-reference/inventory/fulfillment-orders",
+              "graphql-reference/inventory/import-storage-location",
+              "graphql-reference/inventory/inventory-count",
+              "graphql-reference/inventory/inventory-counts",
+              "graphql-reference/inventory/lines-inventory-count",
+              "graphql-reference/inventory/pack-fulfillment-order",
+              "graphql-reference/inventory/release-to-pick-fulfillment-order",
+              "graphql-reference/inventory/search-fulfillment-orders",
+              "graphql-reference/inventory/ship-fulfillment-order",
+              "graphql-reference/inventory/stock",
+              "graphql-reference/inventory/stock-get",
+              "graphql-reference/inventory/stock-movement",
+              "graphql-reference/inventory/stock-movements",
+              "graphql-reference/inventory/storage-location",
+              "graphql-reference/inventory/storage-locations",
+              "graphql-reference/inventory/thresholds-inventory",
+              "graphql-reference/inventory/update-fulfillment-order",
+              "graphql-reference/inventory/update-storage-location",
+              "graphql-reference/inventory/wave",
+              "graphql-reference/inventory/waves"
+            ]
+          },
+          {
+            "group": "IoT",
+            "pages": [
+              "graphql-reference/iot/attach-device",
+              "graphql-reference/iot/certificate-device",
+              "graphql-reference/iot/create-device",
+              "graphql-reference/iot/create-device-event",
+              "graphql-reference/iot/deactivate-device",
+              "graphql-reference/iot/delete-device",
+              "graphql-reference/iot/detach-device",
+              "graphql-reference/iot/device",
+              "graphql-reference/iot/device-events",
+              "graphql-reference/iot/devices",
+              "graphql-reference/iot/token-device",
+              "graphql-reference/iot/update-device"
+            ]
+          },
+          {
+            "group": "Jobs",
+            "pages": [
+              "graphql-reference/jobs/create-job",
+              "graphql-reference/jobs/create-job-schedule",
+              "graphql-reference/jobs/delete-job-schedule",
+              "graphql-reference/jobs/job",
+              "graphql-reference/jobs/job-schedule",
+              "graphql-reference/jobs/job-schedules",
+              "graphql-reference/jobs/jobs",
+              "graphql-reference/jobs/pause-job-schedule",
+              "graphql-reference/jobs/resume-job-schedule",
+              "graphql-reference/jobs/run-now-job-schedule",
+              "graphql-reference/jobs/update-job-schedule"
+            ]
+          },
+          {
+            "group": "Manifests",
+            "pages": [
+              "graphql-reference/manifests/create-manifest",
+              "graphql-reference/manifests/manifest",
+              "graphql-reference/manifests/manifests",
+              "graphql-reference/manifests/update-manifest"
+            ]
+          },
+          {
+            "group": "Network",
+            "pages": [
+              "graphql-reference/network/close-settlement",
+              "graphql-reference/network/create-interline-agreement",
+              "graphql-reference/network/create-service-level",
+              "graphql-reference/network/delete-service-level",
+              "graphql-reference/network/delist-member",
+              "graphql-reference/network/dispute-settlement",
+              "graphql-reference/network/interline-agreement",
+              "graphql-reference/network/interline-agreements",
+              "graphql-reference/network/ledger-entries",
+              "graphql-reference/network/ledger-entry",
+              "graphql-reference/network/network-members",
+              "graphql-reference/network/pause-member",
+              "graphql-reference/network/service-level",
+              "graphql-reference/network/service-levels",
+              "graphql-reference/network/settlement",
+              "graphql-reference/network/settlements",
+              "graphql-reference/network/sign-interline-agreement",
+              "graphql-reference/network/suspend-interline-agreement",
+              "graphql-reference/network/terminate-interline-agreement",
+              "graphql-reference/network/update-interline-agreement",
+              "graphql-reference/network/update-service-level"
+            ]
+          },
+          {
+            "group": "Pickup Schedules",
+            "pages": [
+              "graphql-reference/pickup-schedules/create-pickup-schedule",
+              "graphql-reference/pickup-schedules/pickup-schedule",
+              "graphql-reference/pickup-schedules/pickup-schedules",
+              "graphql-reference/pickup-schedules/update-pickup-schedule"
+            ]
+          },
+          {
+            "group": "Pickups",
+            "pages": [
+              "graphql-reference/pickups/create-pickup",
+              "graphql-reference/pickups/pickup",
+              "graphql-reference/pickups/pickups",
+              "graphql-reference/pickups/search-pickups",
+              "graphql-reference/pickups/update-pickup"
+            ]
+          },
+          {
+            "group": "Pricing",
+            "pages": [
+              "graphql-reference/pricing/create-pricing-rule",
+              "graphql-reference/pricing/create-rate-sheet",
+              "graphql-reference/pricing/create-surcharge",
+              "graphql-reference/pricing/delete-pricing-rule",
+              "graphql-reference/pricing/delete-rate-sheet",
+              "graphql-reference/pricing/delete-surcharge",
+              "graphql-reference/pricing/import-rate-sheet",
+              "graphql-reference/pricing/pricing-rule",
+              "graphql-reference/pricing/pricing-rules",
+              "graphql-reference/pricing/publish-rate-sheet",
+              "graphql-reference/pricing/rate-sheet",
+              "graphql-reference/pricing/rate-sheet-export",
+              "graphql-reference/pricing/rate-sheet-versions",
+              "graphql-reference/pricing/rate-sheets",
+              "graphql-reference/pricing/schedule-surcharge",
+              "graphql-reference/pricing/simulate-rate-sheet",
+              "graphql-reference/pricing/surcharge",
+              "graphql-reference/pricing/surcharges",
+              "graphql-reference/pricing/update-pricing-rule",
+              "graphql-reference/pricing/update-rate-sheet",
+              "graphql-reference/pricing/update-surcharge"
+            ]
+          },
+          {
+            "group": "Products",
+            "pages": [
+              "graphql-reference/products/create-product",
+              "graphql-reference/products/delete-product",
+              "graphql-reference/products/product",
+              "graphql-reference/products/products",
+              "graphql-reference/products/search-products",
+              "graphql-reference/products/update-product"
+            ]
+          },
+          {
+            "group": "Rates",
+            "pages": [
+              "graphql-reference/rates/create-rate",
+              "graphql-reference/rates/rate-quote"
+            ]
+          },
+          {
+            "group": "Routes",
+            "pages": [
+              "graphql-reference/routes/activate-route",
+              "graphql-reference/routes/arrive-route-run-leg",
+              "graphql-reference/routes/arrive-route-run-stop",
+              "graphql-reference/routes/assign-route-run",
+              "graphql-reference/routes/cancel-route-run",
+              "graphql-reference/routes/complete-route-run",
+              "graphql-reference/routes/complete-route-run-stop",
+              "graphql-reference/routes/create-facility",
+              "graphql-reference/routes/create-route",
+              "graphql-reference/routes/create-route-run",
+              "graphql-reference/routes/create-route-stop",
+              "graphql-reference/routes/deactivate-route",
+              "graphql-reference/routes/delete-facility",
+              "graphql-reference/routes/delete-route",
+              "graphql-reference/routes/delete-route-stop",
+              "graphql-reference/routes/depart-route-run-leg",
+              "graphql-reference/routes/dispatch-route-run",
+              "graphql-reference/routes/facilities",
+              "graphql-reference/routes/facility",
+              "graphql-reference/routes/fail-route-run-stop",
+              "graphql-reference/routes/optimize-route-run",
+              "graphql-reference/routes/reorder-route-stop",
+              "graphql-reference/routes/replan-shipment-journey",
+              "graphql-reference/routes/route",
+              "graphql-reference/routes/route-legs",
+              "graphql-reference/routes/route-run",
+              "graphql-reference/routes/route-runs",
+              "graphql-reference/routes/routes",
+              "graphql-reference/routes/skip-route-run-stop",
+              "graphql-reference/routes/start-route-run",
+              "graphql-reference/routes/unassign-route-run",
+              "graphql-reference/routes/update-facility",
+              "graphql-reference/routes/update-route",
+              "graphql-reference/routes/update-route-leg",
+              "graphql-reference/routes/update-route-run",
+              "graphql-reference/routes/update-route-stop"
+            ]
+          },
+          {
+            "group": "Shipments",
+            "pages": [
+              "graphql-reference/shipments/create-shipment",
+              "graphql-reference/shipments/delete-shipment",
+              "graphql-reference/shipments/search-shipments",
+              "graphql-reference/shipments/shipment",
+              "graphql-reference/shipments/shipments",
+              "graphql-reference/shipments/update-shipment"
+            ]
+          },
+          {
+            "group": "Templates",
+            "pages": [
+              "graphql-reference/templates/create-document-job",
+              "graphql-reference/templates/create-document-template",
+              "graphql-reference/templates/create-label-spec",
+              "graphql-reference/templates/delete-document",
+              "graphql-reference/templates/delete-document-template",
+              "graphql-reference/templates/document",
+              "graphql-reference/templates/document-ingestion",
+              "graphql-reference/templates/document-ingestions",
+              "graphql-reference/templates/document-job",
+              "graphql-reference/templates/document-jobs",
+              "graphql-reference/templates/document-template",
+              "graphql-reference/templates/document-template-versions",
+              "graphql-reference/templates/document-templates",
+              "graphql-reference/templates/documents",
+              "graphql-reference/templates/label-spec",
+              "graphql-reference/templates/label-specs",
+              "graphql-reference/templates/preview-document-template",
+              "graphql-reference/templates/publish-document-template",
+              "graphql-reference/templates/publish-label-spec",
+              "graphql-reference/templates/update-document-template",
+              "graphql-reference/templates/update-label-spec",
+              "graphql-reference/templates/validate-document-template"
+            ]
+          },
+          {
+            "group": "Tracking",
+            "pages": [
+              "graphql-reference/tracking/create-tracker",
+              "graphql-reference/tracking/delete-tracker",
+              "graphql-reference/tracking/search-trackers",
+              "graphql-reference/tracking/tracker",
+              "graphql-reference/tracking/trackers",
+              "graphql-reference/tracking/update-tracker"
+            ]
+          },
+          {
+            "group": "Trade",
+            "pages": [
+              "graphql-reference/trade/classification",
+              "graphql-reference/trade/classifications",
+              "graphql-reference/trade/compliance-screening",
+              "graphql-reference/trade/compliance-screenings",
+              "graphql-reference/trade/create-classification",
+              "graphql-reference/trade/create-compliance-screening",
+              "graphql-reference/trade/create-landed-cost",
+              "graphql-reference/trade/duty-collection",
+              "graphql-reference/trade/duty-collections",
+              "graphql-reference/trade/landed-cost",
+              "graphql-reference/trade/landed-costs",
+              "graphql-reference/trade/tariff"
+            ]
+          },
+          {
+            "group": "Webhooks",
+            "pages": [
+              "graphql-reference/webhooks/create-webhook-endpoint",
+              "graphql-reference/webhooks/delete-webhook-endpoint",
+              "graphql-reference/webhooks/update-webhook-endpoint",
+              "graphql-reference/webhooks/webhook-endpoint",
+              "graphql-reference/webhooks/webhook-endpoints"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Platform Constructs",
+        "groups": [
+          {
+            "group": "Overview",
+            "pages": [
+              "platform/index",
+              "platform/shared-objects"
+            ]
+          },
+          {
+            "group": "Foundations",
+            "pages": [
+              "spec/00-conventions",
+              "spec/10-object-management",
+              "spec/11-conformance"
+            ]
+          },
+          {
+            "group": "Identity & access",
+            "pages": [
+              "spec/19-accounts"
+            ]
+          },
+          {
+            "group": "Integrations",
+            "pages": [
+              "spec/26-integrations"
+            ]
+          },
+          {
+            "group": "Events & automation",
+            "pages": [
+              "spec/08-webhooks",
+              "spec/27-jobs"
+            ]
+          },
+          {
+            "group": "Documents",
+            "pages": [
+              "spec/25-documents-generation"
+            ]
+          },
+          {
+            "group": "Billing & payments",
+            "pages": [
+              "spec/28-billing"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "footer": {
+    "socials": {
+      "website": "https://shippinginternals.dev"
+    }
+  },
+  "navbar": {
+    "links": [
+      {
+        "label": "shipping.md",
+        "href": "/shipping"
+      }
+    ]
+  }
+}

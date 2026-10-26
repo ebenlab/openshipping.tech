@@ -1,0 +1,181 @@
+---
+title: "updateTracker"
+description: "Update a Tracker"
+---
+
+`mutation` · Module: **Tracking** · Requires `trackers:write`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+| `input` | `TrackerUpdate` | The fields for this operation. |
+
+### `TrackerUpdate` fields
+
+| Field | Type |
+|---|---|
+| `refresh` | `TrackerUpdateRefreshInput` |
+| `user_metadata` | `UserMetadataInput` |
+
+## Returns
+
+`Tracker!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `TrackerObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `tracking_number` | `String!` |
+| `carrier` | `String!` |
+| `connection` | `String` |
+| `shipment` | `Shipment` |
+| `status` | `TrackingStatusEnum!` |
+| `status_detail` | `String` |
+| `status_updated_at` | `Int` |
+| `delivered_at` | `Int` |
+| `estimated_delivery` | `TrackerEstimatedDelivery` |
+| `origin` | `Location` |
+| `destination` | `Location` |
+| `signed_by` | `String` |
+| `proof_of_delivery` | `ProofOfDelivery` |
+| `attempts` | `Int` |
+| `events` | `[TrackingEvent!]` |
+| `tracking_url` | `String` |
+| `public_url` | `String` |
+| `refresh` | `TrackerRefresh` |
+| `messages` | `[Message!]` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+mutation UpdateTracker($id: ID!, $input: TrackerUpdate!) {
+  updateTracker(id: $id, input: $input) {
+    id
+    object
+    status
+    livemode
+    created
+    updated
+    tracking_number
+    carrier
+    connection
+    shipment {
+      id
+      object
+      status
+      livemode
+      created
+      updated
+    }
+    status_detail
+    status_updated_at
+    delivered_at
+    estimated_delivery {
+      date
+      window {
+        start
+        end
+      }
+      source
+    }
+    origin {
+      city
+      state
+      postal_code
+      country
+      facility
+      latitude
+    }
+    destination {
+      city
+      state
+      postal_code
+      country
+      facility
+      latitude
+    }
+  }
+}
+```
+
+```json Variables
+{
+  "id": "trk_1a2B3c",
+  "input": {
+    "refresh": {
+      "mode": "auto"
+    }
+  }
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "updateTracker": {
+      "id": "trk_1a2B3c",
+      "object": "tracker",
+      "status": "pre_transit",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "tracking_number": "1Z999AA10123456784",
+      "carrier": "dhl_express",
+      "connection": "conn_9f8e",
+      "shipment": {
+        "id": "shp_1a2B3c",
+        "object": "shipment",
+        "status": "draft",
+        "livemode": true,
+        "created": 1791302400,
+        "updated": 1791302400
+      },
+      "status_detail": "example",
+      "status_updated_at": 1791302400,
+      "delivered_at": 1791302400,
+      "estimated_delivery": {
+        "date": "2026-10-07",
+        "window": {
+          "start": "example",
+          "end": "example"
+        },
+        "source": "carrier"
+      },
+      "origin": {
+        "city": "London",
+        "state": "example",
+        "postal_code": "SW1A 2AA",
+        "country": "GB",
+        "facility": "fac_lon_hub",
+        "latitude": 51.5074
+      },
+      "destination": {
+        "city": "London",
+        "state": "example",
+        "postal_code": "SW1A 2AA",
+        "country": "GB",
+        "facility": "fac_lon_hub",
+        "latitude": 51.5074
+      }
+    }
+  }
+}
+```
+
+</ResponseExample>

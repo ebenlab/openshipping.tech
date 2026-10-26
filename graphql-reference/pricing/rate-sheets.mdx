@@ -1,0 +1,125 @@
+---
+title: "rateSheets"
+description: "List rate sheets"
+---
+
+`query` · Module: **Pricing** · Requires `pricing:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `status` | `String` | Filter by status. |
+| `service` | `String` | Filter by service. |
+| `createdGte` | `Int` | Filter by created gte. |
+| `createdLte` | `Int` | Filter by created lte. |
+| `limit` | `Int` | Page size, 1–100 (default 10). |
+| `startingAfter` | `ID` | Cursor: return objects after this ID. |
+| `endingBefore` | `ID` | Cursor: return objects before this ID. |
+
+## Returns
+
+`RateSheetList!`
+
+| Field | Type |
+|---|---|
+| `data` | `[RateSheet!]!` |
+| `has_more` | `Boolean` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query RateSheets($limit: Int) {
+  rateSheets(limit: $limit) {
+    data {
+      id
+      object
+      name
+      status
+      livemode
+      created
+      updated
+      version
+      currency
+      effective_from
+      effective_until
+      services
+      origin_zones
+      weight_rounding {
+        increment {
+          value
+          unit
+        }
+        mode
+      }
+      dimensional_weight {
+        divisor
+        unit
+        applies
+      }
+      aggregate
+    }
+    has_more
+  }
+}
+```
+
+```json Variables
+{
+  "limit": 10
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "rateSheets": {
+      "data": [
+        {
+          "id": "rs_1a2B3c",
+          "object": "rate_sheet",
+          "name": "Example",
+          "status": "draft",
+          "livemode": true,
+          "created": 1791302400,
+          "updated": 1791302400,
+          "version": 3,
+          "currency": "usd",
+          "effective_from": "2026-10-07",
+          "effective_until": "2026-10-07",
+          "services": [
+            "example"
+          ],
+          "origin_zones": [
+            "example"
+          ],
+          "weight_rounding": {
+            "increment": {
+              "value": 1.5,
+              "unit": "g"
+            },
+            "mode": "up"
+          },
+          "dimensional_weight": {
+            "divisor": 1.5,
+            "unit": "kg",
+            "applies": "example"
+          },
+          "aggregate": "handling_unit"
+        }
+      ],
+      "has_more": true
+    }
+  }
+}
+```
+
+</ResponseExample>

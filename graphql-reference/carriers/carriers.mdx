@@ -1,0 +1,220 @@
+---
+title: "carriers"
+description: "List carriers"
+---
+
+`query` · Module: **Carriers**
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `capability` | `String` | Filter by capability. |
+| `country` | `String` | Filter by country. |
+| `status` | `String` | Filter by status. |
+| `limit` | `Int` | Page size, 1–100 (default 10). |
+| `startingAfter` | `ID` | Cursor: return objects after this ID. |
+| `endingBefore` | `ID` | Cursor: return objects before this ID. |
+
+## Returns
+
+`CarrierList!`
+
+| Field | Type |
+|---|---|
+| `data` | `[Carrier!]!` |
+| `has_more` | `Boolean` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query Carriers($limit: Int) {
+  carriers(limit: $limit) {
+    data {
+      id
+      object
+      name
+      status
+      logo_url
+      capabilities
+      services {
+        code
+        name
+        level
+        carrier_code
+        domestic
+        international
+      }
+      packagings {
+        code
+        name
+        max_weight {
+          value
+          unit
+        }
+        dimensions {
+          length
+          width
+          height
+          unit
+        }
+      }
+      label {
+        formats
+        sizes
+      }
+      standardized_features
+      manifest {
+        required
+        scope
+        modes
+        async
+        multiple_per_request
+        ship_date_policies
+      }
+      pickup {
+        requires
+        same_day_cutoff
+      }
+      tracking {
+        number_patterns
+        public_url_template
+      }
+      connection_methods {
+        type
+        label
+        issuer
+        authorization_endpoint
+        token_endpoint
+        openid
+      }
+      inbound {
+        supported
+        registration
+        signature
+        header
+      }
+      test_environment
+    }
+    has_more
+  }
+}
+```
+
+```json Variables
+{
+  "limit": 10
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "carriers": {
+      "data": [
+        {
+          "id": "obj_1a2B3c",
+          "object": "carrier",
+          "name": "Example",
+          "status": "available",
+          "logo_url": "https://example.com/logo",
+          "capabilities": [
+            "example"
+          ],
+          "services": [
+            {
+              "code": "dhl_express_worldwide",
+              "name": "Example",
+              "level": "same_day",
+              "carrier_code": "EXPRESS_WORLDWIDE",
+              "domestic": true,
+              "international": true
+            }
+          ],
+          "packagings": [
+            {
+              "code": "dhl_express_worldwide",
+              "name": "Example",
+              "max_weight": {
+                "value": 1.5,
+                "unit": "g"
+              },
+              "dimensions": {
+                "length": 1.5,
+                "width": 1.5,
+                "height": 1.5,
+                "unit": "mm"
+              }
+            }
+          ],
+          "label": {
+            "formats": [
+              "example"
+            ],
+            "sizes": [
+              "example"
+            ]
+          },
+          "standardized_features": [
+            "example"
+          ],
+          "manifest": {
+            "required": true,
+            "scope": [
+              "connection"
+            ],
+            "modes": [
+              "explicit"
+            ],
+            "async": true,
+            "multiple_per_request": true,
+            "ship_date_policies": [
+              "example"
+            ]
+          },
+          "pickup": {
+            "requires": [
+              "example"
+            ],
+            "same_day_cutoff": "example"
+          },
+          "tracking": {
+            "number_patterns": [
+              "example"
+            ],
+            "public_url_template": "example"
+          },
+          "connection_methods": [
+            {
+              "type": "credentials",
+              "label": "Example",
+              "issuer": "https://ada.okta.com/oauth2/default",
+              "authorization_endpoint": "example",
+              "token_endpoint": "example",
+              "openid": true
+            }
+          ],
+          "inbound": {
+            "supported": true,
+            "registration": "automatic",
+            "signature": "example",
+            "header": "example"
+          },
+          "test_environment": "sandbox"
+        }
+      ],
+      "has_more": true
+    }
+  }
+}
+```
+
+</ResponseExample>

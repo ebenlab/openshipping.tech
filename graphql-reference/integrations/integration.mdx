@@ -1,0 +1,105 @@
+---
+title: "integration"
+description: "Retrieve an integration"
+---
+
+`query` · Module: **Integrations**
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+
+## Returns
+
+`Integration!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `IntegrationObject!` |
+| `name` | `String!` |
+| `kind` | `IntegrationKind!` |
+| `interfaces` | `JSON!` |
+| `connection_methods` | `[ConnectionMethod!]` |
+| `config_schema` | `JsonSchema` |
+| `federated` | `IntegrationFederated` |
+| `pricing` | `IntegrationPricing` |
+| `status` | `IntegrationStatus` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query Integration($id: ID!) {
+  integration(id: $id) {
+    id
+    object
+    name
+    status
+    kind
+    connection_methods {
+      type
+      label
+      issuer
+      authorization_endpoint
+      token_endpoint
+      openid
+    }
+    federated {
+      configuration
+    }
+    pricing {
+      model
+      documentation
+    }
+  }
+}
+```
+
+```json Variables
+{
+  "id": "obj_1a2B3c"
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "integration": {
+      "id": "obj_1a2B3c",
+      "object": "integration",
+      "name": "Example",
+      "status": "available",
+      "kind": "carrier",
+      "connection_methods": [
+        {
+          "type": "credentials",
+          "label": "Example",
+          "issuer": "https://ada.okta.com/oauth2/default",
+          "authorization_endpoint": "example",
+          "token_endpoint": "example",
+          "openid": true
+        }
+      ],
+      "federated": {
+        "configuration": "example"
+      },
+      "pricing": {
+        "model": "example",
+        "documentation": "example"
+      }
+    }
+  }
+}
+```
+
+</ResponseExample>

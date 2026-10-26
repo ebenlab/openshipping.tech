@@ -1,0 +1,144 @@
+---
+title: "pickups"
+description: "List pickups"
+---
+
+`query` · Module: **Pickups** · Requires `pickups:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `status` | `String` | Filter by status. |
+| `carrier` | `String` | Filter by carrier. |
+| `connection` | `String` | Filter by connection. |
+| `dateGte` | `String` | Filter by date gte. |
+| `dateLte` | `String` | Filter by date lte. |
+| `createdGte` | `Int` | Filter by created gte. |
+| `createdLte` | `Int` | Filter by created lte. |
+| `limit` | `Int` | Page size, 1–100 (default 10). |
+| `startingAfter` | `ID` | Cursor: return objects after this ID. |
+| `endingBefore` | `ID` | Cursor: return objects before this ID. |
+
+## Returns
+
+`PickupList!`
+
+| Field | Type |
+|---|---|
+| `data` | `[Pickup!]!` |
+| `has_more` | `Boolean` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query Pickups($limit: Int) {
+  pickups(limit: $limit) {
+    data {
+      id
+      object
+      status
+      type
+      livemode
+      created
+      updated
+      connection
+      carrier
+      confirmation_number
+      contact {
+        name
+        company
+        email
+        phone
+        tax_ids {
+          type
+          value
+          country
+        }
+        address {
+          line1
+          street_number
+          line2
+          city
+        }
+      }
+      date
+      timezone
+      window {
+        ready_at
+        close_at
+      }
+      location
+      instructions
+    }
+    has_more
+  }
+}
+```
+
+```json Variables
+{
+  "limit": 10
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "pickups": {
+      "data": [
+        {
+          "id": "pck_1a2B3c",
+          "object": "pickup",
+          "status": "scheduled",
+          "type": "one_time",
+          "livemode": true,
+          "created": 1791302400,
+          "updated": 1791302400,
+          "connection": "conn_9f8e",
+          "carrier": "dhl_express",
+          "confirmation_number": "example",
+          "contact": {
+            "name": "Example",
+            "company": "example",
+            "email": "ops@example.com",
+            "phone": "+447700900123",
+            "tax_ids": [
+              {
+                "type": "eori",
+                "value": "example",
+                "country": "GB"
+              }
+            ],
+            "address": {
+              "line1": "Downing St",
+              "street_number": "10",
+              "line2": "example",
+              "city": "London"
+            }
+          },
+          "date": "2026-10-07",
+          "timezone": "Europe/London",
+          "window": {
+            "ready_at": "15:00",
+            "close_at": "18:00"
+          },
+          "location": "front_door",
+          "instructions": "example"
+        }
+      ],
+      "has_more": true
+    }
+  }
+}
+```
+
+</ResponseExample>

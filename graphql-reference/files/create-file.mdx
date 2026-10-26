@@ -1,0 +1,110 @@
+---
+title: "createFile"
+description: "Upload a file"
+---
+
+`mutation` · Module: **Files** · Requires `documents:write`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `input` | `FileCreateJsonInput` | The fields for this operation. |
+
+### `FileCreateJsonInput` fields
+
+| Field | Type |
+|---|---|
+| `purpose` | `FileCreateJsonInputPurpose` |
+| `filename` | `String` |
+| `content_type` | `String` |
+| `data` | `String` |
+| `user_metadata` | `UserMetadataInput` |
+
+## Returns
+
+`File!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `FileObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `purpose` | `FilePurpose!` |
+| `filename` | `String` |
+| `content_type` | `String` |
+| `size` | `Int!` |
+| `sha256` | `String` |
+| `url` | `String` |
+| `url_expires_at` | `Int` |
+| `expires_at` | `Int` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+mutation CreateFile($input: FileCreateJsonInput!) {
+  createFile(input: $input) {
+    id
+    object
+    livemode
+    created
+    updated
+    purpose
+    filename
+    content_type
+    size
+    sha256
+    url
+    url_expires_at
+    expires_at
+  }
+}
+```
+
+```json Variables
+{
+  "input": {
+    "purpose": "customs_document",
+    "filename": "example",
+    "content_type": "example",
+    "data": "example"
+  }
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "createFile": {
+      "id": "file_1a2B3c",
+      "object": "file",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "purpose": "customs_document",
+      "filename": "example",
+      "content_type": "example",
+      "size": 2,
+      "sha256": "example",
+      "url": "https://example.com/resource",
+      "url_expires_at": 1791302400,
+      "expires_at": 1791302400
+    }
+  }
+}
+```
+
+</ResponseExample>

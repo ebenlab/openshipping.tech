@@ -1,0 +1,107 @@
+---
+title: "documentTemplateVersions"
+description: "List template versions"
+---
+
+`query` · Module: **Templates**
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+
+## Returns
+
+`DocumentTemplateList!`
+
+| Field | Type |
+|---|---|
+| `data` | `[DocumentTemplate!]!` |
+| `has_more` | `Boolean` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query DocumentTemplateVersions($id: ID!) {
+  documentTemplateVersions(id: $id) {
+    data {
+      id
+      object
+      name
+      type
+      status
+      livemode
+      created
+      updated
+      slug
+      version
+      related_object
+      engine
+      source
+      page {
+        size
+        orientation
+        margins_mm
+        dpi
+      }
+      formats
+      locale
+    }
+    has_more
+  }
+}
+```
+
+```json Variables
+{
+  "id": "obj_1a2B3c"
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "documentTemplateVersions": {
+      "data": [
+        {
+          "id": "dtpl_1a2B3c",
+          "object": "document_template",
+          "name": "Example",
+          "type": "example",
+          "status": "draft",
+          "livemode": true,
+          "created": 1791302400,
+          "updated": 1791302400,
+          "slug": "example",
+          "version": 3,
+          "related_object": "shipment",
+          "engine": "liquid",
+          "source": "api",
+          "page": {
+            "size": "4x6",
+            "orientation": "portrait",
+            "margins_mm": 1.5,
+            "dpi": 2
+          },
+          "formats": [
+            "pdf"
+          ],
+          "locale": "example"
+        }
+      ],
+      "has_more": true
+    }
+  }
+}
+```
+
+</ResponseExample>

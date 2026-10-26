@@ -1,0 +1,202 @@
+---
+title: "createAccount"
+description: "Create a child account"
+---
+
+`mutation` · Module: **Accounts** · Requires `accounts:write`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `input` | `AccountCreate` | The fields for this operation. |
+
+### `AccountCreate` fields
+
+| Field | Type |
+|---|---|
+| `type` | `AccountCreateType` |
+| `profile` | `JSON` |
+| `settings` | `JSON` |
+| `modules` | `[String!]` |
+| `user_metadata` | `UserMetadataInput` |
+
+## Returns
+
+`Account!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `AccountObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `type` | `AccountType!` |
+| `carrier` | `AccountCarrier` |
+| `status` | `AccountStatus!` |
+| `parent` | `String` |
+| `profile` | `AccountProfile` |
+| `settings` | `AccountSettings` |
+| `modules` | `[String!]` |
+| `requirements` | `AccountRequirements` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+mutation CreateAccount($input: AccountCreate!) {
+  createAccount(input: $input) {
+    id
+    object
+    type
+    status
+    livemode
+    created
+    updated
+    carrier {
+      id
+      status
+      kinds
+      visibility
+      service_area
+    }
+    parent
+    profile {
+      legal_name
+      display_name
+      contact {
+        name
+        company
+        email
+        phone
+      }
+      website
+      industry
+    }
+    settings {
+      timezone
+      currency
+      units {
+        weight
+        dimensions
+      }
+      label_format {
+        format
+        size
+        dpi
+        inline
+      }
+      default_ship_from {
+        name
+        company
+        email
+        phone
+      }
+      api_version
+    }
+    modules
+    requirements {
+      currently_due
+      pending_verification
+    }
+  }
+}
+```
+
+```json Variables
+{
+  "input": {
+    "type": "merchant",
+    "profile": {},
+    "settings": {},
+    "modules": [
+      "example"
+    ]
+  }
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "createAccount": {
+      "id": "acct_1a2B3c",
+      "object": "account",
+      "type": "merchant",
+      "status": "onboarding",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "carrier": {
+        "id": "obj_1a2B3c",
+        "status": "onboarding",
+        "kinds": [
+          "example"
+        ],
+        "visibility": "network",
+        "service_area": [
+          "example"
+        ]
+      },
+      "parent": "example",
+      "profile": {
+        "legal_name": "example",
+        "display_name": "example",
+        "contact": {
+          "name": "Example",
+          "company": "example",
+          "email": "ops@example.com",
+          "phone": "+447700900123"
+        },
+        "website": "example",
+        "industry": "example"
+      },
+      "settings": {
+        "timezone": "Europe/London",
+        "currency": "usd",
+        "units": {
+          "weight": "example",
+          "dimensions": "example"
+        },
+        "label_format": {
+          "format": "pdf",
+          "size": "4x6",
+          "dpi": "203",
+          "inline": true
+        },
+        "default_ship_from": {
+          "name": "Example",
+          "company": "example",
+          "email": "ops@example.com",
+          "phone": "+447700900123"
+        },
+        "api_version": "example"
+      },
+      "modules": [
+        "example"
+      ],
+      "requirements": {
+        "currently_due": [
+          "example"
+        ],
+        "pending_verification": [
+          "example"
+        ]
+      }
+    }
+  }
+}
+```
+
+</ResponseExample>

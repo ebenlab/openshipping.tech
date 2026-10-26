@@ -1,0 +1,176 @@
+---
+title: "markUncollectibleInvoice"
+description: "Invoice: mark_uncollectible"
+---
+
+`mutation` · Module: **Billing** · Requires `billing:write`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+
+## Returns
+
+`Invoice!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `InvoiceObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `kind` | `InvoiceKind!` |
+| `direction` | `InvoiceDirection` |
+| `status` | `InvoiceStatus!` |
+| `issuer` | `InvoiceIssuer` |
+| `recipient` | `InvoiceRecipient` |
+| `number` | `String` |
+| `issued_on` | `String` |
+| `due_on` | `String` |
+| `period` | `InvoicePeriod` |
+| `currency` | `String!` |
+| `lines` | `[InvoiceLine!]!` |
+| `totals` | `InvoiceTotals!` |
+| `reconciliation` | `InvoiceReconciliation` |
+| `source` | `InvoiceSource` |
+| `documents` | `[Document!]` |
+| `payments` | `[String!]` |
+| `external_ids` | `[InvoiceExternalIdsItem!]` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+mutation MarkUncollectibleInvoice($id: ID!) {
+  markUncollectibleInvoice(id: $id) {
+    id
+    object
+    status
+    livemode
+    created
+    updated
+    kind
+    direction
+    issuer {
+      name
+      account
+      integration
+      connection
+      tax_ids {
+        type
+        value
+        country
+      }
+    }
+    recipient {
+      name
+      account
+      integration
+      connection
+      tax_ids {
+        type
+        value
+        country
+      }
+    }
+    number
+    issued_on
+    due_on
+    period {
+      from
+      to
+    }
+    currency
+    lines {
+      id
+      kind
+      shipment
+      tracking_number
+      service
+      description
+    }
+  }
+}
+```
+
+```json Variables
+{
+  "id": "invc_1a2B3c"
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "markUncollectibleInvoice": {
+      "id": "invc_1a2B3c",
+      "object": "invoice",
+      "status": "draft",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "kind": "transport",
+      "direction": "payable",
+      "issuer": {
+        "name": "Example",
+        "account": "acct_ada",
+        "integration": "example",
+        "connection": "conn_9f8e",
+        "tax_ids": [
+          {
+            "type": "eori",
+            "value": "example",
+            "country": "GB"
+          }
+        ]
+      },
+      "recipient": {
+        "name": "Example",
+        "account": "acct_ada",
+        "integration": "example",
+        "connection": "conn_9f8e",
+        "tax_ids": [
+          {
+            "type": "eori",
+            "value": "example",
+            "country": "GB"
+          }
+        ]
+      },
+      "number": "SEAL-00918",
+      "issued_on": "2026-10-07",
+      "due_on": "2026-10-07",
+      "period": {
+        "from": "2026-10-07",
+        "to": "2026-10-07"
+      },
+      "currency": "usd",
+      "lines": [
+        {
+          "id": "obj_1a2B3c",
+          "kind": "transport",
+          "shipment": "shp_1Q2w3E4r5T6y",
+          "tracking_number": "1Z999AA10123456784",
+          "service": "dhl_express_worldwide",
+          "description": "Example description"
+        }
+      ]
+    }
+  }
+}
+```
+
+</ResponseExample>

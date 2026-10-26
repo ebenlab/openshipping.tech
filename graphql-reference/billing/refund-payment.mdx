@@ -1,0 +1,102 @@
+---
+title: "refundPayment"
+description: "Refund a payment"
+---
+
+`mutation` · Module: **Billing** · Requires `billing:write` · `Idempotency-Key` header required
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+| `input` | `RefundPaymentInput` | The fields for this operation. |
+
+### `RefundPaymentInput` fields
+
+| Field | Type |
+|---|---|
+| `amount` | `MoneyInput` |
+
+## Returns
+
+`Refund!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `RefundObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `payment` | `String!` |
+| `amount` | `Money!` |
+| `status` | `RefundStatus!` |
+| `reason` | `String` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+mutation RefundPayment($id: ID!, $input: RefundPaymentInput!) {
+  refundPayment(id: $id, input: $input) {
+    id
+    object
+    status
+    livemode
+    created
+    updated
+    payment
+    amount {
+      amount
+      currency
+    }
+    reason
+  }
+}
+```
+
+```json Variables
+{
+  "id": "rf_1a2B3c",
+  "input": {
+    "amount": {
+      "amount": 1299,
+      "currency": "usd"
+    }
+  }
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "refundPayment": {
+      "id": "rf_1a2B3c",
+      "object": "refund",
+      "status": "pending",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "payment": "example",
+      "amount": {
+        "amount": 1299,
+        "currency": "usd"
+      },
+      "reason": "example"
+    }
+  }
+}
+```
+
+</ResponseExample>

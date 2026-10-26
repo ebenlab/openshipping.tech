@@ -1,0 +1,72 @@
+---
+title: "validateDocumentTemplate"
+description: "Validate a template"
+---
+
+`mutation` · Module: **Templates** · Requires `templates:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+
+## Returns
+
+`ValidateDocumentTemplateResult!`
+
+| Field | Type |
+|---|---|
+| `valid` | `Boolean` |
+| `errors` | `[ValidateDocumentTemplateResultErrorsItem!]` |
+| `unknown_fields` | `[String!]` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+mutation ValidateDocumentTemplate($id: ID!) {
+  validateDocumentTemplate(id: $id) {
+    valid
+    errors {
+      line
+      message
+    }
+    unknown_fields
+  }
+}
+```
+
+```json Variables
+{
+  "id": "obj_1a2B3c"
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "validateDocumentTemplate": {
+      "valid": true,
+      "errors": [
+        {
+          "line": 2,
+          "message": "example"
+        }
+      ],
+      "unknown_fields": [
+        "example"
+      ]
+    }
+  }
+}
+```
+
+</ResponseExample>

@@ -1,0 +1,116 @@
+---
+title: "resolveReconciliation"
+description: "Resolve a reconciliation line"
+---
+
+`mutation` · Module: **Billing**
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+| `lineId` | `ID!` | The line id. |
+| `input` | `ResolveReconciliationInput` | The fields for this operation. |
+
+### `ResolveReconciliationInput` fields
+
+| Field | Type |
+|---|---|
+| `action` | `ResolveReconciliationInputAction` |
+| `note` | `String` |
+
+## Returns
+
+`ReconciliationLine!`
+
+| Field | Type |
+|---|---|
+| `invoice_line` | `String!` |
+| `shipment` | `String` |
+| `result` | `ReconciliationLineResult!` |
+| `expected` | `Money` |
+| `billed` | `Money` |
+| `cause` | `String` |
+| `evidence` | `[String!]` |
+| `suggested_action` | `ReconciliationLineSuggestedAction` |
+| `resolution` | `ReconciliationLineResolution` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+mutation ResolveReconciliation($id: ID!, $lineId: ID!, $input: ResolveReconciliationInput!) {
+  resolveReconciliation(id: $id, lineId: $lineId, input: $input) {
+    invoice_line
+    shipment
+    result
+    expected {
+      amount
+      currency
+    }
+    billed {
+      amount
+      currency
+    }
+    cause
+    evidence
+    suggested_action
+    resolution {
+      action
+      note
+      at
+    }
+  }
+}
+```
+
+```json Variables
+{
+  "id": "obj_1a2B3c",
+  "lineId": "example_id",
+  "input": {
+    "action": "accept",
+    "note": "example"
+  }
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "resolveReconciliation": {
+      "invoice_line": "example",
+      "shipment": "shp_1Q2w3E4r5T6y",
+      "result": "matched",
+      "expected": {
+        "amount": 1299,
+        "currency": "usd"
+      },
+      "billed": {
+        "amount": 1299,
+        "currency": "usd"
+      },
+      "cause": "example",
+      "evidence": [
+        "example"
+      ],
+      "suggested_action": "accept",
+      "resolution": {
+        "action": "accept",
+        "note": "example",
+        "at": 2
+      }
+    }
+  }
+}
+```
+
+</ResponseExample>

@@ -1,0 +1,113 @@
+---
+title: "participants"
+description: "List participants"
+---
+
+`query` · Module: **Data Network** · Requires `data:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `kind` | `String` | Filter by kind. |
+| `status` | `String` | Filter by status. |
+| `createdGte` | `Int` | Filter by created gte. |
+| `createdLte` | `Int` | Filter by created lte. |
+| `limit` | `Int` | Page size, 1–100 (default 10). |
+| `startingAfter` | `ID` | Cursor: return objects after this ID. |
+| `endingBefore` | `ID` | Cursor: return objects before this ID. |
+
+## Returns
+
+`ParticipantList!`
+
+| Field | Type |
+|---|---|
+| `data` | `[Participant!]!` |
+| `has_more` | `Boolean` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query Participants($limit: Int) {
+  participants(limit: $limit) {
+    data {
+      id
+      object
+      status
+      livemode
+      created
+      updated
+      did
+      account
+      kinds
+      verification_methods {
+        id
+        type
+      }
+      credentials {
+        type
+        issuer
+        valid_until
+        vc
+      }
+    }
+    has_more
+  }
+}
+```
+
+```json Variables
+{
+  "limit": 10
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "participants": {
+      "data": [
+        {
+          "id": "ptc_1a2B3c",
+          "object": "participant",
+          "status": "active",
+          "livemode": true,
+          "created": 1791302400,
+          "updated": 1791302400,
+          "did": "did:web:swiftair.example",
+          "account": "acct_ada",
+          "kinds": [
+            "example"
+          ],
+          "verification_methods": [
+            {
+              "id": "obj_1a2B3c",
+              "type": "example"
+            }
+          ],
+          "credentials": [
+            {
+              "type": "example",
+              "issuer": "https://ada.okta.com/oauth2/default",
+              "valid_until": "example",
+              "vc": "example"
+            }
+          ]
+        }
+      ],
+      "has_more": true
+    }
+  }
+}
+```
+
+</ResponseExample>

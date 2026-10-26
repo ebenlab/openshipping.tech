@@ -1,0 +1,88 @@
+---
+title: "event"
+description: "Retrieve an event"
+---
+
+`query` · Module: **Events**
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+
+## Returns
+
+`Event!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `EventObject!` |
+| `livemode` | `Boolean` |
+| `created` | `Int!` |
+| `type` | `String!` |
+| `api_version` | `String` |
+| `account` | `String` |
+| `data` | `EventData!` |
+| `related` | `JSON` |
+| `request` | `EventRequest` |
+| `pending_webhooks` | `Int` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query Event($id: ID!) {
+  event(id: $id) {
+    id
+    object
+    type
+    livemode
+    created
+    api_version
+    account
+    request {
+      id
+      idempotency_key
+    }
+    pending_webhooks
+  }
+}
+```
+
+```json Variables
+{
+  "id": "obj_1a2B3c"
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "event": {
+      "id": "obj_1a2B3c",
+      "object": "event",
+      "type": "example",
+      "livemode": true,
+      "created": 1791302400,
+      "api_version": "example",
+      "account": "acct_ada",
+      "request": {
+        "id": "obj_1a2B3c",
+        "idempotency_key": "example"
+      },
+      "pending_webhooks": 2
+    }
+  }
+}
+```
+
+</ResponseExample>

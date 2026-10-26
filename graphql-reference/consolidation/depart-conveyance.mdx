@@ -1,0 +1,164 @@
+---
+title: "departConveyance"
+description: "Conveyance: depart"
+---
+
+`mutation` · Module: **Consolidation** · Requires `consolidation:write`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+| `input` | `DepartConveyanceInput` | The fields for this operation. |
+
+### `DepartConveyanceInput` fields
+
+| Field | Type |
+|---|---|
+| `at` | `String` |
+
+## Returns
+
+`Conveyance!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `ConveyanceObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `mode` | `ConveyanceMode!` |
+| `route_run` | `String` |
+| `leg` | `String` |
+| `vehicle` | `String` |
+| `operator` | `String!` |
+| `identifiers` | `ConveyanceIdentifiers` |
+| `departure` | `ConveyanceDeparture` |
+| `arrival` | `ConveyanceArrival` |
+| `status` | `ConveyanceStatus!` |
+| `load` | `[ConveyanceLoadItem!]` |
+| `manifests` | `[ConveyanceManifestsItem!]` |
+| `capacity` | `ConveyanceCapacity` |
+| `used` | `ConveyanceUsed` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+mutation DepartConveyance($id: ID!, $input: DepartConveyanceInput!) {
+  departConveyance(id: $id, input: $input) {
+    id
+    object
+    status
+    livemode
+    created
+    updated
+    mode
+    route_run
+    leg
+    vehicle
+    operator
+    identifiers {
+      flight_number
+      voyage_number
+      imo_number
+      trip_number
+    }
+    departure {
+      location
+      unlocode
+      scheduled
+      actual
+    }
+    arrival {
+      location
+      unlocode
+      scheduled
+      estimated
+      actual
+    }
+    load {
+      consolidation
+      position
+    }
+    manifests {
+      type
+      document
+    }
+  }
+}
+```
+
+```json Variables
+{
+  "id": "cnv_1a2B3c",
+  "input": {
+    "at": "example"
+  }
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "departConveyance": {
+      "id": "cnv_1a2B3c",
+      "object": "conveyance",
+      "status": "planned",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "mode": "air",
+      "route_run": "example",
+      "leg": "example",
+      "vehicle": "veh_van07",
+      "operator": "example",
+      "identifiers": {
+        "flight_number": "SW123",
+        "voyage_number": "example",
+        "imo_number": "example",
+        "trip_number": "example"
+      },
+      "departure": {
+        "location": "loc_lon_a12_03_b",
+        "unlocode": "example",
+        "scheduled": "example",
+        "actual": "example"
+      },
+      "arrival": {
+        "location": "loc_lon_a12_03_b",
+        "unlocode": "example",
+        "scheduled": "example",
+        "estimated": "example",
+        "actual": "example"
+      },
+      "load": [
+        {
+          "consolidation": "csl_gay_7781",
+          "position": "example"
+        }
+      ],
+      "manifests": [
+        {
+          "type": "example",
+          "document": "example"
+        }
+      ]
+    }
+  }
+}
+```
+
+</ResponseExample>

@@ -1,0 +1,142 @@
+---
+title: "createApp"
+description: "Register a carrier OAuth app"
+---
+
+`mutation` · Module: **Apps** · Requires `connections:write`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `input` | `AppCreate` | The fields for this operation. |
+
+### `AppCreate` fields
+
+| Field | Type |
+|---|---|
+| `carrier` | `String` |
+| `issuer` | `String` |
+| `name` | `String` |
+| `client_id` | `String` |
+| `client_secret` | `String` |
+| `scopes` | `[String!]` |
+| `redirect_uris` | `[String!]` |
+| `visibility` | `AppCreateVisibility` |
+| `registration` | `AppCreateRegistration` |
+| `initial_access_token` | `String` |
+| `user_metadata` | `UserMetadataInput` |
+
+## Returns
+
+`App!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `AppObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `carrier` | `String!` |
+| `name` | `String` |
+| `client_id` | `String!` |
+| `client_secret` | `String` |
+| `client_secret_preview` | `String` |
+| `client_secret_expires_at` | `Int` |
+| `redirect_uris` | `[String!]` |
+| `scopes` | `[String!]` |
+| `issuer` | `String` |
+| `openid` | `Boolean` |
+| `token_endpoint_auth_method` | `AppTokenEndpointAuthMethod` |
+| `pkce` | `AppPkce` |
+| `registration` | `AppRegistration!` |
+| `visibility` | `AppVisibility` |
+| `status` | `AppStatus` |
+| `connection_count` | `Int` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+mutation CreateApp($input: AppCreate!) {
+  createApp(input: $input) {
+    id
+    object
+    name
+    status
+    livemode
+    created
+    updated
+    carrier
+    client_id
+    client_secret
+    client_secret_preview
+    client_secret_expires_at
+    redirect_uris
+    scopes
+    issuer
+    openid
+  }
+}
+```
+
+```json Variables
+{
+  "input": {
+    "carrier": "dhl_express",
+    "issuer": "https://ada.okta.com/oauth2/default",
+    "name": "Example",
+    "client_id": "0oa1b2c3",
+    "client_secret": "example",
+    "scopes": [
+      "example"
+    ],
+    "redirect_uris": [
+      "example"
+    ],
+    "visibility": "private"
+  }
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "createApp": {
+      "id": "app_1a2B3c",
+      "object": "app",
+      "name": "Example",
+      "status": "active",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "carrier": "dhl_express",
+      "client_id": "0oa1b2c3",
+      "client_secret": "example",
+      "client_secret_preview": "example",
+      "client_secret_expires_at": 1791302400,
+      "redirect_uris": [
+        "example"
+      ],
+      "scopes": [
+        "example"
+      ],
+      "issuer": "https://ada.okta.com/oauth2/default",
+      "openid": true
+    }
+  }
+}
+```
+
+</ResponseExample>

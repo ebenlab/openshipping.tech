@@ -1,0 +1,94 @@
+---
+title: "files"
+description: "List files"
+---
+
+`query` · Module: **Files** · Requires `documents:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `purpose` | `String` | Filter by purpose. |
+| `createdGte` | `Int` | Filter by created gte. |
+| `createdLte` | `Int` | Filter by created lte. |
+| `limit` | `Int` | Page size, 1–100 (default 10). |
+| `startingAfter` | `ID` | Cursor: return objects after this ID. |
+| `endingBefore` | `ID` | Cursor: return objects before this ID. |
+
+## Returns
+
+`FileList!`
+
+| Field | Type |
+|---|---|
+| `data` | `[File!]!` |
+| `has_more` | `Boolean` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query Files($limit: Int) {
+  files(limit: $limit) {
+    data {
+      id
+      object
+      livemode
+      created
+      updated
+      purpose
+      filename
+      content_type
+      size
+      sha256
+      url
+      url_expires_at
+      expires_at
+    }
+    has_more
+  }
+}
+```
+
+```json Variables
+{
+  "limit": 10
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "files": {
+      "data": [
+        {
+          "id": "file_1a2B3c",
+          "object": "file",
+          "livemode": true,
+          "created": 1791302400,
+          "updated": 1791302400,
+          "purpose": "customs_document",
+          "filename": "example",
+          "content_type": "example",
+          "size": 2,
+          "sha256": "example",
+          "url": "https://example.com/resource",
+          "url_expires_at": 1791302400,
+          "expires_at": 1791302400
+        }
+      ],
+      "has_more": true
+    }
+  }
+}
+```
+
+</ResponseExample>

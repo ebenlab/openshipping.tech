@@ -1,0 +1,154 @@
+---
+title: "labelSpec"
+description: "Retrieve a LabelSpec"
+---
+
+`query` · Module: **Templates** · Requires `templates:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+
+## Returns
+
+`LabelSpec!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `LabelSpecObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `owner` | `String` |
+| `carrier` | `String!` |
+| `template` | `String!` |
+| `services` | `[String!]` |
+| `sizes` | `[String!]` |
+| `dpi` | `[Int!]` |
+| `required_fields` | `[String!]` |
+| `barcodes` | `[LabelSpecBarcodesItem!]` |
+| `zones` | `[LabelSpecZonesItem!]` |
+| `tracking_numbers` | `LabelSpecTrackingNumbers` |
+| `certification` | `LabelSpecCertification` |
+| `version` | `Int` |
+| `status` | `LabelSpecStatus!` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query LabelSpec($id: ID!) {
+  labelSpec(id: $id) {
+    id
+    object
+    status
+    livemode
+    created
+    updated
+    owner
+    carrier
+    template
+    services
+    sizes
+    dpi
+    required_fields
+    barcodes {
+      role
+      symbology
+      payload
+      payload_schema
+      min_module_width_mm
+      quiet_zone_mm
+    }
+    zones {
+      name
+      x_mm
+      y_mm
+      w_mm
+      h_mm
+      required
+    }
+    tracking_numbers {
+      format
+      allocation
+      check_digit
+    }
+  }
+}
+```
+
+```json Variables
+{
+  "id": "lspec_1a2B3c"
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "labelSpec": {
+      "id": "lspec_1a2B3c",
+      "object": "label",
+      "status": "draft",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "owner": "acct_ada",
+      "carrier": "dhl_express",
+      "template": "dtpl_packslip_v2",
+      "services": [
+        "example"
+      ],
+      "sizes": [
+        "example"
+      ],
+      "dpi": [
+        2
+      ],
+      "required_fields": [
+        "example"
+      ],
+      "barcodes": [
+        {
+          "role": "example",
+          "symbology": "example",
+          "payload": "example",
+          "payload_schema": "example",
+          "min_module_width_mm": 1.5,
+          "quiet_zone_mm": 1.5
+        }
+      ],
+      "zones": [
+        {
+          "name": "Example",
+          "x_mm": 1.5,
+          "y_mm": 1.5,
+          "w_mm": 1.5,
+          "h_mm": 1.5,
+          "required": true
+        }
+      ],
+      "tracking_numbers": {
+        "format": "pdf",
+        "allocation": "range",
+        "check_digit": "example"
+      }
+    }
+  }
+}
+```
+
+</ResponseExample>

@@ -1,0 +1,136 @@
+---
+title: "createDocumentJob"
+description: "Create a document job"
+---
+
+`mutation` · Module: **Templates** · Requires `templates:write`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `input` | `DocumentJobCreate` | The fields for this operation. |
+
+### `DocumentJobCreate` fields
+
+| Field | Type |
+|---|---|
+| `template` | `String` |
+| `type` | `String` |
+| `objects` | `DocumentJobCreateObjectsInput` |
+| `format` | `String` |
+| `output` | `DocumentJobCreateOutput` |
+| `attach` | `Boolean` |
+| `sort` | `String` |
+
+## Returns
+
+`DocumentJob!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `DocumentJobObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `template` | `String` |
+| `type` | `String` |
+| `status` | `DocumentJobStatus!` |
+| `counts` | `DocumentJobCounts` |
+| `output` | `DocumentJobOutput!` |
+| `result_file` | `String` |
+| `errors` | `[DocumentJobErrorsItem!]` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+mutation CreateDocumentJob($input: DocumentJobCreate!) {
+  createDocumentJob(input: $input) {
+    id
+    object
+    type
+    status
+    livemode
+    created
+    updated
+    template
+    counts {
+      total
+      succeeded
+      failed
+    }
+    output
+    result_file
+    errors {
+      object
+      code
+      message
+    }
+  }
+}
+```
+
+```json Variables
+{
+  "input": {
+    "template": "dtpl_packslip_v2",
+    "type": "example",
+    "objects": {
+      "type": "example",
+      "ids": [
+        "example"
+      ],
+      "query": "example"
+    },
+    "format": "pdf",
+    "output": "merged",
+    "attach": true,
+    "sort": "example"
+  }
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "createDocumentJob": {
+      "id": "djob_1a2B3c",
+      "object": "document_job",
+      "type": "example",
+      "status": "processing",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "template": "dtpl_packslip_v2",
+      "counts": {
+        "total": 1299,
+        "succeeded": 2,
+        "failed": 2
+      },
+      "output": "merged",
+      "result_file": "example",
+      "errors": [
+        {
+          "object": "document_job_errors_item",
+          "code": "dhl_express_worldwide",
+          "message": "example"
+        }
+      ]
+    }
+  }
+}
+```
+
+</ResponseExample>

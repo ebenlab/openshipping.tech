@@ -1,0 +1,151 @@
+---
+title: "conveyances"
+description: "List conveyances"
+---
+
+`query` · Module: **Consolidation** · Requires `consolidation:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `mode` | `String` | Filter by mode. |
+| `status` | `String` | Filter by status. |
+| `identifiersFlightNumber` | `String` | Filter by identifiers.flight number. |
+| `operator` | `String` | Filter by operator. |
+| `createdGte` | `Int` | Filter by created gte. |
+| `createdLte` | `Int` | Filter by created lte. |
+| `limit` | `Int` | Page size, 1–100 (default 10). |
+| `startingAfter` | `ID` | Cursor: return objects after this ID. |
+| `endingBefore` | `ID` | Cursor: return objects before this ID. |
+
+## Returns
+
+`ConveyanceList!`
+
+| Field | Type |
+|---|---|
+| `data` | `[Conveyance!]!` |
+| `has_more` | `Boolean` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query Conveyances($limit: Int) {
+  conveyances(limit: $limit) {
+    data {
+      id
+      object
+      status
+      livemode
+      created
+      updated
+      mode
+      route_run
+      leg
+      vehicle
+      operator
+      identifiers {
+        flight_number
+        voyage_number
+        imo_number
+        trip_number
+      }
+      departure {
+        location
+        unlocode
+        scheduled
+        actual
+      }
+      arrival {
+        location
+        unlocode
+        scheduled
+        estimated
+        actual
+      }
+      load {
+        consolidation
+        position
+      }
+      manifests {
+        type
+        document
+      }
+    }
+    has_more
+  }
+}
+```
+
+```json Variables
+{
+  "limit": 10
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "conveyances": {
+      "data": [
+        {
+          "id": "cnv_1a2B3c",
+          "object": "conveyance",
+          "status": "planned",
+          "livemode": true,
+          "created": 1791302400,
+          "updated": 1791302400,
+          "mode": "air",
+          "route_run": "example",
+          "leg": "example",
+          "vehicle": "veh_van07",
+          "operator": "example",
+          "identifiers": {
+            "flight_number": "SW123",
+            "voyage_number": "example",
+            "imo_number": "example",
+            "trip_number": "example"
+          },
+          "departure": {
+            "location": "loc_lon_a12_03_b",
+            "unlocode": "example",
+            "scheduled": "example",
+            "actual": "example"
+          },
+          "arrival": {
+            "location": "loc_lon_a12_03_b",
+            "unlocode": "example",
+            "scheduled": "example",
+            "estimated": "example",
+            "actual": "example"
+          },
+          "load": [
+            {
+              "consolidation": "csl_gay_7781",
+              "position": "example"
+            }
+          ],
+          "manifests": [
+            {
+              "type": "example",
+              "document": "example"
+            }
+          ]
+        }
+      ],
+      "has_more": true
+    }
+  }
+}
+```
+
+</ResponseExample>

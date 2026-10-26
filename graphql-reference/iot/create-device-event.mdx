@@ -1,0 +1,90 @@
+---
+title: "createDeviceEvent"
+description: "Ingest device events"
+---
+
+`mutation` · Module: **IoT** · Requires `iot:write`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `input` | `CreateDeviceEventInput` | The fields for this operation. |
+
+### `CreateDeviceEventInput` fields
+
+| Field | Type |
+|---|---|
+| `events` | `[DeviceEventInput!]` |
+
+## Returns
+
+`CreateDeviceEventResult!`
+
+| Field | Type |
+|---|---|
+| `accepted` | `Int` |
+| `rejected` | `Int` |
+| `errors` | `[CreateDeviceEventResultErrorsItem!]` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+mutation CreateDeviceEvent($input: CreateDeviceEventInput!) {
+  createDeviceEvent(input: $input) {
+    accepted
+    rejected
+    errors {
+      code
+      index
+      message
+    }
+  }
+}
+```
+
+```json Variables
+{
+  "input": {
+    "events": [
+      {
+        "device": "example",
+        "type": "scan",
+        "at": "example",
+        "barcode": {
+          "symbology": "example",
+          "value": "example"
+        }
+      }
+    ]
+  }
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "createDeviceEvent": {
+      "accepted": 2,
+      "rejected": 2,
+      "errors": [
+        {
+          "code": "dhl_express_worldwide",
+          "index": 2,
+          "message": "example"
+        }
+      ]
+    }
+  }
+}
+```
+
+</ResponseExample>

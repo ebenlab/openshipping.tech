@@ -1,0 +1,77 @@
+---
+title: "searchShipments"
+description: "Search shipments"
+---
+
+`query` · Module: **Shipments** · Requires `shipments:read`
+
+## Arguments
+
+None.
+
+## Returns
+
+`SearchShipmentsResult!`
+
+| Field | Type |
+|---|---|
+| `object` | `SearchShipmentsResultObject!` |
+| `has_more` | `Boolean!` |
+| `next_page` | `String` |
+| `data` | `[Shipment!]!` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query SearchShipments {
+  searchShipments {
+    object
+    has_more
+    next_page
+    data {
+      id
+      object
+      status
+      livemode
+      created
+      updated
+    }
+  }
+}
+```
+
+```json Variables
+{}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "searchShipments": {
+      "object": "search_shipments_result",
+      "has_more": true,
+      "next_page": "example",
+      "data": [
+        {
+          "id": "shp_1a2B3c",
+          "object": "shipment",
+          "status": "draft",
+          "livemode": true,
+          "created": 1791302400,
+          "updated": 1791302400
+        }
+      ]
+    }
+  }
+}
+```
+
+</ResponseExample>

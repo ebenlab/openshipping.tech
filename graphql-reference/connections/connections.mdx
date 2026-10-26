@@ -1,0 +1,124 @@
+---
+title: "connections"
+description: "List connections"
+---
+
+`query` · Module: **Connections** · Requires `connections:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `carrier` | `String` | Filter by carrier. |
+| `method` | `String` | Filter by method. |
+| `status` | `String` | Filter by status. |
+| `ownership` | `String` | Filter by ownership. |
+| `default` | `Boolean` | Filter by default. |
+| `createdGte` | `Int` | Filter by created gte. |
+| `createdLte` | `Int` | Filter by created lte. |
+| `limit` | `Int` | Page size, 1–100 (default 10). |
+| `startingAfter` | `ID` | Cursor: return objects after this ID. |
+| `endingBefore` | `ID` | Cursor: return objects before this ID. |
+
+## Returns
+
+`ConnectionList!`
+
+| Field | Type |
+|---|---|
+| `data` | `[Connection!]!` |
+| `has_more` | `Boolean` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query Connections($limit: Int) {
+  connections(limit: $limit) {
+    data {
+      id
+      object
+      status
+      livemode
+      created
+      updated
+      integration
+      interfaces
+      carrier
+      method
+      display_name
+      account_number
+      default
+      capabilities
+      oauth {
+        status
+        app
+        issuer
+        subject
+        scopes
+        access_token_expires_at
+      }
+      ownership
+    }
+    has_more
+  }
+}
+```
+
+```json Variables
+{
+  "limit": 10
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "connections": {
+      "data": [
+        {
+          "id": "conn_1a2B3c",
+          "object": "connection",
+          "status": "active",
+          "livemode": true,
+          "created": 1791302400,
+          "updated": 1791302400,
+          "integration": "example",
+          "interfaces": [
+            "example"
+          ],
+          "carrier": "dhl_express",
+          "method": "credentials",
+          "display_name": "example",
+          "account_number": "example",
+          "default": true,
+          "capabilities": [
+            "example"
+          ],
+          "oauth": {
+            "status": "valid",
+            "app": "example",
+            "issuer": "https://ada.okta.com/oauth2/default",
+            "subject": "example",
+            "scopes": [
+              "example"
+            ],
+            "access_token_expires_at": 1791302400
+          },
+          "ownership": "account"
+        }
+      ],
+      "has_more": true
+    }
+  }
+}
+```
+
+</ResponseExample>

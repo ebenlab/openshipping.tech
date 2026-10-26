@@ -1,0 +1,106 @@
+---
+title: "option"
+description: "Retrieve a CatalogOption"
+---
+
+`query` · Module: **Catalog** · Requires `catalog:read`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+
+## Returns
+
+`CatalogOption!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `CatalogOptionObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `key` | `String!` |
+| `standardized` | `Boolean` |
+| `carrier_code` | `String` |
+| `name` | `String` |
+| `description` | `String` |
+| `schema` | `JsonSchema!` |
+| `conflicts_with` | `[String!]` |
+| `requires` | `[String!]` |
+| `surcharge` | `String` |
+| `status` | `CatalogOptionStatus!` |
+| `version` | `Int` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+query Option($id: ID!) {
+  option(id: $id) {
+    id
+    object
+    name
+    status
+    livemode
+    created
+    updated
+    key
+    standardized
+    carrier_code
+    description
+    conflicts_with
+    requires
+    surcharge
+    version
+  }
+}
+```
+
+```json Variables
+{
+  "id": "opt_1a2B3c"
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "option": {
+      "id": "opt_1a2B3c",
+      "object": "option",
+      "name": "Example",
+      "status": "draft",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "key": "signature",
+      "standardized": true,
+      "carrier_code": "EXPRESS_WORLDWIDE",
+      "description": "Example description",
+      "conflicts_with": [
+        "example"
+      ],
+      "requires": [
+        "example"
+      ],
+      "surcharge": "example",
+      "version": 3
+    }
+  }
+}
+```
+
+</ResponseExample>

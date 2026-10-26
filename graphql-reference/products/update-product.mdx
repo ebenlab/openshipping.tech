@@ -1,0 +1,172 @@
+---
+title: "updateProduct"
+description: "Update a Product"
+---
+
+`mutation` · Module: **Products** · Requires `products:write`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+| `input` | `ProductInput` | The fields for this operation. |
+
+### `ProductInput` fields
+
+| Field | Type |
+|---|---|
+| `status` | `ProductInputStatus` |
+| `sku` | `String` |
+| `title` | `String` |
+| `description` | `String` |
+| `variant_of` | `String` |
+| `options` | `JSON` |
+| `category` | `String` |
+| `brand` | `String` |
+| `material` | `String` |
+| `origin_country` | `String` |
+| `manufacturer` | `ProductInputManufacturerInput` |
+| `unit_value` | `MoneyInput` |
+| `unit_net_weight` | `WeightInput` |
+| `unit_gross_weight` | `WeightInput` |
+| `unit_dimensions` | `DimensionsInput` |
+| `hs_codes` | `ProductInputHsCodesInput` |
+| `classification` | `ProductInputClassificationInput` |
+| `compliance` | `ItemComplianceInput` |
+| `dangerous_goods` | `DangerousGoodsInput` |
+| `barcodes` | `[ProductInputBarcodesItemInput!]` |
+| `product_url` | `String` |
+| `image_url` | `String` |
+| `external_ids` | `[ProductInputExternalIdsItemInput!]` |
+| `user_metadata` | `UserMetadataInput` |
+
+## Returns
+
+`Product!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `ProductObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `status` | `ProductStatus!` |
+| `sku` | `String!` |
+| `title` | `String` |
+| `description` | `String` |
+| `variant_of` | `String` |
+| `options` | `JSON` |
+| `category` | `String` |
+| `brand` | `String` |
+| `material` | `String` |
+| `origin_country` | `String` |
+| `manufacturer` | `ProductManufacturer` |
+| `unit_value` | `Money` |
+| `unit_net_weight` | `Weight` |
+| `unit_gross_weight` | `Weight` |
+| `unit_dimensions` | `Dimensions` |
+| `hs_codes` | `ProductHsCodes` |
+| `classification` | `ProductClassification` |
+| `compliance` | `ItemCompliance` |
+| `dangerous_goods` | `DangerousGoods` |
+| `barcodes` | `[ProductBarcodesItem!]` |
+| `product_url` | `String` |
+| `image_url` | `String` |
+| `external_ids` | `[ProductExternalIdsItem!]` |
+| `restrictions` | `[ProductRestrictionsItem!]` |
+| `version` | `Int` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+mutation UpdateProduct($id: ID!, $input: ProductInput!) {
+  updateProduct(id: $id, input: $input) {
+    id
+    object
+    status
+    livemode
+    created
+    updated
+    sku
+    title
+    description
+    variant_of
+    category
+    brand
+    material
+    origin_country
+    manufacturer {
+      name
+      country
+      mid
+    }
+    unit_value {
+      amount
+      currency
+    }
+  }
+}
+```
+
+```json Variables
+{
+  "id": "prod_1a2B3c",
+  "input": {
+    "status": "active",
+    "sku": "TS-RED-M",
+    "title": "Example",
+    "description": "Example description",
+    "variant_of": "example",
+    "options": {},
+    "category": "example",
+    "brand": "example"
+  }
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "updateProduct": {
+      "id": "prod_1a2B3c",
+      "object": "product",
+      "status": "active",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "sku": "TS-RED-M",
+      "title": "Example",
+      "description": "Example description",
+      "variant_of": "example",
+      "category": "example",
+      "brand": "example",
+      "material": "example",
+      "origin_country": "PT",
+      "manufacturer": {
+        "name": "Example",
+        "country": "GB",
+        "mid": "example"
+      },
+      "unit_value": {
+        "amount": 1299,
+        "currency": "usd"
+      }
+    }
+  }
+}
+```
+
+</ResponseExample>

@@ -1,0 +1,178 @@
+---
+title: "updateService"
+description: "Update a CatalogService"
+---
+
+`mutation` · Module: **Catalog** · Requires `catalog:write`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+| `input` | `CatalogServiceInput` | The fields for this operation. |
+
+### `CatalogServiceInput` fields
+
+| Field | Type |
+|---|---|
+| `code` | `String` |
+| `name` | `String` |
+| `description` | `String` |
+| `level` | `ServiceLevelEnum` |
+| `carrier_code` | `String` |
+| `status` | `CatalogServiceInputStatus` |
+| `domestic` | `Boolean` |
+| `international` | `Boolean` |
+| `coverage` | `[CatalogServiceInputCoverageItemInput!]` |
+| `cutoff` | `CatalogServiceInputCutoffInput` |
+| `handover` | `[CatalogServiceInputHandoverItem!]` |
+| `limits` | `CatalogServiceInputLimitsInput` |
+| `dimensional_weight` | `CatalogServiceInputDimensionalWeightInput` |
+| `packagings` | `[String!]` |
+| `options` | `[CatalogServiceInputOptionsItemInput!]` |
+| `requires` | `[String!]` |
+| `features` | `JSON` |
+| `label` | `CatalogServiceInputLabelInput` |
+| `effective_from` | `String` |
+| `effective_until` | `String` |
+| `version` | `Int` |
+| `user_metadata` | `UserMetadataInput` |
+
+## Returns
+
+`CatalogService!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `CatalogServiceObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `code` | `String!` |
+| `name` | `String!` |
+| `description` | `String` |
+| `level` | `ServiceLevelEnum!` |
+| `carrier_code` | `String` |
+| `status` | `CatalogServiceStatus!` |
+| `domestic` | `Boolean` |
+| `international` | `Boolean` |
+| `coverage` | `[CatalogServiceCoverageItem!]` |
+| `cutoff` | `CatalogServiceCutoff` |
+| `handover` | `[CatalogServiceHandoverItem!]` |
+| `limits` | `CatalogServiceLimits` |
+| `dimensional_weight` | `CatalogServiceDimensionalWeight` |
+| `packagings` | `[String!]` |
+| `options` | `[CatalogServiceOptionsItem!]` |
+| `requires` | `[String!]` |
+| `features` | `JSON` |
+| `label` | `CatalogServiceLabel` |
+| `effective_from` | `String` |
+| `effective_until` | `String` |
+| `version` | `Int` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+mutation UpdateService($id: ID!, $input: CatalogServiceInput!) {
+  updateService(id: $id, input: $input) {
+    id
+    object
+    code
+    name
+    status
+    livemode
+    created
+    updated
+    description
+    level
+    carrier_code
+    domestic
+    international
+    coverage {
+      origin_zone
+      destination_zone
+      transit {
+        min_days
+        max_days
+        business_days
+      }
+    }
+    cutoff {
+      local_time
+      facility
+    }
+    handover
+  }
+}
+```
+
+```json Variables
+{
+  "id": "svc_1a2B3c",
+  "input": {
+    "code": "dhl_express_worldwide",
+    "name": "Example",
+    "description": "Example description",
+    "level": "same_day",
+    "carrier_code": "EXPRESS_WORLDWIDE",
+    "status": "draft",
+    "domestic": true,
+    "international": true
+  }
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "updateService": {
+      "id": "svc_1a2B3c",
+      "object": "service",
+      "code": "dhl_express_worldwide",
+      "name": "Example",
+      "status": "draft",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "description": "Example description",
+      "level": "same_day",
+      "carrier_code": "EXPRESS_WORLDWIDE",
+      "domestic": true,
+      "international": true,
+      "coverage": [
+        {
+          "origin_zone": "zone_gb_mainland",
+          "destination_zone": "zone_gb_mainland",
+          "transit": {
+            "min_days": 2,
+            "max_days": 2,
+            "business_days": true
+          }
+        }
+      ],
+      "cutoff": {
+        "local_time": "15:00",
+        "facility": "fac_lon_hub"
+      },
+      "handover": [
+        "drop_off"
+      ]
+    }
+  }
+}
+```
+
+</ResponseExample>

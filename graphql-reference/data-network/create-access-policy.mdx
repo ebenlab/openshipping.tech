@@ -1,0 +1,116 @@
+---
+title: "createAccessPolicy"
+description: "Create an access policy"
+---
+
+`mutation` · Module: **Data Network** · Requires `data:write`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `input` | `AccessPolicyInput` | The fields for this operation. |
+
+### `AccessPolicyInput` fields
+
+| Field | Type |
+|---|---|
+| `rules` | `[AccessPolicyInputRulesItemInput!]` |
+| `user_metadata` | `UserMetadataInput` |
+
+## Returns
+
+`AccessPolicy!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `AccessPolicyObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `rules` | `[AccessPolicyRulesItem!]!` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+mutation CreateAccessPolicy($input: AccessPolicyInput!) {
+  createAccessPolicy(input: $input) {
+    id
+    object
+    livemode
+    created
+    updated
+    rules {
+      role
+      objects
+      fields
+      scope
+      deny
+      require_credentials
+    }
+  }
+}
+```
+
+```json Variables
+{
+  "input": {
+    "rules": [
+      {
+        "role": "example",
+        "objects": [
+          "example"
+        ],
+        "fields": [
+          "example"
+        ],
+        "scope": "example"
+      }
+    ]
+  }
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "createAccessPolicy": {
+      "id": "pol_1a2B3c",
+      "object": "access_policy",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "rules": [
+        {
+          "role": "example",
+          "objects": [
+            "example"
+          ],
+          "fields": [
+            "example"
+          ],
+          "scope": "example",
+          "deny": true,
+          "require_credentials": [
+            "example"
+          ]
+        }
+      ]
+    }
+  }
+}
+```
+
+</ResponseExample>

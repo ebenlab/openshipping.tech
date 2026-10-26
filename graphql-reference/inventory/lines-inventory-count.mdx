@@ -1,0 +1,134 @@
+---
+title: "linesInventoryCount"
+description: "Add count lines"
+---
+
+`mutation` · Module: **Inventory** · Requires `inventory:write`
+
+## Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `id` | `ID!` | The object's ID. |
+| `input` | `LinesInventoryCountInput` | The fields for this operation. |
+
+### `LinesInventoryCountInput` fields
+
+| Field | Type |
+|---|---|
+| `counts` | `[LinesInventoryCountInputCountsItemInput!]` |
+
+## Returns
+
+`InventoryCount!`
+
+| Field | Type |
+|---|---|
+| `id` | `String!` |
+| `object` | `InventoryCountObject!` |
+| `livemode` | `Boolean!` |
+| `created` | `Int!` |
+| `updated` | `Int` |
+| `facility` | `String!` |
+| `type` | `InventoryCountType!` |
+| `blind` | `Boolean` |
+| `status` | `InventoryCountStatus!` |
+| `scope` | `InventoryCountScope` |
+| `lines` | `[InventoryCountLinesItem!]` |
+| `user_metadata` | `UserMetadata` |
+| `carrier_metadata` | `CarrierMetadata` |
+| `system_metadata` | `SystemMetadata` |
+
+## Errors
+
+Errors are returned in `errors[]`, with the REST error object in `extensions` (`type`, `code`, `param`, `request_id`), using the codes in [Conventions §9](/spec/00-conventions).
+
+<RequestExample>
+
+```graphql Request
+mutation LinesInventoryCount($id: ID!, $input: LinesInventoryCountInput!) {
+  linesInventoryCount(id: $id, input: $input) {
+    id
+    object
+    type
+    status
+    livemode
+    created
+    updated
+    facility
+    blind
+    scope {
+      locations
+      products
+      zone
+    }
+    lines {
+      location
+      product
+      lot
+      expected
+      counted
+      variance
+    }
+  }
+}
+```
+
+```json Variables
+{
+  "id": "cnt_1a2B3c",
+  "input": {
+    "counts": [
+      {
+        "location": "loc_lon_a12_03_b",
+        "product": "prod_ts_red_m",
+        "lot": "example",
+        "counted": 2
+      }
+    ]
+  }
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": {
+    "linesInventoryCount": {
+      "id": "cnt_1a2B3c",
+      "object": "inventory_count",
+      "type": "cycle",
+      "status": "open",
+      "livemode": true,
+      "created": 1791302400,
+      "updated": 1791302400,
+      "facility": "fac_lon_hub",
+      "blind": true,
+      "scope": {
+        "locations": [
+          "example"
+        ],
+        "products": [
+          "example"
+        ],
+        "zone": "zone_gb_mainland"
+      },
+      "lines": [
+        {
+          "location": "loc_lon_a12_03_b",
+          "product": "prod_ts_red_m",
+          "lot": "example",
+          "expected": 2,
+          "counted": 2,
+          "variance": 2
+        }
+      ]
+    }
+  }
+}
+```
+
+</ResponseExample>
