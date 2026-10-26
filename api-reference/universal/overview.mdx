@@ -1,0 +1,30 @@
+---
+title: "Universal mode"
+description: "The REST operations a Universal implementation exposes: 205 operations across 17 modules."
+---
+
+**Universal mode** is for multi-carrier platforms and aggregators that reach other carriers' networks through one API. This reference lists only the operations a Universal implementation exposes, following the mode profile in [Modes §2](/spec/12-modes). Switch modes from the **REST Interface** tab menu at the top of the page.
+
+| Module | In this mode | Operations | Count |
+|---|---|---|---|
+| `core` | Required | Rates, Shipments, Tracking, Events, Carriers, Batches, Test Helpers, Discovery | 32 |
+| `webhooks` | Required | Webhooks, Inbound | 11 |
+| `pickups` | Optional | Pickups, Pickup Schedules | 17 |
+| `manifests` | Optional | Manifests | 6 |
+| `documents` | Optional | Files, Document Uploads | 9 |
+| `connections` | Required | Connections | 9 |
+| `platform` | Optional | Accounts | 5 |
+| `catalog` | Required, read-only | Catalog | 1 |
+| `pricing` | Optional | GraphQL Interface only | — |
+| `trade` | Optional | Trade | 16 |
+| `products` | Optional | Products | 10 |
+| `templates` | Optional | Templates | 16 |
+| `integrations` | Required | Integrations | 14 |
+| `jobs` | Required | Jobs | 7 |
+| `inventory` | Optional | Inventory | 7 |
+| `billing` | Optional | Billing | 20 |
+| `data_network` | Optional | Data Network | 25 |
+
+Required modules are grouped first in the sidebar, optional ones after. Not part of this mode: `routes`, `fleet`, `injection`, `network`, `iot`, `consolidation`.
+
+The machine-readable file for this mode is [`/openapi/universal.yaml`](/openapi/universal.yaml). The complete document, with every module, is [`/openapi.yaml`](/openapi.yaml).

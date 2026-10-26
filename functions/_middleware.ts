@@ -1,7 +1,7 @@
 // Serves Next.js RSC payloads for client-side navigation in the Mintlify export.
 // A request with an `RSC: 1` header or an `_rsc` query parameter gets
 // `<path>/index.txt` as text/x-component; everything else is a plain static asset.
-export async function onRequest({ request, env, next }) {
+export async function onRequest({ request, env, next }: any): Promise<Response> {
   const url = new URL(request.url);
   const isRsc = request.headers.get("RSC") === "1" || url.searchParams.has("_rsc");
   if (!isRsc) {

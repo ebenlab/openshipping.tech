@@ -1,0 +1,31 @@
+---
+title: "Fleet mode"
+description: "The REST operations a Fleet implementation exposes: 183 operations across 18 modules."
+---
+
+**Fleet mode** is for operators running their own vans, trucks, aircraft, drones or vessels. This reference lists only the operations a Fleet implementation exposes, following the mode profile in [Modes §2](/spec/12-modes). Switch modes from the **REST Interface** tab menu at the top of the page.
+
+| Module | In this mode | Operations | Count |
+|---|---|---|---|
+| `core` | Required | Rates, Shipments, Tracking, Events, Carriers, Batches, Test Helpers, Discovery | 32 |
+| `webhooks` | Required | Webhooks, Inbound | 11 |
+| `pickups` | Optional | Pickups, Pickup Schedules | 17 |
+| `connections` | Optional | Connections | 9 |
+| `platform` | Optional | Accounts | 5 |
+| `catalog` | Required | Catalog | 1 |
+| `pricing` | Required | GraphQL Interface only | — |
+| `routes` | Required | Routes | 2 |
+| `fleet` | Required | GraphQL Interface only | — |
+| `injection` | Optional | Injection | 10 |
+| `products` | Optional | Products | 10 |
+| `iot` | Optional | IoT | 3 |
+| `consolidation` | Optional | Consolidation | 1 |
+| `templates` | Optional | Templates | 16 |
+| `integrations` | Optional | Integrations | 14 |
+| `jobs` | Required | Jobs | 7 |
+| `billing` | Optional | Billing | 20 |
+| `data_network` | Optional | Data Network | 25 |
+
+Required modules are grouped first in the sidebar, optional ones after. Not part of this mode: `manifests`, `documents`, `trade`, `network`, `inventory`.
+
+The machine-readable file for this mode is [`/openapi/fleet.yaml`](/openapi/fleet.yaml). The complete document, with every module, is [`/openapi.yaml`](/openapi.yaml).

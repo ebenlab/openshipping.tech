@@ -1,7 +1,7 @@
 ---
 title: "shipping.md"
 description: "The agent-facing discovery file. Implementers host it at https://{domain}/shipping.md."
-# shipping.md: the agent-facing discovery file for the Open Logistics Specification.
+# shipping.md: the agent-facing discovery file for the Open Logistics Specs.
 # An implementer hosts this file at https://{domain}/shipping.md (text/markdown; charset=utf-8).
 # The frontmatter is machine-readable. The body is written for an LLM agent to follow.
 spec: open-logistics-spec
@@ -41,7 +41,7 @@ agent_policy:
 
 # Example Shipping: shipping.md
 
-This file tells an agent how to ship with this API: get live rates, buy and void labels, book pickups, close manifests, upload customs documents, and track handling_units. It is generated from the implementer's configuration and follows the Open Logistics Specification spec, version 0.1.
+This file tells an agent how to ship with this API: get live rates, buy and void labels, book pickups, close manifests, upload customs documents, and track handling_units. It is generated from the implementer's configuration and follows Open Logistics Specs, version 0.1.
 
 If you are an agent, read this whole file before making a call. It is short on purpose.
 

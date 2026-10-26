@@ -1,0 +1,18 @@
+---
+title: "Data Network mode"
+description: "The REST operations a Data Network implementation exposes: 63 operations across 5 modules."
+---
+
+**Data Network mode** is for nodes of the shared, verifiable logistics data network. This reference lists only the operations a Data Network implementation exposes, following the mode profile in [Modes §2](/spec/12-modes). Switch modes from the **REST Interface** tab menu at the top of the page.
+
+| Module | In this mode | Operations | Count |
+|---|---|---|---|
+| `core` | Required, read-only | Rates, Shipments, Tracking, Events, Carriers, Batches, Discovery | 15 |
+| `webhooks` | Required | Webhooks, Inbound | 11 |
+| `platform` | Required | Accounts | 5 |
+| `jobs` | Required | Jobs | 7 |
+| `data_network` | Required | Data Network | 25 |
+
+Required modules are grouped first in the sidebar, optional ones after. Not part of this mode: `pickups`, `manifests`, `documents`, `connections`, `catalog`, `pricing`, `trade`, `routes`, `fleet`, `injection`, `products`, `network`, `iot`, `consolidation`, `templates`, `integrations`, `inventory`, `billing`. Core objects are a read-only replica in this mode, so only their read operations appear.
+
+The machine-readable file for this mode is [`/openapi/data-network.yaml`](/openapi/data-network.yaml). The complete document, with every module, is [`/openapi.yaml`](/openapi.yaml).

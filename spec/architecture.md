@@ -17,7 +17,7 @@ flowchart LR
         D["Ops dashboards"]
     end
     subgraph Implementer["Implementer (one or more modes)"]
-        API["Open Logistics Specification /v1"]
+        API["Open Logistics Specs /v1"]
         DISC["/shipping.md and /.well-known/shipping-configuration"]
     end
     subgraph Carriers

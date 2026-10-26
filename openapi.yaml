@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  title: Open Logistics Specification
+  title: Open Logistics Specs
   version: 0.1.0-draft
   summary: An open, carrier-agnostic shipping API specification.
   description: 'Draft 0.1 (2026-10-06). See README.md and spec/*.md for normative text; this document is the machine-readable reference. Operations

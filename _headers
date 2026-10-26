@@ -16,3 +16,6 @@
 
 /graphql/schema.graphql
   Content-Type: text/plain; charset=utf-8
+
+/openapi/*
+  Content-Type: application/yaml; charset=utf-8

@@ -1,7 +1,7 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Open Logistics Specification",
+  "name": "Open Logistics Specs",
   "description": "An open, carrier-agnostic shipping API specification for agents and developers.",
   "colors": {
     "primary": "#2f7d5f",
@@ -96,7 +96,2024 @@
       },
       {
         "tab": "REST Interface",
-        "openapi": "openapi.yaml"
+        "menu": [
+          {
+            "item": "Universal",
+            "description": "205 operations",
+            "openapi": {
+              "source": "openapi/universal.yaml",
+              "directory": "api-reference/universal"
+            },
+            "groups": [
+              {
+                "group": "Overview",
+                "pages": [
+                  "api-reference/universal/overview"
+                ]
+              },
+              {
+                "group": "Required modules",
+                "pages": [
+                  {
+                    "group": "Rates",
+                    "pages": [
+                      "POST /v1/rates",
+                      "GET /v1/rate_quotes/{id}"
+                    ]
+                  },
+                  {
+                    "group": "Shipments",
+                    "pages": [
+                      "POST /v1/shipments",
+                      "GET /v1/shipments",
+                      "GET /v1/shipments/search",
+                      "GET /v1/shipments/{id}",
+                      "POST /v1/shipments/{id}",
+                      "DELETE /v1/shipments/{id}",
+                      "POST /v1/shipments/{id}/purchase",
+                      "POST /v1/shipments/{id}/void",
+                      "POST /v1/shipments/{id}/rates",
+                      "POST /v1/shipments/{id}/return",
+                      "POST /v1/shipments/{id}/label"
+                    ]
+                  },
+                  {
+                    "group": "Tracking",
+                    "pages": [
+                      "POST /v1/trackers",
+                      "GET /v1/trackers",
+                      "GET /v1/trackers/search",
+                      "GET /v1/trackers/{id}",
+                      "POST /v1/trackers/{id}",
+                      "DELETE /v1/trackers/{id}",
+                      "POST /v1/trackers/{id}/refresh",
+                      "GET /v1/trackers/{id}/events"
+                    ]
+                  },
+                  {
+                    "group": "Webhooks",
+                    "pages": [
+                      "POST /v1/webhook_endpoints",
+                      "GET /v1/webhook_endpoints",
+                      "GET /v1/webhook_endpoints/{id}",
+                      "POST /v1/webhook_endpoints/{id}",
+                      "DELETE /v1/webhook_endpoints/{id}",
+                      "POST /v1/webhook_endpoints/{id}/rotate_secret",
+                      "POST /v1/webhook_endpoints/{id}/test"
+                    ]
+                  },
+                  {
+                    "group": "Events",
+                    "pages": [
+                      "GET /v1/events",
+                      "GET /v1/events/{id}",
+                      "GET /v1/events/{id}/deliveries",
+                      "POST /v1/events/{id}/redeliver"
+                    ]
+                  },
+                  {
+                    "group": "Inbound",
+                    "pages": [
+                      "POST /v1/inbound/{connection_id}",
+                      "POST /v1/inbound_events",
+                      "GET /v1/inbound_events",
+                      "GET /v1/inbound_events/{id}"
+                    ]
+                  },
+                  {
+                    "group": "Carriers",
+                    "pages": [
+                      "GET /v1/carriers",
+                      "GET /v1/carriers/{id}"
+                    ]
+                  },
+                  {
+                    "group": "Connections",
+                    "pages": [
+                      "POST /v1/connections",
+                      "GET /v1/connections",
+                      "GET /v1/connections/{id}",
+                      "POST /v1/connections/{id}",
+                      "DELETE /v1/connections/{id}",
+                      "POST /v1/connections/{id}/verify",
+                      "POST /v1/connect_sessions",
+                      "GET /v1/connect_sessions/{id}",
+                      "GET /v1/oauth/callback"
+                    ]
+                  },
+                  {
+                    "group": "Batches",
+                    "pages": [
+                      "POST /v1/batches",
+                      "GET /v1/batches/{id}"
+                    ]
+                  },
+                  {
+                    "group": "Test Helpers",
+                    "pages": [
+                      "POST /v1/test_helpers/trackers/{id}/advance",
+                      "POST /v1/test_helpers/shipments/{id}/charge_adjustment"
+                    ]
+                  },
+                  {
+                    "group": "Catalog",
+                    "pages": [
+                      "POST /v1/service_availability"
+                    ]
+                  },
+                  {
+                    "group": "Integrations",
+                    "pages": [
+                      "GET /v1/integrations",
+                      "GET /v1/integrations/{id}",
+                      "POST /v1/address_validations",
+                      "GET /v1/address_validations/{id}",
+                      "POST /v1/insurance_quotes",
+                      "POST /v1/coverages",
+                      "GET /v1/coverages",
+                      "GET /v1/coverages/{id}",
+                      "POST /v1/coverages/{id}/cancel",
+                      "POST /v1/claims",
+                      "GET /v1/claims",
+                      "GET /v1/claims/{id}",
+                      "POST /v1/claims/{id}",
+                      "POST /v1/claims/{id}/withdraw"
+                    ]
+                  },
+                  {
+                    "group": "Jobs",
+                    "pages": [
+                      "POST /v1/jobs",
+                      "GET /v1/jobs",
+                      "GET /v1/jobs/{id}",
+                      "POST /v1/jobs/{id}/cancel",
+                      "POST /v1/jobs/{id}/retry",
+                      "GET /v1/jobs/{id}/logs",
+                      "GET /v1/jobs/{id}/stream"
+                    ]
+                  },
+                  {
+                    "group": "Discovery",
+                    "pages": [
+                      "GET /.well-known/shipping-configuration"
+                    ]
+                  }
+                ]
+              },
+              {
+                "group": "Optional modules",
+                "pages": [
+                  {
+                    "group": "Pickups",
+                    "pages": [
+                      "POST /v1/pickups/availability",
+                      "POST /v1/pickups",
+                      "GET /v1/pickups",
+                      "GET /v1/pickups/search",
+                      "GET /v1/pickups/{id}",
+                      "POST /v1/pickups/{id}",
+                      "POST /v1/pickups/{id}/cancel"
+                    ]
+                  },
+                  {
+                    "group": "Manifests",
+                    "pages": [
+                      "POST /v1/manifests",
+                      "GET /v1/manifests",
+                      "GET /v1/manifests/{id}",
+                      "POST /v1/manifests/{id}",
+                      "POST /v1/manifests/preview",
+                      "POST /v1/manifests/{id}/reprint"
+                    ]
+                  },
+                  {
+                    "group": "Files",
+                    "pages": [
+                      "POST /v1/files",
+                      "GET /v1/files",
+                      "GET /v1/files/{id}",
+                      "DELETE /v1/files/{id}",
+                      "GET /v1/files/{id}/contents"
+                    ]
+                  },
+                  {
+                    "group": "Document Uploads",
+                    "pages": [
+                      "POST /v1/document_uploads",
+                      "GET /v1/document_uploads",
+                      "GET /v1/document_uploads/{id}",
+                      "POST /v1/document_uploads/{id}"
+                    ]
+                  },
+                  {
+                    "group": "Pickup Schedules",
+                    "pages": [
+                      "POST /v1/pickup_schedules",
+                      "GET /v1/pickup_schedules",
+                      "GET /v1/pickup_schedules/{id}",
+                      "POST /v1/pickup_schedules/{id}",
+                      "POST /v1/pickup_schedules/{id}/pause",
+                      "POST /v1/pickup_schedules/{id}/resume",
+                      "POST /v1/pickup_schedules/{id}/cancel",
+                      "POST /v1/pickup_schedules/{id}/skip",
+                      "POST /v1/pickup_schedules/{id}/add",
+                      "GET /v1/pickup_schedules/{id}/occurrences"
+                    ]
+                  },
+                  {
+                    "group": "Trade",
+                    "pages": [
+                      "POST /v1/classifications",
+                      "GET /v1/classifications",
+                      "GET /v1/classifications/{id}",
+                      "POST /v1/classifications/{id}/apply",
+                      "POST /v1/classifications/{id}/feedback",
+                      "POST /v1/compliance_screenings",
+                      "GET /v1/compliance_screenings",
+                      "GET /v1/compliance_screenings/{id}",
+                      "POST /v1/landed_costs",
+                      "GET /v1/landed_costs",
+                      "GET /v1/landed_costs/{id}",
+                      "GET /v1/tariffs/{country}/{hs_code}",
+                      "GET /v1/duty_collections",
+                      "GET /v1/duty_collections/{id}",
+                      "POST /v1/duty_collections/{id}/pay",
+                      "POST /v1/duty_collections/export"
+                    ]
+                  },
+                  {
+                    "group": "Accounts",
+                    "pages": [
+                      "POST /v1/accounts",
+                      "GET /v1/accounts",
+                      "GET /v1/accounts/{id}",
+                      "POST /v1/accounts/{id}",
+                      "GET /v1/account"
+                    ]
+                  },
+                  {
+                    "group": "Products",
+                    "pages": [
+                      "POST /v1/products",
+                      "GET /v1/products",
+                      "GET /v1/products/search",
+                      "GET /v1/products/{id}",
+                      "POST /v1/products/{id}",
+                      "DELETE /v1/products/{id}",
+                      "POST /v1/products/upsert",
+                      "POST /v1/products/import",
+                      "POST /v1/products/{id}/archive",
+                      "POST /v1/products/{id}/unarchive"
+                    ]
+                  },
+                  {
+                    "group": "Data Network",
+                    "pages": [
+                      "POST /v1/participants",
+                      "GET /v1/participants",
+                      "GET /v1/participants/{id}",
+                      "POST /v1/participants/{id}/credentials",
+                      "POST /v1/participants/{id}/rotate_keys",
+                      "POST /v1/records",
+                      "GET /v1/records",
+                      "POST /v1/records/query",
+                      "POST /v1/records/verify",
+                      "GET /v1/records/feed",
+                      "POST /v1/records/erase",
+                      "GET /v1/anchors/{id}",
+                      "POST /v1/access_grants",
+                      "GET /v1/access_grants",
+                      "GET /v1/access_grants/{id}",
+                      "POST /v1/access_grants/{id}/revoke",
+                      "POST /v1/attestations",
+                      "GET /v1/attestations",
+                      "GET /v1/attestations/{id}",
+                      "POST /v1/datasets",
+                      "GET /v1/timelines/{shipment_id}",
+                      "GET /v1/timelines/{shipment_id}/events",
+                      "POST /v1/timelines/resolve",
+                      "POST /v1/identifier_links",
+                      "GET /v1/milestone_definitions"
+                    ]
+                  },
+                  {
+                    "group": "Templates",
+                    "pages": [
+                      "POST /v1/documents/generate",
+                      "GET /v1/documents",
+                      "GET /v1/documents/{id}",
+                      "DELETE /v1/documents/{id}",
+                      "POST /v1/document_jobs",
+                      "GET /v1/document_jobs",
+                      "GET /v1/document_jobs/{id}",
+                      "GET /v1/label_specs",
+                      "GET /v1/label_specs/{id}",
+                      "POST /v1/label_specs/{id}/certify",
+                      "POST /v1/label_specs/{id}/tracking_ranges",
+                      "POST /v1/documents/ingest",
+                      "GET /v1/document_ingestions",
+                      "GET /v1/document_ingestions/{id}",
+                      "POST /v1/document_ingestions/{id}/apply",
+                      "POST /v1/document_ingestions/{id}/reject"
+                    ]
+                  },
+                  {
+                    "group": "Billing",
+                    "pages": [
+                      "GET /v1/invoices",
+                      "GET /v1/invoices/{id}",
+                      "POST /v1/invoices/{id}/dispute",
+                      "POST /v1/invoices/{id}/pay",
+                      "GET /v1/invoices/{id}/export",
+                      "GET /v1/invoices/upcoming",
+                      "POST /v1/usage_records",
+                      "GET /v1/usage_records",
+                      "GET /v1/usage_records/{id}",
+                      "POST /v1/usage_records/import",
+                      "GET /v1/usage_summaries",
+                      "GET /v1/balance",
+                      "POST /v1/balance/top_up",
+                      "GET /v1/balance_transactions",
+                      "POST /v1/payment_methods/setup",
+                      "GET /v1/payment_methods",
+                      "GET /v1/payment_methods/{id}",
+                      "DELETE /v1/payment_methods/{id}",
+                      "GET /v1/payments",
+                      "GET /v1/payments/{id}"
+                    ]
+                  },
+                  {
+                    "group": "Inventory",
+                    "pages": [
+                      "GET /v1/inventory/levels",
+                      "POST /v1/fulfillment_orders",
+                      "GET /v1/fulfillment_orders",
+                      "GET /v1/fulfillment_orders/search",
+                      "GET /v1/fulfillment_orders/{id}",
+                      "POST /v1/fulfillment_orders/{id}",
+                      "POST /v1/fulfillment_orders/{id}/cancel"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "item": "Carrier",
+            "description": "212 operations",
+            "openapi": {
+              "source": "openapi/carrier.yaml",
+              "directory": "api-reference/carrier"
+            },
+            "groups": [
+              {
+                "group": "Overview",
+                "pages": [
+                  "api-reference/carrier/overview"
+                ]
+              },
+              {
+                "group": "Required modules",
+                "pages": [
+                  {
+                    "group": "Rates",
+                    "pages": [
+                      "POST /v1/rates",
+                      "GET /v1/rate_quotes/{id}"
+                    ]
+                  },
+                  {
+                    "group": "Shipments",
+                    "pages": [
+                      "POST /v1/shipments",
+                      "GET /v1/shipments",
+                      "GET /v1/shipments/search",
+                      "GET /v1/shipments/{id}",
+                      "POST /v1/shipments/{id}",
+                      "DELETE /v1/shipments/{id}",
+                      "POST /v1/shipments/{id}/purchase",
+                      "POST /v1/shipments/{id}/void",
+                      "POST /v1/shipments/{id}/rates",
+                      "POST /v1/shipments/{id}/return",
+                      "POST /v1/shipments/{id}/label"
+                    ]
+                  },
+                  {
+                    "group": "Pickups",
+                    "pages": [
+                      "POST /v1/pickups/availability",
+                      "POST /v1/pickups",
+                      "GET /v1/pickups",
+                      "GET /v1/pickups/search",
+                      "GET /v1/pickups/{id}",
+                      "POST /v1/pickups/{id}",
+                      "POST /v1/pickups/{id}/cancel"
+                    ]
+                  },
+                  {
+                    "group": "Tracking",
+                    "pages": [
+                      "POST /v1/trackers",
+                      "GET /v1/trackers",
+                      "GET /v1/trackers/search",
+                      "GET /v1/trackers/{id}",
+                      "POST /v1/trackers/{id}",
+                      "DELETE /v1/trackers/{id}",
+                      "POST /v1/trackers/{id}/refresh",
+                      "GET /v1/trackers/{id}/events"
+                    ]
+                  },
+                  {
+                    "group": "Webhooks",
+                    "pages": [
+                      "POST /v1/webhook_endpoints",
+                      "GET /v1/webhook_endpoints",
+                      "GET /v1/webhook_endpoints/{id}",
+                      "POST /v1/webhook_endpoints/{id}",
+                      "DELETE /v1/webhook_endpoints/{id}",
+                      "POST /v1/webhook_endpoints/{id}/rotate_secret",
+                      "POST /v1/webhook_endpoints/{id}/test"
+                    ]
+                  },
+                  {
+                    "group": "Events",
+                    "pages": [
+                      "GET /v1/events",
+                      "GET /v1/events/{id}",
+                      "GET /v1/events/{id}/deliveries",
+                      "POST /v1/events/{id}/redeliver"
+                    ]
+                  },
+                  {
+                    "group": "Inbound",
+                    "pages": [
+                      "POST /v1/inbound/{connection_id}",
+                      "POST /v1/inbound_events",
+                      "GET /v1/inbound_events",
+                      "GET /v1/inbound_events/{id}"
+                    ]
+                  },
+                  {
+                    "group": "Carriers",
+                    "pages": [
+                      "GET /v1/carriers",
+                      "GET /v1/carriers/{id}"
+                    ]
+                  },
+                  {
+                    "group": "Batches",
+                    "pages": [
+                      "POST /v1/batches",
+                      "GET /v1/batches/{id}"
+                    ]
+                  },
+                  {
+                    "group": "Test Helpers",
+                    "pages": [
+                      "POST /v1/test_helpers/trackers/{id}/advance",
+                      "POST /v1/test_helpers/shipments/{id}/charge_adjustment"
+                    ]
+                  },
+                  {
+                    "group": "Pickup Schedules",
+                    "pages": [
+                      "POST /v1/pickup_schedules",
+                      "GET /v1/pickup_schedules",
+                      "GET /v1/pickup_schedules/{id}",
+                      "POST /v1/pickup_schedules/{id}",
+                      "POST /v1/pickup_schedules/{id}/pause",
+                      "POST /v1/pickup_schedules/{id}/resume",
+                      "POST /v1/pickup_schedules/{id}/cancel",
+                      "POST /v1/pickup_schedules/{id}/skip",
+                      "POST /v1/pickup_schedules/{id}/add",
+                      "GET /v1/pickup_schedules/{id}/occurrences"
+                    ]
+                  },
+                  {
+                    "group": "Trade",
+                    "pages": [
+                      "POST /v1/classifications",
+                      "GET /v1/classifications",
+                      "GET /v1/classifications/{id}",
+                      "POST /v1/classifications/{id}/apply",
+                      "POST /v1/classifications/{id}/feedback",
+                      "POST /v1/compliance_screenings",
+                      "GET /v1/compliance_screenings",
+                      "GET /v1/compliance_screenings/{id}",
+                      "POST /v1/landed_costs",
+                      "GET /v1/landed_costs",
+                      "GET /v1/landed_costs/{id}",
+                      "GET /v1/tariffs/{country}/{hs_code}",
+                      "GET /v1/duty_collections",
+                      "GET /v1/duty_collections/{id}",
+                      "POST /v1/duty_collections/{id}/pay",
+                      "POST /v1/duty_collections/export"
+                    ]
+                  },
+                  {
+                    "group": "Catalog",
+                    "pages": [
+                      "POST /v1/service_availability"
+                    ]
+                  },
+                  {
+                    "group": "Routes",
+                    "pages": [
+                      "POST /v1/journeys/plan",
+                      "GET /v1/shipments/{id}/journey"
+                    ]
+                  },
+                  {
+                    "group": "Accounts",
+                    "pages": [
+                      "POST /v1/accounts",
+                      "GET /v1/accounts",
+                      "GET /v1/accounts/{id}",
+                      "POST /v1/accounts/{id}",
+                      "GET /v1/account"
+                    ]
+                  },
+                  {
+                    "group": "Consolidation",
+                    "pages": [
+                      "GET /v1/shipments/{id}/custody"
+                    ]
+                  },
+                  {
+                    "group": "Jobs",
+                    "pages": [
+                      "POST /v1/jobs",
+                      "GET /v1/jobs",
+                      "GET /v1/jobs/{id}",
+                      "POST /v1/jobs/{id}/cancel",
+                      "POST /v1/jobs/{id}/retry",
+                      "GET /v1/jobs/{id}/logs",
+                      "GET /v1/jobs/{id}/stream"
+                    ]
+                  },
+                  {
+                    "group": "Billing",
+                    "pages": [
+                      "GET /v1/invoices",
+                      "GET /v1/invoices/{id}",
+                      "POST /v1/invoices/{id}/dispute",
+                      "POST /v1/invoices/{id}/pay",
+                      "GET /v1/invoices/{id}/export",
+                      "GET /v1/invoices/upcoming",
+                      "POST /v1/usage_records",
+                      "GET /v1/usage_records",
+                      "GET /v1/usage_records/{id}",
+                      "POST /v1/usage_records/import",
+                      "GET /v1/usage_summaries",
+                      "GET /v1/balance",
+                      "POST /v1/balance/top_up",
+                      "GET /v1/balance_transactions",
+                      "POST /v1/payment_methods/setup",
+                      "GET /v1/payment_methods",
+                      "GET /v1/payment_methods/{id}",
+                      "DELETE /v1/payment_methods/{id}",
+                      "GET /v1/payments",
+                      "GET /v1/payments/{id}"
+                    ]
+                  },
+                  {
+                    "group": "Discovery",
+                    "pages": [
+                      "GET /.well-known/shipping-configuration"
+                    ]
+                  }
+                ]
+              },
+              {
+                "group": "Optional modules",
+                "pages": [
+                  {
+                    "group": "Manifests",
+                    "pages": [
+                      "POST /v1/manifests",
+                      "GET /v1/manifests",
+                      "GET /v1/manifests/{id}",
+                      "POST /v1/manifests/{id}",
+                      "POST /v1/manifests/preview",
+                      "POST /v1/manifests/{id}/reprint"
+                    ]
+                  },
+                  {
+                    "group": "Files",
+                    "pages": [
+                      "POST /v1/files",
+                      "GET /v1/files",
+                      "GET /v1/files/{id}",
+                      "DELETE /v1/files/{id}",
+                      "GET /v1/files/{id}/contents"
+                    ]
+                  },
+                  {
+                    "group": "Document Uploads",
+                    "pages": [
+                      "POST /v1/document_uploads",
+                      "GET /v1/document_uploads",
+                      "GET /v1/document_uploads/{id}",
+                      "POST /v1/document_uploads/{id}"
+                    ]
+                  },
+                  {
+                    "group": "Injection",
+                    "pages": [
+                      "POST /v1/shipments/{id}/cancel_injection",
+                      "POST /v1/asns",
+                      "GET /v1/asns",
+                      "GET /v1/asns/{id}",
+                      "POST /v1/asns/{id}",
+                      "POST /v1/asns/{id}/dispatch",
+                      "POST /v1/asns/{id}/arrive",
+                      "POST /v1/asns/{id}/cancel",
+                      "POST /v1/asns/{id}/close",
+                      "POST /v1/asns/{id}/receive"
+                    ]
+                  },
+                  {
+                    "group": "Products",
+                    "pages": [
+                      "POST /v1/products",
+                      "GET /v1/products",
+                      "GET /v1/products/search",
+                      "GET /v1/products/{id}",
+                      "POST /v1/products/{id}",
+                      "DELETE /v1/products/{id}",
+                      "POST /v1/products/upsert",
+                      "POST /v1/products/import",
+                      "POST /v1/products/{id}/archive",
+                      "POST /v1/products/{id}/unarchive"
+                    ]
+                  },
+                  {
+                    "group": "IoT",
+                    "pages": [
+                      "POST /v1/device_events",
+                      "GET /v1/device_events",
+                      "GET /v1/shipments/{id}/conditions"
+                    ]
+                  },
+                  {
+                    "group": "Data Network",
+                    "pages": [
+                      "POST /v1/participants",
+                      "GET /v1/participants",
+                      "GET /v1/participants/{id}",
+                      "POST /v1/participants/{id}/credentials",
+                      "POST /v1/participants/{id}/rotate_keys",
+                      "POST /v1/records",
+                      "GET /v1/records",
+                      "POST /v1/records/query",
+                      "POST /v1/records/verify",
+                      "GET /v1/records/feed",
+                      "POST /v1/records/erase",
+                      "GET /v1/anchors/{id}",
+                      "POST /v1/access_grants",
+                      "GET /v1/access_grants",
+                      "GET /v1/access_grants/{id}",
+                      "POST /v1/access_grants/{id}/revoke",
+                      "POST /v1/attestations",
+                      "GET /v1/attestations",
+                      "GET /v1/attestations/{id}",
+                      "POST /v1/datasets",
+                      "GET /v1/timelines/{shipment_id}",
+                      "GET /v1/timelines/{shipment_id}/events",
+                      "POST /v1/timelines/resolve",
+                      "POST /v1/identifier_links",
+                      "GET /v1/milestone_definitions"
+                    ]
+                  },
+                  {
+                    "group": "Templates",
+                    "pages": [
+                      "POST /v1/documents/generate",
+                      "GET /v1/documents",
+                      "GET /v1/documents/{id}",
+                      "DELETE /v1/documents/{id}",
+                      "POST /v1/document_jobs",
+                      "GET /v1/document_jobs",
+                      "GET /v1/document_jobs/{id}",
+                      "GET /v1/label_specs",
+                      "GET /v1/label_specs/{id}",
+                      "POST /v1/label_specs/{id}/certify",
+                      "POST /v1/label_specs/{id}/tracking_ranges",
+                      "POST /v1/documents/ingest",
+                      "GET /v1/document_ingestions",
+                      "GET /v1/document_ingestions/{id}",
+                      "POST /v1/document_ingestions/{id}/apply",
+                      "POST /v1/document_ingestions/{id}/reject"
+                    ]
+                  },
+                  {
+                    "group": "Integrations",
+                    "pages": [
+                      "GET /v1/integrations",
+                      "GET /v1/integrations/{id}",
+                      "POST /v1/address_validations",
+                      "GET /v1/address_validations/{id}",
+                      "POST /v1/insurance_quotes",
+                      "POST /v1/coverages",
+                      "GET /v1/coverages",
+                      "GET /v1/coverages/{id}",
+                      "POST /v1/coverages/{id}/cancel",
+                      "POST /v1/claims",
+                      "GET /v1/claims",
+                      "GET /v1/claims/{id}",
+                      "POST /v1/claims/{id}",
+                      "POST /v1/claims/{id}/withdraw"
+                    ]
+                  },
+                  {
+                    "group": "Inventory",
+                    "pages": [
+                      "GET /v1/inventory/levels",
+                      "POST /v1/fulfillment_orders",
+                      "GET /v1/fulfillment_orders",
+                      "GET /v1/fulfillment_orders/search",
+                      "GET /v1/fulfillment_orders/{id}",
+                      "POST /v1/fulfillment_orders/{id}",
+                      "POST /v1/fulfillment_orders/{id}/cancel"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "item": "Network",
+            "description": "221 operations",
+            "openapi": {
+              "source": "openapi/network.yaml",
+              "directory": "api-reference/network"
+            },
+            "groups": [
+              {
+                "group": "Overview",
+                "pages": [
+                  "api-reference/network/overview"
+                ]
+              },
+              {
+                "group": "Required modules",
+                "pages": [
+                  {
+                    "group": "Rates",
+                    "pages": [
+                      "POST /v1/rates",
+                      "GET /v1/rate_quotes/{id}"
+                    ]
+                  },
+                  {
+                    "group": "Shipments",
+                    "pages": [
+                      "POST /v1/shipments",
+                      "GET /v1/shipments",
+                      "GET /v1/shipments/search",
+                      "GET /v1/shipments/{id}",
+                      "POST /v1/shipments/{id}",
+                      "DELETE /v1/shipments/{id}",
+                      "POST /v1/shipments/{id}/purchase",
+                      "POST /v1/shipments/{id}/void",
+                      "POST /v1/shipments/{id}/rates",
+                      "POST /v1/shipments/{id}/return",
+                      "POST /v1/shipments/{id}/label"
+                    ]
+                  },
+                  {
+                    "group": "Pickups",
+                    "pages": [
+                      "POST /v1/pickups/availability",
+                      "POST /v1/pickups",
+                      "GET /v1/pickups",
+                      "GET /v1/pickups/search",
+                      "GET /v1/pickups/{id}",
+                      "POST /v1/pickups/{id}",
+                      "POST /v1/pickups/{id}/cancel"
+                    ]
+                  },
+                  {
+                    "group": "Tracking",
+                    "pages": [
+                      "POST /v1/trackers",
+                      "GET /v1/trackers",
+                      "GET /v1/trackers/search",
+                      "GET /v1/trackers/{id}",
+                      "POST /v1/trackers/{id}",
+                      "DELETE /v1/trackers/{id}",
+                      "POST /v1/trackers/{id}/refresh",
+                      "GET /v1/trackers/{id}/events"
+                    ]
+                  },
+                  {
+                    "group": "Webhooks",
+                    "pages": [
+                      "POST /v1/webhook_endpoints",
+                      "GET /v1/webhook_endpoints",
+                      "GET /v1/webhook_endpoints/{id}",
+                      "POST /v1/webhook_endpoints/{id}",
+                      "DELETE /v1/webhook_endpoints/{id}",
+                      "POST /v1/webhook_endpoints/{id}/rotate_secret",
+                      "POST /v1/webhook_endpoints/{id}/test"
+                    ]
+                  },
+                  {
+                    "group": "Events",
+                    "pages": [
+                      "GET /v1/events",
+                      "GET /v1/events/{id}",
+                      "GET /v1/events/{id}/deliveries",
+                      "POST /v1/events/{id}/redeliver"
+                    ]
+                  },
+                  {
+                    "group": "Inbound",
+                    "pages": [
+                      "POST /v1/inbound/{connection_id}",
+                      "POST /v1/inbound_events",
+                      "GET /v1/inbound_events",
+                      "GET /v1/inbound_events/{id}"
+                    ]
+                  },
+                  {
+                    "group": "Carriers",
+                    "pages": [
+                      "GET /v1/carriers",
+                      "GET /v1/carriers/{id}"
+                    ]
+                  },
+                  {
+                    "group": "Batches",
+                    "pages": [
+                      "POST /v1/batches",
+                      "GET /v1/batches/{id}"
+                    ]
+                  },
+                  {
+                    "group": "Test Helpers",
+                    "pages": [
+                      "POST /v1/test_helpers/trackers/{id}/advance",
+                      "POST /v1/test_helpers/shipments/{id}/charge_adjustment"
+                    ]
+                  },
+                  {
+                    "group": "Pickup Schedules",
+                    "pages": [
+                      "POST /v1/pickup_schedules",
+                      "GET /v1/pickup_schedules",
+                      "GET /v1/pickup_schedules/{id}",
+                      "POST /v1/pickup_schedules/{id}",
+                      "POST /v1/pickup_schedules/{id}/pause",
+                      "POST /v1/pickup_schedules/{id}/resume",
+                      "POST /v1/pickup_schedules/{id}/cancel",
+                      "POST /v1/pickup_schedules/{id}/skip",
+                      "POST /v1/pickup_schedules/{id}/add",
+                      "GET /v1/pickup_schedules/{id}/occurrences"
+                    ]
+                  },
+                  {
+                    "group": "Catalog",
+                    "pages": [
+                      "POST /v1/service_availability"
+                    ]
+                  },
+                  {
+                    "group": "Routes",
+                    "pages": [
+                      "POST /v1/journeys/plan",
+                      "GET /v1/shipments/{id}/journey"
+                    ]
+                  },
+                  {
+                    "group": "Injection",
+                    "pages": [
+                      "POST /v1/shipments/{id}/cancel_injection",
+                      "POST /v1/asns",
+                      "GET /v1/asns",
+                      "GET /v1/asns/{id}",
+                      "POST /v1/asns/{id}",
+                      "POST /v1/asns/{id}/dispatch",
+                      "POST /v1/asns/{id}/arrive",
+                      "POST /v1/asns/{id}/cancel",
+                      "POST /v1/asns/{id}/close",
+                      "POST /v1/asns/{id}/receive"
+                    ]
+                  },
+                  {
+                    "group": "Accounts",
+                    "pages": [
+                      "POST /v1/accounts",
+                      "GET /v1/accounts",
+                      "GET /v1/accounts/{id}",
+                      "POST /v1/accounts/{id}",
+                      "GET /v1/account"
+                    ]
+                  },
+                  {
+                    "group": "Consolidation",
+                    "pages": [
+                      "GET /v1/shipments/{id}/custody"
+                    ]
+                  },
+                  {
+                    "group": "Integrations",
+                    "pages": [
+                      "GET /v1/integrations",
+                      "GET /v1/integrations/{id}",
+                      "POST /v1/address_validations",
+                      "GET /v1/address_validations/{id}",
+                      "POST /v1/insurance_quotes",
+                      "POST /v1/coverages",
+                      "GET /v1/coverages",
+                      "GET /v1/coverages/{id}",
+                      "POST /v1/coverages/{id}/cancel",
+                      "POST /v1/claims",
+                      "GET /v1/claims",
+                      "GET /v1/claims/{id}",
+                      "POST /v1/claims/{id}",
+                      "POST /v1/claims/{id}/withdraw"
+                    ]
+                  },
+                  {
+                    "group": "Jobs",
+                    "pages": [
+                      "POST /v1/jobs",
+                      "GET /v1/jobs",
+                      "GET /v1/jobs/{id}",
+                      "POST /v1/jobs/{id}/cancel",
+                      "POST /v1/jobs/{id}/retry",
+                      "GET /v1/jobs/{id}/logs",
+                      "GET /v1/jobs/{id}/stream"
+                    ]
+                  },
+                  {
+                    "group": "Billing",
+                    "pages": [
+                      "GET /v1/invoices",
+                      "GET /v1/invoices/{id}",
+                      "POST /v1/invoices/{id}/dispute",
+                      "POST /v1/invoices/{id}/pay",
+                      "GET /v1/invoices/{id}/export",
+                      "GET /v1/invoices/upcoming",
+                      "POST /v1/usage_records",
+                      "GET /v1/usage_records",
+                      "GET /v1/usage_records/{id}",
+                      "POST /v1/usage_records/import",
+                      "GET /v1/usage_summaries",
+                      "GET /v1/balance",
+                      "POST /v1/balance/top_up",
+                      "GET /v1/balance_transactions",
+                      "POST /v1/payment_methods/setup",
+                      "GET /v1/payment_methods",
+                      "GET /v1/payment_methods/{id}",
+                      "DELETE /v1/payment_methods/{id}",
+                      "GET /v1/payments",
+                      "GET /v1/payments/{id}"
+                    ]
+                  },
+                  {
+                    "group": "Discovery",
+                    "pages": [
+                      "GET /.well-known/shipping-configuration"
+                    ]
+                  }
+                ]
+              },
+              {
+                "group": "Optional modules",
+                "pages": [
+                  {
+                    "group": "Manifests",
+                    "pages": [
+                      "POST /v1/manifests",
+                      "GET /v1/manifests",
+                      "GET /v1/manifests/{id}",
+                      "POST /v1/manifests/{id}",
+                      "POST /v1/manifests/preview",
+                      "POST /v1/manifests/{id}/reprint"
+                    ]
+                  },
+                  {
+                    "group": "Files",
+                    "pages": [
+                      "POST /v1/files",
+                      "GET /v1/files",
+                      "GET /v1/files/{id}",
+                      "DELETE /v1/files/{id}",
+                      "GET /v1/files/{id}/contents"
+                    ]
+                  },
+                  {
+                    "group": "Document Uploads",
+                    "pages": [
+                      "POST /v1/document_uploads",
+                      "GET /v1/document_uploads",
+                      "GET /v1/document_uploads/{id}",
+                      "POST /v1/document_uploads/{id}"
+                    ]
+                  },
+                  {
+                    "group": "Connections",
+                    "pages": [
+                      "POST /v1/connections",
+                      "GET /v1/connections",
+                      "GET /v1/connections/{id}",
+                      "POST /v1/connections/{id}",
+                      "DELETE /v1/connections/{id}",
+                      "POST /v1/connections/{id}/verify",
+                      "POST /v1/connect_sessions",
+                      "GET /v1/connect_sessions/{id}",
+                      "GET /v1/oauth/callback"
+                    ]
+                  },
+                  {
+                    "group": "Trade",
+                    "pages": [
+                      "POST /v1/classifications",
+                      "GET /v1/classifications",
+                      "GET /v1/classifications/{id}",
+                      "POST /v1/classifications/{id}/apply",
+                      "POST /v1/classifications/{id}/feedback",
+                      "POST /v1/compliance_screenings",
+                      "GET /v1/compliance_screenings",
+                      "GET /v1/compliance_screenings/{id}",
+                      "POST /v1/landed_costs",
+                      "GET /v1/landed_costs",
+                      "GET /v1/landed_costs/{id}",
+                      "GET /v1/tariffs/{country}/{hs_code}",
+                      "GET /v1/duty_collections",
+                      "GET /v1/duty_collections/{id}",
+                      "POST /v1/duty_collections/{id}/pay",
+                      "POST /v1/duty_collections/export"
+                    ]
+                  },
+                  {
+                    "group": "Products",
+                    "pages": [
+                      "POST /v1/products",
+                      "GET /v1/products",
+                      "GET /v1/products/search",
+                      "GET /v1/products/{id}",
+                      "POST /v1/products/{id}",
+                      "DELETE /v1/products/{id}",
+                      "POST /v1/products/upsert",
+                      "POST /v1/products/import",
+                      "POST /v1/products/{id}/archive",
+                      "POST /v1/products/{id}/unarchive"
+                    ]
+                  },
+                  {
+                    "group": "IoT",
+                    "pages": [
+                      "POST /v1/device_events",
+                      "GET /v1/device_events",
+                      "GET /v1/shipments/{id}/conditions"
+                    ]
+                  },
+                  {
+                    "group": "Data Network",
+                    "pages": [
+                      "POST /v1/participants",
+                      "GET /v1/participants",
+                      "GET /v1/participants/{id}",
+                      "POST /v1/participants/{id}/credentials",
+                      "POST /v1/participants/{id}/rotate_keys",
+                      "POST /v1/records",
+                      "GET /v1/records",
+                      "POST /v1/records/query",
+                      "POST /v1/records/verify",
+                      "GET /v1/records/feed",
+                      "POST /v1/records/erase",
+                      "GET /v1/anchors/{id}",
+                      "POST /v1/access_grants",
+                      "GET /v1/access_grants",
+                      "GET /v1/access_grants/{id}",
+                      "POST /v1/access_grants/{id}/revoke",
+                      "POST /v1/attestations",
+                      "GET /v1/attestations",
+                      "GET /v1/attestations/{id}",
+                      "POST /v1/datasets",
+                      "GET /v1/timelines/{shipment_id}",
+                      "GET /v1/timelines/{shipment_id}/events",
+                      "POST /v1/timelines/resolve",
+                      "POST /v1/identifier_links",
+                      "GET /v1/milestone_definitions"
+                    ]
+                  },
+                  {
+                    "group": "Templates",
+                    "pages": [
+                      "POST /v1/documents/generate",
+                      "GET /v1/documents",
+                      "GET /v1/documents/{id}",
+                      "DELETE /v1/documents/{id}",
+                      "POST /v1/document_jobs",
+                      "GET /v1/document_jobs",
+                      "GET /v1/document_jobs/{id}",
+                      "GET /v1/label_specs",
+                      "GET /v1/label_specs/{id}",
+                      "POST /v1/label_specs/{id}/certify",
+                      "POST /v1/label_specs/{id}/tracking_ranges",
+                      "POST /v1/documents/ingest",
+                      "GET /v1/document_ingestions",
+                      "GET /v1/document_ingestions/{id}",
+                      "POST /v1/document_ingestions/{id}/apply",
+                      "POST /v1/document_ingestions/{id}/reject"
+                    ]
+                  },
+                  {
+                    "group": "Inventory",
+                    "pages": [
+                      "GET /v1/inventory/levels",
+                      "POST /v1/fulfillment_orders",
+                      "GET /v1/fulfillment_orders",
+                      "GET /v1/fulfillment_orders/search",
+                      "GET /v1/fulfillment_orders/{id}",
+                      "POST /v1/fulfillment_orders/{id}",
+                      "POST /v1/fulfillment_orders/{id}/cancel"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "item": "3PL",
+            "description": "221 operations",
+            "openapi": {
+              "source": "openapi/3pl.yaml",
+              "directory": "api-reference/3pl"
+            },
+            "groups": [
+              {
+                "group": "Overview",
+                "pages": [
+                  "api-reference/3pl/overview"
+                ]
+              },
+              {
+                "group": "Required modules",
+                "pages": [
+                  {
+                    "group": "Rates",
+                    "pages": [
+                      "POST /v1/rates",
+                      "GET /v1/rate_quotes/{id}"
+                    ]
+                  },
+                  {
+                    "group": "Shipments",
+                    "pages": [
+                      "POST /v1/shipments",
+                      "GET /v1/shipments",
+                      "GET /v1/shipments/search",
+                      "GET /v1/shipments/{id}",
+                      "POST /v1/shipments/{id}",
+                      "DELETE /v1/shipments/{id}",
+                      "POST /v1/shipments/{id}/purchase",
+                      "POST /v1/shipments/{id}/void",
+                      "POST /v1/shipments/{id}/rates",
+                      "POST /v1/shipments/{id}/return",
+                      "POST /v1/shipments/{id}/label"
+                    ]
+                  },
+                  {
+                    "group": "Tracking",
+                    "pages": [
+                      "POST /v1/trackers",
+                      "GET /v1/trackers",
+                      "GET /v1/trackers/search",
+                      "GET /v1/trackers/{id}",
+                      "POST /v1/trackers/{id}",
+                      "DELETE /v1/trackers/{id}",
+                      "POST /v1/trackers/{id}/refresh",
+                      "GET /v1/trackers/{id}/events"
+                    ]
+                  },
+                  {
+                    "group": "Webhooks",
+                    "pages": [
+                      "POST /v1/webhook_endpoints",
+                      "GET /v1/webhook_endpoints",
+                      "GET /v1/webhook_endpoints/{id}",
+                      "POST /v1/webhook_endpoints/{id}",
+                      "DELETE /v1/webhook_endpoints/{id}",
+                      "POST /v1/webhook_endpoints/{id}/rotate_secret",
+                      "POST /v1/webhook_endpoints/{id}/test"
+                    ]
+                  },
+                  {
+                    "group": "Events",
+                    "pages": [
+                      "GET /v1/events",
+                      "GET /v1/events/{id}",
+                      "GET /v1/events/{id}/deliveries",
+                      "POST /v1/events/{id}/redeliver"
+                    ]
+                  },
+                  {
+                    "group": "Inbound",
+                    "pages": [
+                      "POST /v1/inbound/{connection_id}",
+                      "POST /v1/inbound_events",
+                      "GET /v1/inbound_events",
+                      "GET /v1/inbound_events/{id}"
+                    ]
+                  },
+                  {
+                    "group": "Carriers",
+                    "pages": [
+                      "GET /v1/carriers",
+                      "GET /v1/carriers/{id}"
+                    ]
+                  },
+                  {
+                    "group": "Batches",
+                    "pages": [
+                      "POST /v1/batches",
+                      "GET /v1/batches/{id}"
+                    ]
+                  },
+                  {
+                    "group": "Test Helpers",
+                    "pages": [
+                      "POST /v1/test_helpers/trackers/{id}/advance",
+                      "POST /v1/test_helpers/shipments/{id}/charge_adjustment"
+                    ]
+                  },
+                  {
+                    "group": "Trade",
+                    "pages": [
+                      "POST /v1/classifications",
+                      "GET /v1/classifications",
+                      "GET /v1/classifications/{id}",
+                      "POST /v1/classifications/{id}/apply",
+                      "POST /v1/classifications/{id}/feedback",
+                      "POST /v1/compliance_screenings",
+                      "GET /v1/compliance_screenings",
+                      "GET /v1/compliance_screenings/{id}",
+                      "POST /v1/landed_costs",
+                      "GET /v1/landed_costs",
+                      "GET /v1/landed_costs/{id}",
+                      "GET /v1/tariffs/{country}/{hs_code}",
+                      "GET /v1/duty_collections",
+                      "GET /v1/duty_collections/{id}",
+                      "POST /v1/duty_collections/{id}/pay",
+                      "POST /v1/duty_collections/export"
+                    ]
+                  },
+                  {
+                    "group": "Catalog",
+                    "pages": [
+                      "POST /v1/service_availability"
+                    ]
+                  },
+                  {
+                    "group": "Routes",
+                    "pages": [
+                      "POST /v1/journeys/plan",
+                      "GET /v1/shipments/{id}/journey"
+                    ]
+                  },
+                  {
+                    "group": "Injection",
+                    "pages": [
+                      "POST /v1/shipments/{id}/cancel_injection",
+                      "POST /v1/asns",
+                      "GET /v1/asns",
+                      "GET /v1/asns/{id}",
+                      "POST /v1/asns/{id}",
+                      "POST /v1/asns/{id}/dispatch",
+                      "POST /v1/asns/{id}/arrive",
+                      "POST /v1/asns/{id}/cancel",
+                      "POST /v1/asns/{id}/close",
+                      "POST /v1/asns/{id}/receive"
+                    ]
+                  },
+                  {
+                    "group": "Products",
+                    "pages": [
+                      "POST /v1/products",
+                      "GET /v1/products",
+                      "GET /v1/products/search",
+                      "GET /v1/products/{id}",
+                      "POST /v1/products/{id}",
+                      "DELETE /v1/products/{id}",
+                      "POST /v1/products/upsert",
+                      "POST /v1/products/import",
+                      "POST /v1/products/{id}/archive",
+                      "POST /v1/products/{id}/unarchive"
+                    ]
+                  },
+                  {
+                    "group": "Consolidation",
+                    "pages": [
+                      "GET /v1/shipments/{id}/custody"
+                    ]
+                  },
+                  {
+                    "group": "Templates",
+                    "pages": [
+                      "POST /v1/documents/generate",
+                      "GET /v1/documents",
+                      "GET /v1/documents/{id}",
+                      "DELETE /v1/documents/{id}",
+                      "POST /v1/document_jobs",
+                      "GET /v1/document_jobs",
+                      "GET /v1/document_jobs/{id}",
+                      "GET /v1/label_specs",
+                      "GET /v1/label_specs/{id}",
+                      "POST /v1/label_specs/{id}/certify",
+                      "POST /v1/label_specs/{id}/tracking_ranges",
+                      "POST /v1/documents/ingest",
+                      "GET /v1/document_ingestions",
+                      "GET /v1/document_ingestions/{id}",
+                      "POST /v1/document_ingestions/{id}/apply",
+                      "POST /v1/document_ingestions/{id}/reject"
+                    ]
+                  },
+                  {
+                    "group": "Jobs",
+                    "pages": [
+                      "POST /v1/jobs",
+                      "GET /v1/jobs",
+                      "GET /v1/jobs/{id}",
+                      "POST /v1/jobs/{id}/cancel",
+                      "POST /v1/jobs/{id}/retry",
+                      "GET /v1/jobs/{id}/logs",
+                      "GET /v1/jobs/{id}/stream"
+                    ]
+                  },
+                  {
+                    "group": "Billing",
+                    "pages": [
+                      "GET /v1/invoices",
+                      "GET /v1/invoices/{id}",
+                      "POST /v1/invoices/{id}/dispute",
+                      "POST /v1/invoices/{id}/pay",
+                      "GET /v1/invoices/{id}/export",
+                      "GET /v1/invoices/upcoming",
+                      "POST /v1/usage_records",
+                      "GET /v1/usage_records",
+                      "GET /v1/usage_records/{id}",
+                      "POST /v1/usage_records/import",
+                      "GET /v1/usage_summaries",
+                      "GET /v1/balance",
+                      "POST /v1/balance/top_up",
+                      "GET /v1/balance_transactions",
+                      "POST /v1/payment_methods/setup",
+                      "GET /v1/payment_methods",
+                      "GET /v1/payment_methods/{id}",
+                      "DELETE /v1/payment_methods/{id}",
+                      "GET /v1/payments",
+                      "GET /v1/payments/{id}"
+                    ]
+                  },
+                  {
+                    "group": "Inventory",
+                    "pages": [
+                      "GET /v1/inventory/levels",
+                      "POST /v1/fulfillment_orders",
+                      "GET /v1/fulfillment_orders",
+                      "GET /v1/fulfillment_orders/search",
+                      "GET /v1/fulfillment_orders/{id}",
+                      "POST /v1/fulfillment_orders/{id}",
+                      "POST /v1/fulfillment_orders/{id}/cancel"
+                    ]
+                  },
+                  {
+                    "group": "Discovery",
+                    "pages": [
+                      "GET /.well-known/shipping-configuration"
+                    ]
+                  }
+                ]
+              },
+              {
+                "group": "Optional modules",
+                "pages": [
+                  {
+                    "group": "Pickups",
+                    "pages": [
+                      "POST /v1/pickups/availability",
+                      "POST /v1/pickups",
+                      "GET /v1/pickups",
+                      "GET /v1/pickups/search",
+                      "GET /v1/pickups/{id}",
+                      "POST /v1/pickups/{id}",
+                      "POST /v1/pickups/{id}/cancel"
+                    ]
+                  },
+                  {
+                    "group": "Manifests",
+                    "pages": [
+                      "POST /v1/manifests",
+                      "GET /v1/manifests",
+                      "GET /v1/manifests/{id}",
+                      "POST /v1/manifests/{id}",
+                      "POST /v1/manifests/preview",
+                      "POST /v1/manifests/{id}/reprint"
+                    ]
+                  },
+                  {
+                    "group": "Files",
+                    "pages": [
+                      "POST /v1/files",
+                      "GET /v1/files",
+                      "GET /v1/files/{id}",
+                      "DELETE /v1/files/{id}",
+                      "GET /v1/files/{id}/contents"
+                    ]
+                  },
+                  {
+                    "group": "Document Uploads",
+                    "pages": [
+                      "POST /v1/document_uploads",
+                      "GET /v1/document_uploads",
+                      "GET /v1/document_uploads/{id}",
+                      "POST /v1/document_uploads/{id}"
+                    ]
+                  },
+                  {
+                    "group": "Connections",
+                    "pages": [
+                      "POST /v1/connections",
+                      "GET /v1/connections",
+                      "GET /v1/connections/{id}",
+                      "POST /v1/connections/{id}",
+                      "DELETE /v1/connections/{id}",
+                      "POST /v1/connections/{id}/verify",
+                      "POST /v1/connect_sessions",
+                      "GET /v1/connect_sessions/{id}",
+                      "GET /v1/oauth/callback"
+                    ]
+                  },
+                  {
+                    "group": "Pickup Schedules",
+                    "pages": [
+                      "POST /v1/pickup_schedules",
+                      "GET /v1/pickup_schedules",
+                      "GET /v1/pickup_schedules/{id}",
+                      "POST /v1/pickup_schedules/{id}",
+                      "POST /v1/pickup_schedules/{id}/pause",
+                      "POST /v1/pickup_schedules/{id}/resume",
+                      "POST /v1/pickup_schedules/{id}/cancel",
+                      "POST /v1/pickup_schedules/{id}/skip",
+                      "POST /v1/pickup_schedules/{id}/add",
+                      "GET /v1/pickup_schedules/{id}/occurrences"
+                    ]
+                  },
+                  {
+                    "group": "Accounts",
+                    "pages": [
+                      "POST /v1/accounts",
+                      "GET /v1/accounts",
+                      "GET /v1/accounts/{id}",
+                      "POST /v1/accounts/{id}",
+                      "GET /v1/account"
+                    ]
+                  },
+                  {
+                    "group": "IoT",
+                    "pages": [
+                      "POST /v1/device_events",
+                      "GET /v1/device_events",
+                      "GET /v1/shipments/{id}/conditions"
+                    ]
+                  },
+                  {
+                    "group": "Data Network",
+                    "pages": [
+                      "POST /v1/participants",
+                      "GET /v1/participants",
+                      "GET /v1/participants/{id}",
+                      "POST /v1/participants/{id}/credentials",
+                      "POST /v1/participants/{id}/rotate_keys",
+                      "POST /v1/records",
+                      "GET /v1/records",
+                      "POST /v1/records/query",
+                      "POST /v1/records/verify",
+                      "GET /v1/records/feed",
+                      "POST /v1/records/erase",
+                      "GET /v1/anchors/{id}",
+                      "POST /v1/access_grants",
+                      "GET /v1/access_grants",
+                      "GET /v1/access_grants/{id}",
+                      "POST /v1/access_grants/{id}/revoke",
+                      "POST /v1/attestations",
+                      "GET /v1/attestations",
+                      "GET /v1/attestations/{id}",
+                      "POST /v1/datasets",
+                      "GET /v1/timelines/{shipment_id}",
+                      "GET /v1/timelines/{shipment_id}/events",
+                      "POST /v1/timelines/resolve",
+                      "POST /v1/identifier_links",
+                      "GET /v1/milestone_definitions"
+                    ]
+                  },
+                  {
+                    "group": "Integrations",
+                    "pages": [
+                      "GET /v1/integrations",
+                      "GET /v1/integrations/{id}",
+                      "POST /v1/address_validations",
+                      "GET /v1/address_validations/{id}",
+                      "POST /v1/insurance_quotes",
+                      "POST /v1/coverages",
+                      "GET /v1/coverages",
+                      "GET /v1/coverages/{id}",
+                      "POST /v1/coverages/{id}/cancel",
+                      "POST /v1/claims",
+                      "GET /v1/claims",
+                      "GET /v1/claims/{id}",
+                      "POST /v1/claims/{id}",
+                      "POST /v1/claims/{id}/withdraw"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "item": "Fleet",
+            "description": "183 operations",
+            "openapi": {
+              "source": "openapi/fleet.yaml",
+              "directory": "api-reference/fleet"
+            },
+            "groups": [
+              {
+                "group": "Overview",
+                "pages": [
+                  "api-reference/fleet/overview"
+                ]
+              },
+              {
+                "group": "Required modules",
+                "pages": [
+                  {
+                    "group": "Rates",
+                    "pages": [
+                      "POST /v1/rates",
+                      "GET /v1/rate_quotes/{id}"
+                    ]
+                  },
+                  {
+                    "group": "Shipments",
+                    "pages": [
+                      "POST /v1/shipments",
+                      "GET /v1/shipments",
+                      "GET /v1/shipments/search",
+                      "GET /v1/shipments/{id}",
+                      "POST /v1/shipments/{id}",
+                      "DELETE /v1/shipments/{id}",
+                      "POST /v1/shipments/{id}/purchase",
+                      "POST /v1/shipments/{id}/void",
+                      "POST /v1/shipments/{id}/rates",
+                      "POST /v1/shipments/{id}/return",
+                      "POST /v1/shipments/{id}/label"
+                    ]
+                  },
+                  {
+                    "group": "Tracking",
+                    "pages": [
+                      "POST /v1/trackers",
+                      "GET /v1/trackers",
+                      "GET /v1/trackers/search",
+                      "GET /v1/trackers/{id}",
+                      "POST /v1/trackers/{id}",
+                      "DELETE /v1/trackers/{id}",
+                      "POST /v1/trackers/{id}/refresh",
+                      "GET /v1/trackers/{id}/events"
+                    ]
+                  },
+                  {
+                    "group": "Webhooks",
+                    "pages": [
+                      "POST /v1/webhook_endpoints",
+                      "GET /v1/webhook_endpoints",
+                      "GET /v1/webhook_endpoints/{id}",
+                      "POST /v1/webhook_endpoints/{id}",
+                      "DELETE /v1/webhook_endpoints/{id}",
+                      "POST /v1/webhook_endpoints/{id}/rotate_secret",
+                      "POST /v1/webhook_endpoints/{id}/test"
+                    ]
+                  },
+                  {
+                    "group": "Events",
+                    "pages": [
+                      "GET /v1/events",
+                      "GET /v1/events/{id}",
+                      "GET /v1/events/{id}/deliveries",
+                      "POST /v1/events/{id}/redeliver"
+                    ]
+                  },
+                  {
+                    "group": "Inbound",
+                    "pages": [
+                      "POST /v1/inbound/{connection_id}",
+                      "POST /v1/inbound_events",
+                      "GET /v1/inbound_events",
+                      "GET /v1/inbound_events/{id}"
+                    ]
+                  },
+                  {
+                    "group": "Carriers",
+                    "pages": [
+                      "GET /v1/carriers",
+                      "GET /v1/carriers/{id}"
+                    ]
+                  },
+                  {
+                    "group": "Batches",
+                    "pages": [
+                      "POST /v1/batches",
+                      "GET /v1/batches/{id}"
+                    ]
+                  },
+                  {
+                    "group": "Test Helpers",
+                    "pages": [
+                      "POST /v1/test_helpers/trackers/{id}/advance",
+                      "POST /v1/test_helpers/shipments/{id}/charge_adjustment"
+                    ]
+                  },
+                  {
+                    "group": "Catalog",
+                    "pages": [
+                      "POST /v1/service_availability"
+                    ]
+                  },
+                  {
+                    "group": "Routes",
+                    "pages": [
+                      "POST /v1/journeys/plan",
+                      "GET /v1/shipments/{id}/journey"
+                    ]
+                  },
+                  {
+                    "group": "Jobs",
+                    "pages": [
+                      "POST /v1/jobs",
+                      "GET /v1/jobs",
+                      "GET /v1/jobs/{id}",
+                      "POST /v1/jobs/{id}/cancel",
+                      "POST /v1/jobs/{id}/retry",
+                      "GET /v1/jobs/{id}/logs",
+                      "GET /v1/jobs/{id}/stream"
+                    ]
+                  },
+                  {
+                    "group": "Discovery",
+                    "pages": [
+                      "GET /.well-known/shipping-configuration"
+                    ]
+                  }
+                ]
+              },
+              {
+                "group": "Optional modules",
+                "pages": [
+                  {
+                    "group": "Pickups",
+                    "pages": [
+                      "POST /v1/pickups/availability",
+                      "POST /v1/pickups",
+                      "GET /v1/pickups",
+                      "GET /v1/pickups/search",
+                      "GET /v1/pickups/{id}",
+                      "POST /v1/pickups/{id}",
+                      "POST /v1/pickups/{id}/cancel"
+                    ]
+                  },
+                  {
+                    "group": "Connections",
+                    "pages": [
+                      "POST /v1/connections",
+                      "GET /v1/connections",
+                      "GET /v1/connections/{id}",
+                      "POST /v1/connections/{id}",
+                      "DELETE /v1/connections/{id}",
+                      "POST /v1/connections/{id}/verify",
+                      "POST /v1/connect_sessions",
+                      "GET /v1/connect_sessions/{id}",
+                      "GET /v1/oauth/callback"
+                    ]
+                  },
+                  {
+                    "group": "Pickup Schedules",
+                    "pages": [
+                      "POST /v1/pickup_schedules",
+                      "GET /v1/pickup_schedules",
+                      "GET /v1/pickup_schedules/{id}",
+                      "POST /v1/pickup_schedules/{id}",
+                      "POST /v1/pickup_schedules/{id}/pause",
+                      "POST /v1/pickup_schedules/{id}/resume",
+                      "POST /v1/pickup_schedules/{id}/cancel",
+                      "POST /v1/pickup_schedules/{id}/skip",
+                      "POST /v1/pickup_schedules/{id}/add",
+                      "GET /v1/pickup_schedules/{id}/occurrences"
+                    ]
+                  },
+                  {
+                    "group": "Injection",
+                    "pages": [
+                      "POST /v1/shipments/{id}/cancel_injection",
+                      "POST /v1/asns",
+                      "GET /v1/asns",
+                      "GET /v1/asns/{id}",
+                      "POST /v1/asns/{id}",
+                      "POST /v1/asns/{id}/dispatch",
+                      "POST /v1/asns/{id}/arrive",
+                      "POST /v1/asns/{id}/cancel",
+                      "POST /v1/asns/{id}/close",
+                      "POST /v1/asns/{id}/receive"
+                    ]
+                  },
+                  {
+                    "group": "Accounts",
+                    "pages": [
+                      "POST /v1/accounts",
+                      "GET /v1/accounts",
+                      "GET /v1/accounts/{id}",
+                      "POST /v1/accounts/{id}",
+                      "GET /v1/account"
+                    ]
+                  },
+                  {
+                    "group": "Products",
+                    "pages": [
+                      "POST /v1/products",
+                      "GET /v1/products",
+                      "GET /v1/products/search",
+                      "GET /v1/products/{id}",
+                      "POST /v1/products/{id}",
+                      "DELETE /v1/products/{id}",
+                      "POST /v1/products/upsert",
+                      "POST /v1/products/import",
+                      "POST /v1/products/{id}/archive",
+                      "POST /v1/products/{id}/unarchive"
+                    ]
+                  },
+                  {
+                    "group": "IoT",
+                    "pages": [
+                      "POST /v1/device_events",
+                      "GET /v1/device_events",
+                      "GET /v1/shipments/{id}/conditions"
+                    ]
+                  },
+                  {
+                    "group": "Data Network",
+                    "pages": [
+                      "POST /v1/participants",
+                      "GET /v1/participants",
+                      "GET /v1/participants/{id}",
+                      "POST /v1/participants/{id}/credentials",
+                      "POST /v1/participants/{id}/rotate_keys",
+                      "POST /v1/records",
+                      "GET /v1/records",
+                      "POST /v1/records/query",
+                      "POST /v1/records/verify",
+                      "GET /v1/records/feed",
+                      "POST /v1/records/erase",
+                      "GET /v1/anchors/{id}",
+                      "POST /v1/access_grants",
+                      "GET /v1/access_grants",
+                      "GET /v1/access_grants/{id}",
+                      "POST /v1/access_grants/{id}/revoke",
+                      "POST /v1/attestations",
+                      "GET /v1/attestations",
+                      "GET /v1/attestations/{id}",
+                      "POST /v1/datasets",
+                      "GET /v1/timelines/{shipment_id}",
+                      "GET /v1/timelines/{shipment_id}/events",
+                      "POST /v1/timelines/resolve",
+                      "POST /v1/identifier_links",
+                      "GET /v1/milestone_definitions"
+                    ]
+                  },
+                  {
+                    "group": "Consolidation",
+                    "pages": [
+                      "GET /v1/shipments/{id}/custody"
+                    ]
+                  },
+                  {
+                    "group": "Templates",
+                    "pages": [
+                      "POST /v1/documents/generate",
+                      "GET /v1/documents",
+                      "GET /v1/documents/{id}",
+                      "DELETE /v1/documents/{id}",
+                      "POST /v1/document_jobs",
+                      "GET /v1/document_jobs",
+                      "GET /v1/document_jobs/{id}",
+                      "GET /v1/label_specs",
+                      "GET /v1/label_specs/{id}",
+                      "POST /v1/label_specs/{id}/certify",
+                      "POST /v1/label_specs/{id}/tracking_ranges",
+                      "POST /v1/documents/ingest",
+                      "GET /v1/document_ingestions",
+                      "GET /v1/document_ingestions/{id}",
+                      "POST /v1/document_ingestions/{id}/apply",
+                      "POST /v1/document_ingestions/{id}/reject"
+                    ]
+                  },
+                  {
+                    "group": "Integrations",
+                    "pages": [
+                      "GET /v1/integrations",
+                      "GET /v1/integrations/{id}",
+                      "POST /v1/address_validations",
+                      "GET /v1/address_validations/{id}",
+                      "POST /v1/insurance_quotes",
+                      "POST /v1/coverages",
+                      "GET /v1/coverages",
+                      "GET /v1/coverages/{id}",
+                      "POST /v1/coverages/{id}/cancel",
+                      "POST /v1/claims",
+                      "GET /v1/claims",
+                      "GET /v1/claims/{id}",
+                      "POST /v1/claims/{id}",
+                      "POST /v1/claims/{id}/withdraw"
+                    ]
+                  },
+                  {
+                    "group": "Billing",
+                    "pages": [
+                      "GET /v1/invoices",
+                      "GET /v1/invoices/{id}",
+                      "POST /v1/invoices/{id}/dispute",
+                      "POST /v1/invoices/{id}/pay",
+                      "GET /v1/invoices/{id}/export",
+                      "GET /v1/invoices/upcoming",
+                      "POST /v1/usage_records",
+                      "GET /v1/usage_records",
+                      "GET /v1/usage_records/{id}",
+                      "POST /v1/usage_records/import",
+                      "GET /v1/usage_summaries",
+                      "GET /v1/balance",
+                      "POST /v1/balance/top_up",
+                      "GET /v1/balance_transactions",
+                      "POST /v1/payment_methods/setup",
+                      "GET /v1/payment_methods",
+                      "GET /v1/payment_methods/{id}",
+                      "DELETE /v1/payment_methods/{id}",
+                      "GET /v1/payments",
+                      "GET /v1/payments/{id}"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "item": "Data Network",
+            "description": "63 operations",
+            "openapi": {
+              "source": "openapi/data-network.yaml",
+              "directory": "api-reference/data-network"
+            },
+            "groups": [
+              {
+                "group": "Overview",
+                "pages": [
+                  "api-reference/data-network/overview"
+                ]
+              },
+              {
+                "group": "Required modules",
+                "pages": [
+                  {
+                    "group": "Rates",
+                    "pages": [
+                      "GET /v1/rate_quotes/{id}"
+                    ]
+                  },
+                  {
+                    "group": "Shipments",
+                    "pages": [
+                      "GET /v1/shipments",
+                      "GET /v1/shipments/search",
+                      "GET /v1/shipments/{id}"
+                    ]
+                  },
+                  {
+                    "group": "Tracking",
+                    "pages": [
+                      "GET /v1/trackers",
+                      "GET /v1/trackers/search",
+                      "GET /v1/trackers/{id}",
+                      "GET /v1/trackers/{id}/events"
+                    ]
+                  },
+                  {
+                    "group": "Webhooks",
+                    "pages": [
+                      "POST /v1/webhook_endpoints",
+                      "GET /v1/webhook_endpoints",
+                      "GET /v1/webhook_endpoints/{id}",
+                      "POST /v1/webhook_endpoints/{id}",
+                      "DELETE /v1/webhook_endpoints/{id}",
+                      "POST /v1/webhook_endpoints/{id}/rotate_secret",
+                      "POST /v1/webhook_endpoints/{id}/test"
+                    ]
+                  },
+                  {
+                    "group": "Events",
+                    "pages": [
+                      "GET /v1/events",
+                      "GET /v1/events/{id}",
+                      "GET /v1/events/{id}/deliveries"
+                    ]
+                  },
+                  {
+                    "group": "Inbound",
+                    "pages": [
+                      "POST /v1/inbound/{connection_id}",
+                      "POST /v1/inbound_events",
+                      "GET /v1/inbound_events",
+                      "GET /v1/inbound_events/{id}"
+                    ]
+                  },
+                  {
+                    "group": "Carriers",
+                    "pages": [
+                      "GET /v1/carriers",
+                      "GET /v1/carriers/{id}"
+                    ]
+                  },
+                  {
+                    "group": "Batches",
+                    "pages": [
+                      "GET /v1/batches/{id}"
+                    ]
+                  },
+                  {
+                    "group": "Accounts",
+                    "pages": [
+                      "POST /v1/accounts",
+                      "GET /v1/accounts",
+                      "GET /v1/accounts/{id}",
+                      "POST /v1/accounts/{id}",
+                      "GET /v1/account"
+                    ]
+                  },
+                  {
+                    "group": "Data Network",
+                    "pages": [
+                      "POST /v1/participants",
+                      "GET /v1/participants",
+                      "GET /v1/participants/{id}",
+                      "POST /v1/participants/{id}/credentials",
+                      "POST /v1/participants/{id}/rotate_keys",
+                      "POST /v1/records",
+                      "GET /v1/records",
+                      "POST /v1/records/query",
+                      "POST /v1/records/verify",
+                      "GET /v1/records/feed",
+                      "POST /v1/records/erase",
+                      "GET /v1/anchors/{id}",
+                      "POST /v1/access_grants",
+                      "GET /v1/access_grants",
+                      "GET /v1/access_grants/{id}",
+                      "POST /v1/access_grants/{id}/revoke",
+                      "POST /v1/attestations",
+                      "GET /v1/attestations",
+                      "GET /v1/attestations/{id}",
+                      "POST /v1/datasets",
+                      "GET /v1/timelines/{shipment_id}",
+                      "GET /v1/timelines/{shipment_id}/events",
+                      "POST /v1/timelines/resolve",
+                      "POST /v1/identifier_links",
+                      "GET /v1/milestone_definitions"
+                    ]
+                  },
+                  {
+                    "group": "Jobs",
+                    "pages": [
+                      "POST /v1/jobs",
+                      "GET /v1/jobs",
+                      "GET /v1/jobs/{id}",
+                      "POST /v1/jobs/{id}/cancel",
+                      "POST /v1/jobs/{id}/retry",
+                      "GET /v1/jobs/{id}/logs",
+                      "GET /v1/jobs/{id}/stream"
+                    ]
+                  },
+                  {
+                    "group": "Discovery",
+                    "pages": [
+                      "GET /.well-known/shipping-configuration"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
       },
       {
         "tab": "GraphQL Interface",

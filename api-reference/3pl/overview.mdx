@@ -1,0 +1,35 @@
+---
+title: "3PL mode"
+description: "The REST operations a 3PL implementation exposes: 221 operations across 22 modules."
+---
+
+**3PL mode** is for third-party logistics and fulfillment providers shipping on behalf of many merchants. This reference lists only the operations a 3PL implementation exposes, following the mode profile in [Modes §2](/spec/12-modes). Switch modes from the **REST Interface** tab menu at the top of the page.
+
+| Module | In this mode | Operations | Count |
+|---|---|---|---|
+| `core` | Required | Rates, Shipments, Tracking, Events, Carriers, Batches, Test Helpers, Discovery | 32 |
+| `webhooks` | Required | Webhooks, Inbound | 11 |
+| `pickups` | Optional | Pickups, Pickup Schedules | 17 |
+| `manifests` | Optional | Manifests | 6 |
+| `documents` | Optional | Files, Document Uploads | 9 |
+| `connections` | Optional | Connections | 9 |
+| `platform` | Optional | Accounts | 5 |
+| `catalog` | Required | Catalog | 1 |
+| `pricing` | Required | GraphQL Interface only | — |
+| `trade` | Required | Trade | 16 |
+| `routes` | Required | Routes | 2 |
+| `fleet` | Optional | GraphQL Interface only | — |
+| `injection` | Required | Injection | 10 |
+| `products` | Required | Products | 10 |
+| `iot` | Optional | IoT | 3 |
+| `consolidation` | Required | Consolidation | 1 |
+| `templates` | Required | Templates | 16 |
+| `integrations` | Optional | Integrations | 14 |
+| `jobs` | Required | Jobs | 7 |
+| `inventory` | Required | Inventory | 7 |
+| `billing` | Required | Billing | 20 |
+| `data_network` | Optional | Data Network | 25 |
+
+Required modules are grouped first in the sidebar, optional ones after. Not part of this mode: `network`.
+
+The machine-readable file for this mode is [`/openapi/3pl.yaml`](/openapi/3pl.yaml). The complete document, with every module, is [`/openapi.yaml`](/openapi.yaml).

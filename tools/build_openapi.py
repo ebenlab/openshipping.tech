@@ -1,4 +1,4 @@
-"""Generate openapi.yaml for the Open Logistics Specification draft 0.1."""
+"""Generate openapi.yaml for the Open Logistics Specs draft 0.1."""
 import sys, yaml
 
 R = lambda n: {"$ref": f"#/components/schemas/{n}"}
@@ -1401,7 +1401,7 @@ GQL_OPS = GS.partition(paths)
 doc = {
   "openapi": "3.1.0",
   "info": {
-    "title": "Open Logistics Specification", "version": "0.1.0-draft",
+    "title": "Open Logistics Specs", "version": "0.1.0-draft",
     "summary": "An open, carrier-agnostic shipping API specification.",
     "description": "Draft 0.1 (2026-10-06). See README.md and spec/*.md for normative text; this document is the machine-readable reference. "
                    "Operations marked `x-spends-money: true` purchase labels or services and MUST be confirmed by a human when invoked by an agent.",
@@ -1449,6 +1449,9 @@ used_tags = {op["tags"][0] for it in paths.values() for k, op in it.items() if k
 doc["tags"] = [t for t in doc["tags"] if t["name"] in used_tags]
 GS.prune_schemas(doc)
 yaml.dump(doc, open(sys.argv[1], "w"), Dumper=D, sort_keys=False, width=140, allow_unicode=True)
+import openapi_modes
+print("per-mode REST operations:", openapi_modes.emit(doc, GS.ROOT / "openapi", D))
+openapi_modes.write_nav(GS.ROOT)
 print("REST paths:", len(paths), "operations:", sum(1 for p in paths.values() for k in p if k in ("get", "post", "delete")), "schemas:", len(doc["components"]["schemas"]))
 nq, nm, _ = GS.emit(GQL_OPS, ALL_SCHEMAS, GS.ROOT / "graphql" / "schema.graphql", GS.ROOT / "spec" / "graphql.md")
 print("GraphQL queries:", nq, "mutations:", nm)

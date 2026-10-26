@@ -136,10 +136,10 @@ flowchart TD
     D --> E["Run scripted flows per module with test-mode magic values"]
     E --> F["Check the invariants"]
     F -->|any fails| X
-    F -->|all pass| G["Pass: MAY display Open Logistics Specification 0.1"]
+    F -->|all pass| G["Pass: MAY display Open Logistics Specs 0.1"]
 ```
 
-An implementer passing the suite MAY display `Open Logistics Specification 0.1 – {modules}`.
+An implementer passing the suite MAY display `Open Logistics Specs 0.1 – {modules}`.
 
 ## 5. Agent integration (MCP)
 

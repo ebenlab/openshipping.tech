@@ -1,9 +1,9 @@
 ---
 title: "Platform Constructs"
-description: "The reusable, domain-neutral building blocks under the Open Logistics Specification: conventions, identity, integrations, events, jobs, documents, billing and shared objects."
+description: "The reusable, domain-neutral building blocks under the Open Logistics Specs: conventions, identity, integrations, events, jobs, documents, billing and shared objects."
 ---
 
-The Open Logistics Specification is built from two layers:
+The Open Logistics Specs are built from two layers:
 
 - **Platform Constructs** (this tab) are concepts that any multi-tenant API platform needs, whatever its domain: how requests, IDs, errors and versions work; who the tenants and users are; how providers are integrated; how events, jobs, documents and money flow. Nothing here is specific to shipping.
 - **Specification** (the first tab) defines the logistics domain on top of them: shipments, rates, tracking, customs, networks, fleets, inventory and the parties involved.

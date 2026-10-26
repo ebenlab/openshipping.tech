@@ -166,7 +166,7 @@ footer input { width: min(320px, 70vw); }
 
 <div class="wrap">
   <header>
-    <div class="eyebrow">Shipping Internals · Open Logistics Specification 0.1</div>
+    <div class="eyebrow">Shipping Internals · Open Logistics Specs 0.1</div>
     <h1>The logistics industry, as one network of parties and objects</h1>
     <p class="lede">Twenty-two parties, twelve platform modules and the canonical objects they read and write, shown three ways. Select anything to see what it owns, the operations it performs and where the spec defines them. Run a scenario to watch one shipment move through the network.</p>
     <div class="views" role="group" aria-label="Visualization">
@@ -678,6 +678,12 @@ footer input { width: min(320px, 70vw); }
   docsInput.addEventListener("change", () => { try { localStorage.setItem("imap-docs-base", docsInput.value); } catch (e) {} if (state.tab === "specs") renderPanel(); });
   const localDocs = /^https?:$/.test(location.protocol) && /^(localhost|127\.0\.0\.1|\[::1\])$|\.localhost$/.test(location.hostname);
   const docUrl = path => (docsInput.value || (localDocs ? location.origin : "https://shippinginternals.dev")).replace(/\/+$/, "") + "/" + path;
+  // REST reference for the selected mode, or the first mode this node belongs to.
+  const MODE_LABEL = { universal: "Universal", carrier: "Carrier", network: "Network", "3pl": "3PL", fleet: "Fleet", data: "Data Network" };
+  function restRef(n) {
+    const m = state.mode !== "all" ? state.mode : (n.modes && n.modes[0]) || "universal";
+    return [`api-reference/${m === "data" ? "data-network" : m}/overview`, MODE_LABEL[m]];
+  }
   function renderPanel() {
     const n = byId[state.selected];
     document.getElementById("p-kind").textContent = KIND[n.kind];
@@ -692,7 +698,7 @@ footer input { width: min(320px, 70vw); }
       panel.innerHTML = `<p>${n.kind === "party" || n.kind === "module" ? "Writes or calls:" : "Related objects:"}</p><div class="objchips">${own.map(o => `<button data-go="${o}">${esc(byId[o].label)}</button>`).join("")}</div>` +
         (users.length ? `<p>Written or called by:</p><div class="objchips">${users.map(o => `<button data-go="${o}">${esc(byId[o].label)}</button>`).join("")}</div>` : "");
     } else if (state.tab === "ops") panel.innerHTML = `<ul class="list">${n.ops.map(o => `<li><code>${esc(o)}</code></li>`).join("")}</ul>`;
-    else panel.innerHTML = `<div class="links">${n.specs.map(c => `<a href="${esc(docUrl(CH[c][1]))}" target="_blank" rel="noopener"><span>${esc(CH[c][0])}</span><span>${/^\d+$/.test(c) ? "ch. " + c : c === "B" ? "appx B" : ""}</span></a>`).join("")}<a href="${esc(docUrl("api-reference"))}" target="_blank" rel="noopener"><span>API reference</span><span>OpenAPI</span></a></div>`;
+    else panel.innerHTML = `<div class="links">${n.specs.map(c => `<a href="${esc(docUrl(CH[c][1]))}" target="_blank" rel="noopener"><span>${esc(CH[c][0])}</span><span>${/^\d+$/.test(c) ? "ch. " + c : c === "B" ? "appx B" : ""}</span></a>`).join("")}<a href="${esc(docUrl(restRef(n)[0]))}" target="_blank" rel="noopener"><span>REST reference</span><span>${esc(restRef(n)[1])} mode</span></a></div>`;
     panel.querySelectorAll("[data-go]").forEach(b => b.addEventListener("click", () => select(b.dataset.go)));
   }
   function select(id) { state.selected = id; renderPanel(); paint(); if (current && current.focus) current.focus(id); }
@@ -708,7 +714,7 @@ footer input { width: min(320px, 70vw); }
   document.querySelectorAll("[data-mode]").forEach(b => b.addEventListener("click", () => {
     state.mode = b.dataset.mode;
     document.querySelectorAll("[data-mode]").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
-    paint();
+    paint(); if (state.tab === "specs") renderPanel();
   }));
   document.getElementById("search").addEventListener("input", ev => {
     const q = ev.target.value.trim().toLowerCase();

@@ -1,0 +1,34 @@
+---
+title: "Carrier mode"
+description: "The REST operations a Carrier implementation exposes: 212 operations across 21 modules."
+---
+
+**Carrier mode** is for parcel carriers, postal operators and cross-border networks selling their own network. This reference lists only the operations a Carrier implementation exposes, following the mode profile in [Modes §2](/spec/12-modes). Switch modes from the **REST Interface** tab menu at the top of the page.
+
+| Module | In this mode | Operations | Count |
+|---|---|---|---|
+| `core` | Required | Rates, Shipments, Tracking, Events, Carriers, Batches, Test Helpers, Discovery | 32 |
+| `webhooks` | Required | Webhooks, Inbound | 11 |
+| `pickups` | Required | Pickups, Pickup Schedules | 17 |
+| `manifests` | Optional | Manifests | 6 |
+| `documents` | Optional | Files, Document Uploads | 9 |
+| `platform` | Required | Accounts | 5 |
+| `catalog` | Required | Catalog | 1 |
+| `pricing` | Required | GraphQL Interface only | — |
+| `trade` | Required | Trade | 16 |
+| `routes` | Required | Routes | 2 |
+| `fleet` | Optional | GraphQL Interface only | — |
+| `injection` | Optional | Injection | 10 |
+| `products` | Optional | Products | 10 |
+| `iot` | Optional | IoT | 3 |
+| `consolidation` | Required | Consolidation | 1 |
+| `templates` | Optional | Templates | 16 |
+| `integrations` | Optional | Integrations | 14 |
+| `jobs` | Required | Jobs | 7 |
+| `inventory` | Optional | Inventory | 7 |
+| `billing` | Required | Billing | 20 |
+| `data_network` | Optional | Data Network | 25 |
+
+Required modules are grouped first in the sidebar, optional ones after. Not part of this mode: `connections`, `network`.
+
+The machine-readable file for this mode is [`/openapi/carrier.yaml`](/openapi/carrier.yaml). The complete document, with every module, is [`/openapi.yaml`](/openapi.yaml).

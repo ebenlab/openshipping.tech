@@ -1,5 +1,5 @@
 ---
-title: "Open Logistics Specification"
+title: "Open Logistics Specs"
 description: "One resource model and one wire format for rates, labels, pickups, manifests, customs documents, tracking, webhooks and carrier connections."
 ---
 
